@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+if ! command -v chiptool &> /dev/null; then
+    echo "chiptool could not be found. Install it with the following command:"
+    echo ""
+    echo "    cargo install --git https://github.com/embassy-rs/chiptool --locked"
+    echo ""
+    exit 1
+fi
+
+if ! command -v form &> /dev/null; then
+    echo "form could not be found. Install it with the following command:"
+    echo ""
+    echo "    cargo install form"
+    echo ""
+    exit 1
+fi
+
 set -euxo pipefail
 
 rm -f src/chips/*/*.rs
