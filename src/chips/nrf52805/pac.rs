@@ -1,4 +1,4 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (218daa7 2024-01-15))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (4df74f6 2024-11-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - POWER_CLOCK"]
@@ -16765,6 +16765,12 @@ pub mod uicr {
             assert!(n < 32usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize + n * 4usize) as _) }
         }
+        #[doc = "Description collection: Reserved for Nordic MDK"]
+        #[inline(always)]
+        pub const fn nrfmdk(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 8usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize + n * 4usize) as _) }
+        }
         #[doc = "Description collection: Mapping of the nRESET function (see POWER chapter for details)"]
         #[inline(always)]
         pub const fn pselreset(
@@ -16812,7 +16818,9 @@ pub mod uicr {
         impl Pall {
             #[doc = "Enable"]
             pub const ENABLED: Self = Self(0x0);
-            #[doc = "Disable"]
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware and software"]
+            pub const HW_DISABLED: Self = Self(0x5a);
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware"]
             pub const DISABLED: Self = Self(0xff);
         }
         impl Pall {

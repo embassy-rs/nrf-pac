@@ -1,16 +1,16 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (218daa7 2024-01-15))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (4df74f6 2024-11-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
-    #[doc = "0 - POWER_CLOCK"]
-    POWER_CLOCK = 0,
+    #[doc = "0 - CLOCK_POWER"]
+    CLOCK_POWER = 0,
     #[doc = "1 - RADIO"]
     RADIO = 1,
-    #[doc = "2 - UARTE0_UART0"]
-    UARTE0_UART0 = 2,
-    #[doc = "3 - SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0"]
-    SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0 = 3,
-    #[doc = "4 - SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1"]
-    SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1 = 4,
+    #[doc = "2 - UART0_UARTE0"]
+    UART0_UARTE0 = 2,
+    #[doc = "3 - SPI0_SPIM0_SPIS0_TWI0_TWIM0_TWIS0"]
+    SPI0_SPIM0_SPIS0_TWI0_TWIM0_TWIS0 = 3,
+    #[doc = "4 - SPI1_SPIM1_SPIS1_TWI1_TWIM1_TWIS1"]
+    SPI1_SPIM1_SPIS1_TWI1_TWIM1_TWIS1 = 4,
     #[doc = "5 - NFCT"]
     NFCT = 5,
     #[doc = "6 - GPIOTE"]
@@ -31,8 +31,8 @@ pub enum Interrupt {
     RNG = 13,
     #[doc = "14 - ECB"]
     ECB = 14,
-    #[doc = "15 - CCM_AAR"]
-    CCM_AAR = 15,
+    #[doc = "15 - AAR_CCM"]
+    AAR_CCM = 15,
     #[doc = "16 - WDT"]
     WDT = 16,
     #[doc = "17 - RTC1"]
@@ -41,18 +41,18 @@ pub enum Interrupt {
     QDEC = 18,
     #[doc = "19 - COMP_LPCOMP"]
     COMP_LPCOMP = 19,
-    #[doc = "20 - SWI0_EGU0"]
-    SWI0_EGU0 = 20,
-    #[doc = "21 - SWI1_EGU1"]
-    SWI1_EGU1 = 21,
-    #[doc = "22 - SWI2_EGU2"]
-    SWI2_EGU2 = 22,
-    #[doc = "23 - SWI3_EGU3"]
-    SWI3_EGU3 = 23,
-    #[doc = "24 - SWI4_EGU4"]
-    SWI4_EGU4 = 24,
-    #[doc = "25 - SWI5_EGU5"]
-    SWI5_EGU5 = 25,
+    #[doc = "20 - EGU0_SWI0"]
+    EGU0_SWI0 = 20,
+    #[doc = "21 - EGU1_SWI1"]
+    EGU1_SWI1 = 21,
+    #[doc = "22 - EGU2_SWI2"]
+    EGU2_SWI2 = 22,
+    #[doc = "23 - EGU3_SWI3"]
+    EGU3_SWI3 = 23,
+    #[doc = "24 - EGU4_SWI4"]
+    EGU4_SWI4 = 24,
+    #[doc = "25 - EGU5_SWI5"]
+    EGU5_SWI5 = 25,
     #[doc = "26 - TIMER3"]
     TIMER3 = 26,
     #[doc = "27 - TIMER4"]
@@ -67,8 +67,8 @@ pub enum Interrupt {
     PWM1 = 33,
     #[doc = "34 - PWM2"]
     PWM2 = 34,
-    #[doc = "35 - SPIM2_SPIS2_SPI2"]
-    SPIM2_SPIS2_SPI2 = 35,
+    #[doc = "35 - SPI2_SPIM2_SPIS2"]
+    SPI2_SPIM2_SPIS2 = 35,
     #[doc = "36 - RTC2"]
     RTC2 = 36,
     #[doc = "37 - I2S"]
@@ -97,11 +97,11 @@ unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
 #[cfg(feature = "rt")]
 mod _vectors {
     extern "C" {
-        fn POWER_CLOCK();
+        fn CLOCK_POWER();
         fn RADIO();
-        fn UARTE0_UART0();
-        fn SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0();
-        fn SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1();
+        fn UART0_UARTE0();
+        fn SPI0_SPIM0_SPIS0_TWI0_TWIM0_TWIS0();
+        fn SPI1_SPIM1_SPIS1_TWI1_TWIM1_TWIS1();
         fn NFCT();
         fn GPIOTE();
         fn SAADC();
@@ -112,17 +112,17 @@ mod _vectors {
         fn TEMP();
         fn RNG();
         fn ECB();
-        fn CCM_AAR();
+        fn AAR_CCM();
         fn WDT();
         fn RTC1();
         fn QDEC();
         fn COMP_LPCOMP();
-        fn SWI0_EGU0();
-        fn SWI1_EGU1();
-        fn SWI2_EGU2();
-        fn SWI3_EGU3();
-        fn SWI4_EGU4();
-        fn SWI5_EGU5();
+        fn EGU0_SWI0();
+        fn EGU1_SWI1();
+        fn EGU2_SWI2();
+        fn EGU3_SWI3();
+        fn EGU4_SWI4();
+        fn EGU5_SWI5();
         fn TIMER3();
         fn TIMER4();
         fn PWM0();
@@ -130,7 +130,7 @@ mod _vectors {
         fn MWU();
         fn PWM1();
         fn PWM2();
-        fn SPIM2_SPIS2_SPI2();
+        fn SPI2_SPIM2_SPIS2();
         fn RTC2();
         fn I2S();
         fn FPU();
@@ -149,17 +149,17 @@ mod _vectors {
     #[no_mangle]
     pub static __INTERRUPTS: [Vector; 48] = [
         Vector {
-            _handler: POWER_CLOCK,
+            _handler: CLOCK_POWER,
         },
         Vector { _handler: RADIO },
         Vector {
-            _handler: UARTE0_UART0,
+            _handler: UART0_UARTE0,
         },
         Vector {
-            _handler: SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0,
+            _handler: SPI0_SPIM0_SPIS0_TWI0_TWIM0_TWIS0,
         },
         Vector {
-            _handler: SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1,
+            _handler: SPI1_SPIM1_SPIS1_TWI1_TWIM1_TWIS1,
         },
         Vector { _handler: NFCT },
         Vector { _handler: GPIOTE },
@@ -171,7 +171,7 @@ mod _vectors {
         Vector { _handler: TEMP },
         Vector { _handler: RNG },
         Vector { _handler: ECB },
-        Vector { _handler: CCM_AAR },
+        Vector { _handler: AAR_CCM },
         Vector { _handler: WDT },
         Vector { _handler: RTC1 },
         Vector { _handler: QDEC },
@@ -179,22 +179,22 @@ mod _vectors {
             _handler: COMP_LPCOMP,
         },
         Vector {
-            _handler: SWI0_EGU0,
+            _handler: EGU0_SWI0,
         },
         Vector {
-            _handler: SWI1_EGU1,
+            _handler: EGU1_SWI1,
         },
         Vector {
-            _handler: SWI2_EGU2,
+            _handler: EGU2_SWI2,
         },
         Vector {
-            _handler: SWI3_EGU3,
+            _handler: EGU3_SWI3,
         },
         Vector {
-            _handler: SWI4_EGU4,
+            _handler: EGU4_SWI4,
         },
         Vector {
-            _handler: SWI5_EGU5,
+            _handler: EGU5_SWI5,
         },
         Vector { _handler: TIMER3 },
         Vector { _handler: TIMER4 },
@@ -206,7 +206,7 @@ mod _vectors {
         Vector { _handler: PWM1 },
         Vector { _handler: PWM2 },
         Vector {
-            _handler: SPIM2_SPIS2_SPI2,
+            _handler: SPI2_SPIM2_SPIS2,
         },
         Vector { _handler: RTC2 },
         Vector { _handler: I2S },
@@ -228,6 +228,9 @@ mod _vectors {
 pub const FICR: ficr::Ficr = unsafe { ficr::Ficr::from_ptr(0x1000_0000usize as _) };
 #[doc = "User information configuration registers"]
 pub const UICR: uicr::Uicr = unsafe { uicr::Uicr::from_ptr(0x1000_1000usize as _) };
+#[doc = "Access Port Protection"]
+pub const APPROTECT: approtect::Approtect =
+    unsafe { approtect::Approtect::from_ptr(0x4000_0000usize as _) };
 #[doc = "Clock control"]
 pub const CLOCK: clock::Clock = unsafe { clock::Clock::from_ptr(0x4000_0000usize as _) };
 #[doc = "Power control"]
@@ -284,7 +287,7 @@ pub const RNG: rng::Rng = unsafe { rng::Rng::from_ptr(0x4000_d000usize as _) };
 pub const ECB: ecb::Ecb = unsafe { ecb::Ecb::from_ptr(0x4000_e000usize as _) };
 #[doc = "Accelerated Address Resolver"]
 pub const AAR: aar::Aar = unsafe { aar::Aar::from_ptr(0x4000_f000usize as _) };
-#[doc = "AES CCM Mode Encryption"]
+#[doc = "AES CCM mode encryption"]
 pub const CCM: ccm::Ccm = unsafe { ccm::Ccm::from_ptr(0x4000_f000usize as _) };
 #[doc = "Watchdog Timer"]
 pub const WDT: wdt::Wdt = unsafe { wdt::Wdt::from_ptr(0x4001_0000usize as _) };
@@ -294,36 +297,36 @@ pub const RTC1: rtc::Rtc = unsafe { rtc::Rtc::from_ptr(0x4001_1000usize as _) };
 pub const QDEC: qdec::Qdec = unsafe { qdec::Qdec::from_ptr(0x4001_2000usize as _) };
 #[doc = "Comparator"]
 pub const COMP: comp::Comp = unsafe { comp::Comp::from_ptr(0x4001_3000usize as _) };
-#[doc = "Low Power Comparator"]
+#[doc = "Low-power comparator"]
 pub const LPCOMP: lpcomp::Lpcomp = unsafe { lpcomp::Lpcomp::from_ptr(0x4001_3000usize as _) };
-#[doc = "Event Generator Unit 0"]
+#[doc = "Event generator unit 0"]
 pub const EGU0: egu::Egu = unsafe { egu::Egu::from_ptr(0x4001_4000usize as _) };
 #[doc = "Software interrupt 0"]
 pub const SWI0: swi::Swi = unsafe { swi::Swi::from_ptr(0x4001_4000usize as _) };
-#[doc = "Event Generator Unit 1"]
+#[doc = "Event generator unit 1"]
 pub const EGU1: egu::Egu = unsafe { egu::Egu::from_ptr(0x4001_5000usize as _) };
 #[doc = "Software interrupt 1"]
 pub const SWI1: swi::Swi = unsafe { swi::Swi::from_ptr(0x4001_5000usize as _) };
-#[doc = "Event Generator Unit 2"]
+#[doc = "Event generator unit 2"]
 pub const EGU2: egu::Egu = unsafe { egu::Egu::from_ptr(0x4001_6000usize as _) };
 #[doc = "Software interrupt 2"]
 pub const SWI2: swi::Swi = unsafe { swi::Swi::from_ptr(0x4001_6000usize as _) };
-#[doc = "Event Generator Unit 3"]
+#[doc = "Event generator unit 3"]
 pub const EGU3: egu::Egu = unsafe { egu::Egu::from_ptr(0x4001_7000usize as _) };
 #[doc = "Software interrupt 3"]
 pub const SWI3: swi::Swi = unsafe { swi::Swi::from_ptr(0x4001_7000usize as _) };
-#[doc = "Event Generator Unit 4"]
+#[doc = "Event generator unit 4"]
 pub const EGU4: egu::Egu = unsafe { egu::Egu::from_ptr(0x4001_8000usize as _) };
 #[doc = "Software interrupt 4"]
 pub const SWI4: swi::Swi = unsafe { swi::Swi::from_ptr(0x4001_8000usize as _) };
-#[doc = "Event Generator Unit 5"]
+#[doc = "Event generator unit 5"]
 pub const EGU5: egu::Egu = unsafe { egu::Egu::from_ptr(0x4001_9000usize as _) };
 #[doc = "Software interrupt 5"]
 pub const SWI5: swi::Swi = unsafe { swi::Swi::from_ptr(0x4001_9000usize as _) };
 #[doc = "Timer/Counter 3"]
-pub const TIMER3: timer3::Timer3 = unsafe { timer3::Timer3::from_ptr(0x4001_a000usize as _) };
+pub const TIMER3: timer::Timer = unsafe { timer::Timer::from_ptr(0x4001_a000usize as _) };
 #[doc = "Timer/Counter 4"]
-pub const TIMER4: timer3::Timer3 = unsafe { timer3::Timer3::from_ptr(0x4001_b000usize as _) };
+pub const TIMER4: timer::Timer = unsafe { timer::Timer::from_ptr(0x4001_b000usize as _) };
 #[doc = "Pulse width modulation unit 0"]
 pub const PWM0: pwm::Pwm = unsafe { pwm::Pwm::from_ptr(0x4001_c000usize as _) };
 #[doc = "Pulse Density Modulation (Digital Microphone) Interface"]
@@ -362,16 +365,38 @@ pub const QSPI: qspi::Qspi = unsafe { qspi::Qspi::from_ptr(0x4002_9000usize as _
 pub const PWM3: pwm::Pwm = unsafe { pwm::Pwm::from_ptr(0x4002_d000usize as _) };
 #[doc = "Serial Peripheral Interface Master with EasyDMA 3"]
 pub const SPIM3: spim::Spim = unsafe { spim::Spim::from_ptr(0x4002_f000usize as _) };
-#[doc = "GPIO Port 1"]
+#[doc = "GPIO Port 0"]
 pub const P0: gpio::Gpio = unsafe { gpio::Gpio::from_ptr(0x5000_0000usize as _) };
-#[doc = "GPIO Port 2"]
+#[doc = "GPIO Port 1"]
 pub const P1: gpio::Gpio = unsafe { gpio::Gpio::from_ptr(0x5000_0300usize as _) };
-#[doc = "CRYPTOCELL HOST_RGF interface"]
-pub const CC_HOST_RGF: cc_host_rgf::CcHostRgf =
-    unsafe { cc_host_rgf::CcHostRgf::from_ptr(0x5002_a000usize as _) };
-#[doc = "ARM TrustZone CryptoCell register interface"]
+#[doc = "CRYPTOCELL register interface"]
 pub const CRYPTOCELL: cryptocell::Cryptocell =
     unsafe { cryptocell::Cryptocell::from_ptr(0x5002_a000usize as _) };
+#[doc = "CRYPTOCELL AES engine"]
+pub const CC_AES: cc_aes::CcAes = unsafe { cc_aes::CcAes::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL CHACHA engine"]
+pub const CC_CHACHA: cc_chacha::CcChacha =
+    unsafe { cc_chacha::CcChacha::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL CTL interface"]
+pub const CC_CTL: cc_ctl::CcCtl = unsafe { cc_ctl::CcCtl::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL Data IN interface"]
+pub const CC_DIN: cc_din::CcDin = unsafe { cc_din::CcDin::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL Data OUT interface"]
+pub const CC_DOUT: cc_dout::CcDout = unsafe { cc_dout::CcDout::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL HASH engine"]
+pub const CC_HASH: cc_hash::CcHash = unsafe { cc_hash::CcHash::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL HOST register interface"]
+pub const CC_HOST_RGF: cc_host_rgf::CcHostRgf =
+    unsafe { cc_host_rgf::CcHostRgf::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL MISC interface"]
+pub const CC_MISC: cc_misc::CcMisc = unsafe { cc_misc::CcMisc::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL PKA engine"]
+pub const CC_PKA: cc_pka::CcPka = unsafe { cc_pka::CcPka::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL RNG engine"]
+pub const CC_RNG: cc_rng::CcRng = unsafe { cc_rng::CcRng::from_ptr(0x5002_b000usize as _) };
+#[doc = "CRYPTOCELL RNG SRAM interface"]
+pub const CC_RNG_SRAM: cc_rng_sram::CcRngSram =
+    unsafe { cc_rng_sram::CcRngSram::from_ptr(0x5002_b000usize as _) };
 #[doc = r" Number available in the NVIC for configuring priority"]
 #[cfg(feature = "rt")]
 pub const NVIC_PRIO_BITS: u8 = 3;
@@ -491,35 +516,35 @@ pub mod aar {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for RESOLVED event"]
+            #[doc = "Write '1' to disable interrupt for event RESOLVED"]
             #[inline(always)]
             pub const fn resolved(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for RESOLVED event"]
+            #[doc = "Write '1' to disable interrupt for event RESOLVED"]
             #[inline(always)]
             pub fn set_resolved(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for NOTRESOLVED event"]
+            #[doc = "Write '1' to disable interrupt for event NOTRESOLVED"]
             #[inline(always)]
             pub const fn notresolved(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for NOTRESOLVED event"]
+            #[doc = "Write '1' to disable interrupt for event NOTRESOLVED"]
             #[inline(always)]
             pub fn set_notresolved(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -536,13 +561,13 @@ pub mod aar {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Nirk(pub u32);
         impl Nirk {
-            #[doc = "Number of Identity root keys available in the IRK data structure"]
+            #[doc = "Number of Identity Root Keys available in the IRK data structure"]
             #[inline(always)]
             pub const fn nirk(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x1f;
                 val as u8
             }
-            #[doc = "Number of Identity root keys available in the IRK data structure"]
+            #[doc = "Number of Identity Root Keys available in the IRK data structure"]
             #[inline(always)]
             pub fn set_nirk(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
@@ -653,51 +678,46 @@ pub mod acl {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Configure the word-aligned start address of region n to protect"]
+        #[doc = "Description cluster: Start address of region to protect. The start address must be word-aligned."]
         #[inline(always)]
         pub const fn addr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Size of region to protect counting from address ACL\\[n\\].ADDR. Write '0' as no effect."]
+        #[doc = "Description cluster: Size of region to protect counting from address ACL\\[n\\].ADDR. Writing a '0' has no effect."]
         #[inline(always)]
         pub const fn size(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Access permissions for region n as defined by start address ACL\\[n\\].ADDR and size ACL\\[n\\].SIZE"]
+        #[doc = "Description cluster: Access permissions for region n as defined by start address ACL\\[n\\].ADDR and size ACL\\[n\\].SIZE"]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::Perm, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
-        #[doc = "Unspecified"]
-        #[inline(always)]
-        pub const fn unused0(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
-        }
     }
     pub mod regs {
-        #[doc = "Description cluster\\[n\\]: Access permissions for region n as defined by start address ACL\\[n\\].ADDR and size ACL\\[n\\].SIZE"]
+        #[doc = "Description cluster: Access permissions for region n as defined by start address ACL\\[n\\].ADDR and size ACL\\[n\\].SIZE"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Perm(pub u32);
         impl Perm {
-            #[doc = "Configure write and erase permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure write and erase permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub const fn write(&self) -> super::vals::Write {
                 let val = (self.0 >> 1usize) & 0x01;
                 super::vals::Write::from_bits(val as u8)
             }
-            #[doc = "Configure write and erase permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure write and erase permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub fn set_write(&mut self, val: super::vals::Write) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
             }
-            #[doc = "Configure read permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure read permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub const fn read(&self) -> super::vals::Read {
                 let val = (self.0 >> 2usize) & 0x01;
                 super::vals::Read::from_bits(val as u8)
             }
-            #[doc = "Configure read permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure read permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub fn set_read(&mut self, val: super::vals::Read) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
@@ -714,9 +734,9 @@ pub mod acl {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Read {
-            #[doc = "Allow read instructions to region n"]
+            #[doc = "Allow read instructions to region n."]
             ENABLE = 0x0,
-            #[doc = "Block read instructions to region n"]
+            #[doc = "Block read instructions to region n."]
             DISABLE = 0x01,
         }
         impl Read {
@@ -744,9 +764,9 @@ pub mod acl {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Write {
-            #[doc = "Allow write and erase instructions to region n"]
+            #[doc = "Allow write and erase instructions to region n."]
             ENABLE = 0x0,
-            #[doc = "Block write and erase instructions to region n"]
+            #[doc = "Block write and erase instructions to region n."]
             DISABLE = 0x01,
         }
         impl Write {
@@ -773,8 +793,3059 @@ pub mod acl {
         }
     }
 }
+pub mod approtect {
+    #[doc = "Access Port Protection"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Approtect {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Approtect {}
+    unsafe impl Sync for Approtect {}
+    impl Approtect {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Software force enable APPROTECT mechanism until next reset."]
+        #[inline(always)]
+        pub const fn forceprotect(
+            self,
+        ) -> crate::common::Reg<regs::Forceprotect, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0550usize) as _) }
+        }
+        #[doc = "Software disable APPROTECT mechanism"]
+        #[inline(always)]
+        pub const fn disable(self) -> crate::common::Reg<regs::Disable, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0558usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Software disable APPROTECT mechanism"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Disable(pub u32);
+        impl Disable {
+            #[doc = "Software disable APPROTECT mechanism"]
+            #[inline(always)]
+            pub const fn disable(&self) -> super::vals::Disable {
+                let val = (self.0 >> 0usize) & 0xff;
+                super::vals::Disable::from_bits(val as u8)
+            }
+            #[doc = "Software disable APPROTECT mechanism"]
+            #[inline(always)]
+            pub fn set_disable(&mut self, val: super::vals::Disable) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Disable {
+            #[inline(always)]
+            fn default() -> Disable {
+                Disable(0)
+            }
+        }
+        #[doc = "Software force enable APPROTECT mechanism until next reset."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Forceprotect(pub u32);
+        impl Forceprotect {
+            #[doc = "Write 0x0 to force enable APPROTECT mechanism"]
+            #[inline(always)]
+            pub const fn forceprotect(&self) -> super::vals::Forceprotect {
+                let val = (self.0 >> 0usize) & 0xff;
+                super::vals::Forceprotect::from_bits(val as u8)
+            }
+            #[doc = "Write 0x0 to force enable APPROTECT mechanism"]
+            #[inline(always)]
+            pub fn set_forceprotect(&mut self, val: super::vals::Forceprotect) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Forceprotect {
+            #[inline(always)]
+            fn default() -> Forceprotect {
+                Forceprotect(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub struct Disable(pub u8);
+        impl Disable {
+            #[doc = "Software disable APPROTECT mechanism"]
+            pub const SW_DISABLE: Self = Self(0x5a);
+        }
+        impl Disable {
+            pub const fn from_bits(val: u8) -> Disable {
+                Self(val & 0xff)
+            }
+            pub const fn to_bits(self) -> u8 {
+                self.0
+            }
+        }
+        impl From<u8> for Disable {
+            #[inline(always)]
+            fn from(val: u8) -> Disable {
+                Disable::from_bits(val)
+            }
+        }
+        impl From<Disable> for u8 {
+            #[inline(always)]
+            fn from(val: Disable) -> u8 {
+                Disable::to_bits(val)
+            }
+        }
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub struct Forceprotect(pub u8);
+        impl Forceprotect {
+            #[doc = "Software force enable APPROTECT mechanism"]
+            pub const FORCE: Self = Self(0x0);
+        }
+        impl Forceprotect {
+            pub const fn from_bits(val: u8) -> Forceprotect {
+                Self(val & 0xff)
+            }
+            pub const fn to_bits(self) -> u8 {
+                self.0
+            }
+        }
+        impl From<u8> for Forceprotect {
+            #[inline(always)]
+            fn from(val: u8) -> Forceprotect {
+                Forceprotect::from_bits(val)
+            }
+        }
+        impl From<Forceprotect> for u8 {
+            #[inline(always)]
+            fn from(val: Forceprotect) -> u8 {
+                Forceprotect::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_aes {
+    #[doc = "CRYPTOCELL AES engine"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcAes {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcAes {}
+    unsafe impl Sync for CcAes {}
+    impl CcAes {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Description collection: AES key value to use. The initial AES_KEY_0\\[0\\] register holds the least significant bits \\[31:0\\] of the key value."]
+        #[inline(always)]
+        pub const fn aes_key_0(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
+            assert!(n < 8usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize + n * 4usize) as _) }
+        }
+        #[doc = "Description collection: AES Initialization Vector (IV) to use. The initial AES_IV_0\\[0\\] register holds the least significant bits \\[31:0\\] of the IV."]
+        #[inline(always)]
+        pub const fn aes_iv_0(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 4usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0440usize + n * 4usize) as _) }
+        }
+        #[doc = "Description collection: AES counter (CTR) to use. The initial AES_CTR\\[0\\] register holds the least significant bits \\[31:0\\] of the CTR."]
+        #[inline(always)]
+        pub const fn aes_ctr(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 4usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0460usize + n * 4usize) as _) }
+        }
+        #[doc = "Status register for AES engine activity."]
+        #[inline(always)]
+        pub const fn aes_busy(self) -> crate::common::Reg<regs::AesBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0470usize) as _) }
+        }
+        #[doc = "Writing to this address trigger sampling of the HW key to the AES_KEY_0 register"]
+        #[inline(always)]
+        pub const fn aes_sk(self) -> crate::common::Reg<regs::AesSk, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0478usize) as _) }
+        }
+        #[doc = "Writing to this address triggers the AES engine to generate K1 and K2 for AES-CMAC operations."]
+        #[inline(always)]
+        pub const fn aes_cmac_init(
+            self,
+        ) -> crate::common::Reg<regs::AesCmacInit, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x047cusize) as _) }
+        }
+        #[doc = "This register should be set with the amount of remaining bytes until the end of the current AES operation."]
+        #[inline(always)]
+        pub const fn aes_remaining_bytes(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04bcusize) as _) }
+        }
+        #[doc = "Control the AES engine behavior."]
+        #[inline(always)]
+        pub const fn aes_control(self) -> crate::common::Reg<regs::AesControl, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04c0usize) as _) }
+        }
+        #[doc = "Hardware configuration of the AES engine. Reset value holds the supported features."]
+        #[inline(always)]
+        pub const fn aes_hw_flags(self) -> crate::common::Reg<regs::AesHwFlags, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04c8usize) as _) }
+        }
+        #[doc = "This register enables the AES CTR no increment mode in which the counter mode is not incremented between two blocks"]
+        #[inline(always)]
+        pub const fn aes_ctr_no_increment(
+            self,
+        ) -> crate::common::Reg<regs::AesCtrNoIncrement, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04d8usize) as _) }
+        }
+        #[doc = "Reset the AES engine."]
+        #[inline(always)]
+        pub const fn aes_sw_reset(self) -> crate::common::Reg<regs::AesSwReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04f4usize) as _) }
+        }
+        #[doc = "Writing to this address triggers the AES engine to perform a CMAC operation with size 0. The CMAC result can be read from the AES_IV_0 register."]
+        #[inline(always)]
+        pub const fn aes_cmac_size0_kick(
+            self,
+        ) -> crate::common::Reg<regs::AesCmacSize0Kick, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Status register for AES engine activity."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesBusy(pub u32);
+        impl AesBusy {
+            #[doc = "AES engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::Status {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Status::from_bits(val as u8)
+            }
+            #[doc = "AES engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::Status) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for AesBusy {
+            #[inline(always)]
+            fn default() -> AesBusy {
+                AesBusy(0)
+            }
+        }
+        #[doc = "Writing to this address triggers the AES engine to generate K1 and K2 for AES-CMAC operations."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesCmacInit(pub u32);
+        impl AesCmacInit {
+            #[doc = "Generate K1 and K2 for the AES-CMAC operations."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Generate K1 and K2 for the AES-CMAC operations."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for AesCmacInit {
+            #[inline(always)]
+            fn default() -> AesCmacInit {
+                AesCmacInit(0)
+            }
+        }
+        #[doc = "Writing to this address triggers the AES engine to perform a CMAC operation with size 0. The CMAC result can be read from the AES_IV_0 register."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesCmacSize0Kick(pub u32);
+        impl AesCmacSize0Kick {
+            #[doc = "Force AES CMAC operation with size 0."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Force AES CMAC operation with size 0."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for AesCmacSize0Kick {
+            #[inline(always)]
+            fn default() -> AesCmacSize0Kick {
+                AesCmacSize0Kick(0)
+            }
+        }
+        #[doc = "Control the AES engine behavior."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesControl(pub u32);
+        impl AesControl {
+            #[doc = "Set AES encrypt or decrypt mode in non-tunneling operations."]
+            #[inline(always)]
+            pub const fn dec_key0(&self) -> super::vals::DecKey0 {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::DecKey0::from_bits(val as u8)
+            }
+            #[doc = "Set AES encrypt or decrypt mode in non-tunneling operations."]
+            #[inline(always)]
+            pub fn set_dec_key0(&mut self, val: super::vals::DecKey0) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Set the AES mode."]
+            #[inline(always)]
+            pub const fn mode_key0(&self) -> super::vals::ModeKey0 {
+                let val = (self.0 >> 2usize) & 0x07;
+                super::vals::ModeKey0::from_bits(val as u8)
+            }
+            #[doc = "Set the AES mode."]
+            #[inline(always)]
+            pub fn set_mode_key0(&mut self, val: super::vals::ModeKey0) {
+                self.0 = (self.0 & !(0x07 << 2usize)) | (((val.to_bits() as u32) & 0x07) << 2usize);
+            }
+            #[doc = "Set the AES key length."]
+            #[inline(always)]
+            pub const fn nk_key0(&self) -> super::vals::NkKey0 {
+                let val = (self.0 >> 12usize) & 0x03;
+                super::vals::NkKey0::from_bits(val as u8)
+            }
+            #[doc = "Set the AES key length."]
+            #[inline(always)]
+            pub fn set_nk_key0(&mut self, val: super::vals::NkKey0) {
+                self.0 =
+                    (self.0 & !(0x03 << 12usize)) | (((val.to_bits() as u32) & 0x03) << 12usize);
+            }
+            #[doc = "This field determines the value that is written to AES_KEY_0, when AES_SK is kicked."]
+            #[inline(always)]
+            pub const fn aes_xor_cryptokey(&self) -> bool {
+                let val = (self.0 >> 29usize) & 0x01;
+                val != 0
+            }
+            #[doc = "This field determines the value that is written to AES_KEY_0, when AES_SK is kicked."]
+            #[inline(always)]
+            pub fn set_aes_xor_cryptokey(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
+            }
+            #[doc = "Using direct access and not the DIN-DOUT DMA interface"]
+            #[inline(always)]
+            pub const fn direct_access(&self) -> bool {
+                let val = (self.0 >> 31usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Using direct access and not the DIN-DOUT DMA interface"]
+            #[inline(always)]
+            pub fn set_direct_access(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
+            }
+        }
+        impl Default for AesControl {
+            #[inline(always)]
+            fn default() -> AesControl {
+                AesControl(0)
+            }
+        }
+        #[doc = "This register enables the AES CTR no increment mode in which the counter mode is not incremented between two blocks"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesCtrNoIncrement(pub u32);
+        impl AesCtrNoIncrement {
+            #[doc = "This field enables the AES CTR no increment mode in which the counter mode is not incremented between two blocks"]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "This field enables the AES CTR no increment mode in which the counter mode is not incremented between two blocks"]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for AesCtrNoIncrement {
+            #[inline(always)]
+            fn default() -> AesCtrNoIncrement {
+                AesCtrNoIncrement(0)
+            }
+        }
+        #[doc = "Hardware configuration of the AES engine. Reset value holds the supported features."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesHwFlags(pub u32);
+        impl AesHwFlags {
+            #[doc = "If this flag is set, the engine support 192 bits and 256 bits key size."]
+            #[inline(always)]
+            pub const fn support_256_192_key(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine support 192 bits and 256 bits key size."]
+            #[inline(always)]
+            pub fn set_support_256_192_key(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "If this flag is set, the engine support AES_LARGE_RKEK."]
+            #[inline(always)]
+            pub const fn aes_large_rkek(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine support AES_LARGE_RKEK."]
+            #[inline(always)]
+            pub fn set_aes_large_rkek(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "If this flag is set, the engine support DPA countermeasures."]
+            #[inline(always)]
+            pub const fn dpa_cntrmsr_exist(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine support DPA countermeasures."]
+            #[inline(always)]
+            pub fn set_dpa_cntrmsr_exist(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "If this flag is set, the engine support AES CTR mode."]
+            #[inline(always)]
+            pub const fn ctr_exist(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine support AES CTR mode."]
+            #[inline(always)]
+            pub fn set_ctr_exist(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+            #[doc = "If this flag is set, the engine only support encrypt operations."]
+            #[inline(always)]
+            pub const fn only_encrypt(&self) -> bool {
+                let val = (self.0 >> 4usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine only support encrypt operations."]
+            #[inline(always)]
+            pub fn set_only_encrypt(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+            }
+            #[doc = "If this flag is set, the engine uses SBOX tables."]
+            #[inline(always)]
+            pub const fn use_sbox_table(&self) -> bool {
+                let val = (self.0 >> 5usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine uses SBOX tables."]
+            #[inline(always)]
+            pub fn set_use_sbox_table(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+            }
+            #[doc = "If this flag is set, the engine uses 5 SBOX where each AES round takes 4 cycles."]
+            #[inline(always)]
+            pub const fn use_5_sboxes(&self) -> bool {
+                let val = (self.0 >> 8usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine uses 5 SBOX where each AES round takes 4 cycles."]
+            #[inline(always)]
+            pub fn set_use_5_sboxes(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
+            }
+            #[doc = "If this flag is set, the engine contains the PREV_IV register for faster AES XCBC MAC calculation."]
+            #[inline(always)]
+            pub const fn aes_support_prev_iv(&self) -> bool {
+                let val = (self.0 >> 9usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine contains the PREV_IV register for faster AES XCBC MAC calculation."]
+            #[inline(always)]
+            pub fn set_aes_support_prev_iv(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
+            }
+            #[doc = "If this flag is set, the engine support tunneling operations."]
+            #[inline(always)]
+            pub const fn aes_tunnel_exist(&self) -> bool {
+                let val = (self.0 >> 10usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine support tunneling operations."]
+            #[inline(always)]
+            pub fn set_aes_tunnel_exist(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
+            }
+            #[doc = "If this flag is set, the engine support a second register set for tunneling operations."]
+            #[inline(always)]
+            pub const fn second_regs_set_exist(&self) -> bool {
+                let val = (self.0 >> 11usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine support a second register set for tunneling operations."]
+            #[inline(always)]
+            pub fn set_second_regs_set_exist(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
+            }
+            #[doc = "If this flag is set, the engine support DFA countermeasures."]
+            #[inline(always)]
+            pub const fn dfa_cntrmsr_exist(&self) -> bool {
+                let val = (self.0 >> 12usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine support DFA countermeasures."]
+            #[inline(always)]
+            pub fn set_dfa_cntrmsr_exist(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
+            }
+        }
+        impl Default for AesHwFlags {
+            #[inline(always)]
+            fn default() -> AesHwFlags {
+                AesHwFlags(0)
+            }
+        }
+        #[doc = "Writing to this address trigger sampling of the HW key to the AES_KEY_0 register"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesSk(pub u32);
+        impl AesSk {
+            #[doc = "Sample HW key to AES_KEY_0 registers."]
+            #[inline(always)]
+            pub const fn aes_sk(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Sample HW key to AES_KEY_0 registers."]
+            #[inline(always)]
+            pub fn set_aes_sk(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for AesSk {
+            #[inline(always)]
+            fn default() -> AesSk {
+                AesSk(0)
+            }
+        }
+        #[doc = "Reset the AES engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesSwReset(pub u32);
+        impl AesSwReset {
+            #[doc = "Writing any value to this address resets the AES engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the AES engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for AesSwReset {
+            #[inline(always)]
+            fn default() -> AesSwReset {
+                AesSwReset(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DecKey0 {
+            #[doc = "Perform AES encryption"]
+            ENCRYPT = 0x0,
+            #[doc = "Perform AES decryption"]
+            DECRYPT = 0x01,
+        }
+        impl DecKey0 {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DecKey0 {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DecKey0 {
+            #[inline(always)]
+            fn from(val: u8) -> DecKey0 {
+                DecKey0::from_bits(val)
+            }
+        }
+        impl From<DecKey0> for u8 {
+            #[inline(always)]
+            fn from(val: DecKey0) -> u8 {
+                DecKey0::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ModeKey0 {
+            #[doc = "Electronic codebook mode"]
+            ECB = 0x0,
+            #[doc = "Cipher block chaining mode"]
+            CBC = 0x01,
+            #[doc = "Counter mode"]
+            CTR = 0x02,
+            #[doc = "Cipher Block Chaining Message Authentication Code"]
+            CBC_MAC = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            #[doc = "Cipher-based Message Authentication Code"]
+            CMAC = 0x07,
+        }
+        impl ModeKey0 {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ModeKey0 {
+                unsafe { core::mem::transmute(val & 0x07) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ModeKey0 {
+            #[inline(always)]
+            fn from(val: u8) -> ModeKey0 {
+                ModeKey0::from_bits(val)
+            }
+        }
+        impl From<ModeKey0> for u8 {
+            #[inline(always)]
+            fn from(val: ModeKey0) -> u8 {
+                ModeKey0::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum NkKey0 {
+            #[doc = "128 bits key length"]
+            _128BITS = 0x0,
+            _RESERVED_1 = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+        }
+        impl NkKey0 {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> NkKey0 {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for NkKey0 {
+            #[inline(always)]
+            fn from(val: u8) -> NkKey0 {
+                NkKey0::from_bits(val)
+            }
+        }
+        impl From<NkKey0> for u8 {
+            #[inline(always)]
+            fn from(val: NkKey0) -> u8 {
+                NkKey0::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Status {
+            #[doc = "AES engine is idle"]
+            IDLE = 0x0,
+            #[doc = "AES engine is busy"]
+            BUSY = 0x01,
+        }
+        impl Status {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Status {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Status {
+            #[inline(always)]
+            fn from(val: u8) -> Status {
+                Status::from_bits(val)
+            }
+        }
+        impl From<Status> for u8 {
+            #[inline(always)]
+            fn from(val: Status) -> u8 {
+                Status::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_chacha {
+    #[doc = "CRYPTOCELL CHACHA engine"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcChacha {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcChacha {}
+    unsafe impl Sync for CcChacha {}
+    impl CcChacha {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Control the CHACHA engine behavior."]
+        #[inline(always)]
+        pub const fn chacha_control(
+            self,
+        ) -> crate::common::Reg<regs::ChachaControl, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0380usize) as _) }
+        }
+        #[doc = "CHACHA engine HW version"]
+        #[inline(always)]
+        pub const fn chacha_version(self) -> crate::common::Reg<u32, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0384usize) as _) }
+        }
+        #[doc = "Description collection: CHACHA key value to use. The initial CHACHA_KEY\\[0\\] register holds the least significant bits \\[31:0\\] of the key value."]
+        #[inline(always)]
+        pub const fn chacha_key(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
+            assert!(n < 8usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0388usize + n * 4usize) as _) }
+        }
+        #[doc = "Description collection: CHACHA Initialization Vector (IV) to use. The IV is also known as the nonce."]
+        #[inline(always)]
+        pub const fn chacha_iv(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 2usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03a8usize + n * 4usize) as _) }
+        }
+        #[doc = "Status register for CHACHA engine activity."]
+        #[inline(always)]
+        pub const fn chacha_busy(self) -> crate::common::Reg<regs::ChachaBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03b0usize) as _) }
+        }
+        #[doc = "Hardware configuration of the CHACHA engine. Reset value holds the supported features."]
+        #[inline(always)]
+        pub const fn chacha_hw_flags(
+            self,
+        ) -> crate::common::Reg<regs::ChachaHwFlags, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03b4usize) as _) }
+        }
+        #[doc = "Store the LSB value of the block counter, in order to support suspend/resume of operation"]
+        #[inline(always)]
+        pub const fn chacha_block_cnt_lsb(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03b8usize) as _) }
+        }
+        #[doc = "Store the MSB value of the block counter, in order to support suspend/resume of operation"]
+        #[inline(always)]
+        pub const fn chacha_block_cnt_msb(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03bcusize) as _) }
+        }
+        #[doc = "Reset the CHACHA engine."]
+        #[inline(always)]
+        pub const fn chacha_sw_reset(
+            self,
+        ) -> crate::common::Reg<regs::ChachaSwReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03c0usize) as _) }
+        }
+        #[doc = "Description collection: The auto-generated key to use in Poly1305 MAC calculation. The initial CHACHA_POLY1305_KEY\\[0\\] register holds the least significant bits \\[31:0\\] of the key value."]
+        #[inline(always)]
+        pub const fn chacha_poly1305_key(
+            self,
+            n: usize,
+        ) -> crate::common::Reg<u32, crate::common::R> {
+            assert!(n < 8usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03c4usize + n * 4usize) as _) }
+        }
+        #[doc = "CHACHA engine data order configuration."]
+        #[inline(always)]
+        pub const fn chacha_endianness(
+            self,
+        ) -> crate::common::Reg<regs::ChachaEndianness, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03e4usize) as _) }
+        }
+        #[doc = "Debug register for the CHACHA engine"]
+        #[inline(always)]
+        pub const fn chacha_debug(self) -> crate::common::Reg<regs::ChachaDebug, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x03e8usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Status register for CHACHA engine activity."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ChachaBusy(pub u32);
+        impl ChachaBusy {
+            #[doc = "CHACHA engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::Status {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Status::from_bits(val as u8)
+            }
+            #[doc = "CHACHA engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::Status) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for ChachaBusy {
+            #[inline(always)]
+            fn default() -> ChachaBusy {
+                ChachaBusy(0)
+            }
+        }
+        #[doc = "Control the CHACHA engine behavior."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ChachaControl(pub u32);
+        impl ChachaControl {
+            #[doc = "Run engine in ChaCha or Salsa mode"]
+            #[inline(always)]
+            pub const fn chacha_or_salsa(&self) -> super::vals::ChachaOrSalsa {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::ChachaOrSalsa::from_bits(val as u8)
+            }
+            #[doc = "Run engine in ChaCha or Salsa mode"]
+            #[inline(always)]
+            pub fn set_chacha_or_salsa(&mut self, val: super::vals::ChachaOrSalsa) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Perform initialization for a new message"]
+            #[inline(always)]
+            pub const fn init(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Perform initialization for a new message"]
+            #[inline(always)]
+            pub fn set_init(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Generate the key to use in Poly1305 message authentication code calculation."]
+            #[inline(always)]
+            pub const fn gen_key_poly1305(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Generate the key to use in Poly1305 message authentication code calculation."]
+            #[inline(always)]
+            pub fn set_gen_key_poly1305(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "Key length selection."]
+            #[inline(always)]
+            pub const fn key_len(&self) -> super::vals::KeyLen {
+                let val = (self.0 >> 3usize) & 0x01;
+                super::vals::KeyLen::from_bits(val as u8)
+            }
+            #[doc = "Key length selection."]
+            #[inline(always)]
+            pub fn set_key_len(&mut self, val: super::vals::KeyLen) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val.to_bits() as u32) & 0x01) << 3usize);
+            }
+            #[doc = "Set number of permutation rounds, default value is 20."]
+            #[inline(always)]
+            pub const fn num_of_rounds(&self) -> super::vals::NumOfRounds {
+                let val = (self.0 >> 4usize) & 0x03;
+                super::vals::NumOfRounds::from_bits(val as u8)
+            }
+            #[doc = "Set number of permutation rounds, default value is 20."]
+            #[inline(always)]
+            pub fn set_num_of_rounds(&mut self, val: super::vals::NumOfRounds) {
+                self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
+            }
+            #[doc = "Reset block counter for new messages"]
+            #[inline(always)]
+            pub const fn reset_block_cnt(&self) -> bool {
+                let val = (self.0 >> 9usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Reset block counter for new messages"]
+            #[inline(always)]
+            pub fn set_reset_block_cnt(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
+            }
+            #[doc = "Use 96 bits Initialization Vector (IV)"]
+            #[inline(always)]
+            pub const fn use_iv_96bit(&self) -> bool {
+                let val = (self.0 >> 10usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Use 96 bits Initialization Vector (IV)"]
+            #[inline(always)]
+            pub fn set_use_iv_96bit(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
+            }
+        }
+        impl Default for ChachaControl {
+            #[inline(always)]
+            fn default() -> ChachaControl {
+                ChachaControl(0)
+            }
+        }
+        #[doc = "Debug register for the CHACHA engine"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ChachaDebug(pub u32);
+        impl ChachaDebug {
+            #[doc = "Reflects the debug state of the CHACHA FSM."]
+            #[inline(always)]
+            pub const fn fsm_state(&self) -> super::vals::FsmState {
+                let val = (self.0 >> 0usize) & 0x03;
+                super::vals::FsmState::from_bits(val as u8)
+            }
+            #[doc = "Reflects the debug state of the CHACHA FSM."]
+            #[inline(always)]
+            pub fn set_fsm_state(&mut self, val: super::vals::FsmState) {
+                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
+            }
+        }
+        impl Default for ChachaDebug {
+            #[inline(always)]
+            fn default() -> ChachaDebug {
+                ChachaDebug(0)
+            }
+        }
+        #[doc = "CHACHA engine data order configuration."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ChachaEndianness(pub u32);
+        impl ChachaEndianness {
+            #[doc = "Change the word order of the input data."]
+            #[inline(always)]
+            pub const fn chacha_din_word_order(&self) -> super::vals::ChachaDinWordOrder {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::ChachaDinWordOrder::from_bits(val as u8)
+            }
+            #[doc = "Change the word order of the input data."]
+            #[inline(always)]
+            pub fn set_chacha_din_word_order(&mut self, val: super::vals::ChachaDinWordOrder) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Change the byte order of the input data."]
+            #[inline(always)]
+            pub const fn chacha_din_byte_order(&self) -> super::vals::ChachaDinByteOrder {
+                let val = (self.0 >> 1usize) & 0x01;
+                super::vals::ChachaDinByteOrder::from_bits(val as u8)
+            }
+            #[doc = "Change the byte order of the input data."]
+            #[inline(always)]
+            pub fn set_chacha_din_byte_order(&mut self, val: super::vals::ChachaDinByteOrder) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Change the quarter of a matrix order in the engine."]
+            #[inline(always)]
+            pub const fn chacha_core_matrix_lbe_order(
+                &self,
+            ) -> super::vals::ChachaCoreMatrixLbeOrder {
+                let val = (self.0 >> 2usize) & 0x01;
+                super::vals::ChachaCoreMatrixLbeOrder::from_bits(val as u8)
+            }
+            #[doc = "Change the quarter of a matrix order in the engine."]
+            #[inline(always)]
+            pub fn set_chacha_core_matrix_lbe_order(
+                &mut self,
+                val: super::vals::ChachaCoreMatrixLbeOrder,
+            ) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
+            }
+            #[doc = "Change the word order of the output data."]
+            #[inline(always)]
+            pub const fn chacha_dout_word_order(&self) -> super::vals::ChachaDoutWordOrder {
+                let val = (self.0 >> 3usize) & 0x01;
+                super::vals::ChachaDoutWordOrder::from_bits(val as u8)
+            }
+            #[doc = "Change the word order of the output data."]
+            #[inline(always)]
+            pub fn set_chacha_dout_word_order(&mut self, val: super::vals::ChachaDoutWordOrder) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val.to_bits() as u32) & 0x01) << 3usize);
+            }
+            #[doc = "Change the byte order of the output data."]
+            #[inline(always)]
+            pub const fn chacha_dout_byte_order(&self) -> super::vals::ChachaDoutByteOrder {
+                let val = (self.0 >> 4usize) & 0x01;
+                super::vals::ChachaDoutByteOrder::from_bits(val as u8)
+            }
+            #[doc = "Change the byte order of the output data."]
+            #[inline(always)]
+            pub fn set_chacha_dout_byte_order(&mut self, val: super::vals::ChachaDoutByteOrder) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
+            }
+        }
+        impl Default for ChachaEndianness {
+            #[inline(always)]
+            fn default() -> ChachaEndianness {
+                ChachaEndianness(0)
+            }
+        }
+        #[doc = "Hardware configuration of the CHACHA engine. Reset value holds the supported features."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ChachaHwFlags(pub u32);
+        impl ChachaHwFlags {
+            #[doc = "If this flag is set, the engine include ChaCha support"]
+            #[inline(always)]
+            pub const fn chacha_exists(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include ChaCha support"]
+            #[inline(always)]
+            pub fn set_chacha_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "If this flag is set, the engine include Salsa support"]
+            #[inline(always)]
+            pub const fn salsa_exists(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include Salsa support"]
+            #[inline(always)]
+            pub fn set_salsa_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "If this flag is set, the next matrix calculated when the current one is written to data output path."]
+            #[inline(always)]
+            pub const fn fast_chacha(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the next matrix calculated when the current one is written to data output path."]
+            #[inline(always)]
+            pub fn set_fast_chacha(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+        }
+        impl Default for ChachaHwFlags {
+            #[inline(always)]
+            fn default() -> ChachaHwFlags {
+                ChachaHwFlags(0)
+            }
+        }
+        #[doc = "Reset the CHACHA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ChachaSwReset(pub u32);
+        impl ChachaSwReset {
+            #[doc = "Writing any value to this address resets the CHACHA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the CHACHA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for ChachaSwReset {
+            #[inline(always)]
+            fn default() -> ChachaSwReset {
+                ChachaSwReset(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ChachaCoreMatrixLbeOrder {
+            #[doc = "Use default quarter of matrix order, where quarters are ordered as follows: q0, q1, q2, q3. Each quarter represents a 128-bits section of the matrix."]
+            DEFAULT = 0x0,
+            #[doc = "Reverse the order of matrix quarters, where quarters are re-ordered as follows: q3, q2, q1, q0. Each quarter represents a 128-bits section of the matrix."]
+            REVERSE = 0x01,
+        }
+        impl ChachaCoreMatrixLbeOrder {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ChachaCoreMatrixLbeOrder {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ChachaCoreMatrixLbeOrder {
+            #[inline(always)]
+            fn from(val: u8) -> ChachaCoreMatrixLbeOrder {
+                ChachaCoreMatrixLbeOrder::from_bits(val)
+            }
+        }
+        impl From<ChachaCoreMatrixLbeOrder> for u8 {
+            #[inline(always)]
+            fn from(val: ChachaCoreMatrixLbeOrder) -> u8 {
+                ChachaCoreMatrixLbeOrder::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ChachaDinByteOrder {
+            #[doc = "Use default byte order within each input word, where bytes are ordered as follows: B0, B1, B2, B3."]
+            DEFAULT = 0x0,
+            #[doc = "Reverse the byte order within each input word, where bytes are re-ordered as follows: B3, B2, B1, B0."]
+            REVERSE = 0x01,
+        }
+        impl ChachaDinByteOrder {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ChachaDinByteOrder {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ChachaDinByteOrder {
+            #[inline(always)]
+            fn from(val: u8) -> ChachaDinByteOrder {
+                ChachaDinByteOrder::from_bits(val)
+            }
+        }
+        impl From<ChachaDinByteOrder> for u8 {
+            #[inline(always)]
+            fn from(val: ChachaDinByteOrder) -> u8 {
+                ChachaDinByteOrder::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ChachaDinWordOrder {
+            #[doc = "Use default word order for 128-bits input, where words are ordered as follows: w0, w1, w2, w3."]
+            DEFAULT = 0x0,
+            #[doc = "Reverses the word order for 128-bits input, where words are re-ordered as follows: w3, w2, w1, w0."]
+            REVERSE = 0x01,
+        }
+        impl ChachaDinWordOrder {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ChachaDinWordOrder {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ChachaDinWordOrder {
+            #[inline(always)]
+            fn from(val: u8) -> ChachaDinWordOrder {
+                ChachaDinWordOrder::from_bits(val)
+            }
+        }
+        impl From<ChachaDinWordOrder> for u8 {
+            #[inline(always)]
+            fn from(val: ChachaDinWordOrder) -> u8 {
+                ChachaDinWordOrder::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ChachaDoutByteOrder {
+            #[doc = "Use default byte order within each output word, where bytes are ordered as follows: B0, B1, B2, B3."]
+            DEFAULT = 0x0,
+            #[doc = "Reverse the byte order within each output word, where bytes are re-ordered as follows: B3, B2, B1, B0."]
+            REVERSE = 0x01,
+        }
+        impl ChachaDoutByteOrder {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ChachaDoutByteOrder {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ChachaDoutByteOrder {
+            #[inline(always)]
+            fn from(val: u8) -> ChachaDoutByteOrder {
+                ChachaDoutByteOrder::from_bits(val)
+            }
+        }
+        impl From<ChachaDoutByteOrder> for u8 {
+            #[inline(always)]
+            fn from(val: ChachaDoutByteOrder) -> u8 {
+                ChachaDoutByteOrder::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ChachaDoutWordOrder {
+            #[doc = "Uses default word order for 128-bits output, where words are ordered as follows: w0, w1, w2, w3."]
+            DEFAULT = 0x0,
+            #[doc = "Reverse the word order for 128-bits output, where words are re-ordered as follows: w3, w2, w1, w0."]
+            REVERSE = 0x01,
+        }
+        impl ChachaDoutWordOrder {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ChachaDoutWordOrder {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ChachaDoutWordOrder {
+            #[inline(always)]
+            fn from(val: u8) -> ChachaDoutWordOrder {
+                ChachaDoutWordOrder::from_bits(val)
+            }
+        }
+        impl From<ChachaDoutWordOrder> for u8 {
+            #[inline(always)]
+            fn from(val: ChachaDoutWordOrder) -> u8 {
+                ChachaDoutWordOrder::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ChachaOrSalsa {
+            #[doc = "Run engine in ChaCha mode"]
+            CHA_CHA = 0x0,
+            #[doc = "Run engine in Salsa mode"]
+            SALSA = 0x01,
+        }
+        impl ChachaOrSalsa {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ChachaOrSalsa {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ChachaOrSalsa {
+            #[inline(always)]
+            fn from(val: u8) -> ChachaOrSalsa {
+                ChachaOrSalsa::from_bits(val)
+            }
+        }
+        impl From<ChachaOrSalsa> for u8 {
+            #[inline(always)]
+            fn from(val: ChachaOrSalsa) -> u8 {
+                ChachaOrSalsa::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum FsmState {
+            #[doc = "CHACHA FSM is in idle state"]
+            IDLE_STATE = 0x0,
+            #[doc = "CHACHA FSM is in init state"]
+            INIT_STATE = 0x01,
+            #[doc = "CHACHA FSM is in rounds state"]
+            ROUNDS_STATE = 0x02,
+            #[doc = "CHACHA FSM is in final state"]
+            FINAL_STATE = 0x03,
+        }
+        impl FsmState {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> FsmState {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for FsmState {
+            #[inline(always)]
+            fn from(val: u8) -> FsmState {
+                FsmState::from_bits(val)
+            }
+        }
+        impl From<FsmState> for u8 {
+            #[inline(always)]
+            fn from(val: FsmState) -> u8 {
+                FsmState::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum KeyLen {
+            #[doc = "Use 256 bits key length"]
+            _256BITS = 0x0,
+            #[doc = "Use 128 bits key length"]
+            _128BITS = 0x01,
+        }
+        impl KeyLen {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> KeyLen {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for KeyLen {
+            #[inline(always)]
+            fn from(val: u8) -> KeyLen {
+                KeyLen::from_bits(val)
+            }
+        }
+        impl From<KeyLen> for u8 {
+            #[inline(always)]
+            fn from(val: KeyLen) -> u8 {
+                KeyLen::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum NumOfRounds {
+            #[doc = "Use 20 rounds of rotation (default)"]
+            DEFAULT = 0x0,
+            #[doc = "Use 12 rounds of rotation"]
+            _12ROUNDS = 0x01,
+            #[doc = "Use 8 rounds of rotation"]
+            _8ROUNDS = 0x02,
+            _RESERVED_3 = 0x03,
+        }
+        impl NumOfRounds {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> NumOfRounds {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for NumOfRounds {
+            #[inline(always)]
+            fn from(val: u8) -> NumOfRounds {
+                NumOfRounds::from_bits(val)
+            }
+        }
+        impl From<NumOfRounds> for u8 {
+            #[inline(always)]
+            fn from(val: NumOfRounds) -> u8 {
+                NumOfRounds::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Status {
+            #[doc = "CHACHA engine is idle"]
+            IDLE = 0x0,
+            #[doc = "CHACHA engine is busy"]
+            BUSY = 0x01,
+        }
+        impl Status {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Status {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Status {
+            #[inline(always)]
+            fn from(val: u8) -> Status {
+                Status::from_bits(val)
+            }
+        }
+        impl From<Status> for u8 {
+            #[inline(always)]
+            fn from(val: Status) -> u8 {
+                Status::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_ctl {
+    #[doc = "CRYPTOCELL CTL interface"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcCtl {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcCtl {}
+    unsafe impl Sync for CcCtl {}
+    impl CcCtl {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Defines the cryptographic flow."]
+        #[inline(always)]
+        pub const fn crypto_ctl(self) -> crate::common::Reg<regs::CryptoCtl, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0900usize) as _) }
+        }
+        #[doc = "Status register for cryptographic cores engine activity."]
+        #[inline(always)]
+        pub const fn crypto_busy(self) -> crate::common::Reg<regs::CryptoBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0910usize) as _) }
+        }
+        #[doc = "Status register for HASH engine activity."]
+        #[inline(always)]
+        pub const fn hash_busy(self) -> crate::common::Reg<regs::HashBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x091cusize) as _) }
+        }
+        #[doc = "A general-purpose read/write register."]
+        #[inline(always)]
+        pub const fn context_id(self) -> crate::common::Reg<regs::ContextId, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0930usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "A general-purpose read/write register."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ContextId(pub u32);
+        impl ContextId {
+            #[doc = "Context ID"]
+            #[inline(always)]
+            pub const fn context_id(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[doc = "Context ID"]
+            #[inline(always)]
+            pub fn set_context_id(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for ContextId {
+            #[inline(always)]
+            fn default() -> ContextId {
+                ContextId(0)
+            }
+        }
+        #[doc = "Status register for cryptographic cores engine activity."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct CryptoBusy(pub u32);
+        impl CryptoBusy {
+            #[doc = "Cryptographic core engines status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::CryptoBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::CryptoBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "Cryptographic core engines status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::CryptoBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for CryptoBusy {
+            #[inline(always)]
+            fn default() -> CryptoBusy {
+                CryptoBusy(0)
+            }
+        }
+        #[doc = "Defines the cryptographic flow."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct CryptoCtl(pub u32);
+        impl CryptoCtl {
+            #[doc = "Configure the cryptographic engine mode."]
+            #[inline(always)]
+            pub const fn mode(&self) -> super::vals::Mode {
+                let val = (self.0 >> 0usize) & 0x1f;
+                super::vals::Mode::from_bits(val as u8)
+            }
+            #[doc = "Configure the cryptographic engine mode."]
+            #[inline(always)]
+            pub fn set_mode(&mut self, val: super::vals::Mode) {
+                self.0 = (self.0 & !(0x1f << 0usize)) | (((val.to_bits() as u32) & 0x1f) << 0usize);
+            }
+        }
+        impl Default for CryptoCtl {
+            #[inline(always)]
+            fn default() -> CryptoCtl {
+                CryptoCtl(0)
+            }
+        }
+        #[doc = "Status register for HASH engine activity."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashBusy(pub u32);
+        impl HashBusy {
+            #[doc = "Hash engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::HashBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::HashBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "Hash engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::HashBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for HashBusy {
+            #[inline(always)]
+            fn default() -> HashBusy {
+                HashBusy(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum CryptoBusyStatus {
+            #[doc = "Cryptographic core engines are idle"]
+            IDLE = 0x0,
+            #[doc = "Cryptographic core engines are busy"]
+            BUSY = 0x01,
+        }
+        impl CryptoBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> CryptoBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for CryptoBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> CryptoBusyStatus {
+                CryptoBusyStatus::from_bits(val)
+            }
+        }
+        impl From<CryptoBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: CryptoBusyStatus) -> u8 {
+                CryptoBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum HashBusyStatus {
+            #[doc = "HASH engine is idle"]
+            IDLE = 0x0,
+            #[doc = "HASH engine is busy"]
+            BUSY = 0x01,
+        }
+        impl HashBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> HashBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for HashBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> HashBusyStatus {
+                HashBusyStatus::from_bits(val)
+            }
+        }
+        impl From<HashBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: HashBusyStatus) -> u8 {
+                HashBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Mode {
+            #[doc = "Bypass cryptographic engine"]
+            BYPASS = 0x0,
+            #[doc = "Use AES engine"]
+            AESACTIVE = 0x01,
+            #[doc = "Pipe AES engine output to HASH engine input"]
+            AESTO_HASH_ACTIVE = 0x02,
+            #[doc = "Process input using both AES and HASH engine in parallell"]
+            AESAND_HASH_ACTIVE = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            #[doc = "Use HASH engine"]
+            HASH_ACTIVE = 0x07,
+            _RESERVED_8 = 0x08,
+            #[doc = "Calculate AES MAC and bypass"]
+            AESMACAND_BYPASS_ACTIVE = 0x09,
+            #[doc = "Pipe AES engine output to HASH engine input. The resulting digest output is piped to DOUT buffer."]
+            AESTO_HASH_AND_DOUTACTIVE = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+            #[doc = "Use CHACHA engine"]
+            CHA_CHA_ACTIVE = 0x10,
+            _RESERVED_11 = 0x11,
+            _RESERVED_12 = 0x12,
+            _RESERVED_13 = 0x13,
+            _RESERVED_14 = 0x14,
+            _RESERVED_15 = 0x15,
+            _RESERVED_16 = 0x16,
+            _RESERVED_17 = 0x17,
+            _RESERVED_18 = 0x18,
+            _RESERVED_19 = 0x19,
+            _RESERVED_1a = 0x1a,
+            _RESERVED_1b = 0x1b,
+            _RESERVED_1c = 0x1c,
+            _RESERVED_1d = 0x1d,
+            _RESERVED_1e = 0x1e,
+            _RESERVED_1f = 0x1f,
+        }
+        impl Mode {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Mode {
+                unsafe { core::mem::transmute(val & 0x1f) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Mode {
+            #[inline(always)]
+            fn from(val: u8) -> Mode {
+                Mode::from_bits(val)
+            }
+        }
+        impl From<Mode> for u8 {
+            #[inline(always)]
+            fn from(val: Mode) -> u8 {
+                Mode::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_din {
+    #[doc = "CRYPTOCELL Data IN interface"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcDin {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcDin {}
+    unsafe impl Sync for CcDin {}
+    impl CcDin {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Used by CPU to write data directly to the DIN buffer, which is then sent to the cryptographic engines for processing."]
+        #[inline(always)]
+        pub const fn din_buffer(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c00usize) as _) }
+        }
+        #[doc = "Status register for DIN DMA engine activity when accessing memory."]
+        #[inline(always)]
+        pub const fn din_dma_mem_busy(
+            self,
+        ) -> crate::common::Reg<regs::DinDmaMemBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c20usize) as _) }
+        }
+        #[doc = "Data source address in memory."]
+        #[inline(always)]
+        pub const fn src_mem_addr(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c28usize) as _) }
+        }
+        #[doc = "The number of bytes to be read from memory. Writing to this register triggers the DMA operation."]
+        #[inline(always)]
+        pub const fn src_mem_size(self) -> crate::common::Reg<regs::SrcMemSize, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c2cusize) as _) }
+        }
+        #[doc = "Data source address in RNG SRAM."]
+        #[inline(always)]
+        pub const fn src_sram_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c30usize) as _) }
+        }
+        #[doc = "The number of bytes to be read from RNG SRAM. Writing to this register triggers the DMA operation."]
+        #[inline(always)]
+        pub const fn src_sram_size(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c34usize) as _) }
+        }
+        #[doc = "Status register for DIN DMA engine activity when accessing RNG SRAM."]
+        #[inline(always)]
+        pub const fn din_dma_sram_busy(
+            self,
+        ) -> crate::common::Reg<regs::DinDmaSramBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c38usize) as _) }
+        }
+        #[doc = "Configure the endianness of DIN DMA transactions towards RNG SRAM."]
+        #[inline(always)]
+        pub const fn din_dma_sram_endianness(
+            self,
+        ) -> crate::common::Reg<regs::DinDmaSramEndianness, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c3cusize) as _) }
+        }
+        #[doc = "Reset the DIN DMA engine."]
+        #[inline(always)]
+        pub const fn din_sw_reset(self) -> crate::common::Reg<regs::DinSwReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c44usize) as _) }
+        }
+        #[doc = "Specifies the number of bytes the CPU will write to the DIN_BUFFER, ensuring the cryptographic engine processes the correct amount of data."]
+        #[inline(always)]
+        pub const fn din_cpu_data(self) -> crate::common::Reg<regs::DinCpuData, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c48usize) as _) }
+        }
+        #[doc = "Indicates that the next CPU write to the DIN_BUFFER is the last in the sequence. This is needed only when the data size is NOT modulo 4 (e.g. HASH padding)."]
+        #[inline(always)]
+        pub const fn din_write_align(
+            self,
+        ) -> crate::common::Reg<regs::DinWriteAlign, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c4cusize) as _) }
+        }
+        #[doc = "Register indicating if DIN FIFO is empty and if more data can be accepted."]
+        #[inline(always)]
+        pub const fn din_fifo_empty(
+            self,
+        ) -> crate::common::Reg<regs::DinFifoEmpty, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c50usize) as _) }
+        }
+        #[doc = "Reset the DIN FIFO, effectively clearing the FIFO for new data."]
+        #[inline(always)]
+        pub const fn din_fifo_reset(
+            self,
+        ) -> crate::common::Reg<regs::DinFifoReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c58usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Specifies the number of bytes the CPU will write to the DIN_BUFFER, ensuring the cryptographic engine processes the correct amount of data."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinCpuData(pub u32);
+        impl DinCpuData {
+            #[doc = "When using CPU direct write to the DIN_BUFFER, the size of input data in bytes should be written to this register."]
+            #[inline(always)]
+            pub const fn size(&self) -> u16 {
+                let val = (self.0 >> 0usize) & 0xffff;
+                val as u16
+            }
+            #[doc = "When using CPU direct write to the DIN_BUFFER, the size of input data in bytes should be written to this register."]
+            #[inline(always)]
+            pub fn set_size(&mut self, val: u16) {
+                self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
+            }
+        }
+        impl Default for DinCpuData {
+            #[inline(always)]
+            fn default() -> DinCpuData {
+                DinCpuData(0)
+            }
+        }
+        #[doc = "Status register for DIN DMA engine activity when accessing memory."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinDmaMemBusy(pub u32);
+        impl DinDmaMemBusy {
+            #[doc = "DIN memory DMA engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::DinDmaMemBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::DinDmaMemBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "DIN memory DMA engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::DinDmaMemBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DinDmaMemBusy {
+            #[inline(always)]
+            fn default() -> DinDmaMemBusy {
+                DinDmaMemBusy(0)
+            }
+        }
+        #[doc = "Status register for DIN DMA engine activity when accessing RNG SRAM."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinDmaSramBusy(pub u32);
+        impl DinDmaSramBusy {
+            #[doc = "DIN RNG SRAM DMA engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::DinDmaSramBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::DinDmaSramBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "DIN RNG SRAM DMA engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::DinDmaSramBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DinDmaSramBusy {
+            #[inline(always)]
+            fn default() -> DinDmaSramBusy {
+                DinDmaSramBusy(0)
+            }
+        }
+        #[doc = "Configure the endianness of DIN DMA transactions towards RNG SRAM."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinDmaSramEndianness(pub u32);
+        impl DinDmaSramEndianness {
+            #[doc = "Endianness of DIN DMA transactions towards RNG SRAM. The default value is little-endian."]
+            #[inline(always)]
+            pub const fn endian(&self) -> super::vals::Endian {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Endian::from_bits(val as u8)
+            }
+            #[doc = "Endianness of DIN DMA transactions towards RNG SRAM. The default value is little-endian."]
+            #[inline(always)]
+            pub fn set_endian(&mut self, val: super::vals::Endian) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DinDmaSramEndianness {
+            #[inline(always)]
+            fn default() -> DinDmaSramEndianness {
+                DinDmaSramEndianness(0)
+            }
+        }
+        #[doc = "Register indicating if DIN FIFO is empty and if more data can be accepted."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinFifoEmpty(pub u32);
+        impl DinFifoEmpty {
+            #[doc = "DIN FIFO status"]
+            #[inline(always)]
+            pub const fn status(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "DIN FIFO status"]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DinFifoEmpty {
+            #[inline(always)]
+            fn default() -> DinFifoEmpty {
+                DinFifoEmpty(0)
+            }
+        }
+        #[doc = "Reset the DIN FIFO, effectively clearing the FIFO for new data."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinFifoReset(pub u32);
+        impl DinFifoReset {
+            #[doc = "Writing any value to this address resets the DIN FIFO."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the DIN FIFO."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DinFifoReset {
+            #[inline(always)]
+            fn default() -> DinFifoReset {
+                DinFifoReset(0)
+            }
+        }
+        #[doc = "Reset the DIN DMA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinSwReset(pub u32);
+        impl DinSwReset {
+            #[doc = "Writing any value to this address resets the DIN DMA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the DIN DMA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DinSwReset {
+            #[inline(always)]
+            fn default() -> DinSwReset {
+                DinSwReset(0)
+            }
+        }
+        #[doc = "Indicates that the next CPU write to the DIN_BUFFER is the last in the sequence. This is needed only when the data size is NOT modulo 4 (e.g. HASH padding)."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DinWriteAlign(pub u32);
+        impl DinWriteAlign {
+            #[doc = "Next CPU write to the DIN_BUFFER is the last word."]
+            #[inline(always)]
+            pub const fn last(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Next CPU write to the DIN_BUFFER is the last word."]
+            #[inline(always)]
+            pub fn set_last(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DinWriteAlign {
+            #[inline(always)]
+            fn default() -> DinWriteAlign {
+                DinWriteAlign(0)
+            }
+        }
+        #[doc = "The number of bytes to be read from memory. Writing to this register triggers the DMA operation."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct SrcMemSize(pub u32);
+        impl SrcMemSize {
+            #[doc = "Total number of bytes to read from memory."]
+            #[inline(always)]
+            pub const fn size(&self) -> u32 {
+                let val = (self.0 >> 0usize) & 0x3fff_ffff;
+                val as u32
+            }
+            #[doc = "Total number of bytes to read from memory."]
+            #[inline(always)]
+            pub fn set_size(&mut self, val: u32) {
+                self.0 =
+                    (self.0 & !(0x3fff_ffff << 0usize)) | (((val as u32) & 0x3fff_ffff) << 0usize);
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub const fn first(&self) -> bool {
+                let val = (self.0 >> 30usize) & 0x01;
+                val != 0
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub fn set_first(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub const fn last(&self) -> bool {
+                let val = (self.0 >> 31usize) & 0x01;
+                val != 0
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub fn set_last(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
+            }
+        }
+        impl Default for SrcMemSize {
+            #[inline(always)]
+            fn default() -> SrcMemSize {
+                SrcMemSize(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DinDmaMemBusyStatus {
+            #[doc = "DIN memory DMA engine is idle"]
+            IDLE = 0x0,
+            #[doc = "DIN memory DMA engine is busy"]
+            BUSY = 0x01,
+        }
+        impl DinDmaMemBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DinDmaMemBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DinDmaMemBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> DinDmaMemBusyStatus {
+                DinDmaMemBusyStatus::from_bits(val)
+            }
+        }
+        impl From<DinDmaMemBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: DinDmaMemBusyStatus) -> u8 {
+                DinDmaMemBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DinDmaSramBusyStatus {
+            #[doc = "DIN RNG SRAM DMA engine is idle"]
+            IDLE = 0x0,
+            #[doc = "DIN RNG SRAM DMA engine is busy"]
+            BUSY = 0x01,
+        }
+        impl DinDmaSramBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DinDmaSramBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DinDmaSramBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> DinDmaSramBusyStatus {
+                DinDmaSramBusyStatus::from_bits(val)
+            }
+        }
+        impl From<DinDmaSramBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: DinDmaSramBusyStatus) -> u8 {
+                DinDmaSramBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Endian {
+            #[doc = "Use little-endian format for RNG SRAM DMA transactions"]
+            LITTLE_ENDIAN = 0x0,
+            #[doc = "Use big-endian format for RNG SRAM DMA transactions"]
+            BIG_ENDIAN = 0x01,
+        }
+        impl Endian {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Endian {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Endian {
+            #[inline(always)]
+            fn from(val: u8) -> Endian {
+                Endian::from_bits(val)
+            }
+        }
+        impl From<Endian> for u8 {
+            #[inline(always)]
+            fn from(val: Endian) -> u8 {
+                Endian::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_dout {
+    #[doc = "CRYPTOCELL Data OUT interface"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcDout {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcDout {}
+    unsafe impl Sync for CcDout {}
+    impl CcDout {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Cryptographic results directly accessible by the CPU."]
+        #[inline(always)]
+        pub const fn dout_buffer(self) -> crate::common::Reg<u32, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c00usize) as _) }
+        }
+        #[doc = "Status register for DOUT DMA engine activity when accessing memory."]
+        #[inline(always)]
+        pub const fn dout_dma_mem_busy(
+            self,
+        ) -> crate::common::Reg<regs::DoutDmaMemBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d20usize) as _) }
+        }
+        #[doc = "Data destination address in memory."]
+        #[inline(always)]
+        pub const fn dst_mem_addr(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d28usize) as _) }
+        }
+        #[doc = "The number of bytes to be written to memory."]
+        #[inline(always)]
+        pub const fn dst_mem_size(self) -> crate::common::Reg<regs::DstMemSize, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d2cusize) as _) }
+        }
+        #[doc = "Data destination address in RNG SRAM."]
+        #[inline(always)]
+        pub const fn dst_sram_addr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d30usize) as _) }
+        }
+        #[doc = "The number of bytes to be written to RNG SRAM."]
+        #[inline(always)]
+        pub const fn dst_sram_size(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d34usize) as _) }
+        }
+        #[doc = "Status register for DOUT DMA engine activity when accessing RNG SRAM."]
+        #[inline(always)]
+        pub const fn dout_dma_sram_busy(
+            self,
+        ) -> crate::common::Reg<regs::DoutDmaSramBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d38usize) as _) }
+        }
+        #[doc = "Configure the endianness of DOUT DMA transactions towards RNG SRAM."]
+        #[inline(always)]
+        pub const fn dout_dma_sram_endianness(
+            self,
+        ) -> crate::common::Reg<regs::DoutDmaSramEndianness, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d3cusize) as _) }
+        }
+        #[doc = "Indication that the next CPU read from the DOUT_BUFFER is the last in the sequence. This is needed only when the data size is NOT modulo 4 (e.g. HASH padding)."]
+        #[inline(always)]
+        pub const fn dout_read_align(
+            self,
+        ) -> crate::common::Reg<regs::DoutReadAlign, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d44usize) as _) }
+        }
+        #[doc = "Register indicating if DOUT FIFO is empty or if more data will come."]
+        #[inline(always)]
+        pub const fn dout_fifo_empty(
+            self,
+        ) -> crate::common::Reg<regs::DoutFifoEmpty, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d50usize) as _) }
+        }
+        #[doc = "Reset the DOUT DMA engine."]
+        #[inline(always)]
+        pub const fn dout_sw_reset(
+            self,
+        ) -> crate::common::Reg<regs::DoutSwReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0d58usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Status register for DOUT DMA engine activity when accessing memory."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DoutDmaMemBusy(pub u32);
+        impl DoutDmaMemBusy {
+            #[doc = "DOUT memory DMA engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::DoutDmaMemBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::DoutDmaMemBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "DOUT memory DMA engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::DoutDmaMemBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DoutDmaMemBusy {
+            #[inline(always)]
+            fn default() -> DoutDmaMemBusy {
+                DoutDmaMemBusy(0)
+            }
+        }
+        #[doc = "Status register for DOUT DMA engine activity when accessing RNG SRAM."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DoutDmaSramBusy(pub u32);
+        impl DoutDmaSramBusy {
+            #[doc = "DOUT RNG SRAM DMA engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::DoutDmaSramBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::DoutDmaSramBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "DOUT RNG SRAM DMA engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::DoutDmaSramBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DoutDmaSramBusy {
+            #[inline(always)]
+            fn default() -> DoutDmaSramBusy {
+                DoutDmaSramBusy(0)
+            }
+        }
+        #[doc = "Configure the endianness of DOUT DMA transactions towards RNG SRAM."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DoutDmaSramEndianness(pub u32);
+        impl DoutDmaSramEndianness {
+            #[doc = "Endianness of DOUT DMA transactions towards RNG SRAM. The default value is little-endian."]
+            #[inline(always)]
+            pub const fn endian(&self) -> super::vals::Endian {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Endian::from_bits(val as u8)
+            }
+            #[doc = "Endianness of DOUT DMA transactions towards RNG SRAM. The default value is little-endian."]
+            #[inline(always)]
+            pub fn set_endian(&mut self, val: super::vals::Endian) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DoutDmaSramEndianness {
+            #[inline(always)]
+            fn default() -> DoutDmaSramEndianness {
+                DoutDmaSramEndianness(0)
+            }
+        }
+        #[doc = "Register indicating if DOUT FIFO is empty or if more data will come."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DoutFifoEmpty(pub u32);
+        impl DoutFifoEmpty {
+            #[doc = "DOUT FIFO status"]
+            #[inline(always)]
+            pub const fn status(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "DOUT FIFO status"]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DoutFifoEmpty {
+            #[inline(always)]
+            fn default() -> DoutFifoEmpty {
+                DoutFifoEmpty(0)
+            }
+        }
+        #[doc = "Indication that the next CPU read from the DOUT_BUFFER is the last in the sequence. This is needed only when the data size is NOT modulo 4 (e.g. HASH padding)."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DoutReadAlign(pub u32);
+        impl DoutReadAlign {
+            #[doc = "Next CPU read from the DOUT_BUFFER is the last word, and the remaining read aligned content can be flushed."]
+            #[inline(always)]
+            pub const fn last(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Next CPU read from the DOUT_BUFFER is the last word, and the remaining read aligned content can be flushed."]
+            #[inline(always)]
+            pub fn set_last(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DoutReadAlign {
+            #[inline(always)]
+            fn default() -> DoutReadAlign {
+                DoutReadAlign(0)
+            }
+        }
+        #[doc = "Reset the DOUT DMA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DoutSwReset(pub u32);
+        impl DoutSwReset {
+            #[doc = "Writing any value to this address resets the DOUT DMA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the DOUT DMA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DoutSwReset {
+            #[inline(always)]
+            fn default() -> DoutSwReset {
+                DoutSwReset(0)
+            }
+        }
+        #[doc = "The number of bytes to be written to memory."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DstMemSize(pub u32);
+        impl DstMemSize {
+            #[doc = "Total number of bytes to write to memory."]
+            #[inline(always)]
+            pub const fn size(&self) -> u32 {
+                let val = (self.0 >> 0usize) & 0x3fff_ffff;
+                val as u32
+            }
+            #[doc = "Total number of bytes to write to memory."]
+            #[inline(always)]
+            pub fn set_size(&mut self, val: u32) {
+                self.0 =
+                    (self.0 & !(0x3fff_ffff << 0usize)) | (((val as u32) & 0x3fff_ffff) << 0usize);
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub const fn first(&self) -> bool {
+                let val = (self.0 >> 30usize) & 0x01;
+                val != 0
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub fn set_first(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub const fn last(&self) -> bool {
+                let val = (self.0 >> 31usize) & 0x01;
+                val != 0
+            }
+            #[doc = "This field is reserved"]
+            #[inline(always)]
+            pub fn set_last(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
+            }
+        }
+        impl Default for DstMemSize {
+            #[inline(always)]
+            fn default() -> DstMemSize {
+                DstMemSize(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DoutDmaMemBusyStatus {
+            #[doc = "DOUT memory DMA engine is idle"]
+            IDLE = 0x0,
+            #[doc = "DOUT memory DMA engine is busy"]
+            BUSY = 0x01,
+        }
+        impl DoutDmaMemBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DoutDmaMemBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DoutDmaMemBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> DoutDmaMemBusyStatus {
+                DoutDmaMemBusyStatus::from_bits(val)
+            }
+        }
+        impl From<DoutDmaMemBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: DoutDmaMemBusyStatus) -> u8 {
+                DoutDmaMemBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DoutDmaSramBusyStatus {
+            #[doc = "DOUT RNG SRAM DMA engine is idle"]
+            IDLE = 0x0,
+            #[doc = "DOUT RNG SRAM DMA engine is busy"]
+            BUSY = 0x01,
+        }
+        impl DoutDmaSramBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DoutDmaSramBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DoutDmaSramBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> DoutDmaSramBusyStatus {
+                DoutDmaSramBusyStatus::from_bits(val)
+            }
+        }
+        impl From<DoutDmaSramBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: DoutDmaSramBusyStatus) -> u8 {
+                DoutDmaSramBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Endian {
+            #[doc = "Use little-endian format for RNG SRAM DMA transactions"]
+            LITTLE_ENDIAN = 0x0,
+            #[doc = "Use big-endian format for RNG SRAM DMA transactions"]
+            BIG_ENDIAN = 0x01,
+        }
+        impl Endian {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Endian {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Endian {
+            #[inline(always)]
+            fn from(val: u8) -> Endian {
+                Endian::from_bits(val)
+            }
+        }
+        impl From<Endian> for u8 {
+            #[inline(always)]
+            fn from(val: Endian) -> u8 {
+                Endian::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_hash {
+    #[doc = "CRYPTOCELL HASH engine"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcHash {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcHash {}
+    unsafe impl Sync for CcHash {}
+    impl CcHash {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Description collection: HASH_H value registers. The initial HASH_H\\[0\\] register holds the least significant bits \\[31:0\\] of the value."]
+        #[inline(always)]
+        pub const fn hash_h(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 8usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0640usize + n * 4usize) as _) }
+        }
+        #[doc = "Configure the HASH engine to automatically pad data at the end of the DMA transfer to complete the digest operation."]
+        #[inline(always)]
+        pub const fn hash_pad_auto(
+            self,
+        ) -> crate::common::Reg<regs::HashPadAuto, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0684usize) as _) }
+        }
+        #[doc = "Configure HASH engine initial state registers."]
+        #[inline(always)]
+        pub const fn hash_init_state(
+            self,
+        ) -> crate::common::Reg<regs::HashInitState, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0694usize) as _) }
+        }
+        #[doc = "HASH engine HW version"]
+        #[inline(always)]
+        pub const fn hash_version(self) -> crate::common::Reg<regs::HashVersion, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07b0usize) as _) }
+        }
+        #[doc = "Control the HASH engine behavior."]
+        #[inline(always)]
+        pub const fn hash_control(
+            self,
+        ) -> crate::common::Reg<regs::HashControl, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07c0usize) as _) }
+        }
+        #[doc = "Enable the hardware padding feature of the HASH engine."]
+        #[inline(always)]
+        pub const fn hash_pad(self) -> crate::common::Reg<regs::HashPad, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07c4usize) as _) }
+        }
+        #[doc = "Force the hardware padding operation to trigger if the input data length is zero bytes."]
+        #[inline(always)]
+        pub const fn hash_pad_force(
+            self,
+        ) -> crate::common::Reg<regs::HashPadForce, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07c8usize) as _) }
+        }
+        #[doc = "Bits \\[31:0\\] of the number of bytes that have been digested so far."]
+        #[inline(always)]
+        pub const fn hash_cur_len_0(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07ccusize) as _) }
+        }
+        #[doc = "Bits \\[63:32\\] of the number of bytes that have been digested so far."]
+        #[inline(always)]
+        pub const fn hash_cur_len_1(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07d0usize) as _) }
+        }
+        #[doc = "Hardware configuration of the HASH engine. Reset value holds the supported features."]
+        #[inline(always)]
+        pub const fn hash_hw_flags(
+            self,
+        ) -> crate::common::Reg<regs::HashHwFlags, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07dcusize) as _) }
+        }
+        #[doc = "Reset the HASH engine."]
+        #[inline(always)]
+        pub const fn hash_sw_reset(
+            self,
+        ) -> crate::common::Reg<regs::HashSwReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07e4usize) as _) }
+        }
+        #[doc = "Configure the endianness of HASH data and padding generation."]
+        #[inline(always)]
+        pub const fn hash_endianness(
+            self,
+        ) -> crate::common::Reg<regs::HashEndianness, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x07e8usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Control the HASH engine behavior."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashControl(pub u32);
+        impl HashControl {
+            #[doc = "Select HASH mode to execute"]
+            #[inline(always)]
+            pub const fn mode(&self) -> super::vals::Mode {
+                let val = (self.0 >> 0usize) & 0x0f;
+                super::vals::Mode::from_bits(val as u8)
+            }
+            #[doc = "Select HASH mode to execute"]
+            #[inline(always)]
+            pub fn set_mode(&mut self, val: super::vals::Mode) {
+                self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
+            }
+        }
+        impl Default for HashControl {
+            #[inline(always)]
+            fn default() -> HashControl {
+                HashControl(0)
+            }
+        }
+        #[doc = "Configure the endianness of HASH data and padding generation."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashEndianness(pub u32);
+        impl HashEndianness {
+            #[doc = "Endianness of HASH data and padding generation. The default value is little-endian."]
+            #[inline(always)]
+            pub const fn endian(&self) -> super::vals::Endian {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Endian::from_bits(val as u8)
+            }
+            #[doc = "Endianness of HASH data and padding generation. The default value is little-endian."]
+            #[inline(always)]
+            pub fn set_endian(&mut self, val: super::vals::Endian) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for HashEndianness {
+            #[inline(always)]
+            fn default() -> HashEndianness {
+                HashEndianness(0)
+            }
+        }
+        #[doc = "Hardware configuration of the HASH engine. Reset value holds the supported features."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashHwFlags(pub u32);
+        impl HashHwFlags {
+            #[doc = "Indicates the number of concurrent words the hash is using to compute signature."]
+            #[inline(always)]
+            pub const fn cw(&self) -> super::vals::Cw {
+                let val = (self.0 >> 0usize) & 0x0f;
+                super::vals::Cw::from_bits(val as u8)
+            }
+            #[doc = "Indicates the number of concurrent words the hash is using to compute signature."]
+            #[inline(always)]
+            pub fn set_cw(&mut self, val: super::vals::Cw) {
+                self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
+            }
+            #[doc = "Indicate if Hi adders are present for each Hi value or 1 adder is shared for all Hi."]
+            #[inline(always)]
+            pub const fn ch(&self) -> super::vals::Ch {
+                let val = (self.0 >> 4usize) & 0x0f;
+                super::vals::Ch::from_bits(val as u8)
+            }
+            #[doc = "Indicate if Hi adders are present for each Hi value or 1 adder is shared for all Hi."]
+            #[inline(always)]
+            pub fn set_ch(&mut self, val: super::vals::Ch) {
+                self.0 = (self.0 & !(0x0f << 4usize)) | (((val.to_bits() as u32) & 0x0f) << 4usize);
+            }
+            #[doc = "Determine the granularity of word size."]
+            #[inline(always)]
+            pub const fn dw(&self) -> super::vals::Dw {
+                let val = (self.0 >> 8usize) & 0x0f;
+                super::vals::Dw::from_bits(val as u8)
+            }
+            #[doc = "Determine the granularity of word size."]
+            #[inline(always)]
+            pub fn set_dw(&mut self, val: super::vals::Dw) {
+                self.0 = (self.0 & !(0x0f << 8usize)) | (((val.to_bits() as u32) & 0x0f) << 8usize);
+            }
+            #[doc = "If this flag is set, the engine include SHA-512 support."]
+            #[inline(always)]
+            pub const fn sha_512_exists(&self) -> bool {
+                let val = (self.0 >> 12usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include SHA-512 support."]
+            #[inline(always)]
+            pub fn set_sha_512_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
+            }
+            #[doc = "If this flag is set, the engine include pad block support."]
+            #[inline(always)]
+            pub const fn pad_exists(&self) -> bool {
+                let val = (self.0 >> 13usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include pad block support."]
+            #[inline(always)]
+            pub fn set_pad_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
+            }
+            #[doc = "If this flag is set, the engine include MD5 support."]
+            #[inline(always)]
+            pub const fn md5_exists(&self) -> bool {
+                let val = (self.0 >> 14usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include MD5 support."]
+            #[inline(always)]
+            pub fn set_md5_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
+            }
+            #[doc = "If this flag is set, the engine include HMAC support."]
+            #[inline(always)]
+            pub const fn hmac_exists(&self) -> bool {
+                let val = (self.0 >> 15usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include HMAC support."]
+            #[inline(always)]
+            pub fn set_hmac_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
+            }
+            #[doc = "If this flag is set, the engine include SHA-256 support."]
+            #[inline(always)]
+            pub const fn sha_256_exists(&self) -> bool {
+                let val = (self.0 >> 16usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include SHA-256 support."]
+            #[inline(always)]
+            pub fn set_sha_256_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
+            }
+            #[doc = "If this flag is set, the engine include compare digest logic."]
+            #[inline(always)]
+            pub const fn hash_compare_exists(&self) -> bool {
+                let val = (self.0 >> 17usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include compare digest logic."]
+            #[inline(always)]
+            pub fn set_hash_compare_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
+            }
+            #[doc = "If this flag is set, the engine include HASH to DOUT support."]
+            #[inline(always)]
+            pub const fn dump_hash_to_dout_exists(&self) -> bool {
+                let val = (self.0 >> 18usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include HASH to DOUT support."]
+            #[inline(always)]
+            pub fn set_dump_hash_to_dout_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
+            }
+        }
+        impl Default for HashHwFlags {
+            #[inline(always)]
+            fn default() -> HashHwFlags {
+                HashHwFlags(0)
+            }
+        }
+        #[doc = "Configure HASH engine initial state registers."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashInitState(pub u32);
+        impl HashInitState {
+            #[doc = "Enable loading of data to initial state registers. Digest/IV for HASH/AES_MAC."]
+            #[inline(always)]
+            pub const fn load(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enable loading of data to initial state registers. Digest/IV for HASH/AES_MAC."]
+            #[inline(always)]
+            pub fn set_load(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for HashInitState {
+            #[inline(always)]
+            fn default() -> HashInitState {
+                HashInitState(0)
+            }
+        }
+        #[doc = "Enable the hardware padding feature of the HASH engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashPad(pub u32);
+        impl HashPad {
+            #[doc = "Configure hardware padding feature."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Configure hardware padding feature."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for HashPad {
+            #[inline(always)]
+            fn default() -> HashPad {
+                HashPad(0)
+            }
+        }
+        #[doc = "Configure the HASH engine to automatically pad data at the end of the DMA transfer to complete the digest operation."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashPadAuto(pub u32);
+        impl HashPadAuto {
+            #[doc = "Enable automatic padding in hardware."]
+            #[inline(always)]
+            pub const fn hwpad(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enable automatic padding in hardware."]
+            #[inline(always)]
+            pub fn set_hwpad(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for HashPadAuto {
+            #[inline(always)]
+            fn default() -> HashPadAuto {
+                HashPadAuto(0)
+            }
+        }
+        #[doc = "Force the hardware padding operation to trigger if the input data length is zero bytes."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashPadForce(pub u32);
+        impl HashPadForce {
+            #[doc = "Trigger hardware padding operation."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Trigger hardware padding operation."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+        }
+        impl Default for HashPadForce {
+            #[inline(always)]
+            fn default() -> HashPadForce {
+                HashPadForce(0)
+            }
+        }
+        #[doc = "Reset the HASH engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashSwReset(pub u32);
+        impl HashSwReset {
+            #[doc = "Writing any value to this address resets the HASH engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the HASH engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for HashSwReset {
+            #[inline(always)]
+            fn default() -> HashSwReset {
+                HashSwReset(0)
+            }
+        }
+        #[doc = "HASH engine HW version"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashVersion(pub u32);
+        impl HashVersion {
+            #[inline(always)]
+            pub const fn patch(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[inline(always)]
+            pub fn set_patch(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+            #[doc = "Minor version number"]
+            #[inline(always)]
+            pub const fn minor_version_number(&self) -> u8 {
+                let val = (self.0 >> 8usize) & 0x0f;
+                val as u8
+            }
+            #[doc = "Minor version number"]
+            #[inline(always)]
+            pub fn set_minor_version_number(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
+            }
+            #[doc = "Major version number"]
+            #[inline(always)]
+            pub const fn major_version_number(&self) -> u8 {
+                let val = (self.0 >> 12usize) & 0x0f;
+                val as u8
+            }
+            #[doc = "Major version number"]
+            #[inline(always)]
+            pub fn set_major_version_number(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x0f << 12usize)) | (((val as u32) & 0x0f) << 12usize);
+            }
+        }
+        impl Default for HashVersion {
+            #[inline(always)]
+            fn default() -> HashVersion {
+                HashVersion(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Ch {
+            #[doc = "One Hi value is updated at a time."]
+            ONE = 0x0,
+            #[doc = "All Hi values are updated at the same time."]
+            ALL = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+        }
+        impl Ch {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Ch {
+                unsafe { core::mem::transmute(val & 0x0f) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Ch {
+            #[inline(always)]
+            fn from(val: u8) -> Ch {
+                Ch::from_bits(val)
+            }
+        }
+        impl From<Ch> for u8 {
+            #[inline(always)]
+            fn from(val: Ch) -> u8 {
+                Ch::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Cw {
+            _RESERVED_0 = 0x0,
+            #[doc = "One concurrent word used by hash during signature generation"]
+            ONE = 0x01,
+            #[doc = "Two concurrent words used by hash during signature generation"]
+            TWO = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+        }
+        impl Cw {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Cw {
+                unsafe { core::mem::transmute(val & 0x0f) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Cw {
+            #[inline(always)]
+            fn from(val: u8) -> Cw {
+                Cw::from_bits(val)
+            }
+        }
+        impl From<Cw> for u8 {
+            #[inline(always)]
+            fn from(val: Cw) -> u8 {
+                Cw::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Dw {
+            #[doc = "32 bits word data."]
+            _32BITS = 0x0,
+            #[doc = "64 bits word data."]
+            _64BITS = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+        }
+        impl Dw {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Dw {
+                unsafe { core::mem::transmute(val & 0x0f) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Dw {
+            #[inline(always)]
+            fn from(val: u8) -> Dw {
+                Dw::from_bits(val)
+            }
+        }
+        impl From<Dw> for u8 {
+            #[inline(always)]
+            fn from(val: Dw) -> u8 {
+                Dw::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Endian {
+            #[doc = "Use little-endian format for data and padding"]
+            LITTLE_ENDIAN = 0x0,
+            #[doc = "Use big-endian format for data and padding"]
+            BIG_ENDIAN = 0x01,
+        }
+        impl Endian {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Endian {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Endian {
+            #[inline(always)]
+            fn from(val: u8) -> Endian {
+                Endian::from_bits(val)
+            }
+        }
+        impl From<Endian> for u8 {
+            #[inline(always)]
+            fn from(val: Endian) -> u8 {
+                Endian::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Mode {
+            _RESERVED_0 = 0x0,
+            #[doc = "Select SHA1 mode"]
+            SHA1 = 0x01,
+            #[doc = "Select SHA256 mode"]
+            SHA256 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            #[doc = "Select SHA224 mode"]
+            SHA224 = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+        }
+        impl Mode {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Mode {
+                unsafe { core::mem::transmute(val & 0x0f) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Mode {
+            #[inline(always)]
+            fn from(val: u8) -> Mode {
+                Mode::from_bits(val)
+            }
+        }
+        impl From<Mode> for u8 {
+            #[inline(always)]
+            fn from(val: Mode) -> u8 {
+                Mode::to_bits(val)
+            }
+        }
+    }
+}
 pub mod cc_host_rgf {
-    #[doc = "CRYPTOCELL HOST_RGF interface"]
+    #[doc = "CRYPTOCELL HOST register interface"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct CcHostRgf {
         ptr: *mut u8,
@@ -790,48 +3861,458 @@ pub mod cc_host_rgf {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "AES hardware key select"]
+        #[doc = "Interrupt request register. Each bit of this register holds the interrupt status of a single interrupt source. If corresponding IMR bit is unmasked, an interrupt is generated."]
+        #[inline(always)]
+        pub const fn irr(self) -> crate::common::Reg<regs::Irr, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a00usize) as _) }
+        }
+        #[doc = "Interrupt mask register. Each bit of this register holds the mask of a single interrupt source."]
+        #[inline(always)]
+        pub const fn imr(self) -> crate::common::Reg<regs::Imr, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a04usize) as _) }
+        }
+        #[doc = "Interrupt clear register. Writing a 1 bit into a field in this register will clear the corresponding bit in IRR."]
+        #[inline(always)]
+        pub const fn icr(self) -> crate::common::Reg<regs::Icr, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a08usize) as _) }
+        }
+        #[doc = "This register defines the endianness of the Host-accessible registers, and can only be written once."]
+        #[inline(always)]
+        pub const fn endianness(self) -> crate::common::Reg<regs::Endianness, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a0cusize) as _) }
+        }
+        #[doc = "This register holds the CRYPTOCELL subsystem signature. See reset value."]
+        #[inline(always)]
+        pub const fn host_signature(self) -> crate::common::Reg<u32, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a24usize) as _) }
+        }
+        #[doc = "Hardware configuration of the CRYPTOCELL subsystem. Reset value holds the supported features."]
+        #[inline(always)]
+        pub const fn host_boot(self) -> crate::common::Reg<regs::HostBoot, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a28usize) as _) }
+        }
+        #[doc = "AES hardware key select."]
         #[inline(always)]
         pub const fn host_cryptokey_sel(
             self,
         ) -> crate::common::Reg<regs::HostCryptokeySel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1a38usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a38usize) as _) }
         }
-        #[doc = "This write-once register is the K_PRTL lock register. When this register is set, K_PRTL can not be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
+        #[doc = "This write-once register is the K_PRTL lock register. When this register is set, K_PRTL cannot be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
         #[inline(always)]
         pub const fn host_iot_kprtl_lock(
             self,
         ) -> crate::common::Reg<regs::HostIotKprtlLock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1a4cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a4cusize) as _) }
         }
         #[doc = "This register holds bits 31:0 of K_DR. The value of this register is saved in the CRYPTOCELL AO power domain. Reading from this address returns the K_DR valid status indicating if K_DR is successfully retained."]
         #[inline(always)]
-        pub const fn host_iot_kdr0(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1a50usize) as _) }
+        pub const fn host_iot_kdr0(
+            self,
+        ) -> crate::common::Reg<regs::HostIotKdr0, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a50usize) as _) }
         }
         #[doc = "This register holds bits 63:32 of K_DR. The value of this register is saved in the CRYPTOCELL AO power domain."]
         #[inline(always)]
         pub const fn host_iot_kdr1(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1a54usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a54usize) as _) }
         }
         #[doc = "This register holds bits 95:64 of K_DR. The value of this register is saved in the CRYPTOCELL AO power domain."]
         #[inline(always)]
         pub const fn host_iot_kdr2(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1a58usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a58usize) as _) }
         }
         #[doc = "This register holds bits 127:96 of K_DR. The value of this register is saved in the CRYPTOCELL AO power domain."]
         #[inline(always)]
         pub const fn host_iot_kdr3(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1a5cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a5cusize) as _) }
         }
-        #[doc = "Controls lifecycle state (LCS) for CRYPTOCELL subsystem"]
+        #[doc = "Controls life-cycle state (LCS) for CRYPTOCELL subsystem"]
         #[inline(always)]
         pub const fn host_iot_lcs(self) -> crate::common::Reg<regs::HostIotLcs, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1a60usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0a60usize) as _) }
         }
     }
     pub mod regs {
-        #[doc = "AES hardware key select"]
+        #[doc = "This register defines the endianness of the Host-accessible registers, and can only be written once."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Endianness(pub u32);
+        impl Endianness {
+            #[doc = "DOUT write endianness."]
+            #[inline(always)]
+            pub const fn dout_wr_bg(&self) -> super::vals::DoutWrBg {
+                let val = (self.0 >> 3usize) & 0x01;
+                super::vals::DoutWrBg::from_bits(val as u8)
+            }
+            #[doc = "DOUT write endianness."]
+            #[inline(always)]
+            pub fn set_dout_wr_bg(&mut self, val: super::vals::DoutWrBg) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val.to_bits() as u32) & 0x01) << 3usize);
+            }
+            #[doc = "DIN read endianness."]
+            #[inline(always)]
+            pub const fn din_rd_bg(&self) -> super::vals::DinRdBg {
+                let val = (self.0 >> 7usize) & 0x01;
+                super::vals::DinRdBg::from_bits(val as u8)
+            }
+            #[doc = "DIN read endianness."]
+            #[inline(always)]
+            pub fn set_din_rd_bg(&mut self, val: super::vals::DinRdBg) {
+                self.0 = (self.0 & !(0x01 << 7usize)) | (((val.to_bits() as u32) & 0x01) << 7usize);
+            }
+            #[doc = "DOUT write word endianness."]
+            #[inline(always)]
+            pub const fn dout_wr_wbg(&self) -> super::vals::DoutWrWbg {
+                let val = (self.0 >> 11usize) & 0x01;
+                super::vals::DoutWrWbg::from_bits(val as u8)
+            }
+            #[doc = "DOUT write word endianness."]
+            #[inline(always)]
+            pub fn set_dout_wr_wbg(&mut self, val: super::vals::DoutWrWbg) {
+                self.0 =
+                    (self.0 & !(0x01 << 11usize)) | (((val.to_bits() as u32) & 0x01) << 11usize);
+            }
+            #[doc = "DIN read word endianness."]
+            #[inline(always)]
+            pub const fn din_rd_wbg(&self) -> super::vals::DinRdWbg {
+                let val = (self.0 >> 15usize) & 0x01;
+                super::vals::DinRdWbg::from_bits(val as u8)
+            }
+            #[doc = "DIN read word endianness."]
+            #[inline(always)]
+            pub fn set_din_rd_wbg(&mut self, val: super::vals::DinRdWbg) {
+                self.0 =
+                    (self.0 & !(0x01 << 15usize)) | (((val.to_bits() as u32) & 0x01) << 15usize);
+            }
+        }
+        impl Default for Endianness {
+            #[inline(always)]
+            fn default() -> Endianness {
+                Endianness(0)
+            }
+        }
+        #[doc = "Hardware configuration of the CRYPTOCELL subsystem. Reset value holds the supported features."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HostBoot(pub u32);
+        impl HostBoot {
+            #[doc = "If this flag is set, full power gating is implemented"]
+            #[inline(always)]
+            pub const fn power_gating_exists_local(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, full power gating is implemented"]
+            #[inline(always)]
+            pub fn set_power_gating_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "If this flag is set, large RKEK is supported"]
+            #[inline(always)]
+            pub const fn large_rkek_local(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, large RKEK is supported"]
+            #[inline(always)]
+            pub fn set_large_rkek_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "If this flag is set, HASH in fuses is supported"]
+            #[inline(always)]
+            pub const fn hash_in_fuses_local(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, HASH in fuses is supported"]
+            #[inline(always)]
+            pub fn set_hash_in_fuses_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "If this flag is set, external secure memory is supported"]
+            #[inline(always)]
+            pub const fn ext_mem_secured_local(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, external secure memory is supported"]
+            #[inline(always)]
+            pub fn set_ext_mem_secured_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+            #[doc = "If this flag is set, RKEK ECC is supported"]
+            #[inline(always)]
+            pub const fn rkek_ecc_exists_local_n(&self) -> bool {
+                let val = (self.0 >> 5usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, RKEK ECC is supported"]
+            #[inline(always)]
+            pub fn set_rkek_ecc_exists_local_n(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+            }
+            #[doc = "SRAM size"]
+            #[inline(always)]
+            pub const fn sram_size_local(&self) -> u8 {
+                let val = (self.0 >> 6usize) & 0x07;
+                val as u8
+            }
+            #[doc = "SRAM size"]
+            #[inline(always)]
+            pub fn set_sram_size_local(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x07 << 6usize)) | (((val as u32) & 0x07) << 6usize);
+            }
+            #[doc = "If this flag is set, Descriptors are supported"]
+            #[inline(always)]
+            pub const fn dscrptr_exists_local(&self) -> bool {
+                let val = (self.0 >> 9usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, Descriptors are supported"]
+            #[inline(always)]
+            pub fn set_dscrptr_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
+            }
+            #[doc = "If this flag is set, PAU is supported"]
+            #[inline(always)]
+            pub const fn pau_exists_local(&self) -> bool {
+                let val = (self.0 >> 10usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, PAU is supported"]
+            #[inline(always)]
+            pub fn set_pau_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
+            }
+            #[doc = "If this flag is set, the RNG engine is present"]
+            #[inline(always)]
+            pub const fn rng_exists_local(&self) -> bool {
+                let val = (self.0 >> 11usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the RNG engine is present"]
+            #[inline(always)]
+            pub fn set_rng_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
+            }
+            #[doc = "If this flag is set, the PKA engine is present"]
+            #[inline(always)]
+            pub const fn pka_exists_local(&self) -> bool {
+                let val = (self.0 >> 12usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the PKA engine is present"]
+            #[inline(always)]
+            pub fn set_pka_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
+            }
+            #[doc = "If this flag is set, the RC4 engine is present"]
+            #[inline(always)]
+            pub const fn rc4_exists_local(&self) -> bool {
+                let val = (self.0 >> 13usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the RC4 engine is present"]
+            #[inline(always)]
+            pub fn set_rc4_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
+            }
+            #[doc = "If this flag is set, the HASH engine supports SHA512"]
+            #[inline(always)]
+            pub const fn sha_512_prsnt_local(&self) -> bool {
+                let val = (self.0 >> 14usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the HASH engine supports SHA512"]
+            #[inline(always)]
+            pub fn set_sha_512_prsnt_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
+            }
+            #[doc = "If this flag is set, the HASH engine supports SHA256"]
+            #[inline(always)]
+            pub const fn sha_256_prsnt_local(&self) -> bool {
+                let val = (self.0 >> 15usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the HASH engine supports SHA256"]
+            #[inline(always)]
+            pub fn set_sha_256_prsnt_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
+            }
+            #[doc = "If this flag is set, the HASH engine supports MD5"]
+            #[inline(always)]
+            pub const fn md5_prsnt_local(&self) -> bool {
+                let val = (self.0 >> 16usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the HASH engine supports MD5"]
+            #[inline(always)]
+            pub fn set_md5_prsnt_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
+            }
+            #[doc = "If this flag is set, the HASH engine is present"]
+            #[inline(always)]
+            pub const fn hash_exists_local(&self) -> bool {
+                let val = (self.0 >> 17usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the HASH engine is present"]
+            #[inline(always)]
+            pub fn set_hash_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
+            }
+            #[doc = "If this flag is set, the C2 engine is present"]
+            #[inline(always)]
+            pub const fn c2_exists_local(&self) -> bool {
+                let val = (self.0 >> 18usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the C2 engine is present"]
+            #[inline(always)]
+            pub fn set_c2_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
+            }
+            #[doc = "If this flag is set, the DES engine is present"]
+            #[inline(always)]
+            pub const fn des_exists_local(&self) -> bool {
+                let val = (self.0 >> 19usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the DES engine is present"]
+            #[inline(always)]
+            pub fn set_des_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
+            }
+            #[doc = "If this flag is set, AES XCBC-MAC mode is supported"]
+            #[inline(always)]
+            pub const fn aes_xcbc_mac_exists_local(&self) -> bool {
+                let val = (self.0 >> 20usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, AES XCBC-MAC mode is supported"]
+            #[inline(always)]
+            pub fn set_aes_xcbc_mac_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
+            }
+            #[doc = "If this flag is set, AES CMAC mode is supported"]
+            #[inline(always)]
+            pub const fn aes_cmac_exists_local(&self) -> bool {
+                let val = (self.0 >> 21usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, AES CMAC mode is supported"]
+            #[inline(always)]
+            pub fn set_aes_cmac_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
+            }
+            #[doc = "If this flag is set, AES CCM mode is supported"]
+            #[inline(always)]
+            pub const fn aes_ccm_exists_local(&self) -> bool {
+                let val = (self.0 >> 22usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, AES CCM mode is supported"]
+            #[inline(always)]
+            pub fn set_aes_ccm_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
+            }
+            #[doc = "If this flag is set, AES XEX mode T-value calculation in HW is supported"]
+            #[inline(always)]
+            pub const fn aes_xex_hw_t_calc_local(&self) -> bool {
+                let val = (self.0 >> 23usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, AES XEX mode T-value calculation in HW is supported"]
+            #[inline(always)]
+            pub fn set_aes_xex_hw_t_calc_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
+            }
+            #[doc = "If this flag is set, AES XEX mode is supported"]
+            #[inline(always)]
+            pub const fn aes_xex_exists_local(&self) -> bool {
+                let val = (self.0 >> 24usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, AES XEX mode is supported"]
+            #[inline(always)]
+            pub fn set_aes_xex_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
+            }
+            #[doc = "If this flag is set, AES CTR mode is supported"]
+            #[inline(always)]
+            pub const fn ctr_exists_local(&self) -> bool {
+                let val = (self.0 >> 25usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, AES CTR mode is supported"]
+            #[inline(always)]
+            pub fn set_ctr_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
+            }
+            #[doc = "If this flag is set, the AES engine data input support byte size resolution"]
+            #[inline(always)]
+            pub const fn aes_din_byte_resolution_local(&self) -> bool {
+                let val = (self.0 >> 26usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the AES engine data input support byte size resolution"]
+            #[inline(always)]
+            pub fn set_aes_din_byte_resolution_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
+            }
+            #[doc = "If this flag is set, the AES engine supports tunneling operations"]
+            #[inline(always)]
+            pub const fn tunneling_enb_local(&self) -> bool {
+                let val = (self.0 >> 27usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the AES engine supports tunneling operations"]
+            #[inline(always)]
+            pub fn set_tunneling_enb_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
+            }
+            #[doc = "If this flag is set, the AES engine supports 192/256 bits key sizes"]
+            #[inline(always)]
+            pub const fn support_256_192_key_local(&self) -> bool {
+                let val = (self.0 >> 28usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the AES engine supports 192/256 bits key sizes"]
+            #[inline(always)]
+            pub fn set_support_256_192_key_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
+            }
+            #[doc = "If this flag is set, the AES engine only support encryption"]
+            #[inline(always)]
+            pub const fn only_encrypt_local(&self) -> bool {
+                let val = (self.0 >> 29usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the AES engine only support encryption"]
+            #[inline(always)]
+            pub fn set_only_encrypt_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
+            }
+            #[doc = "If this flag is set, the AES engine is present"]
+            #[inline(always)]
+            pub const fn aes_exists_local(&self) -> bool {
+                let val = (self.0 >> 30usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the AES engine is present"]
+            #[inline(always)]
+            pub fn set_aes_exists_local(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
+            }
+        }
+        impl Default for HostBoot {
+            #[inline(always)]
+            fn default() -> HostBoot {
+                HostBoot(0)
+            }
+        }
+        #[doc = "AES hardware key select."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct HostCryptokeySel(pub u32);
@@ -854,18 +4335,42 @@ pub mod cc_host_rgf {
                 HostCryptokeySel(0)
             }
         }
-        #[doc = "This write-once register is the K_PRTL lock register. When this register is set, K_PRTL can not be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
+        #[doc = "This register holds bits 31:0 of K_DR. The value of this register is saved in the CRYPTOCELL AO power domain. Reading from this address returns the K_DR valid status indicating if K_DR is successfully retained."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HostIotKdr0(pub u32);
+        impl HostIotKdr0 {
+            #[doc = "This register holds bits 31:0 of K_DR. The value of this register is saved in the CRYPTOCELL AO power domain. Reading from this address returns the K_DR valid status indicating if K_DR is successfully retained. Write: K_DR bits 31:0."]
+            #[inline(always)]
+            pub const fn host_iot_kdr0(&self) -> super::vals::HostIotKdr0 {
+                let val = (self.0 >> 0usize) & 0xffff_ffff;
+                super::vals::HostIotKdr0::from_bits(val as u32)
+            }
+            #[doc = "This register holds bits 31:0 of K_DR. The value of this register is saved in the CRYPTOCELL AO power domain. Reading from this address returns the K_DR valid status indicating if K_DR is successfully retained. Write: K_DR bits 31:0."]
+            #[inline(always)]
+            pub fn set_host_iot_kdr0(&mut self, val: super::vals::HostIotKdr0) {
+                self.0 = (self.0 & !(0xffff_ffff << 0usize))
+                    | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
+            }
+        }
+        impl Default for HostIotKdr0 {
+            #[inline(always)]
+            fn default() -> HostIotKdr0 {
+                HostIotKdr0(0)
+            }
+        }
+        #[doc = "This write-once register is the K_PRTL lock register. When this register is set, K_PRTL cannot be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct HostIotKprtlLock(pub u32);
         impl HostIotKprtlLock {
-            #[doc = "This register is the K_PRTL lock register. When this register is set, K_PRTL can not be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
+            #[doc = "This register is the K_PRTL lock register. When this register is set, K_PRTL cannot be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
             #[inline(always)]
             pub const fn host_iot_kprtl_lock(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "This register is the K_PRTL lock register. When this register is set, K_PRTL can not be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
+            #[doc = "This register is the K_PRTL lock register. When this register is set, K_PRTL cannot be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
             #[inline(always)]
             pub fn set_host_iot_kprtl_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -877,29 +4382,29 @@ pub mod cc_host_rgf {
                 HostIotKprtlLock(0)
             }
         }
-        #[doc = "Controls lifecycle state (LCS) for CRYPTOCELL subsystem"]
+        #[doc = "Controls life-cycle state (LCS) for CRYPTOCELL subsystem"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct HostIotLcs(pub u32);
         impl HostIotLcs {
-            #[doc = "Lifecycle state value. This field is write-once per reset."]
+            #[doc = "Life-cycle state value. This field is write-once per reset."]
             #[inline(always)]
             pub const fn lcs(&self) -> super::vals::Lcs {
                 let val = (self.0 >> 0usize) & 0x07;
                 super::vals::Lcs::from_bits(val as u8)
             }
-            #[doc = "Lifecycle state value. This field is write-once per reset."]
+            #[doc = "Life-cycle state value. This field is write-once per reset."]
             #[inline(always)]
             pub fn set_lcs(&mut self, val: super::vals::Lcs) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
             }
-            #[doc = "This field is read-only and indicates if CRYPTOCELL LCS has been successfully configured since last reset"]
+            #[doc = "Read-only field. Indicates if CRYPTOCELL LCS has been successfully configured since last reset."]
             #[inline(always)]
             pub const fn lcs_is_valid(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "This field is read-only and indicates if CRYPTOCELL LCS has been successfully configured since last reset"]
+            #[doc = "Read-only field. Indicates if CRYPTOCELL LCS has been successfully configured since last reset."]
             #[inline(always)]
             pub fn set_lcs_is_valid(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
@@ -911,8 +4416,486 @@ pub mod cc_host_rgf {
                 HostIotLcs(0)
             }
         }
+        #[doc = "Interrupt clear register. Writing a 1 bit into a field in this register will clear the corresponding bit in IRR."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Icr(pub u32);
+        impl Icr {
+            #[doc = "The RNG SRAM to DIN DMA done interrupt clear."]
+            #[inline(always)]
+            pub const fn sram_to_din_clear(&self) -> bool {
+                let val = (self.0 >> 4usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The RNG SRAM to DIN DMA done interrupt clear."]
+            #[inline(always)]
+            pub fn set_sram_to_din_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+            }
+            #[doc = "The DOUT to RNG SRAM DMA done interrupt clear."]
+            #[inline(always)]
+            pub const fn dout_to_sram_clear(&self) -> bool {
+                let val = (self.0 >> 5usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The DOUT to RNG SRAM DMA done interrupt clear."]
+            #[inline(always)]
+            pub fn set_dout_to_sram_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+            }
+            #[doc = "The memory to DIN DMA done interrupt clear."]
+            #[inline(always)]
+            pub const fn mem_to_din_clear(&self) -> bool {
+                let val = (self.0 >> 6usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The memory to DIN DMA done interrupt clear."]
+            #[inline(always)]
+            pub fn set_mem_to_din_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
+            }
+            #[doc = "The DOUT to memory DMA done interrupt clear."]
+            #[inline(always)]
+            pub const fn dout_to_mem_clear(&self) -> bool {
+                let val = (self.0 >> 7usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The DOUT to memory DMA done interrupt clear."]
+            #[inline(always)]
+            pub fn set_dout_to_mem_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
+            }
+            #[doc = "The AHB error interrupt clear."]
+            #[inline(always)]
+            pub const fn ahb_err_clear(&self) -> bool {
+                let val = (self.0 >> 8usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The AHB error interrupt clear."]
+            #[inline(always)]
+            pub fn set_ahb_err_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
+            }
+            #[doc = "The PKA end of operation interrupt clear."]
+            #[inline(always)]
+            pub const fn pka_clear(&self) -> bool {
+                let val = (self.0 >> 9usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The PKA end of operation interrupt clear."]
+            #[inline(always)]
+            pub fn set_pka_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
+            }
+            #[doc = "The RNG interrupt clear. Register RNG_ISR in the RNG engine must be cleared before this interrupt can be cleared."]
+            #[inline(always)]
+            pub const fn rng_clear(&self) -> bool {
+                let val = (self.0 >> 10usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The RNG interrupt clear. Register RNG_ISR in the RNG engine must be cleared before this interrupt can be cleared."]
+            #[inline(always)]
+            pub fn set_rng_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
+            }
+        }
+        impl Default for Icr {
+            #[inline(always)]
+            fn default() -> Icr {
+                Icr(0)
+            }
+        }
+        #[doc = "Interrupt mask register. Each bit of this register holds the mask of a single interrupt source."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Imr(pub u32);
+        impl Imr {
+            #[doc = "The RNG SRAM to DIN DMA done interrupt mask."]
+            #[inline(always)]
+            pub const fn sram_to_din_mask(&self) -> super::vals::SramToDinMask {
+                let val = (self.0 >> 4usize) & 0x01;
+                super::vals::SramToDinMask::from_bits(val as u8)
+            }
+            #[doc = "The RNG SRAM to DIN DMA done interrupt mask."]
+            #[inline(always)]
+            pub fn set_sram_to_din_mask(&mut self, val: super::vals::SramToDinMask) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
+            }
+            #[doc = "The DOUT to RNG SRAM DMA done interrupt mask."]
+            #[inline(always)]
+            pub const fn dout_to_sram_mask(&self) -> super::vals::DoutToSramMask {
+                let val = (self.0 >> 5usize) & 0x01;
+                super::vals::DoutToSramMask::from_bits(val as u8)
+            }
+            #[doc = "The DOUT to RNG SRAM DMA done interrupt mask."]
+            #[inline(always)]
+            pub fn set_dout_to_sram_mask(&mut self, val: super::vals::DoutToSramMask) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val.to_bits() as u32) & 0x01) << 5usize);
+            }
+            #[doc = "The memory to DIN DMA done interrupt mask."]
+            #[inline(always)]
+            pub const fn mem_to_din_mask(&self) -> super::vals::MemToDinMask {
+                let val = (self.0 >> 6usize) & 0x01;
+                super::vals::MemToDinMask::from_bits(val as u8)
+            }
+            #[doc = "The memory to DIN DMA done interrupt mask."]
+            #[inline(always)]
+            pub fn set_mem_to_din_mask(&mut self, val: super::vals::MemToDinMask) {
+                self.0 = (self.0 & !(0x01 << 6usize)) | (((val.to_bits() as u32) & 0x01) << 6usize);
+            }
+            #[doc = "The DOUT to memory DMA done interrupt mask."]
+            #[inline(always)]
+            pub const fn dout_to_mem_mask(&self) -> super::vals::DoutToMemMask {
+                let val = (self.0 >> 7usize) & 0x01;
+                super::vals::DoutToMemMask::from_bits(val as u8)
+            }
+            #[doc = "The DOUT to memory DMA done interrupt mask."]
+            #[inline(always)]
+            pub fn set_dout_to_mem_mask(&mut self, val: super::vals::DoutToMemMask) {
+                self.0 = (self.0 & !(0x01 << 7usize)) | (((val.to_bits() as u32) & 0x01) << 7usize);
+            }
+            #[doc = "The AHB error interrupt mask."]
+            #[inline(always)]
+            pub const fn ahb_err_mask(&self) -> super::vals::AhbErrMask {
+                let val = (self.0 >> 8usize) & 0x01;
+                super::vals::AhbErrMask::from_bits(val as u8)
+            }
+            #[doc = "The AHB error interrupt mask."]
+            #[inline(always)]
+            pub fn set_ahb_err_mask(&mut self, val: super::vals::AhbErrMask) {
+                self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
+            }
+            #[doc = "The PKA end of operation interrupt mask."]
+            #[inline(always)]
+            pub const fn pka_mask(&self) -> super::vals::PkaMask {
+                let val = (self.0 >> 9usize) & 0x01;
+                super::vals::PkaMask::from_bits(val as u8)
+            }
+            #[doc = "The PKA end of operation interrupt mask."]
+            #[inline(always)]
+            pub fn set_pka_mask(&mut self, val: super::vals::PkaMask) {
+                self.0 = (self.0 & !(0x01 << 9usize)) | (((val.to_bits() as u32) & 0x01) << 9usize);
+            }
+            #[doc = "The RNG interrupt mask."]
+            #[inline(always)]
+            pub const fn rng_mask(&self) -> super::vals::RngMask {
+                let val = (self.0 >> 10usize) & 0x01;
+                super::vals::RngMask::from_bits(val as u8)
+            }
+            #[doc = "The RNG interrupt mask."]
+            #[inline(always)]
+            pub fn set_rng_mask(&mut self, val: super::vals::RngMask) {
+                self.0 =
+                    (self.0 & !(0x01 << 10usize)) | (((val.to_bits() as u32) & 0x01) << 10usize);
+            }
+        }
+        impl Default for Imr {
+            #[inline(always)]
+            fn default() -> Imr {
+                Imr(0)
+            }
+        }
+        #[doc = "Interrupt request register. Each bit of this register holds the interrupt status of a single interrupt source. If corresponding IMR bit is unmasked, an interrupt is generated."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Irr(pub u32);
+        impl Irr {
+            #[doc = "The RNG SRAM to DIN DMA done interrupt status. This interrupt is asserted when all data was delivered from RNG SRAM to DIN buffer."]
+            #[inline(always)]
+            pub const fn sram_to_din_int(&self) -> bool {
+                let val = (self.0 >> 4usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The RNG SRAM to DIN DMA done interrupt status. This interrupt is asserted when all data was delivered from RNG SRAM to DIN buffer."]
+            #[inline(always)]
+            pub fn set_sram_to_din_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+            }
+            #[doc = "The DOUT to RNG SRAM DMA done interrupt status. This interrupt is asserted when all data was delivered from DOUT buffer to RNG SRAM."]
+            #[inline(always)]
+            pub const fn dout_to_sram_int(&self) -> bool {
+                let val = (self.0 >> 5usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The DOUT to RNG SRAM DMA done interrupt status. This interrupt is asserted when all data was delivered from DOUT buffer to RNG SRAM."]
+            #[inline(always)]
+            pub fn set_dout_to_sram_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+            }
+            #[doc = "The memory to DIN DMA done interrupt status. This interrupt is asserted when all data was delivered from memory to DIN buffer."]
+            #[inline(always)]
+            pub const fn mem_to_din_int(&self) -> bool {
+                let val = (self.0 >> 6usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The memory to DIN DMA done interrupt status. This interrupt is asserted when all data was delivered from memory to DIN buffer."]
+            #[inline(always)]
+            pub fn set_mem_to_din_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
+            }
+            #[doc = "The DOUT to memory DMA done interrupt status. This interrupt is asserted when all data was delivered from DOUT buffer to memory."]
+            #[inline(always)]
+            pub const fn dout_to_mem_int(&self) -> bool {
+                let val = (self.0 >> 7usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The DOUT to memory DMA done interrupt status. This interrupt is asserted when all data was delivered from DOUT buffer to memory."]
+            #[inline(always)]
+            pub fn set_dout_to_mem_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
+            }
+            #[doc = "The AHB error interrupt status."]
+            #[inline(always)]
+            pub const fn ahb_err_int(&self) -> bool {
+                let val = (self.0 >> 8usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The AHB error interrupt status."]
+            #[inline(always)]
+            pub fn set_ahb_err_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
+            }
+            #[doc = "The PKA end of operation interrupt status."]
+            #[inline(always)]
+            pub const fn pka_int(&self) -> bool {
+                let val = (self.0 >> 9usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The PKA end of operation interrupt status."]
+            #[inline(always)]
+            pub fn set_pka_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
+            }
+            #[doc = "The RNG interrupt status."]
+            #[inline(always)]
+            pub const fn rng_int(&self) -> bool {
+                let val = (self.0 >> 10usize) & 0x01;
+                val != 0
+            }
+            #[doc = "The RNG interrupt status."]
+            #[inline(always)]
+            pub fn set_rng_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
+            }
+        }
+        impl Default for Irr {
+            #[inline(always)]
+            fn default() -> Irr {
+                Irr(0)
+            }
+        }
     }
     pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum AhbErrMask {
+            #[doc = "Do not mask AHB error interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask AHB error interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl AhbErrMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> AhbErrMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for AhbErrMask {
+            #[inline(always)]
+            fn from(val: u8) -> AhbErrMask {
+                AhbErrMask::from_bits(val)
+            }
+        }
+        impl From<AhbErrMask> for u8 {
+            #[inline(always)]
+            fn from(val: AhbErrMask) -> u8 {
+                AhbErrMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DinRdBg {
+            #[doc = "Configure DIN read as little-endian"]
+            LITTLE_ENDIAN = 0x0,
+            #[doc = "Configure DIN read as big-endian"]
+            BIG_ENDIAN = 0x01,
+        }
+        impl DinRdBg {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DinRdBg {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DinRdBg {
+            #[inline(always)]
+            fn from(val: u8) -> DinRdBg {
+                DinRdBg::from_bits(val)
+            }
+        }
+        impl From<DinRdBg> for u8 {
+            #[inline(always)]
+            fn from(val: DinRdBg) -> u8 {
+                DinRdBg::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DinRdWbg {
+            #[doc = "Configure DIN read word as little-endian"]
+            LITTLE_ENDIAN = 0x0,
+            #[doc = "Configure DIN read word as big-endian"]
+            BIG_ENDIAN = 0x01,
+        }
+        impl DinRdWbg {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DinRdWbg {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DinRdWbg {
+            #[inline(always)]
+            fn from(val: u8) -> DinRdWbg {
+                DinRdWbg::from_bits(val)
+            }
+        }
+        impl From<DinRdWbg> for u8 {
+            #[inline(always)]
+            fn from(val: DinRdWbg) -> u8 {
+                DinRdWbg::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DoutToMemMask {
+            #[doc = "Do not mask DOUT to memory DMA done interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask DOUT to memory DMA done interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl DoutToMemMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DoutToMemMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DoutToMemMask {
+            #[inline(always)]
+            fn from(val: u8) -> DoutToMemMask {
+                DoutToMemMask::from_bits(val)
+            }
+        }
+        impl From<DoutToMemMask> for u8 {
+            #[inline(always)]
+            fn from(val: DoutToMemMask) -> u8 {
+                DoutToMemMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DoutToSramMask {
+            #[doc = "Do not mask DOUT to RNG SRAM DMA done interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask DOUT to RNG SRAM DMA done interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl DoutToSramMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DoutToSramMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DoutToSramMask {
+            #[inline(always)]
+            fn from(val: u8) -> DoutToSramMask {
+                DoutToSramMask::from_bits(val)
+            }
+        }
+        impl From<DoutToSramMask> for u8 {
+            #[inline(always)]
+            fn from(val: DoutToSramMask) -> u8 {
+                DoutToSramMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DoutWrBg {
+            #[doc = "Configure DOUT write as little-endian"]
+            LITTLE_ENDIAN = 0x0,
+            #[doc = "Configure DOUT write as big-endian"]
+            BIG_ENDIAN = 0x01,
+        }
+        impl DoutWrBg {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DoutWrBg {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DoutWrBg {
+            #[inline(always)]
+            fn from(val: u8) -> DoutWrBg {
+                DoutWrBg::from_bits(val)
+            }
+        }
+        impl From<DoutWrBg> for u8 {
+            #[inline(always)]
+            fn from(val: DoutWrBg) -> u8 {
+                DoutWrBg::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DoutWrWbg {
+            #[doc = "Configure DOUT write word as little-endian"]
+            LITTLE_ENDIAN = 0x0,
+            #[doc = "Configure DOUT write word as big-endian"]
+            BIG_ENDIAN = 0x01,
+        }
+        impl DoutWrWbg {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DoutWrWbg {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DoutWrWbg {
+            #[inline(always)]
+            fn from(val: u8) -> DoutWrWbg {
+                DoutWrWbg::from_bits(val)
+            }
+        }
+        impl From<DoutWrWbg> for u8 {
+            #[inline(always)]
+            fn from(val: DoutWrWbg) -> u8 {
+                DoutWrWbg::to_bits(val)
+            }
+        }
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum HostCryptokeySel {
@@ -946,11 +4929,40 @@ pub mod cc_host_rgf {
                 HostCryptokeySel::to_bits(val)
             }
         }
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub struct HostIotKdr0(pub u32);
+        impl HostIotKdr0 {
+            #[doc = "Read: 128 bits K_DR key value is not yet retained in the CRYPTOCELL AO power domain."]
+            pub const NOT_RETAINED: Self = Self(0x0);
+            #[doc = "Read: 128 bits K_DR key value is successfully retained in the CRYPTOCELL AO power domain."]
+            pub const RETAINED: Self = Self(0x01);
+        }
+        impl HostIotKdr0 {
+            pub const fn from_bits(val: u32) -> HostIotKdr0 {
+                Self(val & 0xffff_ffff)
+            }
+            pub const fn to_bits(self) -> u32 {
+                self.0
+            }
+        }
+        impl From<u32> for HostIotKdr0 {
+            #[inline(always)]
+            fn from(val: u32) -> HostIotKdr0 {
+                HostIotKdr0::from_bits(val)
+            }
+        }
+        impl From<HostIotKdr0> for u32 {
+            #[inline(always)]
+            fn from(val: HostIotKdr0) -> u32 {
+                HostIotKdr0::to_bits(val)
+            }
+        }
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Lcs {
             #[doc = "CC310 operates in debug mode"]
-            DEBUG = 0x0,
+            DEBUG_ENABLE = 0x0,
             _RESERVED_1 = 0x01,
             #[doc = "CC310 operates in secure mode"]
             SECURE = 0x02,
@@ -982,10 +4994,2457 @@ pub mod cc_host_rgf {
                 Lcs::to_bits(val)
             }
         }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum MemToDinMask {
+            #[doc = "Do not mask memory to DIN DMA done interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask memory to DIN DMA done interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl MemToDinMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> MemToDinMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for MemToDinMask {
+            #[inline(always)]
+            fn from(val: u8) -> MemToDinMask {
+                MemToDinMask::from_bits(val)
+            }
+        }
+        impl From<MemToDinMask> for u8 {
+            #[inline(always)]
+            fn from(val: MemToDinMask) -> u8 {
+                MemToDinMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum PkaMask {
+            #[doc = "Do not mask PKA end of operation interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask PKA end of operation interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl PkaMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> PkaMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for PkaMask {
+            #[inline(always)]
+            fn from(val: u8) -> PkaMask {
+                PkaMask::from_bits(val)
+            }
+        }
+        impl From<PkaMask> for u8 {
+            #[inline(always)]
+            fn from(val: PkaMask) -> u8 {
+                PkaMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum RngMask {
+            #[doc = "Do not mask RNG interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask RNG interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl RngMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> RngMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for RngMask {
+            #[inline(always)]
+            fn from(val: u8) -> RngMask {
+                RngMask::from_bits(val)
+            }
+        }
+        impl From<RngMask> for u8 {
+            #[inline(always)]
+            fn from(val: RngMask) -> u8 {
+                RngMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum SramToDinMask {
+            #[doc = "Do not mask RNG SRAM to DIN DMA done interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask RNG SRAM to DIN DMA done interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl SramToDinMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> SramToDinMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for SramToDinMask {
+            #[inline(always)]
+            fn from(val: u8) -> SramToDinMask {
+                SramToDinMask::from_bits(val)
+            }
+        }
+        impl From<SramToDinMask> for u8 {
+            #[inline(always)]
+            fn from(val: SramToDinMask) -> u8 {
+                SramToDinMask::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_misc {
+    #[doc = "CRYPTOCELL MISC interface"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcMisc {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcMisc {}
+    unsafe impl Sync for CcMisc {}
+    impl CcMisc {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Clock control for the AES engine."]
+        #[inline(always)]
+        pub const fn aes_clk(self) -> crate::common::Reg<regs::AesClk, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0810usize) as _) }
+        }
+        #[doc = "Clock control for the HASH engine."]
+        #[inline(always)]
+        pub const fn hash_clk(self) -> crate::common::Reg<regs::HashClk, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0818usize) as _) }
+        }
+        #[doc = "Clock control for the PKA engine."]
+        #[inline(always)]
+        pub const fn pka_clk(self) -> crate::common::Reg<regs::PkaClk, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x081cusize) as _) }
+        }
+        #[doc = "Clock control for the DMA engines."]
+        #[inline(always)]
+        pub const fn dma_clk(self) -> crate::common::Reg<regs::DmaClk, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0820usize) as _) }
+        }
+        #[doc = "CRYPTOCELL clocks status register."]
+        #[inline(always)]
+        pub const fn clk_status(self) -> crate::common::Reg<regs::ClkStatus, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0824usize) as _) }
+        }
+        #[doc = "Clock control for the CHACHA engine."]
+        #[inline(always)]
+        pub const fn chacha_clk(self) -> crate::common::Reg<regs::ChachaClk, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0858usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Clock control for the AES engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AesClk(pub u32);
+        impl AesClk {
+            #[doc = "Enables clock for the AES engine."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enables clock for the AES engine."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for AesClk {
+            #[inline(always)]
+            fn default() -> AesClk {
+                AesClk(0)
+            }
+        }
+        #[doc = "Clock control for the CHACHA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ChachaClk(pub u32);
+        impl ChachaClk {
+            #[doc = "Enables clock for the CHACHA engine."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enables clock for the CHACHA engine."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for ChachaClk {
+            #[inline(always)]
+            fn default() -> ChachaClk {
+                ChachaClk(0)
+            }
+        }
+        #[doc = "CRYPTOCELL clocks status register."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct ClkStatus(pub u32);
+        impl ClkStatus {
+            #[doc = "Status of AES engine clock."]
+            #[inline(always)]
+            pub const fn aes_clk(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Status of AES engine clock."]
+            #[inline(always)]
+            pub fn set_aes_clk(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Status of HASH engine clock."]
+            #[inline(always)]
+            pub const fn hash_clk(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Status of HASH engine clock."]
+            #[inline(always)]
+            pub fn set_hash_clk(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "Status of PKA engine clock."]
+            #[inline(always)]
+            pub const fn pka_clk(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Status of PKA engine clock."]
+            #[inline(always)]
+            pub fn set_pka_clk(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+            #[doc = "Status of CHACHA engine clock."]
+            #[inline(always)]
+            pub const fn chacha_clk(&self) -> bool {
+                let val = (self.0 >> 7usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Status of CHACHA engine clock."]
+            #[inline(always)]
+            pub fn set_chacha_clk(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
+            }
+            #[doc = "Status of DMA engines clock."]
+            #[inline(always)]
+            pub const fn dma_clk(&self) -> bool {
+                let val = (self.0 >> 8usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Status of DMA engines clock."]
+            #[inline(always)]
+            pub fn set_dma_clk(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
+            }
+        }
+        impl Default for ClkStatus {
+            #[inline(always)]
+            fn default() -> ClkStatus {
+                ClkStatus(0)
+            }
+        }
+        #[doc = "Clock control for the DMA engines."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct DmaClk(pub u32);
+        impl DmaClk {
+            #[doc = "Enables clock for the DMA engines."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enables clock for the DMA engines."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for DmaClk {
+            #[inline(always)]
+            fn default() -> DmaClk {
+                DmaClk(0)
+            }
+        }
+        #[doc = "Clock control for the HASH engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct HashClk(pub u32);
+        impl HashClk {
+            #[doc = "Enables clock for the HASH engine."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enables clock for the HASH engine."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for HashClk {
+            #[inline(always)]
+            fn default() -> HashClk {
+                HashClk(0)
+            }
+        }
+        #[doc = "Clock control for the PKA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct PkaClk(pub u32);
+        impl PkaClk {
+            #[doc = "Enables clock for the PKA engine."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enables clock for the PKA engine."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for PkaClk {
+            #[inline(always)]
+            fn default() -> PkaClk {
+                PkaClk(0)
+            }
+        }
+    }
+}
+pub mod cc_pka {
+    #[doc = "CRYPTOCELL PKA engine"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcPka {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcPka {}
+    unsafe impl Sync for CcPka {}
+    impl CcPka {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Description collection: Register for mapping the virtual register R\\[n\\] to a physical address in the PKA SRAM."]
+        #[inline(always)]
+        pub const fn memory_map(
+            self,
+            n: usize,
+        ) -> crate::common::Reg<regs::MemoryMap, crate::common::RW> {
+            assert!(n < 32usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+        }
+        #[doc = "Operation code to be executed by the PKA engine. Writing to this register triggers the PKA operation."]
+        #[inline(always)]
+        pub const fn opcode(self) -> crate::common::Reg<regs::Opcode, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+        }
+        #[doc = "This register defines the N, Np, T0, and T1 virtual register index."]
+        #[inline(always)]
+        pub const fn n_np_t0_t1_addr(
+            self,
+        ) -> crate::common::Reg<regs::NNpT0T1Addr, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+        }
+        #[doc = "This register holds the status for the PKA pipeline."]
+        #[inline(always)]
+        pub const fn pka_status(self) -> crate::common::Reg<regs::PkaStatus, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+        }
+        #[doc = "Reset the PKA engine."]
+        #[inline(always)]
+        pub const fn pka_sw_reset(self) -> crate::common::Reg<regs::PkaSwReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+        }
+        #[doc = "Description collection: This register holds the operands bit size."]
+        #[inline(always)]
+        pub const fn pka_l(self, n: usize) -> crate::common::Reg<regs::PkaL, crate::common::RW> {
+            assert!(n < 8usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x90usize + n * 4usize) as _) }
+        }
+        #[doc = "Status register indicating if the PKA pipeline is ready to receive a new OPCODE."]
+        #[inline(always)]
+        pub const fn pka_pipe(self) -> crate::common::Reg<regs::PkaPipe, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xb0usize) as _) }
+        }
+        #[doc = "Status register indicating if the PKA operation has been completed."]
+        #[inline(always)]
+        pub const fn pka_done(self) -> crate::common::Reg<regs::PkaDone, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xb4usize) as _) }
+        }
+        #[doc = "PKA engine HW version. Reset value holds the version."]
+        #[inline(always)]
+        pub const fn pka_version(self) -> crate::common::Reg<u32, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xc4usize) as _) }
+        }
+        #[doc = "Start address in PKA SRAM for subsequent write transactions."]
+        #[inline(always)]
+        pub const fn pka_sram_waddr(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xd4usize) as _) }
+        }
+        #[doc = "Write data to PKA SRAM. Writing to this register triggers a DMA transaction writing data into PKA SRAM. The DMA address offset is automatically incremented during write."]
+        #[inline(always)]
+        pub const fn pka_sram_wdata(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xd8usize) as _) }
+        }
+        #[doc = "Read data from PKA SRAM. Reading from this register triggers a DMA transaction read data from PKA SRAM. The DMA address offset is automatically incremented during read."]
+        #[inline(always)]
+        pub const fn pka_sram_rdata(self) -> crate::common::Reg<u32, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xdcusize) as _) }
+        }
+        #[doc = "Register for clearing PKA SRAM write buffer."]
+        #[inline(always)]
+        pub const fn pka_sram_wclear(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xe0usize) as _) }
+        }
+        #[doc = "Start address in PKA SRAM for subsequent read transactions."]
+        #[inline(always)]
+        pub const fn pka_sram_raddr(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xe4usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Description collection: Register for mapping the virtual register R\\[n\\] to a physical address in the PKA SRAM."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct MemoryMap(pub u32);
+        impl MemoryMap {
+            #[doc = "The physical word address used for the virtual register."]
+            #[inline(always)]
+            pub const fn addr(&self) -> u16 {
+                let val = (self.0 >> 1usize) & 0x01ff;
+                val as u16
+            }
+            #[doc = "The physical word address used for the virtual register."]
+            #[inline(always)]
+            pub fn set_addr(&mut self, val: u16) {
+                self.0 = (self.0 & !(0x01ff << 1usize)) | (((val as u32) & 0x01ff) << 1usize);
+            }
+        }
+        impl Default for MemoryMap {
+            #[inline(always)]
+            fn default() -> MemoryMap {
+                MemoryMap(0)
+            }
+        }
+        #[doc = "This register defines the N, Np, T0, and T1 virtual register index."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct NNpT0T1Addr(pub u32);
+        impl NNpT0T1Addr {
+            #[doc = "Register N virtual register index. Default is R0."]
+            #[inline(always)]
+            pub const fn n_virtual_addr(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Register N virtual register index. Default is R0."]
+            #[inline(always)]
+            pub fn set_n_virtual_addr(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
+            }
+            #[doc = "Register Np virtual register index. Default is R1."]
+            #[inline(always)]
+            pub const fn np_virtual_addr(&self) -> u8 {
+                let val = (self.0 >> 5usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Register Np virtual register index. Default is R1."]
+            #[inline(always)]
+            pub fn set_np_virtual_addr(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 5usize)) | (((val as u32) & 0x1f) << 5usize);
+            }
+            #[doc = "Temporary register 0 virtual register index. Default is R30."]
+            #[inline(always)]
+            pub const fn t0_virtual_addr(&self) -> u8 {
+                let val = (self.0 >> 10usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Temporary register 0 virtual register index. Default is R30."]
+            #[inline(always)]
+            pub fn set_t0_virtual_addr(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 10usize)) | (((val as u32) & 0x1f) << 10usize);
+            }
+            #[doc = "Temporary register 1 virtual register index. Default is R31."]
+            #[inline(always)]
+            pub const fn t1_virtual_addr(&self) -> u8 {
+                let val = (self.0 >> 15usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Temporary register 1 virtual register index. Default is R31."]
+            #[inline(always)]
+            pub fn set_t1_virtual_addr(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 15usize)) | (((val as u32) & 0x1f) << 15usize);
+            }
+        }
+        impl Default for NNpT0T1Addr {
+            #[inline(always)]
+            fn default() -> NNpT0T1Addr {
+                NNpT0T1Addr(0)
+            }
+        }
+        #[doc = "Operation code to be executed by the PKA engine. Writing to this register triggers the PKA operation."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Opcode(pub u32);
+        impl Opcode {
+            #[doc = "Holds the operation tag or the operand C virtual register index."]
+            #[inline(always)]
+            pub const fn tag(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0x3f;
+                val as u8
+            }
+            #[doc = "Holds the operation tag or the operand C virtual register index."]
+            #[inline(always)]
+            pub fn set_tag(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
+            }
+            #[doc = "Result register virtual register index."]
+            #[inline(always)]
+            pub const fn reg_r(&self) -> u8 {
+                let val = (self.0 >> 6usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Result register virtual register index."]
+            #[inline(always)]
+            pub fn set_reg_r(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 6usize)) | (((val as u32) & 0x1f) << 6usize);
+            }
+            #[doc = "This field controls the interpretation of REG_R."]
+            #[inline(always)]
+            pub const fn discard_r(&self) -> super::vals::DiscardR {
+                let val = (self.0 >> 11usize) & 0x01;
+                super::vals::DiscardR::from_bits(val as u8)
+            }
+            #[doc = "This field controls the interpretation of REG_R."]
+            #[inline(always)]
+            pub fn set_discard_r(&mut self, val: super::vals::DiscardR) {
+                self.0 =
+                    (self.0 & !(0x01 << 11usize)) | (((val.to_bits() as u32) & 0x01) << 11usize);
+            }
+            #[doc = "Operand B virtual register index."]
+            #[inline(always)]
+            pub const fn reg_b(&self) -> u8 {
+                let val = (self.0 >> 12usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Operand B virtual register index."]
+            #[inline(always)]
+            pub fn set_reg_b(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 12usize)) | (((val as u32) & 0x1f) << 12usize);
+            }
+            #[doc = "This field controls the interpretation of REG_B."]
+            #[inline(always)]
+            pub const fn const_b(&self) -> super::vals::ConstB {
+                let val = (self.0 >> 17usize) & 0x01;
+                super::vals::ConstB::from_bits(val as u8)
+            }
+            #[doc = "This field controls the interpretation of REG_B."]
+            #[inline(always)]
+            pub fn set_const_b(&mut self, val: super::vals::ConstB) {
+                self.0 =
+                    (self.0 & !(0x01 << 17usize)) | (((val.to_bits() as u32) & 0x01) << 17usize);
+            }
+            #[doc = "Operand A virtual register index."]
+            #[inline(always)]
+            pub const fn reg_a(&self) -> u8 {
+                let val = (self.0 >> 18usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Operand A virtual register index."]
+            #[inline(always)]
+            pub fn set_reg_a(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 18usize)) | (((val as u32) & 0x1f) << 18usize);
+            }
+            #[doc = "This field controls the interpretation of REG_A."]
+            #[inline(always)]
+            pub const fn const_a(&self) -> super::vals::ConstA {
+                let val = (self.0 >> 23usize) & 0x01;
+                super::vals::ConstA::from_bits(val as u8)
+            }
+            #[doc = "This field controls the interpretation of REG_A."]
+            #[inline(always)]
+            pub fn set_const_a(&mut self, val: super::vals::ConstA) {
+                self.0 =
+                    (self.0 & !(0x01 << 23usize)) | (((val.to_bits() as u32) & 0x01) << 23usize);
+            }
+            #[doc = "The length of the operands. This value serves as an PKA length register index. E.g.: if LEN field value is set to 0, PKA_L\\[0\\] holds the size of the operands."]
+            #[inline(always)]
+            pub const fn len(&self) -> u8 {
+                let val = (self.0 >> 24usize) & 0x07;
+                val as u8
+            }
+            #[doc = "The length of the operands. This value serves as an PKA length register index. E.g.: if LEN field value is set to 0, PKA_L\\[0\\] holds the size of the operands."]
+            #[inline(always)]
+            pub fn set_len(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x07 << 24usize)) | (((val as u32) & 0x07) << 24usize);
+            }
+            #[doc = "Operation code to be executed by the PKA engine"]
+            #[inline(always)]
+            pub const fn opcode(&self) -> super::vals::Opcode {
+                let val = (self.0 >> 27usize) & 0x1f;
+                super::vals::Opcode::from_bits(val as u8)
+            }
+            #[doc = "Operation code to be executed by the PKA engine"]
+            #[inline(always)]
+            pub fn set_opcode(&mut self, val: super::vals::Opcode) {
+                self.0 =
+                    (self.0 & !(0x1f << 27usize)) | (((val.to_bits() as u32) & 0x1f) << 27usize);
+            }
+        }
+        impl Default for Opcode {
+            #[inline(always)]
+            fn default() -> Opcode {
+                Opcode(0)
+            }
+        }
+        #[doc = "Status register indicating if the PKA operation has been completed."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct PkaDone(pub u32);
+        impl PkaDone {
+            #[doc = "PKA operation status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::PkaDoneStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::PkaDoneStatus::from_bits(val as u8)
+            }
+            #[doc = "PKA operation status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::PkaDoneStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for PkaDone {
+            #[inline(always)]
+            fn default() -> PkaDone {
+                PkaDone(0)
+            }
+        }
+        #[doc = "Description collection: This register holds the operands bit size."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct PkaL(pub u32);
+        impl PkaL {
+            #[doc = "Operand bit size."]
+            #[inline(always)]
+            pub const fn op_size(&self) -> u16 {
+                let val = (self.0 >> 0usize) & 0x1fff;
+                val as u16
+            }
+            #[doc = "Operand bit size."]
+            #[inline(always)]
+            pub fn set_op_size(&mut self, val: u16) {
+                self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
+            }
+        }
+        impl Default for PkaL {
+            #[inline(always)]
+            fn default() -> PkaL {
+                PkaL(0)
+            }
+        }
+        #[doc = "Status register indicating if the PKA pipeline is ready to receive a new OPCODE."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct PkaPipe(pub u32);
+        impl PkaPipe {
+            #[doc = "PKA pipeline status."]
+            #[inline(always)]
+            pub const fn status(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "PKA pipeline status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for PkaPipe {
+            #[inline(always)]
+            fn default() -> PkaPipe {
+                PkaPipe(0)
+            }
+        }
+        #[doc = "This register holds the status for the PKA pipeline."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct PkaStatus(pub u32);
+        impl PkaStatus {
+            #[doc = "The most significant 4-bits of the operand updated in shift operation."]
+            #[inline(always)]
+            pub const fn alu_msb_4bits(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0x0f;
+                val as u8
+            }
+            #[doc = "The most significant 4-bits of the operand updated in shift operation."]
+            #[inline(always)]
+            pub fn set_alu_msb_4bits(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
+            }
+            #[doc = "The least significant 4-bits of the operand updated in shift operation."]
+            #[inline(always)]
+            pub const fn alu_lsb_4bits(&self) -> u8 {
+                let val = (self.0 >> 4usize) & 0x0f;
+                val as u8
+            }
+            #[doc = "The least significant 4-bits of the operand updated in shift operation."]
+            #[inline(always)]
+            pub fn set_alu_lsb_4bits(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
+            }
+            #[doc = "Indicates the MSB sign of the last operation."]
+            #[inline(always)]
+            pub const fn alu_sign_out(&self) -> bool {
+                let val = (self.0 >> 8usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Indicates the MSB sign of the last operation."]
+            #[inline(always)]
+            pub fn set_alu_sign_out(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
+            }
+            #[doc = "Holds the carry of the last ALU operation."]
+            #[inline(always)]
+            pub const fn alu_carry(&self) -> bool {
+                let val = (self.0 >> 9usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Holds the carry of the last ALU operation."]
+            #[inline(always)]
+            pub fn set_alu_carry(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
+            }
+            #[doc = "Holds the carry of the last modular operation."]
+            #[inline(always)]
+            pub const fn alu_carry_mod(&self) -> bool {
+                let val = (self.0 >> 10usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Holds the carry of the last modular operation."]
+            #[inline(always)]
+            pub fn set_alu_carry_mod(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
+            }
+            #[doc = "Indicates the last subtraction operation sign."]
+            #[inline(always)]
+            pub const fn alu_sub_is_zero(&self) -> bool {
+                let val = (self.0 >> 11usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Indicates the last subtraction operation sign."]
+            #[inline(always)]
+            pub fn set_alu_sub_is_zero(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
+            }
+            #[doc = "Indicates if the result of ALU OUT is zero."]
+            #[inline(always)]
+            pub const fn alu_out_zero(&self) -> bool {
+                let val = (self.0 >> 12usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Indicates if the result of ALU OUT is zero."]
+            #[inline(always)]
+            pub fn set_alu_out_zero(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
+            }
+            #[doc = "Modular overflow flag."]
+            #[inline(always)]
+            pub const fn alu_modovrflw(&self) -> bool {
+                let val = (self.0 >> 13usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Modular overflow flag."]
+            #[inline(always)]
+            pub fn set_alu_modovrflw(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
+            }
+            #[doc = "Indication if the division is done by zero."]
+            #[inline(always)]
+            pub const fn div_by_zero(&self) -> bool {
+                let val = (self.0 >> 14usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Indication if the division is done by zero."]
+            #[inline(always)]
+            pub fn set_div_by_zero(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
+            }
+            #[doc = "Indicates the modular inverse of zero."]
+            #[inline(always)]
+            pub const fn modinv_of_zero(&self) -> bool {
+                let val = (self.0 >> 15usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Indicates the modular inverse of zero."]
+            #[inline(always)]
+            pub fn set_modinv_of_zero(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
+            }
+            #[doc = "Opcode of the last operation"]
+            #[inline(always)]
+            pub const fn opcode(&self) -> u8 {
+                let val = (self.0 >> 16usize) & 0x1f;
+                val as u8
+            }
+            #[doc = "Opcode of the last operation"]
+            #[inline(always)]
+            pub fn set_opcode(&mut self, val: u8) {
+                self.0 = (self.0 & !(0x1f << 16usize)) | (((val as u32) & 0x1f) << 16usize);
+            }
+        }
+        impl Default for PkaStatus {
+            #[inline(always)]
+            fn default() -> PkaStatus {
+                PkaStatus(0)
+            }
+        }
+        #[doc = "Reset the PKA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct PkaSwReset(pub u32);
+        impl PkaSwReset {
+            #[doc = "Writing any value to this address resets the PKA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the PKA engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for PkaSwReset {
+            #[inline(always)]
+            fn default() -> PkaSwReset {
+                PkaSwReset(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ConstA {
+            #[doc = "REG_A is intepreted as a register index."]
+            REGISTER = 0x0,
+            #[doc = "REG_A is intepreted as a constant."]
+            CONSTANT = 0x01,
+        }
+        impl ConstA {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ConstA {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ConstA {
+            #[inline(always)]
+            fn from(val: u8) -> ConstA {
+                ConstA::from_bits(val)
+            }
+        }
+        impl From<ConstA> for u8 {
+            #[inline(always)]
+            fn from(val: ConstA) -> u8 {
+                ConstA::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum ConstB {
+            #[doc = "REG_B is intepreted as a register index."]
+            REGISTER = 0x0,
+            #[doc = "REG_B is intepreted as a constant."]
+            CONSTANT = 0x01,
+        }
+        impl ConstB {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ConstB {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ConstB {
+            #[inline(always)]
+            fn from(val: u8) -> ConstB {
+                ConstB::from_bits(val)
+            }
+        }
+        impl From<ConstB> for u8 {
+            #[inline(always)]
+            fn from(val: ConstB) -> u8 {
+                ConstB::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DiscardR {
+            #[doc = "REG_R is intepreted as a register index."]
+            REGISTER = 0x0,
+            #[doc = "Result is discarded."]
+            DISCARD = 0x01,
+        }
+        impl DiscardR {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DiscardR {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DiscardR {
+            #[inline(always)]
+            fn from(val: u8) -> DiscardR {
+                DiscardR::from_bits(val)
+            }
+        }
+        impl From<DiscardR> for u8 {
+            #[inline(always)]
+            fn from(val: DiscardR) -> u8 {
+                DiscardR::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Opcode {
+            #[doc = "Terminate operation"]
+            TERMINATE = 0x0,
+            _RESERVED_1 = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            #[doc = "Add or Increment"]
+            ADD_INC = 0x04,
+            #[doc = "Subtract, Decrement, or Negate"]
+            SUB_DEC_NEG = 0x05,
+            #[doc = "Modular Add or Modular Increment"]
+            MOD_ADD_INC = 0x06,
+            #[doc = "Modular Subtract, Modular Decrement, or Modular Negate"]
+            MOD_SUB_DEC_NEG = 0x07,
+            #[doc = "Perform AND, test, or clear"]
+            ANDTST0CLR0 = 0x08,
+            #[doc = "Perform OR, copy, or set bits"]
+            ORCOPYSET0 = 0x09,
+            #[doc = "Perform XOR, flip bits, invert, or compare"]
+            XORFLP0INVCMP = 0x0a,
+            _RESERVED_b = 0x0b,
+            #[doc = "Shift right 0 operation"]
+            SHR0 = 0x0c,
+            #[doc = "Shift right 1 operation"]
+            SHR1 = 0x0d,
+            #[doc = "Shift left 0 operation"]
+            SHL0 = 0x0e,
+            #[doc = "Shift left 1 operation"]
+            SHL1 = 0x0f,
+            #[doc = "Multiply low operation"]
+            MUL_LOW = 0x10,
+            #[doc = "Modular multiply operation"]
+            MOD_MUL = 0x11,
+            #[doc = "Modular multiply N operation"]
+            MOD_MUL_N = 0x12,
+            #[doc = "Modular exponentiation operation"]
+            MOD_EXP = 0x13,
+            #[doc = "Division operation"]
+            DIVISION = 0x14,
+            #[doc = "Modular inversion operation"]
+            MOD_INV = 0x15,
+            #[doc = "Modular division operation"]
+            MOD_DIV = 0x16,
+            #[doc = "Multiply high operation"]
+            MUL_HIGH = 0x17,
+            #[doc = "Modular multiplication acceleration"]
+            MOD_MLAC = 0x18,
+            #[doc = "Modular multiplication acceleration where final reduction is omitted"]
+            MOD_MLACNR = 0x19,
+            _RESERVED_1a = 0x1a,
+            #[doc = "Reduction operation"]
+            REDUCTION = 0x1b,
+            _RESERVED_1c = 0x1c,
+            _RESERVED_1d = 0x1d,
+            _RESERVED_1e = 0x1e,
+            _RESERVED_1f = 0x1f,
+        }
+        impl Opcode {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Opcode {
+                unsafe { core::mem::transmute(val & 0x1f) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Opcode {
+            #[inline(always)]
+            fn from(val: u8) -> Opcode {
+                Opcode::from_bits(val)
+            }
+        }
+        impl From<Opcode> for u8 {
+            #[inline(always)]
+            fn from(val: Opcode) -> u8 {
+                Opcode::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum PkaDoneStatus {
+            #[doc = "PKA operation is processing"]
+            PROCESSING = 0x0,
+            #[doc = "PKA operation is completed and pipeline is empty"]
+            COMPLETED = 0x01,
+        }
+        impl PkaDoneStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> PkaDoneStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for PkaDoneStatus {
+            #[inline(always)]
+            fn from(val: u8) -> PkaDoneStatus {
+                PkaDoneStatus::from_bits(val)
+            }
+        }
+        impl From<PkaDoneStatus> for u8 {
+            #[inline(always)]
+            fn from(val: PkaDoneStatus) -> u8 {
+                PkaDoneStatus::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_rng {
+    #[doc = "CRYPTOCELL RNG engine"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcRng {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcRng {}
+    unsafe impl Sync for CcRng {}
+    impl CcRng {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Interrupt mask register. Each bit of this register holds the mask of a single interrupt source."]
+        #[inline(always)]
+        pub const fn rng_imr(self) -> crate::common::Reg<regs::RngImr, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+        }
+        #[doc = "Interrupt status register. Each bit of this register holds the interrupt status of a single interrupt source. If corresponding RNG_IMR bit is unmasked, an interrupt is generated."]
+        #[inline(always)]
+        pub const fn rng_isr(self) -> crate::common::Reg<regs::RngIsr, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+        }
+        #[doc = "Interrupt clear register. Writing a 1 bit into a field in this register will clear the corresponding bit in RNG_ISR."]
+        #[inline(always)]
+        pub const fn rng_icr(self) -> crate::common::Reg<regs::RngIcr, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+        }
+        #[doc = "TRNG ring oscillator length configuration"]
+        #[inline(always)]
+        pub const fn trng_config(self) -> crate::common::Reg<regs::TrngConfig, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
+        }
+        #[doc = "This register indicates if TRNG entropy collection is valid."]
+        #[inline(always)]
+        pub const fn trng_valid(self) -> crate::common::Reg<regs::TrngValid, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+        }
+        #[doc = "Description collection: The entropy holding registers (EHR) hold 192-bits random data collected by the TRNG. The initial EHR_DATA\\[0\\] register holds the least significant bits \\[31:0\\] of the random data value."]
+        #[inline(always)]
+        pub const fn ehr_data(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
+            assert!(n < 6usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0114usize + n * 4usize) as _) }
+        }
+        #[doc = "This register controls the ring oscillator circuit used as a noise source."]
+        #[inline(always)]
+        pub const fn noise_source(
+            self,
+        ) -> crate::common::Reg<regs::NoiseSource, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x012cusize) as _) }
+        }
+        #[doc = "Sample count defining the number of CPU clock cycles between two consecutive noise source samples."]
+        #[inline(always)]
+        pub const fn sample_cnt(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0130usize) as _) }
+        }
+        #[doc = "Statistics counter for autocorrelation test activations. Statistics collection is stopped if one of the counters reach its limit of all ones."]
+        #[inline(always)]
+        pub const fn autocorr_statistic(
+            self,
+        ) -> crate::common::Reg<regs::AutocorrStatistic, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0134usize) as _) }
+        }
+        #[doc = "Debug register for the TRNG. This register is used to bypass TRNG tests in hardware."]
+        #[inline(always)]
+        pub const fn trng_debug(self) -> crate::common::Reg<regs::TrngDebug, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0138usize) as _) }
+        }
+        #[doc = "Reset the RNG engine."]
+        #[inline(always)]
+        pub const fn rng_sw_reset(self) -> crate::common::Reg<regs::RngSwReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0140usize) as _) }
+        }
+        #[doc = "Status register for RNG engine activity."]
+        #[inline(always)]
+        pub const fn rng_busy(self) -> crate::common::Reg<regs::RngBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01b8usize) as _) }
+        }
+        #[doc = "Reset the TRNG, including internal counter of collected bits and registers EHR_DATA and TRNG_VALID."]
+        #[inline(always)]
+        pub const fn trng_reset(self) -> crate::common::Reg<regs::TrngReset, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01bcusize) as _) }
+        }
+        #[doc = "Hardware configuration of RNG engine. Reset value holds the supported features."]
+        #[inline(always)]
+        pub const fn rng_hw_flags(self) -> crate::common::Reg<regs::RngHwFlags, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c0usize) as _) }
+        }
+        #[doc = "Control clock for the RNG engine."]
+        #[inline(always)]
+        pub const fn rng_clk(self) -> crate::common::Reg<regs::RngClk, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c4usize) as _) }
+        }
+        #[doc = "Writing to this register enables the RNG DMA engine."]
+        #[inline(always)]
+        pub const fn rng_dma(self) -> crate::common::Reg<regs::RngDma, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c8usize) as _) }
+        }
+        #[doc = "This register defines which ring oscillator length configuration should be used when using the RNG DMA engine."]
+        #[inline(always)]
+        pub const fn rng_dma_rosc_len(
+            self,
+        ) -> crate::common::Reg<regs::RngDmaRoscLen, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01ccusize) as _) }
+        }
+        #[doc = "This register defines the start address in TRNG SRAM for the TRNG data to be collected by the RNG DMA engine."]
+        #[inline(always)]
+        pub const fn rng_dma_sram_addr(
+            self,
+        ) -> crate::common::Reg<regs::RngDmaSramAddr, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d0usize) as _) }
+        }
+        #[doc = "This register defines the number of 192-bits samples that the RNG DMA engine collects per run."]
+        #[inline(always)]
+        pub const fn rng_dma_samples_num(
+            self,
+        ) -> crate::common::Reg<regs::RngDmaSamplesNum, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d4usize) as _) }
+        }
+        #[doc = "This register defines the maximum number of CPU clock cycles per TRNG collection of 192-bits samples. If the number of cycles for a collection exceeds this threshold the WATCHDOG interrupt is triggered."]
+        #[inline(always)]
+        pub const fn rng_watchdog_val(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d8usize) as _) }
+        }
+        #[doc = "Status register for RNG DMA engine activity."]
+        #[inline(always)]
+        pub const fn rng_dma_busy(self) -> crate::common::Reg<regs::RngDmaBusy, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01dcusize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Statistics counter for autocorrelation test activations. Statistics collection is stopped if one of the counters reach its limit of all ones."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct AutocorrStatistic(pub u32);
+        impl AutocorrStatistic {
+            #[doc = "Count each time an autocorrelation test starts. Any write to the field resets the counter."]
+            #[inline(always)]
+            pub const fn autocorr_trys(&self) -> u16 {
+                let val = (self.0 >> 0usize) & 0x3fff;
+                val as u16
+            }
+            #[doc = "Count each time an autocorrelation test starts. Any write to the field resets the counter."]
+            #[inline(always)]
+            pub fn set_autocorr_trys(&mut self, val: u16) {
+                self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
+            }
+            #[doc = "Count each time an autocorrelation test fails. Any write to the field resets the counter."]
+            #[inline(always)]
+            pub const fn autocorr_fails(&self) -> u8 {
+                let val = (self.0 >> 14usize) & 0xff;
+                val as u8
+            }
+            #[doc = "Count each time an autocorrelation test fails. Any write to the field resets the counter."]
+            #[inline(always)]
+            pub fn set_autocorr_fails(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 14usize)) | (((val as u32) & 0xff) << 14usize);
+            }
+        }
+        impl Default for AutocorrStatistic {
+            #[inline(always)]
+            fn default() -> AutocorrStatistic {
+                AutocorrStatistic(0)
+            }
+        }
+        #[doc = "This register controls the ring oscillator circuit used as a noise source."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct NoiseSource(pub u32);
+        impl NoiseSource {
+            #[doc = "Enable or disable the noise source."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enable or disable the noise source."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for NoiseSource {
+            #[inline(always)]
+            fn default() -> NoiseSource {
+                NoiseSource(0)
+            }
+        }
+        #[doc = "Status register for RNG engine activity."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngBusy(pub u32);
+        impl RngBusy {
+            #[doc = "RNG engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::RngBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::RngBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "RNG engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::RngBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "TRNG status."]
+            #[inline(always)]
+            pub const fn trng_status(&self) -> super::vals::TrngStatus {
+                let val = (self.0 >> 1usize) & 0x01;
+                super::vals::TrngStatus::from_bits(val as u8)
+            }
+            #[doc = "TRNG status."]
+            #[inline(always)]
+            pub fn set_trng_status(&mut self, val: super::vals::TrngStatus) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
+            }
+        }
+        impl Default for RngBusy {
+            #[inline(always)]
+            fn default() -> RngBusy {
+                RngBusy(0)
+            }
+        }
+        #[doc = "Control clock for the RNG engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngClk(pub u32);
+        impl RngClk {
+            #[doc = "Enables clock for the RNG engine."]
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enables clock for the RNG engine."]
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for RngClk {
+            #[inline(always)]
+            fn default() -> RngClk {
+                RngClk(0)
+            }
+        }
+        #[doc = "Writing to this register enables the RNG DMA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngDma(pub u32);
+        impl RngDma {
+            #[inline(always)]
+            pub const fn enable(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[inline(always)]
+            pub fn set_enable(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for RngDma {
+            #[inline(always)]
+            fn default() -> RngDma {
+                RngDma(0)
+            }
+        }
+        #[doc = "Status register for RNG DMA engine activity."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngDmaBusy(pub u32);
+        impl RngDmaBusy {
+            #[doc = "RNG DMA engine status."]
+            #[inline(always)]
+            pub const fn status(&self) -> super::vals::RngDmaBusyStatus {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::RngDmaBusyStatus::from_bits(val as u8)
+            }
+            #[doc = "RNG DMA engine status."]
+            #[inline(always)]
+            pub fn set_status(&mut self, val: super::vals::RngDmaBusyStatus) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "The active ring oscillator length configuration used by the RNG DMA engine."]
+            #[inline(always)]
+            pub const fn rosc_len(&self) -> super::vals::RngDmaBusyRoscLen {
+                let val = (self.0 >> 1usize) & 0x03;
+                super::vals::RngDmaBusyRoscLen::from_bits(val as u8)
+            }
+            #[doc = "The active ring oscillator length configuration used by the RNG DMA engine."]
+            #[inline(always)]
+            pub fn set_rosc_len(&mut self, val: super::vals::RngDmaBusyRoscLen) {
+                self.0 = (self.0 & !(0x03 << 1usize)) | (((val.to_bits() as u32) & 0x03) << 1usize);
+            }
+            #[doc = "Number of samples already collected using the current ring oscillator configuration."]
+            #[inline(always)]
+            pub const fn num_of_samples(&self) -> u8 {
+                let val = (self.0 >> 3usize) & 0xff;
+                val as u8
+            }
+            #[doc = "Number of samples already collected using the current ring oscillator configuration."]
+            #[inline(always)]
+            pub fn set_num_of_samples(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 3usize)) | (((val as u32) & 0xff) << 3usize);
+            }
+        }
+        impl Default for RngDmaBusy {
+            #[inline(always)]
+            fn default() -> RngDmaBusy {
+                RngDmaBusy(0)
+            }
+        }
+        #[doc = "This register defines which ring oscillator length configuration should be used when using the RNG DMA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngDmaRoscLen(pub u32);
+        impl RngDmaRoscLen {
+            #[doc = "Use shortest ROSC1 ring oscillator configuration."]
+            #[inline(always)]
+            pub const fn rosc1(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Use shortest ROSC1 ring oscillator configuration."]
+            #[inline(always)]
+            pub fn set_rosc1(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Use ROSC2 ring oscillator configuration."]
+            #[inline(always)]
+            pub const fn rosc2(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Use ROSC2 ring oscillator configuration."]
+            #[inline(always)]
+            pub fn set_rosc2(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Use ROSC3 ring oscillator configuration."]
+            #[inline(always)]
+            pub const fn rosc3(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Use ROSC3 ring oscillator configuration."]
+            #[inline(always)]
+            pub fn set_rosc3(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "Use longest ROSC4 ring oscillator configuration."]
+            #[inline(always)]
+            pub const fn rosc4(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Use longest ROSC4 ring oscillator configuration."]
+            #[inline(always)]
+            pub fn set_rosc4(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+        }
+        impl Default for RngDmaRoscLen {
+            #[inline(always)]
+            fn default() -> RngDmaRoscLen {
+                RngDmaRoscLen(0)
+            }
+        }
+        #[doc = "This register defines the number of 192-bits samples that the RNG DMA engine collects per run."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngDmaSamplesNum(pub u32);
+        impl RngDmaSamplesNum {
+            #[doc = "Defines the number of 192-bits samples that the DMA engine collects per run."]
+            #[inline(always)]
+            pub const fn rng_samples_num(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[doc = "Defines the number of 192-bits samples that the DMA engine collects per run."]
+            #[inline(always)]
+            pub fn set_rng_samples_num(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for RngDmaSamplesNum {
+            #[inline(always)]
+            fn default() -> RngDmaSamplesNum {
+                RngDmaSamplesNum(0)
+            }
+        }
+        #[doc = "This register defines the start address in TRNG SRAM for the TRNG data to be collected by the RNG DMA engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngDmaSramAddr(pub u32);
+        impl RngDmaSramAddr {
+            #[doc = "Start address of the TRNG data in TRNG SRAM."]
+            #[inline(always)]
+            pub const fn rng_sram_dma_addr(&self) -> u16 {
+                let val = (self.0 >> 0usize) & 0x07ff;
+                val as u16
+            }
+            #[doc = "Start address of the TRNG data in TRNG SRAM."]
+            #[inline(always)]
+            pub fn set_rng_sram_dma_addr(&mut self, val: u16) {
+                self.0 = (self.0 & !(0x07ff << 0usize)) | (((val as u32) & 0x07ff) << 0usize);
+            }
+        }
+        impl Default for RngDmaSramAddr {
+            #[inline(always)]
+            fn default() -> RngDmaSramAddr {
+                RngDmaSramAddr(0)
+            }
+        }
+        #[doc = "Hardware configuration of RNG engine. Reset value holds the supported features."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngHwFlags(pub u32);
+        impl RngHwFlags {
+            #[doc = "Data width supported by the entropy collector"]
+            #[inline(always)]
+            pub const fn ehr_width(&self) -> super::vals::EhrWidth {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::EhrWidth::from_bits(val as u8)
+            }
+            #[doc = "Data width supported by the entropy collector"]
+            #[inline(always)]
+            pub fn set_ehr_width(&mut self, val: super::vals::EhrWidth) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "If this flag is set, the engine include support for continuous random number generator test."]
+            #[inline(always)]
+            pub const fn crngt_exists(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include support for continuous random number generator test."]
+            #[inline(always)]
+            pub fn set_crngt_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "If this flag is set, the engine include support for autocorrelation test."]
+            #[inline(always)]
+            pub const fn autocorr_exists(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include support for autocorrelation test."]
+            #[inline(always)]
+            pub fn set_autocorr_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "If this flag is set, the engine include support for bypassing TRNG tests."]
+            #[inline(always)]
+            pub const fn bypass_exists(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include support for bypassing TRNG tests."]
+            #[inline(always)]
+            pub fn set_bypass_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+            #[doc = "If this flag is set, the engine include a pseudo-random number generator."]
+            #[inline(always)]
+            pub const fn prng_exists(&self) -> bool {
+                let val = (self.0 >> 4usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include a pseudo-random number generator."]
+            #[inline(always)]
+            pub fn set_prng_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+            }
+            #[doc = "If this flag is set, the engine include support for known answer tests."]
+            #[inline(always)]
+            pub const fn kat_exists(&self) -> bool {
+                let val = (self.0 >> 5usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include support for known answer tests."]
+            #[inline(always)]
+            pub fn set_kat_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+            }
+            #[doc = "If this flag is set, the engine include support for automatic reseeding."]
+            #[inline(always)]
+            pub const fn reseeding_exists(&self) -> bool {
+                let val = (self.0 >> 6usize) & 0x01;
+                val != 0
+            }
+            #[doc = "If this flag is set, the engine include support for automatic reseeding."]
+            #[inline(always)]
+            pub fn set_reseeding_exists(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
+            }
+            #[inline(always)]
+            pub const fn rng_use_5_sboxes(&self) -> bool {
+                let val = (self.0 >> 7usize) & 0x01;
+                val != 0
+            }
+            #[inline(always)]
+            pub fn set_rng_use_5_sboxes(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
+            }
+        }
+        impl Default for RngHwFlags {
+            #[inline(always)]
+            fn default() -> RngHwFlags {
+                RngHwFlags(0)
+            }
+        }
+        #[doc = "Interrupt clear register. Writing a 1 bit into a field in this register will clear the corresponding bit in RNG_ISR."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngIcr(pub u32);
+        impl RngIcr {
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub const fn ehr_valid_clear(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub fn set_ehr_valid_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Cannot be cleared by software! Only RNG reset clears this bit."]
+            #[inline(always)]
+            pub const fn autocorr_err_clear(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Cannot be cleared by software! Only RNG reset clears this bit."]
+            #[inline(always)]
+            pub fn set_autocorr_err_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub const fn crngt_err_clear(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub fn set_crngt_err_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub const fn vnc_err_clear(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub fn set_vnc_err_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub const fn watchdog_clear(&self) -> bool {
+                let val = (self.0 >> 4usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub fn set_watchdog_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub const fn dma_done_clear(&self) -> bool {
+                let val = (self.0 >> 5usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing value '1' clears corresponding bit in RNG_ISR"]
+            #[inline(always)]
+            pub fn set_dma_done_clear(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+            }
+        }
+        impl Default for RngIcr {
+            #[inline(always)]
+            fn default() -> RngIcr {
+                RngIcr(0)
+            }
+        }
+        #[doc = "Interrupt mask register. Each bit of this register holds the mask of a single interrupt source."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngImr(pub u32);
+        impl RngImr {
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub const fn ehr_valid_mask(&self) -> super::vals::EhrValidMask {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::EhrValidMask::from_bits(val as u8)
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub fn set_ehr_valid_mask(&mut self, val: super::vals::EhrValidMask) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub const fn autocorr_err_mask(&self) -> super::vals::AutocorrErrMask {
+                let val = (self.0 >> 1usize) & 0x01;
+                super::vals::AutocorrErrMask::from_bits(val as u8)
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub fn set_autocorr_err_mask(&mut self, val: super::vals::AutocorrErrMask) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub const fn crngt_err_mask(&self) -> super::vals::CrngtErrMask {
+                let val = (self.0 >> 2usize) & 0x01;
+                super::vals::CrngtErrMask::from_bits(val as u8)
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub fn set_crngt_err_mask(&mut self, val: super::vals::CrngtErrMask) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub const fn vnc_err_mask(&self) -> super::vals::VncErrMask {
+                let val = (self.0 >> 3usize) & 0x01;
+                super::vals::VncErrMask::from_bits(val as u8)
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub fn set_vnc_err_mask(&mut self, val: super::vals::VncErrMask) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val.to_bits() as u32) & 0x01) << 3usize);
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub const fn watchdog_mask(&self) -> super::vals::WatchdogMask {
+                let val = (self.0 >> 4usize) & 0x01;
+                super::vals::WatchdogMask::from_bits(val as u8)
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub fn set_watchdog_mask(&mut self, val: super::vals::WatchdogMask) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub const fn dma_done_mask(&self) -> super::vals::DmaDoneMask {
+                let val = (self.0 >> 5usize) & 0x01;
+                super::vals::DmaDoneMask::from_bits(val as u8)
+            }
+            #[doc = "See RNG_ISR for explanation on this interrupt."]
+            #[inline(always)]
+            pub fn set_dma_done_mask(&mut self, val: super::vals::DmaDoneMask) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val.to_bits() as u32) & 0x01) << 5usize);
+            }
+        }
+        impl Default for RngImr {
+            #[inline(always)]
+            fn default() -> RngImr {
+                RngImr(0)
+            }
+        }
+        #[doc = "Interrupt status register. Each bit of this register holds the interrupt status of a single interrupt source. If corresponding RNG_IMR bit is unmasked, an interrupt is generated."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngIsr(pub u32);
+        impl RngIsr {
+            #[doc = "192-bits have been collected and are ready to be read."]
+            #[inline(always)]
+            pub const fn ehr_valid_int(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "192-bits have been collected and are ready to be read."]
+            #[inline(always)]
+            pub fn set_ehr_valid_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Autocorrelation error. Failure occurs when autocorrelation test has failed four times in a row. Once set, the TRNG ceases to function until next reset."]
+            #[inline(always)]
+            pub const fn autocorr_err_int(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Autocorrelation error. Failure occurs when autocorrelation test has failed four times in a row. Once set, the TRNG ceases to function until next reset."]
+            #[inline(always)]
+            pub fn set_autocorr_err_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Continuous random number generator test error. Failure occurs when two consecutive blocks of 16 collected bits are equal."]
+            #[inline(always)]
+            pub const fn crngt_err_int(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Continuous random number generator test error. Failure occurs when two consecutive blocks of 16 collected bits are equal."]
+            #[inline(always)]
+            pub fn set_crngt_err_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "von Neumann corrector error. Failure occurs if 32 consecutive collected bits are identical, ZERO, or ONE."]
+            #[inline(always)]
+            pub const fn vnc_err_int(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "von Neumann corrector error. Failure occurs if 32 consecutive collected bits are identical, ZERO, or ONE."]
+            #[inline(always)]
+            pub fn set_vnc_err_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+            #[doc = "Maximum number of CPU clock cycles per sample have been exceeded. See RNG_WATCHDOG_VAL for more information."]
+            #[inline(always)]
+            pub const fn watchdog_int(&self) -> bool {
+                let val = (self.0 >> 4usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Maximum number of CPU clock cycles per sample have been exceeded. See RNG_WATCHDOG_VAL for more information."]
+            #[inline(always)]
+            pub fn set_watchdog_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
+            }
+            #[doc = "RNG DMA to SRAM is completed."]
+            #[inline(always)]
+            pub const fn dma_done_int(&self) -> bool {
+                let val = (self.0 >> 5usize) & 0x01;
+                val != 0
+            }
+            #[doc = "RNG DMA to SRAM is completed."]
+            #[inline(always)]
+            pub fn set_dma_done_int(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
+            }
+        }
+        impl Default for RngIsr {
+            #[inline(always)]
+            fn default() -> RngIsr {
+                RngIsr(0)
+            }
+        }
+        #[doc = "Reset the RNG engine."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RngSwReset(pub u32);
+        impl RngSwReset {
+            #[doc = "Writing any value to this address resets the RNG engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the RNG engine. The reset takes 4 CPU clock cycles to complete."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for RngSwReset {
+            #[inline(always)]
+            fn default() -> RngSwReset {
+                RngSwReset(0)
+            }
+        }
+        #[doc = "TRNG ring oscillator length configuration"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TrngConfig(pub u32);
+        impl TrngConfig {
+            #[doc = "Set the length of the oscillator ring (= the number of inverters) out of four possible configurations."]
+            #[inline(always)]
+            pub const fn rosc_len(&self) -> super::vals::TrngConfigRoscLen {
+                let val = (self.0 >> 0usize) & 0x03;
+                super::vals::TrngConfigRoscLen::from_bits(val as u8)
+            }
+            #[doc = "Set the length of the oscillator ring (= the number of inverters) out of four possible configurations."]
+            #[inline(always)]
+            pub fn set_rosc_len(&mut self, val: super::vals::TrngConfigRoscLen) {
+                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
+            }
+        }
+        impl Default for TrngConfig {
+            #[inline(always)]
+            fn default() -> TrngConfig {
+                TrngConfig(0)
+            }
+        }
+        #[doc = "Debug register for the TRNG. This register is used to bypass TRNG tests in hardware."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TrngDebug(pub u32);
+        impl TrngDebug {
+            #[doc = "Bypass the von Neumann corrector post-processing test, including the 32 consecutive bits test."]
+            #[inline(always)]
+            pub const fn vnc_bypass(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Bypass the von Neumann corrector post-processing test, including the 32 consecutive bits test."]
+            #[inline(always)]
+            pub fn set_vnc_bypass(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Bypass the Continuous Random Number Generator Test (CRNGT)."]
+            #[inline(always)]
+            pub const fn crngt_bypass(&self) -> bool {
+                let val = (self.0 >> 2usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Bypass the Continuous Random Number Generator Test (CRNGT)."]
+            #[inline(always)]
+            pub fn set_crngt_bypass(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
+            }
+            #[doc = "Bypass the autocorrelation test."]
+            #[inline(always)]
+            pub const fn autocorr_bypass(&self) -> bool {
+                let val = (self.0 >> 3usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Bypass the autocorrelation test."]
+            #[inline(always)]
+            pub fn set_autocorr_bypass(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
+            }
+        }
+        impl Default for TrngDebug {
+            #[inline(always)]
+            fn default() -> TrngDebug {
+                TrngDebug(0)
+            }
+        }
+        #[doc = "Reset the TRNG, including internal counter of collected bits and registers EHR_DATA and TRNG_VALID."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TrngReset(pub u32);
+        impl TrngReset {
+            #[doc = "Writing any value to this address resets the internal bits counter and registers EHR_DATA and TRNG_VALID. Register NOISE_SOURCE must be disabled in order for the reset to take place."]
+            #[inline(always)]
+            pub const fn reset(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Writing any value to this address resets the internal bits counter and registers EHR_DATA and TRNG_VALID. Register NOISE_SOURCE must be disabled in order for the reset to take place."]
+            #[inline(always)]
+            pub fn set_reset(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for TrngReset {
+            #[inline(always)]
+            fn default() -> TrngReset {
+                TrngReset(0)
+            }
+        }
+        #[doc = "This register indicates if TRNG entropy collection is valid."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TrngValid(pub u32);
+        impl TrngValid {
+            #[doc = "A value of 1 indicates that collection of bits in the TRNG is completed, and data can be read from EHR_DATA registers."]
+            #[inline(always)]
+            pub const fn ehr_data(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "A value of 1 indicates that collection of bits in the TRNG is completed, and data can be read from EHR_DATA registers."]
+            #[inline(always)]
+            pub fn set_ehr_data(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for TrngValid {
+            #[inline(always)]
+            fn default() -> TrngValid {
+                TrngValid(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum AutocorrErrMask {
+            #[doc = "Do not mask autocorrelation interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask autocorrelation interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl AutocorrErrMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> AutocorrErrMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for AutocorrErrMask {
+            #[inline(always)]
+            fn from(val: u8) -> AutocorrErrMask {
+                AutocorrErrMask::from_bits(val)
+            }
+        }
+        impl From<AutocorrErrMask> for u8 {
+            #[inline(always)]
+            fn from(val: AutocorrErrMask) -> u8 {
+                AutocorrErrMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum CrngtErrMask {
+            #[doc = "Do not mask the CRNGT error interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask the CRNGT error interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl CrngtErrMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> CrngtErrMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for CrngtErrMask {
+            #[inline(always)]
+            fn from(val: u8) -> CrngtErrMask {
+                CrngtErrMask::from_bits(val)
+            }
+        }
+        impl From<CrngtErrMask> for u8 {
+            #[inline(always)]
+            fn from(val: CrngtErrMask) -> u8 {
+                CrngtErrMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum DmaDoneMask {
+            #[doc = "Do not mask the RNG DMA completion interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask the RNG DMA completion interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl DmaDoneMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> DmaDoneMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for DmaDoneMask {
+            #[inline(always)]
+            fn from(val: u8) -> DmaDoneMask {
+                DmaDoneMask::from_bits(val)
+            }
+        }
+        impl From<DmaDoneMask> for u8 {
+            #[inline(always)]
+            fn from(val: DmaDoneMask) -> u8 {
+                DmaDoneMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum EhrValidMask {
+            #[doc = "Do not mask EHR interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask EHR interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl EhrValidMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> EhrValidMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for EhrValidMask {
+            #[inline(always)]
+            fn from(val: u8) -> EhrValidMask {
+                EhrValidMask::from_bits(val)
+            }
+        }
+        impl From<EhrValidMask> for u8 {
+            #[inline(always)]
+            fn from(val: EhrValidMask) -> u8 {
+                EhrValidMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum EhrWidth {
+            #[doc = "128 bits EHR width"]
+            _128BITS = 0x0,
+            #[doc = "192 bits EHR width"]
+            _192BITS = 0x01,
+        }
+        impl EhrWidth {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> EhrWidth {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for EhrWidth {
+            #[inline(always)]
+            fn from(val: u8) -> EhrWidth {
+                EhrWidth::from_bits(val)
+            }
+        }
+        impl From<EhrWidth> for u8 {
+            #[inline(always)]
+            fn from(val: EhrWidth) -> u8 {
+                EhrWidth::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum RngBusyStatus {
+            #[doc = "RNG engine is idle"]
+            IDLE = 0x0,
+            #[doc = "RNG engine is busy"]
+            BUSY = 0x01,
+        }
+        impl RngBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> RngBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for RngBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> RngBusyStatus {
+                RngBusyStatus::from_bits(val)
+            }
+        }
+        impl From<RngBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: RngBusyStatus) -> u8 {
+                RngBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum RngDmaBusyRoscLen {
+            #[doc = "Shortest ROSC1 ring oscillator configuration used."]
+            ROSC1 = 0x0,
+            #[doc = "ROSC2 ring oscillator configuration used."]
+            ROSC2 = 0x01,
+            #[doc = "ROSC3 ring oscillator configuration used."]
+            ROSC3 = 0x02,
+            #[doc = "Longest ROSC4 ring oscillator configuration used."]
+            ROSC4 = 0x03,
+        }
+        impl RngDmaBusyRoscLen {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> RngDmaBusyRoscLen {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for RngDmaBusyRoscLen {
+            #[inline(always)]
+            fn from(val: u8) -> RngDmaBusyRoscLen {
+                RngDmaBusyRoscLen::from_bits(val)
+            }
+        }
+        impl From<RngDmaBusyRoscLen> for u8 {
+            #[inline(always)]
+            fn from(val: RngDmaBusyRoscLen) -> u8 {
+                RngDmaBusyRoscLen::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum RngDmaBusyStatus {
+            #[doc = "RNG DMA engine is idle"]
+            IDLE = 0x0,
+            #[doc = "RNG DMA engine is busy"]
+            BUSY = 0x01,
+        }
+        impl RngDmaBusyStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> RngDmaBusyStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for RngDmaBusyStatus {
+            #[inline(always)]
+            fn from(val: u8) -> RngDmaBusyStatus {
+                RngDmaBusyStatus::from_bits(val)
+            }
+        }
+        impl From<RngDmaBusyStatus> for u8 {
+            #[inline(always)]
+            fn from(val: RngDmaBusyStatus) -> u8 {
+                RngDmaBusyStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum TrngConfigRoscLen {
+            #[doc = "Use shortest ROSC1 ring oscillator configuration."]
+            ROSC1 = 0x0,
+            #[doc = "Use ROSC2 ring oscillator configuration."]
+            ROSC2 = 0x01,
+            #[doc = "Use ROSC3 ring oscillator configuration."]
+            ROSC3 = 0x02,
+            #[doc = "Use longest ROSC4 ring oscillator configuration."]
+            ROSC4 = 0x03,
+        }
+        impl TrngConfigRoscLen {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> TrngConfigRoscLen {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for TrngConfigRoscLen {
+            #[inline(always)]
+            fn from(val: u8) -> TrngConfigRoscLen {
+                TrngConfigRoscLen::from_bits(val)
+            }
+        }
+        impl From<TrngConfigRoscLen> for u8 {
+            #[inline(always)]
+            fn from(val: TrngConfigRoscLen) -> u8 {
+                TrngConfigRoscLen::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum TrngStatus {
+            #[doc = "TRNG is idle"]
+            IDLE = 0x0,
+            #[doc = "TRNG is busy"]
+            BUSY = 0x01,
+        }
+        impl TrngStatus {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> TrngStatus {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for TrngStatus {
+            #[inline(always)]
+            fn from(val: u8) -> TrngStatus {
+                TrngStatus::from_bits(val)
+            }
+        }
+        impl From<TrngStatus> for u8 {
+            #[inline(always)]
+            fn from(val: TrngStatus) -> u8 {
+                TrngStatus::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum VncErrMask {
+            #[doc = "Do not mask the von Neumann corrector error interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask the von Neumann corrector error interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl VncErrMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> VncErrMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for VncErrMask {
+            #[inline(always)]
+            fn from(val: u8) -> VncErrMask {
+                VncErrMask::from_bits(val)
+            }
+        }
+        impl From<VncErrMask> for u8 {
+            #[inline(always)]
+            fn from(val: VncErrMask) -> u8 {
+                VncErrMask::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum WatchdogMask {
+            #[doc = "Do not mask the watchdog interrupt i.e. interrupt is generated"]
+            IRQENABLE = 0x0,
+            #[doc = "Mask the watchdog interrupt i.e. no interrupt is generated"]
+            IRQDISABLE = 0x01,
+        }
+        impl WatchdogMask {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> WatchdogMask {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for WatchdogMask {
+            #[inline(always)]
+            fn from(val: u8) -> WatchdogMask {
+                WatchdogMask::from_bits(val)
+            }
+        }
+        impl From<WatchdogMask> for u8 {
+            #[inline(always)]
+            fn from(val: WatchdogMask) -> u8 {
+                WatchdogMask::to_bits(val)
+            }
+        }
+    }
+}
+pub mod cc_rng_sram {
+    #[doc = "CRYPTOCELL RNG SRAM interface"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct CcRngSram {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for CcRngSram {}
+    unsafe impl Sync for CcRngSram {}
+    impl CcRngSram {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Read/Write data from RNG SRAM"]
+        #[inline(always)]
+        pub const fn sram_data(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0f00usize) as _) }
+        }
+        #[doc = "First address given to RNG SRAM DMA for read/write transactions from/to RNG SRAM."]
+        #[inline(always)]
+        pub const fn sram_addr(self) -> crate::common::Reg<regs::SramAddr, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0f04usize) as _) }
+        }
+        #[doc = "RNG SRAM DMA engine is ready to read/write from/to RNG SRAM."]
+        #[inline(always)]
+        pub const fn sram_data_ready(
+            self,
+        ) -> crate::common::Reg<regs::SramDataReady, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0f08usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "First address given to RNG SRAM DMA for read/write transactions from/to RNG SRAM."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct SramAddr(pub u32);
+        impl SramAddr {
+            #[doc = "RNG SRAM starting address"]
+            #[inline(always)]
+            pub const fn sram_addr(&self) -> u16 {
+                let val = (self.0 >> 0usize) & 0x7fff;
+                val as u16
+            }
+            #[doc = "RNG SRAM starting address"]
+            #[inline(always)]
+            pub fn set_sram_addr(&mut self, val: u16) {
+                self.0 = (self.0 & !(0x7fff << 0usize)) | (((val as u32) & 0x7fff) << 0usize);
+            }
+        }
+        impl Default for SramAddr {
+            #[inline(always)]
+            fn default() -> SramAddr {
+                SramAddr(0)
+            }
+        }
+        #[doc = "RNG SRAM DMA engine is ready to read/write from/to RNG SRAM."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct SramDataReady(pub u32);
+        impl SramDataReady {
+            #[doc = "RNG SRAM DMA status."]
+            #[inline(always)]
+            pub const fn sram_ready(&self) -> super::vals::SramReady {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::SramReady::from_bits(val as u8)
+            }
+            #[doc = "RNG SRAM DMA status."]
+            #[inline(always)]
+            pub fn set_sram_ready(&mut self, val: super::vals::SramReady) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for SramDataReady {
+            #[inline(always)]
+            fn default() -> SramDataReady {
+                SramDataReady(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum SramReady {
+            #[doc = "DMA is busy"]
+            BUSY = 0x0,
+            #[doc = "DMA is idle"]
+            IDLE = 0x01,
+        }
+        impl SramReady {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> SramReady {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for SramReady {
+            #[inline(always)]
+            fn from(val: u8) -> SramReady {
+                SramReady::from_bits(val)
+            }
+        }
+        impl From<SramReady> for u8 {
+            #[inline(always)]
+            fn from(val: SramReady) -> u8 {
+                SramReady::to_bits(val)
+            }
+        }
     }
 }
 pub mod ccm {
-    #[doc = "AES CCM Mode Encryption"]
+    #[doc = "AES CCM mode encryption"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Ccm {
         ptr: *mut u8,
@@ -1001,7 +7460,7 @@ pub mod ccm {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Start generation of key-stream. This operation will stop by itself when completed."]
+        #[doc = "Start generation of keystream. This operation will stop by itself when completed."]
         #[inline(always)]
         pub const fn tasks_ksgen(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
@@ -1021,7 +7480,7 @@ pub mod ccm {
         pub const fn tasks_rateoverride(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
         }
-        #[doc = "Key-stream generation complete"]
+        #[doc = "Keystream generation complete"]
         #[inline(always)]
         pub const fn events_endksgen(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
@@ -1036,7 +7495,7 @@ pub mod ccm {
         pub const fn events_error(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -1066,7 +7525,7 @@ pub mod ccm {
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
         }
-        #[doc = "Pointer to data structure holding AES key and NONCE vector"]
+        #[doc = "Pointer to data structure holding the AES key and the NONCE vector"]
         #[inline(always)]
         pub const fn cnfptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
@@ -1086,7 +7545,7 @@ pub mod ccm {
         pub const fn scratchptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
         }
-        #[doc = "Length of key-stream generated when MODE.LENGTH = Extended."]
+        #[doc = "Length of keystream generated when MODE.LENGTH = Extended"]
         #[inline(always)]
         pub const fn maxpacketsize(
             self,
@@ -1130,35 +7589,35 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for ENDKSGEN event"]
+            #[doc = "Write '1' to disable interrupt for event ENDKSGEN"]
             #[inline(always)]
             pub const fn endksgen(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ENDKSGEN event"]
+            #[doc = "Write '1' to disable interrupt for event ENDKSGEN"]
             #[inline(always)]
             pub fn set_endksgen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for ENDCRYPT event"]
+            #[doc = "Write '1' to disable interrupt for event ENDCRYPT"]
             #[inline(always)]
             pub const fn endcrypt(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ENDCRYPT event"]
+            #[doc = "Write '1' to disable interrupt for event ENDCRYPT"]
             #[inline(always)]
             pub fn set_endcrypt(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for ERROR event"]
+            #[doc = "Deprecated intclrfield - Write '1' to disable interrupt for event ERROR"]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ERROR event"]
+            #[doc = "Deprecated intclrfield - Write '1' to disable interrupt for event ERROR"]
             #[inline(always)]
             pub fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -1170,18 +7629,18 @@ pub mod ccm {
                 Inten(0)
             }
         }
-        #[doc = "Length of key-stream generated when MODE.LENGTH = Extended."]
+        #[doc = "Length of keystream generated when MODE.LENGTH = Extended"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Maxpacketsize(pub u32);
         impl Maxpacketsize {
-            #[doc = "Length of key-stream generated when MODE.LENGTH = Extended. This value must be greater or equal to the subsequent packet payload to be encrypted/decrypted."]
+            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater than or equal to the subsequent packet payload to be encrypted/decrypted."]
             #[inline(always)]
             pub const fn maxpacketsize(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Length of key-stream generated when MODE.LENGTH = Extended. This value must be greater or equal to the subsequent packet payload to be encrypted/decrypted."]
+            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater than or equal to the subsequent packet payload to be encrypted/decrypted."]
             #[inline(always)]
             pub fn set_maxpacketsize(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1221,13 +7680,13 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Mode(pub u32);
         impl Mode {
-            #[doc = "The mode of operation to be used. The settings in this register apply whenever either the KSGEN or CRYPT tasks are triggered."]
+            #[doc = "The mode of operation to be used. Settings in this register apply whenever either the KSGEN task or the CRYPT task is triggered."]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 0usize) & 0x01;
                 super::vals::Mode::from_bits(val as u8)
             }
-            #[doc = "The mode of operation to be used. The settings in this register apply whenever either the KSGEN or CRYPT tasks are triggered."]
+            #[doc = "The mode of operation to be used. Settings in this register apply whenever either the KSGEN task or the CRYPT task is triggered."]
             #[inline(always)]
             pub fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
@@ -1268,13 +7727,13 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rateoverride(pub u32);
         impl Rateoverride {
-            #[doc = "Data rate override setting."]
+            #[doc = "Data rate override setting"]
             #[inline(always)]
             pub const fn rateoverride(&self) -> super::vals::Rateoverride {
                 let val = (self.0 >> 0usize) & 0x03;
                 super::vals::Rateoverride::from_bits(val as u8)
             }
-            #[doc = "Data rate override setting."]
+            #[doc = "Data rate override setting"]
             #[inline(always)]
             pub fn set_rateoverride(&mut self, val: super::vals::Rateoverride) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
@@ -1286,18 +7745,18 @@ pub mod ccm {
                 Rateoverride(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between ENDKSGEN event and CRYPT task"]
+            #[doc = "Shortcut between event ENDKSGEN and task CRYPT"]
             #[inline(always)]
             pub const fn endksgen_crypt(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between ENDKSGEN event and CRYPT task"]
+            #[doc = "Shortcut between event ENDKSGEN and task CRYPT"]
             #[inline(always)]
             pub fn set_endksgen_crypt(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -1318,9 +7777,9 @@ pub mod ccm {
             _1MBIT = 0x0,
             #[doc = "2 Mbps"]
             _2MBIT = 0x01,
-            #[doc = "125 Kbps"]
+            #[doc = "125 kbps"]
             _125KBPS = 0x02,
-            #[doc = "500 Kbps"]
+            #[doc = "500 kbps"]
             _500KBPS = 0x03,
         }
         impl Datarate {
@@ -1380,9 +7839,9 @@ pub mod ccm {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Length {
-            #[doc = "Default length. Effective length of LENGTH field in encrypted/decrypted packet is 5 bits. A key-stream for packet payloads up to 27 bytes will be generated."]
+            #[doc = "Default length. Effective length of LENGTH field in encrypted/decrypted packet is 5 bits. A keystream for packet payloads up to 27 bytes will be generated."]
             DEFAULT = 0x0,
-            #[doc = "Extended length. Effective length of LENGTH field in encrypted/decrypted packet is 8 bits. A key-stream for packet payloads up to MAXPACKETSIZE bytes will be generated."]
+            #[doc = "Extended length. Effective length of LENGTH field in encrypted/decrypted packet is 8 bits. A keystream for packet payloads up to MAXPACKETSIZE bytes will be generated."]
             EXTENDED = 0x01,
         }
         impl Length {
@@ -1474,9 +7933,9 @@ pub mod ccm {
             _1MBIT = 0x0,
             #[doc = "2 Mbps"]
             _2MBIT = 0x01,
-            #[doc = "125 Kbps"]
+            #[doc = "125 kbps"]
             _125KBPS = 0x02,
-            #[doc = "500 Kbps"]
+            #[doc = "500 kbps"]
             _500KBPS = 0x03,
         }
         impl Rateoverride {
@@ -1759,68 +8218,68 @@ pub mod clock {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for HFCLKSTARTED event"]
+            #[doc = "Write '1' to disable interrupt for event HFCLKSTARTED"]
             #[inline(always)]
             pub const fn hfclkstarted(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for HFCLKSTARTED event"]
+            #[doc = "Write '1' to disable interrupt for event HFCLKSTARTED"]
             #[inline(always)]
             pub fn set_hfclkstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for LFCLKSTARTED event"]
+            #[doc = "Write '1' to disable interrupt for event LFCLKSTARTED"]
             #[inline(always)]
             pub const fn lfclkstarted(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for LFCLKSTARTED event"]
+            #[doc = "Write '1' to disable interrupt for event LFCLKSTARTED"]
             #[inline(always)]
             pub fn set_lfclkstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for DONE event"]
+            #[doc = "Write '1' to disable interrupt for event DONE"]
             #[inline(always)]
             pub const fn done(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for DONE event"]
+            #[doc = "Write '1' to disable interrupt for event DONE"]
             #[inline(always)]
             pub fn set_done(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Write '1' to disable interrupt for CTTO event"]
+            #[doc = "Write '1' to disable interrupt for event CTTO"]
             #[inline(always)]
             pub const fn ctto(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CTTO event"]
+            #[doc = "Write '1' to disable interrupt for event CTTO"]
             #[inline(always)]
             pub fn set_ctto(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Write '1' to disable interrupt for CTSTARTED event"]
+            #[doc = "Write '1' to disable interrupt for event CTSTARTED"]
             #[inline(always)]
             pub const fn ctstarted(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CTSTARTED event"]
+            #[doc = "Write '1' to disable interrupt for event CTSTARTED"]
             #[inline(always)]
             pub fn set_ctstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
-            #[doc = "Write '1' to disable interrupt for CTSTOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event CTSTOPPED"]
             #[inline(always)]
             pub const fn ctstopped(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CTSTOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event CTSTOPPED"]
             #[inline(always)]
             pub fn set_ctstopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
@@ -2379,7 +8838,7 @@ pub mod comp {
         pub const fn events_cross(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -2515,46 +8974,46 @@ pub mod comp {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for READY event"]
+            #[doc = "Enable or disable interrupt for event READY"]
             #[inline(always)]
             pub const fn ready(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for READY event"]
+            #[doc = "Enable or disable interrupt for event READY"]
             #[inline(always)]
             pub fn set_ready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable interrupt for DOWN event"]
+            #[doc = "Enable or disable interrupt for event DOWN"]
             #[inline(always)]
             pub const fn down(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for DOWN event"]
+            #[doc = "Enable or disable interrupt for event DOWN"]
             #[inline(always)]
             pub fn set_down(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for UP event"]
+            #[doc = "Enable or disable interrupt for event UP"]
             #[inline(always)]
             pub const fn up(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for UP event"]
+            #[doc = "Enable or disable interrupt for event UP"]
             #[inline(always)]
             pub fn set_up(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable interrupt for CROSS event"]
+            #[doc = "Enable or disable interrupt for event CROSS"]
             #[inline(always)]
             pub const fn cross(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CROSS event"]
+            #[doc = "Enable or disable interrupt for event CROSS"]
             #[inline(always)]
             pub fn set_cross(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
@@ -2669,62 +9128,62 @@ pub mod comp {
                 Result(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between READY event and SAMPLE task"]
+            #[doc = "Shortcut between event READY and task SAMPLE"]
             #[inline(always)]
             pub const fn ready_sample(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between READY event and SAMPLE task"]
+            #[doc = "Shortcut between event READY and task SAMPLE"]
             #[inline(always)]
             pub fn set_ready_sample(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between READY event and STOP task"]
+            #[doc = "Shortcut between event READY and task STOP"]
             #[inline(always)]
             pub const fn ready_stop(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between READY event and STOP task"]
+            #[doc = "Shortcut between event READY and task STOP"]
             #[inline(always)]
             pub fn set_ready_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Shortcut between DOWN event and STOP task"]
+            #[doc = "Shortcut between event DOWN and task STOP"]
             #[inline(always)]
             pub const fn down_stop(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between DOWN event and STOP task"]
+            #[doc = "Shortcut between event DOWN and task STOP"]
             #[inline(always)]
             pub fn set_down_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Shortcut between UP event and STOP task"]
+            #[doc = "Shortcut between event UP and task STOP"]
             #[inline(always)]
             pub const fn up_stop(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between UP event and STOP task"]
+            #[doc = "Shortcut between event UP and task STOP"]
             #[inline(always)]
             pub fn set_up_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Shortcut between CROSS event and STOP task"]
+            #[doc = "Shortcut between event CROSS and task STOP"]
             #[inline(always)]
             pub const fn cross_stop(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between CROSS event and STOP task"]
+            #[doc = "Shortcut between event CROSS and task STOP"]
             #[inline(always)]
             pub fn set_cross_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -2960,7 +9419,7 @@ pub mod comp {
             _RESERVED_3 = 0x03,
             #[doc = "VREF = VDD"]
             VDD = 0x04,
-            #[doc = "VREF = AREF (VDD &gt;= VREF &gt;= AREFMIN)"]
+            #[doc = "VREF = AREF"]
             AREF = 0x05,
             _RESERVED_6 = 0x06,
             _RESERVED_7 = 0x07,
@@ -3053,7 +9512,7 @@ pub mod comp {
     }
 }
 pub mod cryptocell {
-    #[doc = "ARM TrustZone CryptoCell register interface"]
+    #[doc = "CRYPTOCELL register interface"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Cryptocell {
         ptr: *mut u8,
@@ -3069,25 +9528,25 @@ pub mod cryptocell {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Enable CRYPTOCELL subsystem"]
+        #[doc = "Enable CRYPTOCELL subsystem."]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
         }
     }
     pub mod regs {
-        #[doc = "Enable CRYPTOCELL subsystem"]
+        #[doc = "Enable CRYPTOCELL subsystem."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Enable(pub u32);
         impl Enable {
-            #[doc = "Enable or disable the CRYPTOCELL subsystem"]
+            #[doc = "Enable or disable the CRYPTOCELL subsystem."]
             #[inline(always)]
             pub const fn enable(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable the CRYPTOCELL subsystem"]
+            #[doc = "Enable or disable the CRYPTOCELL subsystem."]
             #[inline(always)]
             pub fn set_enable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -3160,24 +9619,24 @@ pub mod ecb {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for ENDECB event"]
+            #[doc = "Write '1' to disable interrupt for event ENDECB"]
             #[inline(always)]
             pub const fn endecb(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ENDECB event"]
+            #[doc = "Write '1' to disable interrupt for event ENDECB"]
             #[inline(always)]
             pub fn set_endecb(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for ERRORECB event"]
+            #[doc = "Write '1' to disable interrupt for event ERRORECB"]
             #[inline(always)]
             pub const fn errorecb(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ERRORECB event"]
+            #[doc = "Write '1' to disable interrupt for event ERRORECB"]
             #[inline(always)]
             pub fn set_errorecb(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -3192,7 +9651,7 @@ pub mod ecb {
     }
 }
 pub mod egu {
-    #[doc = "Event Generator Unit 0"]
+    #[doc = "Event generator unit 0"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Egu {
         ptr: *mut u8,
@@ -3208,13 +9667,13 @@ pub mod egu {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description collection\\[n\\]: Trigger n for triggering the corresponding TRIGGERED\\[n\\] event"]
+        #[doc = "Description collection: Trigger n for triggering the corresponding TRIGGERED\\[n\\] event"]
         #[inline(always)]
         pub const fn tasks_trigger(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 16usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Event number n generated by triggering the corresponding TRIGGER\\[n\\] task"]
+        #[doc = "Description collection: Event number n generated by triggering the corresponding TRIGGER\\[n\\] task"]
         #[inline(always)]
         pub const fn events_triggered(
             self,
@@ -3245,7 +9704,7 @@ pub mod egu {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for TRIGGERED\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event TRIGGERED\\[0\\]"]
             #[inline(always)]
             pub const fn triggered(&self, n: usize) -> bool {
                 assert!(n < 16usize);
@@ -3253,7 +9712,7 @@ pub mod egu {
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TRIGGERED\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event TRIGGERED\\[0\\]"]
             #[inline(always)]
             pub fn set_triggered(&mut self, n: usize, val: bool) {
                 assert!(n < 16usize);
@@ -3296,19 +9755,19 @@ pub mod ficr {
         pub const fn codesize(self) -> crate::common::Reg<u32, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Device identifier"]
+        #[doc = "Description collection: Device identifier"]
         #[inline(always)]
         pub const fn deviceid(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
             assert!(n < 2usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x60usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Encryption root, word n"]
+        #[doc = "Description collection: Encryption root, word n"]
         #[inline(always)]
         pub const fn er(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
             assert!(n < 4usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Identity Root, word n"]
+        #[doc = "Description collection: Identity Root, word n"]
         #[inline(always)]
         pub const fn ir(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
             assert!(n < 4usize);
@@ -3321,7 +9780,7 @@ pub mod ficr {
         ) -> crate::common::Reg<regs::Deviceaddrtype, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa0usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Device address n"]
+        #[doc = "Description collection: Device address n"]
         #[inline(always)]
         pub const fn deviceaddr(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
             assert!(n < 2usize);
@@ -3332,7 +9791,7 @@ pub mod ficr {
         pub const fn info(self) -> Info {
             unsafe { Info::from_ptr(self.ptr.add(0x0100usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Production test signature n"]
+        #[doc = "Description collection: Production test signature n"]
         #[inline(always)]
         pub const fn prodtest(
             self,
@@ -3378,9 +9837,9 @@ pub mod ficr {
         pub const fn part(self) -> crate::common::Reg<regs::Part, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Build code (hardware version and production configuration)"]
+        #[doc = "Build code, last two letters of Package Variant and first two characters of Build Code, encoded in ASCII."]
         #[inline(always)]
-        pub const fn variant(self) -> crate::common::Reg<regs::Variant, crate::common::R> {
+        pub const fn variant(self) -> crate::common::Reg<u32, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
         #[doc = "Package option"]
@@ -3397,12 +9856,6 @@ pub mod ficr {
         #[inline(always)]
         pub const fn flash(self) -> crate::common::Reg<regs::Flash, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
-        }
-        #[doc = "Unspecified"]
-        #[inline(always)]
-        pub const fn unused8(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 3usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize + n * 4usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -3421,22 +9874,22 @@ pub mod ficr {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader0(self) -> crate::common::Reg<regs::Tagheader0, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader1(self) -> crate::common::Reg<regs::Tagheader1, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader2(self) -> crate::common::Reg<regs::Tagheader2, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader3(self) -> crate::common::Reg<regs::Tagheader3, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
@@ -3973,7 +10426,7 @@ pub mod ficr {
                 Part(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: Production test signature n"]
+        #[doc = "Description collection: Production test signature n"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Prodtest(pub u32);
@@ -4136,7 +10589,7 @@ pub mod ficr {
                 T4(0)
             }
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Tagheader0(pub u32);
@@ -4192,7 +10645,7 @@ pub mod ficr {
                 Tagheader0(0)
             }
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Tagheader1(pub u32);
@@ -4248,7 +10701,7 @@ pub mod ficr {
                 Tagheader1(0)
             }
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Tagheader2(pub u32);
@@ -4304,7 +10757,7 @@ pub mod ficr {
                 Tagheader2(0)
             }
         }
-        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
+        #[doc = "Default header for NFC tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST, and NFCID1_LAST."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Tagheader3(pub u32);
@@ -4360,30 +10813,6 @@ pub mod ficr {
                 Tagheader3(0)
             }
         }
-        #[doc = "Build code (hardware version and production configuration)"]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Variant(pub u32);
-        impl Variant {
-            #[doc = "Build code (hardware version and production configuration). Encoded as ASCII."]
-            #[inline(always)]
-            pub const fn variant(&self) -> super::vals::Variant {
-                let val = (self.0 >> 0usize) & 0xffff_ffff;
-                super::vals::Variant::from_bits(val as u32)
-            }
-            #[doc = "Build code (hardware version and production configuration). Encoded as ASCII."]
-            #[inline(always)]
-            pub fn set_variant(&mut self, val: super::vals::Variant) {
-                self.0 = (self.0 & !(0xffff_ffff << 0usize))
-                    | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
-            }
-        }
-        impl Default for Variant {
-            #[inline(always)]
-            fn default() -> Variant {
-                Variant(0)
-            }
-        }
     }
     pub mod vals {
         #[repr(u8)]
@@ -4420,15 +10849,15 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Flash(pub u32);
         impl Flash {
-            #[doc = "128 kByte FLASH"]
+            #[doc = "128 kB FLASH"]
             pub const K128: Self = Self(0x80);
-            #[doc = "256 kByte FLASH"]
+            #[doc = "256 kB FLASH"]
             pub const K256: Self = Self(0x0100);
-            #[doc = "512 kByte FLASH"]
+            #[doc = "512 kB FLASH"]
             pub const K512: Self = Self(0x0200);
-            #[doc = "1 MByte FLASH"]
+            #[doc = "1 MB FLASH"]
             pub const K1024: Self = Self(0x0400);
-            #[doc = "2 MByte FLASH"]
+            #[doc = "2 MB FLASH"]
             pub const K2048: Self = Self(0x0800);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
@@ -4457,8 +10886,12 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Package(pub u32);
         impl Package {
-            #[doc = "QIxx - 73-pin aQFN"]
+            #[doc = "QFxx - 6x6 48-pin QFN"]
+            pub const QF: Self = Self(0x2000);
+            #[doc = "QIxx - 7x7 73-pin aQFN"]
             pub const QI: Self = Self(0x2004);
+            #[doc = "CKxx - 3.544 x 3.607 WLCSP"]
+            pub const CK: Self = Self(0x2005);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
         }
@@ -4544,15 +10977,15 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Ram(pub u32);
         impl Ram {
-            #[doc = "16 kByte RAM"]
+            #[doc = "16 kB RAM"]
             pub const K16: Self = Self(0x10);
-            #[doc = "32 kByte RAM"]
+            #[doc = "32 kB RAM"]
             pub const K32: Self = Self(0x20);
-            #[doc = "64 kByte RAM"]
+            #[doc = "64 kB RAM"]
             pub const K64: Self = Self(0x40);
-            #[doc = "128 kByte RAM"]
+            #[doc = "128 kB RAM"]
             pub const K128: Self = Self(0x80);
-            #[doc = "256 kByte RAM"]
+            #[doc = "256 kB RAM"]
             pub const K256: Self = Self(0x0100);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
@@ -4575,47 +11008,6 @@ pub mod ficr {
             #[inline(always)]
             fn from(val: Ram) -> u32 {
                 Ram::to_bits(val)
-            }
-        }
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Variant(pub u32);
-        impl Variant {
-            #[doc = "AAAA"]
-            pub const AAAA: Self = Self(0x4141_4141);
-            #[doc = "AAAB"]
-            pub const AAAB: Self = Self(0x4141_4142);
-            #[doc = "AABA"]
-            pub const AABA: Self = Self(0x4141_4241);
-            #[doc = "AABB"]
-            pub const AABB: Self = Self(0x4141_4242);
-            #[doc = "AACA"]
-            pub const AACA: Self = Self(0x4141_4341);
-            #[doc = "BAAA"]
-            pub const BAAA: Self = Self(0x4241_4141);
-            #[doc = "CAAA"]
-            pub const CAAA: Self = Self(0x4341_4141);
-            #[doc = "Unspecified"]
-            pub const UNSPECIFIED: Self = Self(0xffff_ffff);
-        }
-        impl Variant {
-            pub const fn from_bits(val: u32) -> Variant {
-                Self(val & 0xffff_ffff)
-            }
-            pub const fn to_bits(self) -> u32 {
-                self.0
-            }
-        }
-        impl From<u32> for Variant {
-            #[inline(always)]
-            fn from(val: u32) -> Variant {
-                Variant::from_bits(val)
-            }
-        }
-        impl From<Variant> for u32 {
-            #[inline(always)]
-            fn from(val: Variant) -> u32 {
-                Variant::to_bits(val)
             }
         }
     }
@@ -4645,7 +11037,7 @@ pub mod fpu {
     }
 }
 pub mod gpio {
-    #[doc = "GPIO Port 1"]
+    #[doc = "GPIO Port 0"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Gpio {
         ptr: *mut u8,
@@ -4701,12 +11093,12 @@ pub mod gpio {
         pub const fn latch(self) -> crate::common::Reg<regs::Latch, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
         }
-        #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[inline(always)]
         pub const fn detectmode(self) -> crate::common::Reg<regs::Detectmode, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Configuration of GPIO pins"]
+        #[doc = "Description collection: Configuration of GPIO pins"]
         #[inline(always)]
         pub const fn pin_cnf(
             self,
@@ -4717,18 +11109,18 @@ pub mod gpio {
         }
     }
     pub mod regs {
-        #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Detectmode(pub u32);
         impl Detectmode {
-            #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+            #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
             #[inline(always)]
             pub const fn detectmode(&self) -> super::vals::Detectmode {
                 let val = (self.0 >> 0usize) & 0x01;
                 super::vals::Detectmode::from_bits(val as u8)
             }
-            #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+            #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
             #[inline(always)]
             pub fn set_detectmode(&mut self, val: super::vals::Detectmode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
@@ -4956,7 +11348,7 @@ pub mod gpio {
                 Outset(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: Configuration of GPIO pins"]
+        #[doc = "Description collection: Configuration of GPIO pins"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct PinCnf(pub u32);
@@ -5031,7 +11423,7 @@ pub mod gpio {
         pub enum Detectmode {
             #[doc = "DETECT directly connected to PIN DETECT signals"]
             DEFAULT = 0x0,
-            #[doc = "Use the latched LDETECT behaviour"]
+            #[doc = "Use the latched LDETECT behavior"]
             LDETECT = 0x01,
         }
         impl Detectmode {
@@ -5243,25 +11635,25 @@ pub mod gpiote {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description collection\\[n\\]: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is configured in CONFIG\\[n\\].POLARITY."]
+        #[doc = "Description collection: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is configured in CONFIG\\[n\\].POLARITY."]
         #[inline(always)]
         pub const fn tasks_out(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is to set it high."]
+        #[doc = "Description collection: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is to set it high."]
         #[inline(always)]
         pub const fn tasks_set(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x30usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is to set it low."]
+        #[doc = "Description collection: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is to set it low."]
         #[inline(always)]
         pub const fn tasks_clr(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x60usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Event generated from pin specified in CONFIG\\[n\\].PSEL"]
+        #[doc = "Description collection: Event generated from pin specified in CONFIG\\[n\\].PSEL"]
         #[inline(always)]
         pub const fn events_in(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 8usize);
@@ -5282,7 +11674,7 @@ pub mod gpiote {
         pub const fn intenclr(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Configuration for OUT\\[n\\], SET\\[n\\] and CLR\\[n\\] tasks and IN\\[n\\] event"]
+        #[doc = "Description collection: Configuration for OUT\\[n\\], SET\\[n\\], and CLR\\[n\\] tasks and IN\\[n\\] event"]
         #[inline(always)]
         pub const fn config(self, n: usize) -> crate::common::Reg<regs::Config, crate::common::RW> {
             assert!(n < 8usize);
@@ -5290,7 +11682,7 @@ pub mod gpiote {
         }
     }
     pub mod regs {
-        #[doc = "Description collection\\[n\\]: Configuration for OUT\\[n\\], SET\\[n\\] and CLR\\[n\\] tasks and IN\\[n\\] event"]
+        #[doc = "Description collection: Configuration for OUT\\[n\\], SET\\[n\\], and CLR\\[n\\] tasks and IN\\[n\\] event"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Config(pub u32);
@@ -5306,13 +11698,13 @@ pub mod gpiote {
             pub fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
-            #[doc = "GPIO number associated with SET\\[n\\], CLR\\[n\\] and OUT\\[n\\] tasks and IN\\[n\\] event"]
+            #[doc = "GPIO number associated with SET\\[n\\], CLR\\[n\\], and OUT\\[n\\] tasks and IN\\[n\\] event"]
             #[inline(always)]
             pub const fn psel(&self) -> u8 {
                 let val = (self.0 >> 8usize) & 0x1f;
                 val as u8
             }
-            #[doc = "GPIO number associated with SET\\[n\\], CLR\\[n\\] and OUT\\[n\\] tasks and IN\\[n\\] event"]
+            #[doc = "GPIO number associated with SET\\[n\\], CLR\\[n\\], and OUT\\[n\\] tasks and IN\\[n\\] event"]
             #[inline(always)]
             pub fn set_psel(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x1f << 8usize)) | (((val as u32) & 0x1f) << 8usize);
@@ -5364,101 +11756,101 @@ pub mod gpiote {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for IN\\[0\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[0\\]"]
             #[inline(always)]
             pub const fn in0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[0\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[0\\]"]
             #[inline(always)]
             pub fn set_in0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[1\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[1\\]"]
             #[inline(always)]
             pub const fn in1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[1\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[1\\]"]
             #[inline(always)]
             pub fn set_in1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[2\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[2\\]"]
             #[inline(always)]
             pub const fn in2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[2\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[2\\]"]
             #[inline(always)]
             pub fn set_in2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[3\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[3\\]"]
             #[inline(always)]
             pub const fn in3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[3\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[3\\]"]
             #[inline(always)]
             pub fn set_in3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[4\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[4\\]"]
             #[inline(always)]
             pub const fn in4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[4\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[4\\]"]
             #[inline(always)]
             pub fn set_in4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[5\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[5\\]"]
             #[inline(always)]
             pub const fn in5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[5\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[5\\]"]
             #[inline(always)]
             pub fn set_in5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[6\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[6\\]"]
             #[inline(always)]
             pub const fn in6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[6\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[6\\]"]
             #[inline(always)]
             pub fn set_in6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[7\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[7\\]"]
             #[inline(always)]
             pub const fn in7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for IN\\[7\\] event"]
+            #[doc = "Write '1' to disable interrupt for event IN\\[7\\]"]
             #[inline(always)]
             pub fn set_in7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Write '1' to disable interrupt for PORT event"]
+            #[doc = "Write '1' to disable interrupt for event PORT"]
             #[inline(always)]
             pub const fn port(&self) -> bool {
                 let val = (self.0 >> 31usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for PORT event"]
+            #[doc = "Write '1' to disable interrupt for event PORT"]
             #[inline(always)]
             pub fn set_port(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
@@ -5660,7 +12052,7 @@ pub mod i2s {
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Stops I2S transfer. Also stops MCK generator. Triggering this task will cause the {event:STOPPED} event to be generated."]
+        #[doc = "Stops I2S transfer. Also stops MCK generator. Triggering this task will cause the STOPPED event to be generated."]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -5938,35 +12330,35 @@ pub mod i2s {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for RXPTRUPD event"]
+            #[doc = "Enable or disable interrupt for event RXPTRUPD"]
             #[inline(always)]
             pub const fn rxptrupd(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXPTRUPD event"]
+            #[doc = "Enable or disable interrupt for event RXPTRUPD"]
             #[inline(always)]
             pub fn set_rxptrupd(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable interrupt for TXPTRUPD event"]
+            #[doc = "Enable or disable interrupt for event TXPTRUPD"]
             #[inline(always)]
             pub const fn txptrupd(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXPTRUPD event"]
+            #[doc = "Enable or disable interrupt for event TXPTRUPD"]
             #[inline(always)]
             pub fn set_txptrupd(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
@@ -6288,16 +12680,6 @@ pub mod i2s {
             pub const _32MDIV10: Self = Self(0x1800_0000);
             #[doc = "32 MHz / 8 = 4.0 MHz"]
             pub const _32MDIV8: Self = Self(0x2000_0000);
-            #[doc = "32 MHz / 6 = 5.3333333 MHz"]
-            pub const _32MDIV6: Self = Self(0x2800_0000);
-            #[doc = "32 MHz / 5 = 6.4 MHz"]
-            pub const _32MDIV5: Self = Self(0x3000_0000);
-            #[doc = "32 MHz / 4 = 8.0 MHz"]
-            pub const _32MDIV4: Self = Self(0x4000_0000);
-            #[doc = "32 MHz / 3 = 10.6666667 MHz"]
-            pub const _32MDIV3: Self = Self(0x5000_0000);
-            #[doc = "32 MHz / 2 = 16.0 MHz"]
-            pub const _32MDIV2: Self = Self(0x8000_0000);
         }
         impl Mckfreq {
             pub const fn from_bits(val: u32) -> Mckfreq {
@@ -6436,7 +12818,7 @@ pub mod i2s {
     }
 }
 pub mod lpcomp {
-    #[doc = "Low Power Comparator"]
+    #[doc = "Low-power comparator"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Lpcomp {
         ptr: *mut u8,
@@ -6487,7 +12869,7 @@ pub mod lpcomp {
         pub const fn events_cross(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -6636,46 +13018,46 @@ pub mod lpcomp {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for READY event"]
+            #[doc = "Write '1' to disable interrupt for event READY"]
             #[inline(always)]
             pub const fn ready(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for READY event"]
+            #[doc = "Write '1' to disable interrupt for event READY"]
             #[inline(always)]
             pub fn set_ready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for DOWN event"]
+            #[doc = "Write '1' to disable interrupt for event DOWN"]
             #[inline(always)]
             pub const fn down(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for DOWN event"]
+            #[doc = "Write '1' to disable interrupt for event DOWN"]
             #[inline(always)]
             pub fn set_down(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for UP event"]
+            #[doc = "Write '1' to disable interrupt for event UP"]
             #[inline(always)]
             pub const fn up(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for UP event"]
+            #[doc = "Write '1' to disable interrupt for event UP"]
             #[inline(always)]
             pub fn set_up(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Write '1' to disable interrupt for CROSS event"]
+            #[doc = "Write '1' to disable interrupt for event CROSS"]
             #[inline(always)]
             pub const fn cross(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CROSS event"]
+            #[doc = "Write '1' to disable interrupt for event CROSS"]
             #[inline(always)]
             pub fn set_cross(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
@@ -6756,62 +13138,62 @@ pub mod lpcomp {
                 Result(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between READY event and SAMPLE task"]
+            #[doc = "Shortcut between event READY and task SAMPLE"]
             #[inline(always)]
             pub const fn ready_sample(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between READY event and SAMPLE task"]
+            #[doc = "Shortcut between event READY and task SAMPLE"]
             #[inline(always)]
             pub fn set_ready_sample(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between READY event and STOP task"]
+            #[doc = "Shortcut between event READY and task STOP"]
             #[inline(always)]
             pub const fn ready_stop(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between READY event and STOP task"]
+            #[doc = "Shortcut between event READY and task STOP"]
             #[inline(always)]
             pub fn set_ready_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Shortcut between DOWN event and STOP task"]
+            #[doc = "Shortcut between event DOWN and task STOP"]
             #[inline(always)]
             pub const fn down_stop(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between DOWN event and STOP task"]
+            #[doc = "Shortcut between event DOWN and task STOP"]
             #[inline(always)]
             pub fn set_down_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Shortcut between UP event and STOP task"]
+            #[doc = "Shortcut between event UP and task STOP"]
             #[inline(always)]
             pub const fn up_stop(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between UP event and STOP task"]
+            #[doc = "Shortcut between event UP and task STOP"]
             #[inline(always)]
             pub fn set_up_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Shortcut between CROSS event and STOP task"]
+            #[doc = "Shortcut between event CROSS and task STOP"]
             #[inline(always)]
             pub const fn cross_stop(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between CROSS event and STOP task"]
+            #[doc = "Shortcut between event CROSS and task STOP"]
             #[inline(always)]
             pub fn set_cross_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -7023,9 +13405,9 @@ pub mod lpcomp {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Result {
-            #[doc = "Input voltage is below the reference threshold (VIN+ &lt; VIN-)."]
+            #[doc = "Input voltage is below the reference threshold (VIN+ &lt; VIN-)"]
             BELOW = 0x0,
-            #[doc = "Input voltage is above the reference threshold (VIN+ &gt; VIN-)."]
+            #[doc = "Input voltage is above the reference threshold (VIN+ &gt; VIN-)"]
             ABOVE = 0x01,
         }
         impl Result {
@@ -7053,7 +13435,7 @@ pub mod lpcomp {
     }
 }
 pub mod mwu {
-    #[doc = "Unspecified"]
+    #[doc = "Peripheral events."]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct EventsPregion {
         ptr: *mut u8,
@@ -7069,18 +13451,18 @@ pub mod mwu {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Write access to peripheral region n detected"]
+        #[doc = "Description cluster: Write access to peripheral region n detected"]
         #[inline(always)]
         pub const fn wa(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Read access to peripheral region n detected"]
+        #[doc = "Description cluster: Read access to peripheral region n detected"]
         #[inline(always)]
         pub const fn ra(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
     }
-    #[doc = "Unspecified"]
+    #[doc = "Peripheral events."]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct EventsRegion {
         ptr: *mut u8,
@@ -7096,12 +13478,12 @@ pub mod mwu {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Write access to region n detected"]
+        #[doc = "Description cluster: Write access to region n detected"]
         #[inline(always)]
         pub const fn wa(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Read access to region n detected"]
+        #[doc = "Description cluster: Read access to region n detected"]
         #[inline(always)]
         pub const fn ra(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -7123,13 +13505,13 @@ pub mod mwu {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Unspecified"]
+        #[doc = "Peripheral events."]
         #[inline(always)]
         pub const fn events_region(self, n: usize) -> EventsRegion {
             assert!(n < 4usize);
             unsafe { EventsRegion::from_ptr(self.ptr.add(0x0100usize + n * 8usize) as _) }
         }
-        #[doc = "Unspecified"]
+        #[doc = "Peripheral events."]
         #[inline(always)]
         pub const fn events_pregion(self, n: usize) -> EventsPregion {
             assert!(n < 2usize);
@@ -7150,17 +13532,17 @@ pub mod mwu {
         pub const fn intenclr(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
         }
-        #[doc = "Enable or disable non-maskable interrupt"]
+        #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn nmien(self) -> crate::common::Reg<regs::Nmien, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0320usize) as _) }
         }
-        #[doc = "Enable non-maskable interrupt"]
+        #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn nmienset(self) -> crate::common::Reg<regs::Nmien, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0324usize) as _) }
         }
-        #[doc = "Disable non-maskable interrupt"]
+        #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn nmienclr(self) -> crate::common::Reg<regs::Nmien, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0328usize) as _) }
@@ -7215,12 +13597,12 @@ pub mod mwu {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Source of event/interrupt in region n, write access detected while corresponding subregion was enabled for watching"]
+        #[doc = "Description cluster: Source of event/interrupt in region n, write access detected while corresponding subregion was enabled for watching"]
         #[inline(always)]
         pub const fn substatwa(self) -> crate::common::Reg<regs::Substatwa, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Source of event/interrupt in region n, read access detected while corresponding subregion was enabled for watching"]
+        #[doc = "Description cluster: Source of event/interrupt in region n, read access detected while corresponding subregion was enabled for watching"]
         #[inline(always)]
         pub const fn substatra(self) -> crate::common::Reg<regs::Substatra, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -7242,17 +13624,17 @@ pub mod mwu {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Reserved for future use"]
+        #[doc = "Description cluster: Reserved for future use"]
         #[inline(always)]
         pub const fn start(self) -> crate::common::Reg<u32, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Reserved for future use"]
+        #[doc = "Description cluster: Reserved for future use"]
         #[inline(always)]
         pub const fn end(self) -> crate::common::Reg<u32, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Subregions of region n"]
+        #[doc = "Description cluster: Subregions of region n"]
         #[inline(always)]
         pub const fn subs(self) -> crate::common::Reg<regs::Subs, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
@@ -7274,12 +13656,12 @@ pub mod mwu {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Start address for region n"]
+        #[doc = "Description cluster: Start address for region n"]
         #[inline(always)]
         pub const fn start(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: End address of region n"]
+        #[doc = "Description cluster: End address of region n"]
         #[inline(always)]
         pub const fn end(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -7291,134 +13673,134 @@ pub mod mwu {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for REGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION0WA"]
             #[inline(always)]
             pub const fn region0wa(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION0WA"]
             #[inline(always)]
             pub fn set_region0wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable interrupt for REGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION0RA"]
             #[inline(always)]
             pub const fn region0ra(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION0RA"]
             #[inline(always)]
             pub fn set_region0ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for REGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION1WA"]
             #[inline(always)]
             pub const fn region1wa(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION1WA"]
             #[inline(always)]
             pub fn set_region1wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable interrupt for REGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION1RA"]
             #[inline(always)]
             pub const fn region1ra(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION1RA"]
             #[inline(always)]
             pub fn set_region1ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Enable or disable interrupt for REGION\\[2\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION2WA"]
             #[inline(always)]
             pub const fn region2wa(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[2\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION2WA"]
             #[inline(always)]
             pub fn set_region2wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Enable or disable interrupt for REGION\\[2\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION2RA"]
             #[inline(always)]
             pub const fn region2ra(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[2\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION2RA"]
             #[inline(always)]
             pub fn set_region2ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Enable or disable interrupt for REGION\\[3\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION3WA"]
             #[inline(always)]
             pub const fn region3wa(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[3\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION3WA"]
             #[inline(always)]
             pub fn set_region3wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Enable or disable interrupt for REGION\\[3\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION3RA"]
             #[inline(always)]
             pub const fn region3ra(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for REGION\\[3\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION3RA"]
             #[inline(always)]
             pub fn set_region3ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0WA"]
             #[inline(always)]
             pub const fn pregion0wa(&self) -> bool {
                 let val = (self.0 >> 24usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0WA"]
             #[inline(always)]
             pub fn set_pregion0wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0RA"]
             #[inline(always)]
             pub const fn pregion0ra(&self) -> bool {
                 let val = (self.0 >> 25usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0RA"]
             #[inline(always)]
             pub fn set_pregion0ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1WA"]
             #[inline(always)]
             pub const fn pregion1wa(&self) -> bool {
                 let val = (self.0 >> 26usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1WA"]
             #[inline(always)]
             pub fn set_pregion1wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1RA"]
             #[inline(always)]
             pub const fn pregion1ra(&self) -> bool {
                 let val = (self.0 >> 27usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for PREGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1RA"]
             #[inline(always)]
             pub fn set_pregion1ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
@@ -7430,139 +13812,139 @@ pub mod mwu {
                 Inten(0)
             }
         }
-        #[doc = "Enable or disable non-maskable interrupt"]
+        #[doc = "Enable or disable interrupt"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Nmien(pub u32);
         impl Nmien {
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION0WA"]
             #[inline(always)]
             pub const fn region0wa(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION0WA"]
             #[inline(always)]
             pub fn set_region0wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION0RA"]
             #[inline(always)]
             pub const fn region0ra(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION0RA"]
             #[inline(always)]
             pub fn set_region0ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION1WA"]
             #[inline(always)]
             pub const fn region1wa(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION1WA"]
             #[inline(always)]
             pub fn set_region1wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION1RA"]
             #[inline(always)]
             pub const fn region1ra(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION1RA"]
             #[inline(always)]
             pub fn set_region1ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[2\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION2WA"]
             #[inline(always)]
             pub const fn region2wa(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[2\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION2WA"]
             #[inline(always)]
             pub fn set_region2wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[2\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION2RA"]
             #[inline(always)]
             pub const fn region2ra(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[2\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION2RA"]
             #[inline(always)]
             pub fn set_region2ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[3\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION3WA"]
             #[inline(always)]
             pub const fn region3wa(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[3\\].WA event"]
+            #[doc = "Enable or disable interrupt for event REGION3WA"]
             #[inline(always)]
             pub fn set_region3wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[3\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION3RA"]
             #[inline(always)]
             pub const fn region3ra(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for REGION\\[3\\].RA event"]
+            #[doc = "Enable or disable interrupt for event REGION3RA"]
             #[inline(always)]
             pub fn set_region3ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0WA"]
             #[inline(always)]
             pub const fn pregion0wa(&self) -> bool {
                 let val = (self.0 >> 24usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[0\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0WA"]
             #[inline(always)]
             pub fn set_pregion0wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0RA"]
             #[inline(always)]
             pub const fn pregion0ra(&self) -> bool {
                 let val = (self.0 >> 25usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[0\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION0RA"]
             #[inline(always)]
             pub fn set_pregion0ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1WA"]
             #[inline(always)]
             pub const fn pregion1wa(&self) -> bool {
                 let val = (self.0 >> 26usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[1\\].WA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1WA"]
             #[inline(always)]
             pub fn set_pregion1wa(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1RA"]
             #[inline(always)]
             pub const fn pregion1ra(&self) -> bool {
                 let val = (self.0 >> 27usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable non-maskable interrupt for PREGION\\[1\\].RA event"]
+            #[doc = "Enable or disable interrupt for event PREGION1RA"]
             #[inline(always)]
             pub fn set_pregion1ra(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
@@ -7646,7 +14028,7 @@ pub mod mwu {
                 Regionen(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Subregions of region n"]
+        #[doc = "Description cluster: Subregions of region n"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Subs(pub u32);
@@ -7673,7 +14055,7 @@ pub mod mwu {
                 Subs(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Source of event/interrupt in region n, read access detected while corresponding subregion was enabled for watching"]
+        #[doc = "Description cluster: Source of event/interrupt in region n, read access detected while corresponding subregion was enabled for watching"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Substatra(pub u32);
@@ -7700,7 +14082,7 @@ pub mod mwu {
                 Substatra(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Source of event/interrupt in region n, write access detected while corresponding subregion was enabled for watching"]
+        #[doc = "Description cluster: Source of event/interrupt in region n, write access detected while corresponding subregion was enabled for watching"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Substatwa(pub u32);
@@ -7878,7 +14260,7 @@ pub mod nfct {
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0150usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -7985,7 +14367,7 @@ pub mod nfct {
         ) -> crate::common::Reg<regs::Nfcid13rdLast, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0598usize) as _) }
         }
-        #[doc = "Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is enabled."]
+        #[doc = "Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is activated."]
         #[inline(always)]
         pub const fn autocolresconfig(
             self,
@@ -8062,7 +14444,7 @@ pub mod nfct {
         }
     }
     pub mod regs {
-        #[doc = "Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is enabled."]
+        #[doc = "Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is activated."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Autocolresconfig(pub u32);
@@ -8217,167 +14599,167 @@ pub mod nfct {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for READY event"]
+            #[doc = "Enable or disable interrupt for event READY"]
             #[inline(always)]
             pub const fn ready(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for READY event"]
+            #[doc = "Enable or disable interrupt for event READY"]
             #[inline(always)]
             pub fn set_ready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable interrupt for FIELDDETECTED event"]
+            #[doc = "Enable or disable interrupt for event FIELDDETECTED"]
             #[inline(always)]
             pub const fn fielddetected(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for FIELDDETECTED event"]
+            #[doc = "Enable or disable interrupt for event FIELDDETECTED"]
             #[inline(always)]
             pub fn set_fielddetected(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for FIELDLOST event"]
+            #[doc = "Enable or disable interrupt for event FIELDLOST"]
             #[inline(always)]
             pub const fn fieldlost(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for FIELDLOST event"]
+            #[doc = "Enable or disable interrupt for event FIELDLOST"]
             #[inline(always)]
             pub fn set_fieldlost(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable interrupt for TXFRAMESTART event"]
+            #[doc = "Enable or disable interrupt for event TXFRAMESTART"]
             #[inline(always)]
             pub const fn txframestart(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXFRAMESTART event"]
+            #[doc = "Enable or disable interrupt for event TXFRAMESTART"]
             #[inline(always)]
             pub fn set_txframestart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Enable or disable interrupt for TXFRAMEEND event"]
+            #[doc = "Enable or disable interrupt for event TXFRAMEEND"]
             #[inline(always)]
             pub const fn txframeend(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXFRAMEEND event"]
+            #[doc = "Enable or disable interrupt for event TXFRAMEEND"]
             #[inline(always)]
             pub fn set_txframeend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Enable or disable interrupt for RXFRAMESTART event"]
+            #[doc = "Enable or disable interrupt for event RXFRAMESTART"]
             #[inline(always)]
             pub const fn rxframestart(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXFRAMESTART event"]
+            #[doc = "Enable or disable interrupt for event RXFRAMESTART"]
             #[inline(always)]
             pub fn set_rxframestart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Enable or disable interrupt for RXFRAMEEND event"]
+            #[doc = "Enable or disable interrupt for event RXFRAMEEND"]
             #[inline(always)]
             pub const fn rxframeend(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXFRAMEEND event"]
+            #[doc = "Enable or disable interrupt for event RXFRAMEEND"]
             #[inline(always)]
             pub fn set_rxframeend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Enable or disable interrupt for RXERROR event"]
+            #[doc = "Enable or disable interrupt for event RXERROR"]
             #[inline(always)]
             pub const fn rxerror(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXERROR event"]
+            #[doc = "Enable or disable interrupt for event RXERROR"]
             #[inline(always)]
             pub fn set_rxerror(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
-            #[doc = "Enable or disable interrupt for ENDRX event"]
+            #[doc = "Enable or disable interrupt for event ENDRX"]
             #[inline(always)]
             pub const fn endrx(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDRX event"]
+            #[doc = "Enable or disable interrupt for event ENDRX"]
             #[inline(always)]
             pub fn set_endrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
-            #[doc = "Enable or disable interrupt for ENDTX event"]
+            #[doc = "Enable or disable interrupt for event ENDTX"]
             #[inline(always)]
             pub const fn endtx(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDTX event"]
+            #[doc = "Enable or disable interrupt for event ENDTX"]
             #[inline(always)]
             pub fn set_endtx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
             }
-            #[doc = "Enable or disable interrupt for AUTOCOLRESSTARTED event"]
+            #[doc = "Enable or disable interrupt for event AUTOCOLRESSTARTED"]
             #[inline(always)]
             pub const fn autocolresstarted(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for AUTOCOLRESSTARTED event"]
+            #[doc = "Enable or disable interrupt for event AUTOCOLRESSTARTED"]
             #[inline(always)]
             pub fn set_autocolresstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
-            #[doc = "Enable or disable interrupt for COLLISION event"]
+            #[doc = "Enable or disable interrupt for event COLLISION"]
             #[inline(always)]
             pub const fn collision(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for COLLISION event"]
+            #[doc = "Enable or disable interrupt for event COLLISION"]
             #[inline(always)]
             pub fn set_collision(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Enable or disable interrupt for SELECTED event"]
+            #[doc = "Enable or disable interrupt for event SELECTED"]
             #[inline(always)]
             pub const fn selected(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for SELECTED event"]
+            #[doc = "Enable or disable interrupt for event SELECTED"]
             #[inline(always)]
             pub fn set_selected(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
@@ -8839,40 +15221,40 @@ pub mod nfct {
                 Sensres(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between FIELDDETECTED event and ACTIVATE task"]
+            #[doc = "Shortcut between event FIELDDETECTED and task ACTIVATE"]
             #[inline(always)]
             pub const fn fielddetected_activate(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between FIELDDETECTED event and ACTIVATE task"]
+            #[doc = "Shortcut between event FIELDDETECTED and task ACTIVATE"]
             #[inline(always)]
             pub fn set_fielddetected_activate(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between FIELDLOST event and SENSE task"]
+            #[doc = "Shortcut between event FIELDLOST and task SENSE"]
             #[inline(always)]
             pub const fn fieldlost_sense(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between FIELDLOST event and SENSE task"]
+            #[doc = "Shortcut between event FIELDLOST and task SENSE"]
             #[inline(always)]
             pub fn set_fieldlost_sense(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Shortcut between TXFRAMEEND event and ENABLERXDATA task"]
+            #[doc = "Shortcut between event TXFRAMEEND and task ENABLERXDATA"]
             #[inline(always)]
             pub const fn txframeend_enablerxdata(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between TXFRAMEEND event and ENABLERXDATA task"]
+            #[doc = "Shortcut between event TXFRAMEEND and task ENABLERXDATA"]
             #[inline(always)]
             pub fn set_txframeend_enablerxdata(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
@@ -9296,32 +15678,22 @@ pub mod nvmc {
         }
         #[doc = "Register for erasing a page in code area"]
         #[inline(always)]
-        pub const fn erasepage(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
-        }
-        #[doc = "Deprecated register - Register for erasing a page in code area. Equivalent to ERASEPAGE."]
-        #[inline(always)]
-        pub const fn erasepcr1(self) -> crate::common::Reg<u32, crate::common::RW> {
+        pub const fn erasepage(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
         }
         #[doc = "Register for erasing all non-volatile user memory"]
         #[inline(always)]
-        pub const fn eraseall(self) -> crate::common::Reg<regs::Eraseall, crate::common::RW> {
+        pub const fn eraseall(self) -> crate::common::Reg<regs::Eraseall, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
-        }
-        #[doc = "Deprecated register - Register for erasing a page in code area. Equivalent to ERASEPAGE."]
-        #[inline(always)]
-        pub const fn erasepcr0(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
         }
         #[doc = "Register for erasing user information configuration registers"]
         #[inline(always)]
-        pub const fn eraseuicr(self) -> crate::common::Reg<regs::Eraseuicr, crate::common::RW> {
+        pub const fn eraseuicr(self) -> crate::common::Reg<regs::Eraseuicr, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
         }
         #[doc = "Register for partial erase of a page in code area"]
         #[inline(always)]
-        pub const fn erasepagepartial(self) -> crate::common::Reg<u32, crate::common::RW> {
+        pub const fn erasepagepartial(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
         }
         #[doc = "Register for partial erase configuration"]
@@ -9331,17 +15703,17 @@ pub mod nvmc {
         ) -> crate::common::Reg<regs::Erasepagepartialcfg, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize) as _) }
         }
-        #[doc = "I-code cache configuration register."]
+        #[doc = "I-code cache configuration register"]
         #[inline(always)]
         pub const fn icachecnf(self) -> crate::common::Reg<regs::Icachecnf, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize) as _) }
         }
-        #[doc = "I-code cache hit counter."]
+        #[doc = "I-code cache hit counter"]
         #[inline(always)]
         pub const fn ihit(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0548usize) as _) }
         }
-        #[doc = "I-code cache miss counter."]
+        #[doc = "I-code cache miss counter"]
         #[inline(always)]
         pub const fn imiss(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x054cusize) as _) }
@@ -9376,13 +15748,13 @@ pub mod nvmc {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Eraseall(pub u32);
         impl Eraseall {
-            #[doc = "Erase all non-volatile memory including UICR registers. Note that the erase must be enabled using CONFIG.WEN before the non-volatile memory can be erased."]
+            #[doc = "Erase all non-volatile memory including UICR registers. The erase must be enabled using CONFIG.WEN before the non-volatile memory can be erased."]
             #[inline(always)]
             pub const fn eraseall(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Erase all non-volatile memory including UICR registers. Note that the erase must be enabled using CONFIG.WEN before the non-volatile memory can be erased."]
+            #[doc = "Erase all non-volatile memory including UICR registers. The erase must be enabled using CONFIG.WEN before the non-volatile memory can be erased."]
             #[inline(always)]
             pub fn set_eraseall(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -9422,13 +15794,13 @@ pub mod nvmc {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Eraseuicr(pub u32);
         impl Eraseuicr {
-            #[doc = "Register starting erase of all user information configuration registers. Note that the erase must be enabled using CONFIG.WEN before the UICR can be erased."]
+            #[doc = "Register starting erase of all user information configuration registers. The erase must be enabled using CONFIG.WEN before the UICR can be erased."]
             #[inline(always)]
             pub const fn eraseuicr(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Register starting erase of all user information configuration registers. Note that the erase must be enabled using CONFIG.WEN before the UICR can be erased."]
+            #[doc = "Register starting erase of all user information configuration registers. The erase must be enabled using CONFIG.WEN before the UICR can be erased."]
             #[inline(always)]
             pub fn set_eraseuicr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -9440,7 +15812,7 @@ pub mod nvmc {
                 Eraseuicr(0)
             }
         }
-        #[doc = "I-code cache configuration register."]
+        #[doc = "I-code cache configuration register"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Icachecnf(pub u32);
@@ -9784,35 +16156,35 @@ pub mod pdm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for END event"]
+            #[doc = "Enable or disable interrupt for event END"]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for END event"]
+            #[doc = "Enable or disable interrupt for event END"]
             #[inline(always)]
             pub fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -9863,13 +16235,13 @@ pub mod pdm {
             pub fn set_operation(&mut self, val: super::vals::Operation) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
-            #[doc = "Defines on which PDM_CLK edge Left (or mono) is sampled"]
+            #[doc = "Defines on which PDM_CLK edge left (or mono) is sampled"]
             #[inline(always)]
             pub const fn edge(&self) -> super::vals::Edge {
                 let val = (self.0 >> 1usize) & 0x01;
                 super::vals::Edge::from_bits(val as u8)
             }
-            #[doc = "Defines on which PDM_CLK edge Left (or mono) is sampled"]
+            #[doc = "Defines on which PDM_CLK edge left (or mono) is sampled"]
             #[inline(always)]
             pub fn set_edge(&mut self, val: super::vals::Edge) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
@@ -9886,13 +16258,13 @@ pub mod pdm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Pdmclkctrl(pub u32);
         impl Pdmclkctrl {
-            #[doc = "PDM_CLK frequency"]
+            #[doc = "PDM_CLK frequency configuration"]
             #[inline(always)]
             pub const fn freq(&self) -> super::vals::Freq {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
                 super::vals::Freq::from_bits(val as u32)
             }
-            #[doc = "PDM_CLK frequency"]
+            #[doc = "PDM_CLK frequency configuration"]
             #[inline(always)]
             pub fn set_freq(&mut self, val: super::vals::Freq) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
@@ -10001,11 +16373,11 @@ pub mod pdm {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Gain(pub u8);
         impl Gain {
-            #[doc = "-20dB gain adjustment (minimum)"]
+            #[doc = "-20 dB gain adjustment (minimum)"]
             pub const MIN_GAIN: Self = Self(0x0);
-            #[doc = "0dB gain adjustment"]
+            #[doc = "0 dB gain adjustment"]
             pub const DEFAULT_GAIN: Self = Self(0x28);
-            #[doc = "+20dB gain adjustment (maximum)"]
+            #[doc = "+20 dB gain adjustment (maximum)"]
             pub const MAX_GAIN: Self = Self(0x50);
         }
         impl Gain {
@@ -10031,9 +16403,9 @@ pub mod pdm {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Operation {
-            #[doc = "Sample and store one pair (Left + Right) of 16bit samples per RAM word R=\\[31:16\\]; L=\\[15:0\\]"]
+            #[doc = "Sample and store one pair (left + right) of 16-bit samples per RAM word R=\\[31:16\\]; L=\\[15:0\\]"]
             STEREO = 0x0,
-            #[doc = "Sample and store two successive Left samples (16 bit each) per RAM word L1=\\[31:16\\]; L0=\\[15:0\\]"]
+            #[doc = "Sample and store two successive left samples (16 bits each) per RAM word L1=\\[31:16\\]; L0=\\[15:0\\]"]
             MONO = 0x01,
         }
         impl Operation {
@@ -10107,12 +16479,12 @@ pub mod power {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Enable constant latency mode"]
+        #[doc = "Enable Constant Latency mode"]
         #[inline(always)]
         pub const fn tasks_constlat(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x78usize) as _) }
         }
-        #[doc = "Enable low power mode (variable latency)"]
+        #[doc = "Enable Low-power mode (variable latency)"]
         #[inline(always)]
         pub const fn tasks_lowpwr(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x7cusize) as _) }
@@ -10194,12 +16566,12 @@ pub mod power {
         pub const fn gpregret2(self) -> crate::common::Reg<regs::Gpregret2, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
         }
-        #[doc = "Enable DC/DC converter for REG1 stage."]
+        #[doc = "Enable DC/DC converter for REG1 stage"]
         #[inline(always)]
         pub const fn dcdcen(self) -> crate::common::Reg<regs::Dcdcen, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0578usize) as _) }
         }
-        #[doc = "Enable DC/DC converter for REG0 stage."]
+        #[doc = "Enable DC/DC converter for REG0 stage"]
         #[inline(always)]
         pub const fn dcdcen0(self) -> crate::common::Reg<regs::Dcdcen0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0580usize) as _) }
@@ -10234,24 +16606,24 @@ pub mod power {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: RAMn power control register"]
+        #[doc = "Description cluster: RAMn power control register"]
         #[inline(always)]
         pub const fn power(self) -> crate::common::Reg<regs::Power, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: RAMn power control set register"]
+        #[doc = "Description cluster: RAMn power control set register"]
         #[inline(always)]
         pub const fn powerset(self) -> crate::common::Reg<regs::Power, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: RAMn power control clear register"]
+        #[doc = "Description cluster: RAMn power control clear register"]
         #[inline(always)]
         pub const fn powerclr(self) -> crate::common::Reg<regs::Power, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
     }
     pub mod regs {
-        #[doc = "Enable DC/DC converter for REG1 stage."]
+        #[doc = "Enable DC/DC converter for REG1 stage"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Dcdcen(pub u32);
@@ -10274,7 +16646,7 @@ pub mod power {
                 Dcdcen(0)
             }
         }
-        #[doc = "Enable DC/DC converter for REG0 stage."]
+        #[doc = "Enable DC/DC converter for REG0 stage"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Dcdcen0(pub u32);
@@ -10348,68 +16720,68 @@ pub mod power {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for POFWARN event"]
+            #[doc = "Write '1' to disable interrupt for event POFWARN"]
             #[inline(always)]
             pub const fn pofwarn(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for POFWARN event"]
+            #[doc = "Write '1' to disable interrupt for event POFWARN"]
             #[inline(always)]
             pub fn set_pofwarn(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Write '1' to disable interrupt for SLEEPENTER event"]
+            #[doc = "Write '1' to disable interrupt for event SLEEPENTER"]
             #[inline(always)]
             pub const fn sleepenter(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for SLEEPENTER event"]
+            #[doc = "Write '1' to disable interrupt for event SLEEPENTER"]
             #[inline(always)]
             pub fn set_sleepenter(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Write '1' to disable interrupt for SLEEPEXIT event"]
+            #[doc = "Write '1' to disable interrupt for event SLEEPEXIT"]
             #[inline(always)]
             pub const fn sleepexit(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for SLEEPEXIT event"]
+            #[doc = "Write '1' to disable interrupt for event SLEEPEXIT"]
             #[inline(always)]
             pub fn set_sleepexit(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Write '1' to disable interrupt for USBDETECTED event"]
+            #[doc = "Write '1' to disable interrupt for event USBDETECTED"]
             #[inline(always)]
             pub const fn usbdetected(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for USBDETECTED event"]
+            #[doc = "Write '1' to disable interrupt for event USBDETECTED"]
             #[inline(always)]
             pub fn set_usbdetected(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Write '1' to disable interrupt for USBREMOVED event"]
+            #[doc = "Write '1' to disable interrupt for event USBREMOVED"]
             #[inline(always)]
             pub const fn usbremoved(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for USBREMOVED event"]
+            #[doc = "Write '1' to disable interrupt for event USBREMOVED"]
             #[inline(always)]
             pub fn set_usbremoved(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
-            #[doc = "Write '1' to disable interrupt for USBPWRRDY event"]
+            #[doc = "Write '1' to disable interrupt for event USBPWRRDY"]
             #[inline(always)]
             pub const fn usbpwrrdy(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for USBPWRRDY event"]
+            #[doc = "Write '1' to disable interrupt for event USBPWRRDY"]
             #[inline(always)]
             pub fn set_usbpwrrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
@@ -10489,7 +16861,7 @@ pub mod power {
                 Pofcon(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: RAMn power control register"]
+        #[doc = "Description cluster: RAMn power control register"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Power(pub u32);
@@ -10918,12 +17290,12 @@ pub mod ppi {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Channel n event end-point"]
+        #[doc = "Description cluster: Channel n event endpoint"]
         #[inline(always)]
         pub const fn eep(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Channel n task end-point"]
+        #[doc = "Description cluster: Channel n task endpoint"]
         #[inline(always)]
         pub const fn tep(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -10945,7 +17317,7 @@ pub mod ppi {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Channel n task end-point"]
+        #[doc = "Description cluster: Channel n task endpoint"]
         #[inline(always)]
         pub const fn tep(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
@@ -10994,7 +17366,7 @@ pub mod ppi {
             assert!(n < 20usize);
             unsafe { Ch::from_ptr(self.ptr.add(0x0510usize + n * 8usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Channel group n"]
+        #[doc = "Description collection: Channel group n"]
         #[inline(always)]
         pub const fn chg(self, n: usize) -> crate::common::Reg<regs::Chg, crate::common::RW> {
             assert!(n < 6usize);
@@ -11023,12 +17395,12 @@ pub mod ppi {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Enable channel group n"]
+        #[doc = "Description cluster: Enable channel group n"]
         #[inline(always)]
         pub const fn en(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Disable channel group n"]
+        #[doc = "Description cluster: Disable channel group n"]
         #[inline(always)]
         pub const fn dis(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -11062,7 +17434,7 @@ pub mod ppi {
                 Chen(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: Channel group n"]
+        #[doc = "Description collection: Channel group n"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Chg(pub u32);
@@ -11108,7 +17480,7 @@ pub mod pwm {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description collection\\[n\\]: Output pin select for PWM channel n"]
+        #[doc = "Description collection: Output pin select for PWM channel n"]
         #[inline(always)]
         pub const fn out(
             self,
@@ -11139,7 +17511,7 @@ pub mod pwm {
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence at the rate defined in SEQ\\[n\\]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running."]
+        #[doc = "Description collection: Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence at the rate defined in SEQ\\[n\\]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running."]
         #[inline(always)]
         pub const fn tasks_seqstart(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 2usize);
@@ -11155,7 +17527,7 @@ pub mod pwm {
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: First PWM period started on sequence n"]
+        #[doc = "Description collection: First PWM period started on sequence n"]
         #[inline(always)]
         pub const fn events_seqstarted(
             self,
@@ -11164,7 +17536,7 @@ pub mod pwm {
             assert!(n < 2usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Emitted at end of every sequence n, when last value from RAM has been applied to wave counter"]
+        #[doc = "Description collection: Emitted at end of every sequence n, when last value from RAM has been applied to wave counter"]
         #[inline(always)]
         pub const fn events_seqend(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 2usize);
@@ -11180,7 +17552,7 @@ pub mod pwm {
         pub const fn events_loopsdone(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x011cusize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -11258,29 +17630,29 @@ pub mod pwm {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Beginning address in RAM of this sequence"]
+        #[doc = "Description cluster: Beginning address in RAM of this sequence"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Number of values (duty cycles) in this sequence"]
+        #[doc = "Description cluster: Number of values (duty cycles) in this sequence"]
         #[inline(always)]
         pub const fn cnt(self) -> crate::common::Reg<regs::Cnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Number of additional PWM periods between samples loaded into compare register"]
+        #[doc = "Description cluster: Number of additional PWM periods between samples loaded into compare register"]
         #[inline(always)]
         pub const fn refresh(self) -> crate::common::Reg<regs::Refresh, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Time added after the sequence"]
+        #[doc = "Description cluster: Time added after the sequence"]
         #[inline(always)]
         pub const fn enddelay(self) -> crate::common::Reg<regs::Enddelay, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
         }
     }
     pub mod regs {
-        #[doc = "Description cluster\\[n\\]: Number of values (duty cycles) in this sequence"]
+        #[doc = "Description cluster: Number of values (duty cycles) in this sequence"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Cnt(pub u32);
@@ -11384,7 +17756,7 @@ pub mod pwm {
                 Enable(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Time added after the sequence"]
+        #[doc = "Description cluster: Time added after the sequence"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Enddelay(pub u32);
@@ -11413,79 +17785,79 @@ pub mod pwm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for SEQSTARTED\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQSTARTED\\[0\\]"]
             #[inline(always)]
             pub const fn seqstarted0(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for SEQSTARTED\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQSTARTED\\[0\\]"]
             #[inline(always)]
             pub fn set_seqstarted0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable interrupt for SEQSTARTED\\[1\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQSTARTED\\[1\\]"]
             #[inline(always)]
             pub const fn seqstarted1(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for SEQSTARTED\\[1\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQSTARTED\\[1\\]"]
             #[inline(always)]
             pub fn set_seqstarted1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Enable or disable interrupt for SEQEND\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQEND\\[0\\]"]
             #[inline(always)]
             pub const fn seqend0(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for SEQEND\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQEND\\[0\\]"]
             #[inline(always)]
             pub fn set_seqend0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Enable or disable interrupt for SEQEND\\[1\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQEND\\[1\\]"]
             #[inline(always)]
             pub const fn seqend1(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for SEQEND\\[1\\] event"]
+            #[doc = "Enable or disable interrupt for event SEQEND\\[1\\]"]
             #[inline(always)]
             pub fn set_seqend1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Enable or disable interrupt for PWMPERIODEND event"]
+            #[doc = "Enable or disable interrupt for event PWMPERIODEND"]
             #[inline(always)]
             pub const fn pwmperiodend(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for PWMPERIODEND event"]
+            #[doc = "Enable or disable interrupt for event PWMPERIODEND"]
             #[inline(always)]
             pub fn set_pwmperiodend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Enable or disable interrupt for LOOPSDONE event"]
+            #[doc = "Enable or disable interrupt for event LOOPSDONE"]
             #[inline(always)]
             pub const fn loopsdone(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for LOOPSDONE event"]
+            #[doc = "Enable or disable interrupt for event LOOPSDONE"]
             #[inline(always)]
             pub fn set_loopsdone(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
@@ -11567,7 +17939,7 @@ pub mod pwm {
                 Prescaler(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Number of additional PWM periods between samples loaded into compare register"]
+        #[doc = "Description cluster: Number of additional PWM periods between samples loaded into compare register"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Refresh(pub u32);
@@ -11591,62 +17963,62 @@ pub mod pwm {
                 Refresh(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between SEQEND\\[0\\] event and STOP task"]
+            #[doc = "Shortcut between event SEQEND\\[0\\] and task STOP"]
             #[inline(always)]
             pub const fn seqend0_stop(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between SEQEND\\[0\\] event and STOP task"]
+            #[doc = "Shortcut between event SEQEND\\[0\\] and task STOP"]
             #[inline(always)]
             pub fn set_seqend0_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between SEQEND\\[1\\] event and STOP task"]
+            #[doc = "Shortcut between event SEQEND\\[1\\] and task STOP"]
             #[inline(always)]
             pub const fn seqend1_stop(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between SEQEND\\[1\\] event and STOP task"]
+            #[doc = "Shortcut between event SEQEND\\[1\\] and task STOP"]
             #[inline(always)]
             pub fn set_seqend1_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Shortcut between LOOPSDONE event and SEQSTART\\[0\\] task"]
+            #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[0\\]"]
             #[inline(always)]
             pub const fn loopsdone_seqstart0(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LOOPSDONE event and SEQSTART\\[0\\] task"]
+            #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[0\\]"]
             #[inline(always)]
             pub fn set_loopsdone_seqstart0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Shortcut between LOOPSDONE event and SEQSTART\\[1\\] task"]
+            #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[1\\]"]
             #[inline(always)]
             pub const fn loopsdone_seqstart1(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LOOPSDONE event and SEQSTART\\[1\\] task"]
+            #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[1\\]"]
             #[inline(always)]
             pub fn set_loopsdone_seqstart1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Shortcut between LOOPSDONE event and STOP task"]
+            #[doc = "Shortcut between event LOOPSDONE and task STOP"]
             #[inline(always)]
             pub const fn loopsdone_stop(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LOOPSDONE event and STOP task"]
+            #[doc = "Shortcut between event LOOPSDONE and task STOP"]
             #[inline(always)]
             pub fn set_loopsdone_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -11978,7 +18350,7 @@ pub mod qdec {
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -12152,57 +18524,57 @@ pub mod qdec {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for SAMPLERDY event"]
+            #[doc = "Write '1' to disable interrupt for event SAMPLERDY"]
             #[inline(always)]
             pub const fn samplerdy(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for SAMPLERDY event"]
+            #[doc = "Write '1' to disable interrupt for event SAMPLERDY"]
             #[inline(always)]
             pub fn set_samplerdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for REPORTRDY event"]
+            #[doc = "Write '1' to disable interrupt for event REPORTRDY"]
             #[inline(always)]
             pub const fn reportrdy(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for REPORTRDY event"]
+            #[doc = "Write '1' to disable interrupt for event REPORTRDY"]
             #[inline(always)]
             pub fn set_reportrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for ACCOF event"]
+            #[doc = "Write '1' to disable interrupt for event ACCOF"]
             #[inline(always)]
             pub const fn accof(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ACCOF event"]
+            #[doc = "Write '1' to disable interrupt for event ACCOF"]
             #[inline(always)]
             pub fn set_accof(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Write '1' to disable interrupt for DBLRDY event"]
+            #[doc = "Write '1' to disable interrupt for event DBLRDY"]
             #[inline(always)]
             pub const fn dblrdy(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for DBLRDY event"]
+            #[doc = "Write '1' to disable interrupt for event DBLRDY"]
             #[inline(always)]
             pub fn set_dblrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Write '1' to disable interrupt for STOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for STOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -12265,13 +18637,13 @@ pub mod qdec {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Reportper(pub u32);
         impl Reportper {
-            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated"]
+            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated."]
             #[inline(always)]
             pub const fn reportper(&self) -> super::vals::Reportper {
                 let val = (self.0 >> 0usize) & 0x0f;
                 super::vals::Reportper::from_bits(val as u8)
             }
-            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated"]
+            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated."]
             #[inline(always)]
             pub fn set_reportper(&mut self, val: super::vals::Reportper) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
@@ -12306,84 +18678,84 @@ pub mod qdec {
                 Sampleper(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between REPORTRDY event and READCLRACC task"]
+            #[doc = "Shortcut between event REPORTRDY and task READCLRACC"]
             #[inline(always)]
             pub const fn reportrdy_readclracc(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between REPORTRDY event and READCLRACC task"]
+            #[doc = "Shortcut between event REPORTRDY and task READCLRACC"]
             #[inline(always)]
             pub fn set_reportrdy_readclracc(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between SAMPLERDY event and STOP task"]
+            #[doc = "Shortcut between event SAMPLERDY and task STOP"]
             #[inline(always)]
             pub const fn samplerdy_stop(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between SAMPLERDY event and STOP task"]
+            #[doc = "Shortcut between event SAMPLERDY and task STOP"]
             #[inline(always)]
             pub fn set_samplerdy_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Shortcut between REPORTRDY event and RDCLRACC task"]
+            #[doc = "Shortcut between event REPORTRDY and task RDCLRACC"]
             #[inline(always)]
             pub const fn reportrdy_rdclracc(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between REPORTRDY event and RDCLRACC task"]
+            #[doc = "Shortcut between event REPORTRDY and task RDCLRACC"]
             #[inline(always)]
             pub fn set_reportrdy_rdclracc(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Shortcut between REPORTRDY event and STOP task"]
+            #[doc = "Shortcut between event REPORTRDY and task STOP"]
             #[inline(always)]
             pub const fn reportrdy_stop(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between REPORTRDY event and STOP task"]
+            #[doc = "Shortcut between event REPORTRDY and task STOP"]
             #[inline(always)]
             pub fn set_reportrdy_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Shortcut between DBLRDY event and RDCLRDBL task"]
+            #[doc = "Shortcut between event DBLRDY and task RDCLRDBL"]
             #[inline(always)]
             pub const fn dblrdy_rdclrdbl(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between DBLRDY event and RDCLRDBL task"]
+            #[doc = "Shortcut between event DBLRDY and task RDCLRDBL"]
             #[inline(always)]
             pub fn set_dblrdy_rdclrdbl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Shortcut between DBLRDY event and STOP task"]
+            #[doc = "Shortcut between event DBLRDY and task STOP"]
             #[inline(always)]
             pub const fn dblrdy_stop(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between DBLRDY event and STOP task"]
+            #[doc = "Shortcut between event DBLRDY and task STOP"]
             #[inline(always)]
             pub fn set_dblrdy_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Shortcut between SAMPLERDY event and READCLRACC task"]
+            #[doc = "Shortcut between event SAMPLERDY and task READCLRACC"]
             #[inline(always)]
             pub const fn samplerdy_readclracc(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between SAMPLERDY event and READCLRACC task"]
+            #[doc = "Shortcut between event SAMPLERDY and task READCLRACC"]
             #[inline(always)]
             pub fn set_samplerdy_readclracc(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
@@ -12430,23 +18802,23 @@ pub mod qdec {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Reportper {
-            #[doc = "10 samples / report"]
+            #[doc = "10 samples/report"]
             _10SMPL = 0x0,
-            #[doc = "40 samples / report"]
+            #[doc = "40 samples/report"]
             _40SMPL = 0x01,
-            #[doc = "80 samples / report"]
+            #[doc = "80 samples/report"]
             _80SMPL = 0x02,
-            #[doc = "120 samples / report"]
+            #[doc = "120 samples/report"]
             _120SMPL = 0x03,
-            #[doc = "160 samples / report"]
+            #[doc = "160 samples/report"]
             _160SMPL = 0x04,
-            #[doc = "200 samples / report"]
+            #[doc = "200 samples/report"]
             _200SMPL = 0x05,
-            #[doc = "240 samples / report"]
+            #[doc = "240 samples/report"]
             _240SMPL = 0x06,
-            #[doc = "280 samples / report"]
+            #[doc = "280 samples/report"]
             _280SMPL = 0x07,
-            #[doc = "1 sample / report"]
+            #[doc = "1 sample/report"]
             _1SMPL = 0x08,
             _RESERVED_9 = 0x09,
             _RESERVED_a = 0x0a,
@@ -13311,13 +19683,13 @@ pub mod qspi {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for READY event"]
+            #[doc = "Enable or disable interrupt for event READY"]
             #[inline(always)]
             pub const fn ready(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for READY event"]
+            #[doc = "Enable or disable interrupt for event READY"]
             #[inline(always)]
             pub fn set_ready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -13360,14 +19732,14 @@ pub mod qspi {
             #[doc = "Read transfer length in number of bytes. The length must be a multiple of 4 bytes."]
             #[inline(always)]
             pub const fn cnt(&self) -> u32 {
-                let val = (self.0 >> 0usize) & 0x001f_ffff;
+                let val = (self.0 >> 0usize) & 0x0003_ffff;
                 val as u32
             }
             #[doc = "Read transfer length in number of bytes. The length must be a multiple of 4 bytes."]
             #[inline(always)]
             pub fn set_cnt(&mut self, val: u32) {
                 self.0 =
-                    (self.0 & !(0x001f_ffff << 0usize)) | (((val as u32) & 0x001f_ffff) << 0usize);
+                    (self.0 & !(0x0003_ffff << 0usize)) | (((val as u32) & 0x0003_ffff) << 0usize);
             }
         }
         impl Default for ReadCnt {
@@ -13429,14 +19801,14 @@ pub mod qspi {
             #[doc = "Write transfer length in number of bytes. The length must be a multiple of 4 bytes."]
             #[inline(always)]
             pub const fn cnt(&self) -> u32 {
-                let val = (self.0 >> 0usize) & 0x001f_ffff;
+                let val = (self.0 >> 0usize) & 0x0003_ffff;
                 val as u32
             }
             #[doc = "Write transfer length in number of bytes. The length must be a multiple of 4 bytes."]
             #[inline(always)]
             pub fn set_cnt(&mut self, val: u32) {
                 self.0 =
-                    (self.0 & !(0x001f_ffff << 0usize)) | (((val as u32) & 0x001f_ffff) << 0usize);
+                    (self.0 & !(0x0003_ffff << 0usize)) | (((val as u32) & 0x0003_ffff) << 0usize);
             }
         }
         impl Default for WriteCnt {
@@ -13921,12 +20293,17 @@ pub mod radio {
         pub const fn events_mhrmatch(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x015cusize) as _) }
         }
-        #[doc = "Generated in Ble_LR125Kbit, Ble_LR500Kbit and BleIeee802154_250Kbit modes when last bit is sent on air."]
+        #[doc = "Preamble indicator."]
+        #[inline(always)]
+        pub const fn events_sync(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0168usize) as _) }
+        }
+        #[doc = "Generated in Ble_LR125Kbit, Ble_LR500Kbit and Ieee802154_250Kbit modes when last bit is sent on air."]
         #[inline(always)]
         pub const fn events_phyend(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x016cusize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -14066,13 +20443,13 @@ pub mod radio {
         pub const fn bcc(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0560usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Device address base segment n"]
+        #[doc = "Description collection: Device address base segment n"]
         #[inline(always)]
         pub const fn dab(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 8usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0600usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Device address prefix n"]
+        #[doc = "Description collection: Device address prefix n"]
         #[inline(always)]
         pub const fn dap(self, n: usize) -> crate::common::Reg<regs::Dap, crate::common::RW> {
             assert!(n < 8usize);
@@ -14497,7 +20874,7 @@ pub mod radio {
                 Dai(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: Device address prefix n"]
+        #[doc = "Description collection: Device address prefix n"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Dap(pub u32);
@@ -14629,244 +21006,255 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for READY event"]
+            #[doc = "Write '1' to disable interrupt for event READY"]
             #[inline(always)]
             pub const fn ready(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for READY event"]
+            #[doc = "Write '1' to disable interrupt for event READY"]
             #[inline(always)]
             pub fn set_ready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for ADDRESS event"]
+            #[doc = "Write '1' to disable interrupt for event ADDRESS"]
             #[inline(always)]
             pub const fn address(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ADDRESS event"]
+            #[doc = "Write '1' to disable interrupt for event ADDRESS"]
             #[inline(always)]
             pub fn set_address(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for PAYLOAD event"]
+            #[doc = "Write '1' to disable interrupt for event PAYLOAD"]
             #[inline(always)]
             pub const fn payload(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for PAYLOAD event"]
+            #[doc = "Write '1' to disable interrupt for event PAYLOAD"]
             #[inline(always)]
             pub fn set_payload(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Write '1' to disable interrupt for DISABLED event"]
+            #[doc = "Write '1' to disable interrupt for event DISABLED"]
             #[inline(always)]
             pub const fn disabled(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for DISABLED event"]
+            #[doc = "Write '1' to disable interrupt for event DISABLED"]
             #[inline(always)]
             pub fn set_disabled(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Write '1' to disable interrupt for DEVMATCH event"]
+            #[doc = "Write '1' to disable interrupt for event DEVMATCH"]
             #[inline(always)]
             pub const fn devmatch(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for DEVMATCH event"]
+            #[doc = "Write '1' to disable interrupt for event DEVMATCH"]
             #[inline(always)]
             pub fn set_devmatch(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Write '1' to disable interrupt for DEVMISS event"]
+            #[doc = "Write '1' to disable interrupt for event DEVMISS"]
             #[inline(always)]
             pub const fn devmiss(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for DEVMISS event"]
+            #[doc = "Write '1' to disable interrupt for event DEVMISS"]
             #[inline(always)]
             pub fn set_devmiss(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Write '1' to disable interrupt for RSSIEND event"]
+            #[doc = "Write '1' to disable interrupt for event RSSIEND"]
             #[inline(always)]
             pub const fn rssiend(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for RSSIEND event"]
+            #[doc = "Write '1' to disable interrupt for event RSSIEND"]
             #[inline(always)]
             pub fn set_rssiend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Write '1' to disable interrupt for BCMATCH event"]
+            #[doc = "Write '1' to disable interrupt for event BCMATCH"]
             #[inline(always)]
             pub const fn bcmatch(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for BCMATCH event"]
+            #[doc = "Write '1' to disable interrupt for event BCMATCH"]
             #[inline(always)]
             pub fn set_bcmatch(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
-            #[doc = "Write '1' to disable interrupt for CRCOK event"]
+            #[doc = "Write '1' to disable interrupt for event CRCOK"]
             #[inline(always)]
             pub const fn crcok(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CRCOK event"]
+            #[doc = "Write '1' to disable interrupt for event CRCOK"]
             #[inline(always)]
             pub fn set_crcok(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
             }
-            #[doc = "Write '1' to disable interrupt for CRCERROR event"]
+            #[doc = "Write '1' to disable interrupt for event CRCERROR"]
             #[inline(always)]
             pub const fn crcerror(&self) -> bool {
                 let val = (self.0 >> 13usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CRCERROR event"]
+            #[doc = "Write '1' to disable interrupt for event CRCERROR"]
             #[inline(always)]
             pub fn set_crcerror(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
             }
-            #[doc = "Write '1' to disable interrupt for FRAMESTART event"]
+            #[doc = "Write '1' to disable interrupt for event FRAMESTART"]
             #[inline(always)]
             pub const fn framestart(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for FRAMESTART event"]
+            #[doc = "Write '1' to disable interrupt for event FRAMESTART"]
             #[inline(always)]
             pub fn set_framestart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
-            #[doc = "Write '1' to disable interrupt for EDEND event"]
+            #[doc = "Write '1' to disable interrupt for event EDEND"]
             #[inline(always)]
             pub const fn edend(&self) -> bool {
                 let val = (self.0 >> 15usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for EDEND event"]
+            #[doc = "Write '1' to disable interrupt for event EDEND"]
             #[inline(always)]
             pub fn set_edend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
             }
-            #[doc = "Write '1' to disable interrupt for EDSTOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event EDSTOPPED"]
             #[inline(always)]
             pub const fn edstopped(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for EDSTOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event EDSTOPPED"]
             #[inline(always)]
             pub fn set_edstopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
-            #[doc = "Write '1' to disable interrupt for CCAIDLE event"]
+            #[doc = "Write '1' to disable interrupt for event CCAIDLE"]
             #[inline(always)]
             pub const fn ccaidle(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CCAIDLE event"]
+            #[doc = "Write '1' to disable interrupt for event CCAIDLE"]
             #[inline(always)]
             pub fn set_ccaidle(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Write '1' to disable interrupt for CCABUSY event"]
+            #[doc = "Write '1' to disable interrupt for event CCABUSY"]
             #[inline(always)]
             pub const fn ccabusy(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CCABUSY event"]
+            #[doc = "Write '1' to disable interrupt for event CCABUSY"]
             #[inline(always)]
             pub fn set_ccabusy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Write '1' to disable interrupt for CCASTOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event CCASTOPPED"]
             #[inline(always)]
             pub const fn ccastopped(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CCASTOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event CCASTOPPED"]
             #[inline(always)]
             pub fn set_ccastopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
-            #[doc = "Write '1' to disable interrupt for RATEBOOST event"]
+            #[doc = "Write '1' to disable interrupt for event RATEBOOST"]
             #[inline(always)]
             pub const fn rateboost(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for RATEBOOST event"]
+            #[doc = "Write '1' to disable interrupt for event RATEBOOST"]
             #[inline(always)]
             pub fn set_rateboost(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
-            #[doc = "Write '1' to disable interrupt for TXREADY event"]
+            #[doc = "Write '1' to disable interrupt for event TXREADY"]
             #[inline(always)]
             pub const fn txready(&self) -> bool {
                 let val = (self.0 >> 21usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for TXREADY event"]
+            #[doc = "Write '1' to disable interrupt for event TXREADY"]
             #[inline(always)]
             pub fn set_txready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
             }
-            #[doc = "Write '1' to disable interrupt for RXREADY event"]
+            #[doc = "Write '1' to disable interrupt for event RXREADY"]
             #[inline(always)]
             pub const fn rxready(&self) -> bool {
                 let val = (self.0 >> 22usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for RXREADY event"]
+            #[doc = "Write '1' to disable interrupt for event RXREADY"]
             #[inline(always)]
             pub fn set_rxready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
             }
-            #[doc = "Write '1' to disable interrupt for MHRMATCH event"]
+            #[doc = "Write '1' to disable interrupt for event MHRMATCH"]
             #[inline(always)]
             pub const fn mhrmatch(&self) -> bool {
                 let val = (self.0 >> 23usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for MHRMATCH event"]
+            #[doc = "Write '1' to disable interrupt for event MHRMATCH"]
             #[inline(always)]
             pub fn set_mhrmatch(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
             }
-            #[doc = "Write '1' to disable interrupt for PHYEND event"]
+            #[doc = "Write '1' to disable interrupt for event SYNC"]
+            #[inline(always)]
+            pub const fn sync(&self) -> bool {
+                let val = (self.0 >> 26usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Write '1' to disable interrupt for event SYNC"]
+            #[inline(always)]
+            pub fn set_sync(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
+            }
+            #[doc = "Write '1' to disable interrupt for event PHYEND"]
             #[inline(always)]
             pub const fn phyend(&self) -> bool {
                 let val = (self.0 >> 27usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for PHYEND event"]
+            #[doc = "Write '1' to disable interrupt for event PHYEND"]
             #[inline(always)]
             pub fn set_phyend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
@@ -15468,216 +21856,216 @@ pub mod radio {
                 Sfd(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between READY event and START task"]
+            #[doc = "Shortcut between event READY and task START"]
             #[inline(always)]
             pub const fn ready_start(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between READY event and START task"]
+            #[doc = "Shortcut between event READY and task START"]
             #[inline(always)]
             pub fn set_ready_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between END event and DISABLE task"]
+            #[doc = "Shortcut between event END and task DISABLE"]
             #[inline(always)]
             pub const fn end_disable(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between END event and DISABLE task"]
+            #[doc = "Shortcut between event END and task DISABLE"]
             #[inline(always)]
             pub fn set_end_disable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Shortcut between DISABLED event and TXEN task"]
+            #[doc = "Shortcut between event DISABLED and task TXEN"]
             #[inline(always)]
             pub const fn disabled_txen(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between DISABLED event and TXEN task"]
+            #[doc = "Shortcut between event DISABLED and task TXEN"]
             #[inline(always)]
             pub fn set_disabled_txen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Shortcut between DISABLED event and RXEN task"]
+            #[doc = "Shortcut between event DISABLED and task RXEN"]
             #[inline(always)]
             pub const fn disabled_rxen(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between DISABLED event and RXEN task"]
+            #[doc = "Shortcut between event DISABLED and task RXEN"]
             #[inline(always)]
             pub fn set_disabled_rxen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Shortcut between ADDRESS event and RSSISTART task"]
+            #[doc = "Shortcut between event ADDRESS and task RSSISTART"]
             #[inline(always)]
             pub const fn address_rssistart(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between ADDRESS event and RSSISTART task"]
+            #[doc = "Shortcut between event ADDRESS and task RSSISTART"]
             #[inline(always)]
             pub fn set_address_rssistart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Shortcut between END event and START task"]
+            #[doc = "Shortcut between event END and task START"]
             #[inline(always)]
             pub const fn end_start(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between END event and START task"]
+            #[doc = "Shortcut between event END and task START"]
             #[inline(always)]
             pub fn set_end_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Shortcut between ADDRESS event and BCSTART task"]
+            #[doc = "Shortcut between event ADDRESS and task BCSTART"]
             #[inline(always)]
             pub const fn address_bcstart(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between ADDRESS event and BCSTART task"]
+            #[doc = "Shortcut between event ADDRESS and task BCSTART"]
             #[inline(always)]
             pub fn set_address_bcstart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Shortcut between DISABLED event and RSSISTOP task"]
+            #[doc = "Shortcut between event DISABLED and task RSSISTOP"]
             #[inline(always)]
             pub const fn disabled_rssistop(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between DISABLED event and RSSISTOP task"]
+            #[doc = "Shortcut between event DISABLED and task RSSISTOP"]
             #[inline(always)]
             pub fn set_disabled_rssistop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
-            #[doc = "Shortcut between RXREADY event and CCASTART task"]
+            #[doc = "Shortcut between event RXREADY and task CCASTART"]
             #[inline(always)]
             pub const fn rxready_ccastart(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between RXREADY event and CCASTART task"]
+            #[doc = "Shortcut between event RXREADY and task CCASTART"]
             #[inline(always)]
             pub fn set_rxready_ccastart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
-            #[doc = "Shortcut between CCAIDLE event and TXEN task"]
+            #[doc = "Shortcut between event CCAIDLE and task TXEN"]
             #[inline(always)]
             pub const fn ccaidle_txen(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between CCAIDLE event and TXEN task"]
+            #[doc = "Shortcut between event CCAIDLE and task TXEN"]
             #[inline(always)]
             pub fn set_ccaidle_txen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
             }
-            #[doc = "Shortcut between CCABUSY event and DISABLE task"]
+            #[doc = "Shortcut between event CCABUSY and task DISABLE"]
             #[inline(always)]
             pub const fn ccabusy_disable(&self) -> bool {
                 let val = (self.0 >> 13usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between CCABUSY event and DISABLE task"]
+            #[doc = "Shortcut between event CCABUSY and task DISABLE"]
             #[inline(always)]
             pub fn set_ccabusy_disable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
             }
-            #[doc = "Shortcut between FRAMESTART event and BCSTART task"]
+            #[doc = "Shortcut between event FRAMESTART and task BCSTART"]
             #[inline(always)]
             pub const fn framestart_bcstart(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between FRAMESTART event and BCSTART task"]
+            #[doc = "Shortcut between event FRAMESTART and task BCSTART"]
             #[inline(always)]
             pub fn set_framestart_bcstart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
-            #[doc = "Shortcut between READY event and EDSTART task"]
+            #[doc = "Shortcut between event READY and task EDSTART"]
             #[inline(always)]
             pub const fn ready_edstart(&self) -> bool {
                 let val = (self.0 >> 15usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between READY event and EDSTART task"]
+            #[doc = "Shortcut between event READY and task EDSTART"]
             #[inline(always)]
             pub fn set_ready_edstart(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
             }
-            #[doc = "Shortcut between EDEND event and DISABLE task"]
+            #[doc = "Shortcut between event EDEND and task DISABLE"]
             #[inline(always)]
             pub const fn edend_disable(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between EDEND event and DISABLE task"]
+            #[doc = "Shortcut between event EDEND and task DISABLE"]
             #[inline(always)]
             pub fn set_edend_disable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
-            #[doc = "Shortcut between CCAIDLE event and STOP task"]
+            #[doc = "Shortcut between event CCAIDLE and task STOP"]
             #[inline(always)]
             pub const fn ccaidle_stop(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between CCAIDLE event and STOP task"]
+            #[doc = "Shortcut between event CCAIDLE and task STOP"]
             #[inline(always)]
             pub fn set_ccaidle_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Shortcut between TXREADY event and START task"]
+            #[doc = "Shortcut between event TXREADY and task START"]
             #[inline(always)]
             pub const fn txready_start(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between TXREADY event and START task"]
+            #[doc = "Shortcut between event TXREADY and task START"]
             #[inline(always)]
             pub fn set_txready_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Shortcut between RXREADY event and START task"]
+            #[doc = "Shortcut between event RXREADY and task START"]
             #[inline(always)]
             pub const fn rxready_start(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between RXREADY event and START task"]
+            #[doc = "Shortcut between event RXREADY and task START"]
             #[inline(always)]
             pub fn set_rxready_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
-            #[doc = "Shortcut between PHYEND event and DISABLE task"]
+            #[doc = "Shortcut between event PHYEND and task DISABLE"]
             #[inline(always)]
             pub const fn phyend_disable(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between PHYEND event and DISABLE task"]
+            #[doc = "Shortcut between event PHYEND and task DISABLE"]
             #[inline(always)]
             pub fn set_phyend_disable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
-            #[doc = "Shortcut between PHYEND event and START task"]
+            #[doc = "Shortcut between event PHYEND and task START"]
             #[inline(always)]
             pub const fn phyend_start(&self) -> bool {
                 let val = (self.0 >> 21usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between PHYEND event and START task"]
+            #[doc = "Shortcut between event PHYEND and task START"]
             #[inline(always)]
             pub fn set_phyend_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
@@ -16157,9 +22545,9 @@ pub mod radio {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Ru {
-            #[doc = "Default ramp-up time (tRXEN), compatible with firmware written for nRF51"]
+            #[doc = "Default ramp-up time (tRXEN and tTXEN), compatible with firmware written for nRF51"]
             DEFAULT = 0x0,
-            #[doc = "Fast ramp-up (tRXEN,FAST), see electrical specification for more information"]
+            #[doc = "Fast ramp-up (tRXEN,FAST and tTXEN,FAST), see electrical specification for more information"]
             FAST = 0x01,
         }
         impl Ru {
@@ -16536,7 +22924,8 @@ pub mod radio {
             _RESERVED_df = 0xdf,
             _RESERVED_e0 = 0xe0,
             _RESERVED_e1 = 0xe1,
-            _RESERVED_e2 = 0xe2,
+            #[doc = "Deprecated enumerator - -40 dBm"]
+            NEG30_DBM = 0xe2,
             _RESERVED_e3 = 0xe3,
             _RESERVED_e4 = 0xe4,
             _RESERVED_e5 = 0xe5,
@@ -16570,8 +22959,7 @@ pub mod radio {
             NEG4_DBM = 0xfc,
             _RESERVED_fd = 0xfd,
             _RESERVED_fe = 0xfe,
-            #[doc = "Deprecated enumerator - -40 dBm"]
-            NEG30_DBM = 0xff,
+            _RESERVED_ff = 0xff,
         }
         impl Txpower {
             #[inline(always)]
@@ -16629,7 +23017,7 @@ pub mod rng {
         pub const fn events_valrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -16684,13 +23072,13 @@ pub mod rng {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for VALRDY event"]
+            #[doc = "Write '1' to disable interrupt for event VALRDY"]
             #[inline(always)]
             pub const fn valrdy(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for VALRDY event"]
+            #[doc = "Write '1' to disable interrupt for event VALRDY"]
             #[inline(always)]
             pub fn set_valrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -16702,18 +23090,18 @@ pub mod rng {
                 Inten(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between VALRDY event and STOP task"]
+            #[doc = "Shortcut between event VALRDY and task STOP"]
             #[inline(always)]
             pub const fn valrdy_stop(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between VALRDY event and STOP task"]
+            #[doc = "Shortcut between event VALRDY and task STOP"]
             #[inline(always)]
             pub fn set_valrdy_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -16797,7 +23185,7 @@ pub mod rtc {
         pub const fn events_ovrflw(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Compare event on CC\\[n\\] match"]
+        #[doc = "Description collection: Compare event on CC\\[n\\] match"]
         #[inline(always)]
         pub const fn events_compare(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 4usize);
@@ -16833,12 +23221,12 @@ pub mod rtc {
         pub const fn counter(self) -> crate::common::Reg<regs::Counter, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
         }
-        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)).Must be written when RTC is stopped"]
+        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)). Must be written when RTC is stopped."]
         #[inline(always)]
         pub const fn prescaler(self) -> crate::common::Reg<regs::Prescaler, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Compare register n"]
+        #[doc = "Description collection: Compare register n"]
         #[inline(always)]
         pub const fn cc(self, n: usize) -> crate::common::Reg<regs::Cc, crate::common::RW> {
             assert!(n < 4usize);
@@ -16846,7 +23234,7 @@ pub mod rtc {
         }
     }
     pub mod regs {
-        #[doc = "Description collection\\[n\\]: Compare register n"]
+        #[doc = "Description collection: Compare register n"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Cc(pub u32);
@@ -16899,68 +23287,68 @@ pub mod rtc {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Evten(pub u32);
         impl Evten {
-            #[doc = "Enable or disable event routing for TICK event"]
+            #[doc = "Enable or disable event routing for event TICK"]
             #[inline(always)]
             pub const fn tick(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable event routing for TICK event"]
+            #[doc = "Enable or disable event routing for event TICK"]
             #[inline(always)]
             pub fn set_tick(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable event routing for OVRFLW event"]
+            #[doc = "Enable or disable event routing for event OVRFLW"]
             #[inline(always)]
             pub const fn ovrflw(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable event routing for OVRFLW event"]
+            #[doc = "Enable or disable event routing for event OVRFLW"]
             #[inline(always)]
             pub fn set_ovrflw(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[0\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub const fn compare0(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[0\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub fn set_compare0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[1\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub const fn compare1(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[1\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub fn set_compare1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[2\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub const fn compare2(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[2\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub fn set_compare2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[3\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub const fn compare3(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable event routing for COMPARE\\[3\\] event"]
+            #[doc = "Enable or disable event routing for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub fn set_compare3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
@@ -16977,68 +23365,68 @@ pub mod rtc {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Evtenclr(pub u32);
         impl Evtenclr {
-            #[doc = "Write '1' to disable event routing for TICK event"]
+            #[doc = "Write '1' to disable event routing for event TICK"]
             #[inline(always)]
             pub const fn tick(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable event routing for TICK event"]
+            #[doc = "Write '1' to disable event routing for event TICK"]
             #[inline(always)]
             pub fn set_tick(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable event routing for OVRFLW event"]
+            #[doc = "Write '1' to disable event routing for event OVRFLW"]
             #[inline(always)]
             pub const fn ovrflw(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable event routing for OVRFLW event"]
+            #[doc = "Write '1' to disable event routing for event OVRFLW"]
             #[inline(always)]
             pub fn set_ovrflw(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub const fn compare0(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub fn set_compare0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[1\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub const fn compare1(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[1\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub fn set_compare1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[2\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub const fn compare2(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[2\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub fn set_compare2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[3\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub const fn compare3(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable event routing for COMPARE\\[3\\] event"]
+            #[doc = "Write '1' to disable event routing for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub fn set_compare3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
@@ -17055,68 +23443,68 @@ pub mod rtc {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Evtenset(pub u32);
         impl Evtenset {
-            #[doc = "Write '1' to enable event routing for TICK event"]
+            #[doc = "Write '1' to enable event routing for event TICK"]
             #[inline(always)]
             pub const fn tick(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to enable event routing for TICK event"]
+            #[doc = "Write '1' to enable event routing for event TICK"]
             #[inline(always)]
             pub fn set_tick(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to enable event routing for OVRFLW event"]
+            #[doc = "Write '1' to enable event routing for event OVRFLW"]
             #[inline(always)]
             pub const fn ovrflw(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to enable event routing for OVRFLW event"]
+            #[doc = "Write '1' to enable event routing for event OVRFLW"]
             #[inline(always)]
             pub fn set_ovrflw(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub const fn compare0(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub fn set_compare0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[1\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub const fn compare1(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[1\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub fn set_compare1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[2\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub const fn compare2(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[2\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub fn set_compare2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[3\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub const fn compare3(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to enable event routing for COMPARE\\[3\\] event"]
+            #[doc = "Write '1' to enable event routing for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub fn set_compare3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
@@ -17133,68 +23521,68 @@ pub mod rtc {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for TICK event"]
+            #[doc = "Write '1' to disable interrupt for event TICK"]
             #[inline(always)]
             pub const fn tick(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for TICK event"]
+            #[doc = "Write '1' to disable interrupt for event TICK"]
             #[inline(always)]
             pub fn set_tick(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for OVRFLW event"]
+            #[doc = "Write '1' to disable interrupt for event OVRFLW"]
             #[inline(always)]
             pub const fn ovrflw(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for OVRFLW event"]
+            #[doc = "Write '1' to disable interrupt for event OVRFLW"]
             #[inline(always)]
             pub fn set_ovrflw(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub const fn compare0(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub fn set_compare0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[1\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub const fn compare1(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[1\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[1\\]"]
             #[inline(always)]
             pub fn set_compare1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[2\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub const fn compare2(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[2\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[2\\]"]
             #[inline(always)]
             pub fn set_compare2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[3\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub const fn compare3(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[3\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[3\\]"]
             #[inline(always)]
             pub fn set_compare3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
@@ -17206,7 +23594,7 @@ pub mod rtc {
                 Inten(0)
             }
         }
-        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)).Must be written when RTC is stopped"]
+        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)). Must be written when RTC is stopped."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Prescaler(pub u32);
@@ -17248,28 +23636,28 @@ pub mod saadc {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Input positive pin selection for CH\\[n\\]"]
+        #[doc = "Description cluster: Input positive pin selection for CH\\[n\\]"]
         #[inline(always)]
         pub const fn pselp(self) -> crate::common::Reg<regs::Pselp, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Input negative pin selection for CH\\[n\\]"]
+        #[doc = "Description cluster: Input negative pin selection for CH\\[n\\]"]
         #[inline(always)]
         pub const fn pseln(self) -> crate::common::Reg<regs::Pseln, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Input configuration for CH\\[n\\]"]
+        #[doc = "Description cluster: Input configuration for CH\\[n\\]"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: High/low limits for event monitoring of a channel"]
+        #[doc = "Description cluster: High/low limits for event monitoring of a channel"]
         #[inline(always)]
         pub const fn limit(self) -> crate::common::Reg<regs::Limit, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
         }
     }
-    #[doc = "Unspecified"]
+    #[doc = "Peripheral events."]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct EventsCh {
         ptr: *mut u8,
@@ -17285,12 +23673,12 @@ pub mod saadc {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Last result is equal or above CH\\[n\\].LIMIT.HIGH"]
+        #[doc = "Description cluster: Last result is equal or above CH\\[n\\].LIMIT.HIGH"]
         #[inline(always)]
         pub const fn limith(self) -> crate::common::Reg<regs::Limith, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Last result is equal or below CH\\[n\\].LIMIT.LOW"]
+        #[doc = "Description cluster: Last result is equal or below CH\\[n\\].LIMIT.LOW"]
         #[inline(always)]
         pub const fn limitl(self) -> crate::common::Reg<regs::Limitl, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -17394,7 +23782,7 @@ pub mod saadc {
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0114usize) as _) }
         }
-        #[doc = "Unspecified"]
+        #[doc = "Peripheral events."]
         #[inline(always)]
         pub const fn events_ch(self, n: usize) -> EventsCh {
             assert!(n < 8usize);
@@ -17476,7 +23864,7 @@ pub mod saadc {
                 Amount(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Input configuration for CH\\[n\\]"]
+        #[doc = "Description cluster: Input configuration for CH\\[n\\]"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Config(pub u32);
@@ -17596,244 +23984,244 @@ pub mod saadc {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable interrupt for END event"]
+            #[doc = "Enable or disable interrupt for event END"]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for END event"]
+            #[doc = "Enable or disable interrupt for event END"]
             #[inline(always)]
             pub fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for DONE event"]
+            #[doc = "Enable or disable interrupt for event DONE"]
             #[inline(always)]
             pub const fn done(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for DONE event"]
+            #[doc = "Enable or disable interrupt for event DONE"]
             #[inline(always)]
             pub fn set_done(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable interrupt for RESULTDONE event"]
+            #[doc = "Enable or disable interrupt for event RESULTDONE"]
             #[inline(always)]
             pub const fn resultdone(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RESULTDONE event"]
+            #[doc = "Enable or disable interrupt for event RESULTDONE"]
             #[inline(always)]
             pub fn set_resultdone(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Enable or disable interrupt for CALIBRATEDONE event"]
+            #[doc = "Enable or disable interrupt for event CALIBRATEDONE"]
             #[inline(always)]
             pub const fn calibratedone(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CALIBRATEDONE event"]
+            #[doc = "Enable or disable interrupt for event CALIBRATEDONE"]
             #[inline(always)]
             pub fn set_calibratedone(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[0\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH0LIMITH"]
             #[inline(always)]
             pub const fn ch0limith(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[0\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH0LIMITH"]
             #[inline(always)]
             pub fn set_ch0limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[0\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH0LIMITL"]
             #[inline(always)]
             pub const fn ch0limitl(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[0\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH0LIMITL"]
             #[inline(always)]
             pub fn set_ch0limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[1\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH1LIMITH"]
             #[inline(always)]
             pub const fn ch1limith(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[1\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH1LIMITH"]
             #[inline(always)]
             pub fn set_ch1limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[1\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH1LIMITL"]
             #[inline(always)]
             pub const fn ch1limitl(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[1\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH1LIMITL"]
             #[inline(always)]
             pub fn set_ch1limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[2\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH2LIMITH"]
             #[inline(always)]
             pub const fn ch2limith(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[2\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH2LIMITH"]
             #[inline(always)]
             pub fn set_ch2limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[2\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH2LIMITL"]
             #[inline(always)]
             pub const fn ch2limitl(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[2\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH2LIMITL"]
             #[inline(always)]
             pub fn set_ch2limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[3\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH3LIMITH"]
             #[inline(always)]
             pub const fn ch3limith(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[3\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH3LIMITH"]
             #[inline(always)]
             pub fn set_ch3limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[3\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH3LIMITL"]
             #[inline(always)]
             pub const fn ch3limitl(&self) -> bool {
                 let val = (self.0 >> 13usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[3\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH3LIMITL"]
             #[inline(always)]
             pub fn set_ch3limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[4\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH4LIMITH"]
             #[inline(always)]
             pub const fn ch4limith(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[4\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH4LIMITH"]
             #[inline(always)]
             pub fn set_ch4limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[4\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH4LIMITL"]
             #[inline(always)]
             pub const fn ch4limitl(&self) -> bool {
                 let val = (self.0 >> 15usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[4\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH4LIMITL"]
             #[inline(always)]
             pub fn set_ch4limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[5\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH5LIMITH"]
             #[inline(always)]
             pub const fn ch5limith(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[5\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH5LIMITH"]
             #[inline(always)]
             pub fn set_ch5limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[5\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH5LIMITL"]
             #[inline(always)]
             pub const fn ch5limitl(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[5\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH5LIMITL"]
             #[inline(always)]
             pub fn set_ch5limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[6\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH6LIMITH"]
             #[inline(always)]
             pub const fn ch6limith(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[6\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH6LIMITH"]
             #[inline(always)]
             pub fn set_ch6limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[6\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH6LIMITL"]
             #[inline(always)]
             pub const fn ch6limitl(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[6\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH6LIMITL"]
             #[inline(always)]
             pub fn set_ch6limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[7\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH7LIMITH"]
             #[inline(always)]
             pub const fn ch7limith(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[7\\].LIMITH event"]
+            #[doc = "Enable or disable interrupt for event CH7LIMITH"]
             #[inline(always)]
             pub fn set_ch7limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
-            #[doc = "Enable or disable interrupt for CH\\[7\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH7LIMITL"]
             #[inline(always)]
             pub const fn ch7limitl(&self) -> bool {
                 let val = (self.0 >> 21usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CH\\[7\\].LIMITL event"]
+            #[doc = "Enable or disable interrupt for event CH7LIMITL"]
             #[inline(always)]
             pub fn set_ch7limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
@@ -17845,7 +24233,7 @@ pub mod saadc {
                 Inten(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: High/low limits for event monitoring of a channel"]
+        #[doc = "Description cluster: High/low limits for event monitoring of a channel"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Limit(pub u32);
@@ -17879,16 +24267,18 @@ pub mod saadc {
                 Limit(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Last result is equal or above CH\\[n\\].LIMIT.HIGH"]
+        #[doc = "Description cluster: Last result is equal or above CH\\[n\\].LIMIT.HIGH"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Limith(pub u32);
         impl Limith {
+            #[doc = "Last result is equal or above CH\\[n\\].LIMIT.HIGH"]
             #[inline(always)]
             pub const fn limith(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
+            #[doc = "Last result is equal or above CH\\[n\\].LIMIT.HIGH"]
             #[inline(always)]
             pub fn set_limith(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -17900,16 +24290,18 @@ pub mod saadc {
                 Limith(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Last result is equal or below CH\\[n\\].LIMIT.LOW"]
+        #[doc = "Description cluster: Last result is equal or below CH\\[n\\].LIMIT.LOW"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Limitl(pub u32);
         impl Limitl {
+            #[doc = "Last result is equal or below CH\\[n\\].LIMIT.LOW"]
             #[inline(always)]
             pub const fn limitl(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
+            #[doc = "Last result is equal or below CH\\[n\\].LIMIT.LOW"]
             #[inline(always)]
             pub fn set_limitl(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -17967,7 +24359,7 @@ pub mod saadc {
                 Oversample(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Input negative pin selection for CH\\[n\\]"]
+        #[doc = "Description cluster: Input negative pin selection for CH\\[n\\]"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Pseln(pub u32);
@@ -17990,7 +24382,7 @@ pub mod saadc {
                 Pseln(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Input positive pin selection for CH\\[n\\]"]
+        #[doc = "Description cluster: Input positive pin selection for CH\\[n\\]"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Pselp(pub u32);
@@ -18686,7 +25078,7 @@ pub mod spi {
         pub const fn psel(self) -> Psel {
             unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
         }
-        #[doc = "RXD register"]
+        #[doc = "RXD register. Register is cleared on read and the buffer pointer will be modified if read."]
         #[inline(always)]
         pub const fn rxd(self) -> crate::common::Reg<regs::Rxd, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
@@ -18805,13 +25197,13 @@ pub mod spi {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for READY event"]
+            #[doc = "Write '1' to disable interrupt for event READY"]
             #[inline(always)]
             pub const fn ready(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for READY event"]
+            #[doc = "Write '1' to disable interrupt for event READY"]
             #[inline(always)]
             pub fn set_ready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -18823,7 +25215,7 @@ pub mod spi {
                 Inten(0)
             }
         }
-        #[doc = "RXD register"]
+        #[doc = "RXD register. Register is cleared on read and the buffer pointer will be modified if read."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rxd(pub u32);
@@ -18851,13 +25243,13 @@ pub mod spi {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Txd(pub u32);
         impl Txd {
-            #[doc = "TX data to send. Double buffered"]
+            #[doc = "TX data to send. Double buffered."]
             #[inline(always)]
             pub const fn txd(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "TX data to send. Double buffered"]
+            #[doc = "TX data to send. Double buffered."]
             #[inline(always)]
             pub fn set_txd(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -19068,7 +25460,7 @@ pub mod spim {
         pub const fn rxdelay(self) -> crate::common::Reg<regs::Rxdelay, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions"]
+        #[doc = "Minimum duration between edge of CSN and edge of SCK at the start and the end of a transaction, and minimum duration CSN will stay high between transactions if END-START shortcut is used"]
         #[inline(always)]
         pub const fn csndur(self) -> crate::common::Reg<regs::Csndur, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -19213,7 +25605,7 @@ pub mod spim {
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x014cusize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -19228,7 +25620,7 @@ pub mod spim {
         pub const fn intenclr(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
         }
-        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register is set to STALL by hardware whenever a stall occurres and can be cleared (set to NOSTALL) by the CPU."]
+        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register are set to STALL by hardware whenever a stall occurs and can be cleared (set to NOSTALL) by the CPU."]
         #[inline(always)]
         pub const fn stallstat(self) -> crate::common::Reg<regs::Stallstat, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
@@ -19374,18 +25766,18 @@ pub mod spim {
                 Config(0)
             }
         }
-        #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions"]
+        #[doc = "Minimum duration between edge of CSN and edge of SCK at the start and the end of a transaction, and minimum duration CSN will stay high between transactions if END-START shortcut is used"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Csndur(pub u32);
         impl Csndur {
-            #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
+            #[doc = "Minimum duration between edge of CSN and edge of SCK at the start and end of a transaction. If END-START shortcut is used, minimum duration CSN will stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
             #[inline(always)]
             pub const fn csndur(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
+            #[doc = "Minimum duration between edge of CSN and edge of SCK at the start and end of a transaction. If END-START shortcut is used, minimum duration CSN will stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
             #[inline(always)]
             pub fn set_csndur(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -19495,57 +25887,57 @@ pub mod spim {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for STOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for STOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for ENDRX event"]
+            #[doc = "Write '1' to disable interrupt for event ENDRX"]
             #[inline(always)]
             pub const fn endrx(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ENDRX event"]
+            #[doc = "Write '1' to disable interrupt for event ENDRX"]
             #[inline(always)]
             pub fn set_endrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "Write '1' to disable interrupt for ENDTX event"]
+            #[doc = "Write '1' to disable interrupt for event ENDTX"]
             #[inline(always)]
             pub const fn endtx(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ENDTX event"]
+            #[doc = "Write '1' to disable interrupt for event ENDTX"]
             #[inline(always)]
             pub fn set_endtx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
-            #[doc = "Write '1' to disable interrupt for STARTED event"]
+            #[doc = "Write '1' to disable interrupt for event STARTED"]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for STARTED event"]
+            #[doc = "Write '1' to disable interrupt for event STARTED"]
             #[inline(always)]
             pub fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
@@ -19672,18 +26064,18 @@ pub mod spim {
                 Rxdelay(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between END event and START task"]
+            #[doc = "Shortcut between event END and task START"]
             #[inline(always)]
             pub const fn end_start(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between END event and START task"]
+            #[doc = "Shortcut between event END and task START"]
             #[inline(always)]
             pub fn set_end_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
@@ -19695,7 +26087,7 @@ pub mod spim {
                 Shorts(0)
             }
         }
-        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register is set to STALL by hardware whenever a stall occurres and can be cleared (set to NOSTALL) by the CPU."]
+        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register are set to STALL by hardware whenever a stall occurs and can be cleared (set to NOSTALL) by the CPU."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Stallstat(pub u32);
@@ -20146,6 +26538,11 @@ pub mod spis {
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+        }
     }
     #[doc = "SPI Slave 0"]
     #[derive(Copy, Clone, Eq, PartialEq)]
@@ -20188,7 +26585,7 @@ pub mod spis {
         pub const fn events_acquired(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0128usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -20279,6 +26676,11 @@ pub mod spis {
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+        }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -20378,35 +26780,35 @@ pub mod spis {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for END event"]
+            #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
             pub fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for ENDRX event"]
+            #[doc = "Write '1' to disable interrupt for event ENDRX"]
             #[inline(always)]
             pub const fn endrx(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ENDRX event"]
+            #[doc = "Write '1' to disable interrupt for event ENDRX"]
             #[inline(always)]
             pub fn set_endrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Write '1' to disable interrupt for ACQUIRED event"]
+            #[doc = "Write '1' to disable interrupt for event ACQUIRED"]
             #[inline(always)]
             pub const fn acquired(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ACQUIRED event"]
+            #[doc = "Write '1' to disable interrupt for event ACQUIRED"]
             #[inline(always)]
             pub fn set_acquired(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
@@ -20464,6 +26866,29 @@ pub mod spis {
                 RxdAmount(0)
             }
         }
+        #[doc = "EasyDMA list type"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RxdList(pub u32);
+        impl RxdList {
+            #[doc = "List type"]
+            #[inline(always)]
+            pub const fn list(&self) -> super::vals::RxdListList {
+                let val = (self.0 >> 0usize) & 0x03;
+                super::vals::RxdListList::from_bits(val as u8)
+            }
+            #[doc = "List type"]
+            #[inline(always)]
+            pub fn set_list(&mut self, val: super::vals::RxdListList) {
+                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
+            }
+        }
+        impl Default for RxdList {
+            #[inline(always)]
+            fn default() -> RxdList {
+                RxdList(0)
+            }
+        }
         #[doc = "Maximum number of bytes in receive buffer"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -20510,18 +26935,18 @@ pub mod spis {
                 Semstat(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between END event and ACQUIRE task"]
+            #[doc = "Shortcut between event END and task ACQUIRE"]
             #[inline(always)]
             pub const fn end_acquire(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between END event and ACQUIRE task"]
+            #[doc = "Shortcut between event END and task ACQUIRE"]
             #[inline(always)]
             pub fn set_end_acquire(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -20588,6 +27013,29 @@ pub mod spis {
             #[inline(always)]
             fn default() -> TxdAmount {
                 TxdAmount(0)
+            }
+        }
+        #[doc = "EasyDMA list type"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TxdList(pub u32);
+        impl TxdList {
+            #[doc = "List type"]
+            #[inline(always)]
+            pub const fn list(&self) -> super::vals::TxdListList {
+                let val = (self.0 >> 0usize) & 0x03;
+                super::vals::TxdListList::from_bits(val as u8)
+            }
+            #[doc = "List type"]
+            #[inline(always)]
+            pub fn set_list(&mut self, val: super::vals::TxdListList) {
+                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
+            }
+        }
+        impl Default for TxdList {
+            #[inline(always)]
+            fn default() -> TxdList {
+                TxdList(0)
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
@@ -20751,6 +27199,38 @@ pub mod spis {
         }
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum RxdListList {
+            #[doc = "Disable EasyDMA list"]
+            DISABLED = 0x0,
+            #[doc = "Use array list"]
+            ARRAY_LIST = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+        }
+        impl RxdListList {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> RxdListList {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for RxdListList {
+            #[inline(always)]
+            fn from(val: u8) -> RxdListList {
+                RxdListList::from_bits(val)
+            }
+        }
+        impl From<RxdListList> for u8 {
+            #[inline(always)]
+            fn from(val: RxdListList) -> u8 {
+                RxdListList::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Semstat {
             #[doc = "Semaphore is free"]
             FREE = 0x0,
@@ -20781,6 +27261,38 @@ pub mod spis {
             #[inline(always)]
             fn from(val: Semstat) -> u8 {
                 Semstat::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum TxdListList {
+            #[doc = "Disable EasyDMA list"]
+            DISABLED = 0x0,
+            #[doc = "Use array list"]
+            ARRAY_LIST = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+        }
+        impl TxdListList {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> TxdListList {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for TxdListList {
+            #[inline(always)]
+            fn from(val: u8) -> TxdListList {
+                TxdListList::from_bits(val)
+            }
+        }
+        impl From<TxdListList> for u8 {
+            #[inline(always)]
+            fn from(val: TxdListList) -> u8 {
+                TxdListList::to_bits(val)
             }
         }
     }
@@ -20856,105 +27368,105 @@ pub mod temp {
         pub const fn temp(self) -> crate::common::Reg<u32, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
         }
-        #[doc = "Slope of 1st piece wise linear function"]
+        #[doc = "Slope of first piecewise linear function"]
         #[inline(always)]
         pub const fn a0(self) -> crate::common::Reg<regs::A0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
         }
-        #[doc = "Slope of 2nd piece wise linear function"]
+        #[doc = "Slope of second piecewise linear function"]
         #[inline(always)]
         pub const fn a1(self) -> crate::common::Reg<regs::A1, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
         }
-        #[doc = "Slope of 3rd piece wise linear function"]
+        #[doc = "Slope of third piecewise linear function"]
         #[inline(always)]
         pub const fn a2(self) -> crate::common::Reg<regs::A2, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0528usize) as _) }
         }
-        #[doc = "Slope of 4th piece wise linear function"]
+        #[doc = "Slope of fourth piecewise linear function"]
         #[inline(always)]
         pub const fn a3(self) -> crate::common::Reg<regs::A3, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x052cusize) as _) }
         }
-        #[doc = "Slope of 5th piece wise linear function"]
+        #[doc = "Slope of fifth piecewise linear function"]
         #[inline(always)]
         pub const fn a4(self) -> crate::common::Reg<regs::A4, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0530usize) as _) }
         }
-        #[doc = "Slope of 6th piece wise linear function"]
+        #[doc = "Slope of sixth piecewise linear function"]
         #[inline(always)]
         pub const fn a5(self) -> crate::common::Reg<regs::A5, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0534usize) as _) }
         }
-        #[doc = "y-intercept of 1st piece wise linear function"]
+        #[doc = "y-intercept of first piecewise linear function"]
         #[inline(always)]
         pub const fn b0(self) -> crate::common::Reg<regs::B0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize) as _) }
         }
-        #[doc = "y-intercept of 2nd piece wise linear function"]
+        #[doc = "y-intercept of second piecewise linear function"]
         #[inline(always)]
         pub const fn b1(self) -> crate::common::Reg<regs::B1, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0544usize) as _) }
         }
-        #[doc = "y-intercept of 3rd piece wise linear function"]
+        #[doc = "y-intercept of third piecewise linear function"]
         #[inline(always)]
         pub const fn b2(self) -> crate::common::Reg<regs::B2, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0548usize) as _) }
         }
-        #[doc = "y-intercept of 4th piece wise linear function"]
+        #[doc = "y-intercept of fourth piecewise linear function"]
         #[inline(always)]
         pub const fn b3(self) -> crate::common::Reg<regs::B3, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x054cusize) as _) }
         }
-        #[doc = "y-intercept of 5th piece wise linear function"]
+        #[doc = "y-intercept of fifth piecewise linear function"]
         #[inline(always)]
         pub const fn b4(self) -> crate::common::Reg<regs::B4, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0550usize) as _) }
         }
-        #[doc = "y-intercept of 6th piece wise linear function"]
+        #[doc = "y-intercept of sixth piecewise linear function"]
         #[inline(always)]
         pub const fn b5(self) -> crate::common::Reg<regs::B5, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0554usize) as _) }
         }
-        #[doc = "End point of 1st piece wise linear function"]
+        #[doc = "End point of first piecewise linear function"]
         #[inline(always)]
         pub const fn t0(self) -> crate::common::Reg<regs::T0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0560usize) as _) }
         }
-        #[doc = "End point of 2nd piece wise linear function"]
+        #[doc = "End point of second piecewise linear function"]
         #[inline(always)]
         pub const fn t1(self) -> crate::common::Reg<regs::T1, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0564usize) as _) }
         }
-        #[doc = "End point of 3rd piece wise linear function"]
+        #[doc = "End point of third piecewise linear function"]
         #[inline(always)]
         pub const fn t2(self) -> crate::common::Reg<regs::T2, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0568usize) as _) }
         }
-        #[doc = "End point of 4th piece wise linear function"]
+        #[doc = "End point of fourth piecewise linear function"]
         #[inline(always)]
         pub const fn t3(self) -> crate::common::Reg<regs::T3, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x056cusize) as _) }
         }
-        #[doc = "End point of 5th piece wise linear function"]
+        #[doc = "End point of fifth piecewise linear function"]
         #[inline(always)]
         pub const fn t4(self) -> crate::common::Reg<regs::T4, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0570usize) as _) }
         }
     }
     pub mod regs {
-        #[doc = "Slope of 1st piece wise linear function"]
+        #[doc = "Slope of first piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A0(pub u32);
         impl A0 {
-            #[doc = "Slope of 1st piece wise linear function"]
+            #[doc = "Slope of first piecewise linear function"]
             #[inline(always)]
             pub const fn a0(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 1st piece wise linear function"]
+            #[doc = "Slope of first piecewise linear function"]
             #[inline(always)]
             pub fn set_a0(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20966,18 +27478,18 @@ pub mod temp {
                 A0(0)
             }
         }
-        #[doc = "Slope of 2nd piece wise linear function"]
+        #[doc = "Slope of second piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A1(pub u32);
         impl A1 {
-            #[doc = "Slope of 2nd piece wise linear function"]
+            #[doc = "Slope of second piecewise linear function"]
             #[inline(always)]
             pub const fn a1(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 2nd piece wise linear function"]
+            #[doc = "Slope of second piecewise linear function"]
             #[inline(always)]
             pub fn set_a1(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20989,18 +27501,18 @@ pub mod temp {
                 A1(0)
             }
         }
-        #[doc = "Slope of 3rd piece wise linear function"]
+        #[doc = "Slope of third piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A2(pub u32);
         impl A2 {
-            #[doc = "Slope of 3rd piece wise linear function"]
+            #[doc = "Slope of third piecewise linear function"]
             #[inline(always)]
             pub const fn a2(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 3rd piece wise linear function"]
+            #[doc = "Slope of third piecewise linear function"]
             #[inline(always)]
             pub fn set_a2(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -21012,18 +27524,18 @@ pub mod temp {
                 A2(0)
             }
         }
-        #[doc = "Slope of 4th piece wise linear function"]
+        #[doc = "Slope of fourth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A3(pub u32);
         impl A3 {
-            #[doc = "Slope of 4th piece wise linear function"]
+            #[doc = "Slope of fourth piecewise linear function"]
             #[inline(always)]
             pub const fn a3(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 4th piece wise linear function"]
+            #[doc = "Slope of fourth piecewise linear function"]
             #[inline(always)]
             pub fn set_a3(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -21035,18 +27547,18 @@ pub mod temp {
                 A3(0)
             }
         }
-        #[doc = "Slope of 5th piece wise linear function"]
+        #[doc = "Slope of fifth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A4(pub u32);
         impl A4 {
-            #[doc = "Slope of 5th piece wise linear function"]
+            #[doc = "Slope of fifth piecewise linear function"]
             #[inline(always)]
             pub const fn a4(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 5th piece wise linear function"]
+            #[doc = "Slope of fifth piecewise linear function"]
             #[inline(always)]
             pub fn set_a4(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -21058,18 +27570,18 @@ pub mod temp {
                 A4(0)
             }
         }
-        #[doc = "Slope of 6th piece wise linear function"]
+        #[doc = "Slope of sixth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A5(pub u32);
         impl A5 {
-            #[doc = "Slope of 6th piece wise linear function"]
+            #[doc = "Slope of sixth piecewise linear function"]
             #[inline(always)]
             pub const fn a5(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 6th piece wise linear function"]
+            #[doc = "Slope of sixth piecewise linear function"]
             #[inline(always)]
             pub fn set_a5(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -21081,18 +27593,18 @@ pub mod temp {
                 A5(0)
             }
         }
-        #[doc = "y-intercept of 1st piece wise linear function"]
+        #[doc = "y-intercept of first piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B0(pub u32);
         impl B0 {
-            #[doc = "y-intercept of 1st piece wise linear function"]
+            #[doc = "y-intercept of first piecewise linear function"]
             #[inline(always)]
             pub const fn b0(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 1st piece wise linear function"]
+            #[doc = "y-intercept of first piecewise linear function"]
             #[inline(always)]
             pub fn set_b0(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -21104,18 +27616,18 @@ pub mod temp {
                 B0(0)
             }
         }
-        #[doc = "y-intercept of 2nd piece wise linear function"]
+        #[doc = "y-intercept of second piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B1(pub u32);
         impl B1 {
-            #[doc = "y-intercept of 2nd piece wise linear function"]
+            #[doc = "y-intercept of second piecewise linear function"]
             #[inline(always)]
             pub const fn b1(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 2nd piece wise linear function"]
+            #[doc = "y-intercept of second piecewise linear function"]
             #[inline(always)]
             pub fn set_b1(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -21127,18 +27639,18 @@ pub mod temp {
                 B1(0)
             }
         }
-        #[doc = "y-intercept of 3rd piece wise linear function"]
+        #[doc = "y-intercept of third piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B2(pub u32);
         impl B2 {
-            #[doc = "y-intercept of 3rd piece wise linear function"]
+            #[doc = "y-intercept of third piecewise linear function"]
             #[inline(always)]
             pub const fn b2(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 3rd piece wise linear function"]
+            #[doc = "y-intercept of third piecewise linear function"]
             #[inline(always)]
             pub fn set_b2(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -21150,18 +27662,18 @@ pub mod temp {
                 B2(0)
             }
         }
-        #[doc = "y-intercept of 4th piece wise linear function"]
+        #[doc = "y-intercept of fourth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B3(pub u32);
         impl B3 {
-            #[doc = "y-intercept of 4th piece wise linear function"]
+            #[doc = "y-intercept of fourth piecewise linear function"]
             #[inline(always)]
             pub const fn b3(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 4th piece wise linear function"]
+            #[doc = "y-intercept of fourth piecewise linear function"]
             #[inline(always)]
             pub fn set_b3(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -21173,18 +27685,18 @@ pub mod temp {
                 B3(0)
             }
         }
-        #[doc = "y-intercept of 5th piece wise linear function"]
+        #[doc = "y-intercept of fifth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B4(pub u32);
         impl B4 {
-            #[doc = "y-intercept of 5th piece wise linear function"]
+            #[doc = "y-intercept of fifth piecewise linear function"]
             #[inline(always)]
             pub const fn b4(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 5th piece wise linear function"]
+            #[doc = "y-intercept of fifth piecewise linear function"]
             #[inline(always)]
             pub fn set_b4(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -21196,18 +27708,18 @@ pub mod temp {
                 B4(0)
             }
         }
-        #[doc = "y-intercept of 6th piece wise linear function"]
+        #[doc = "y-intercept of sixth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B5(pub u32);
         impl B5 {
-            #[doc = "y-intercept of 6th piece wise linear function"]
+            #[doc = "y-intercept of sixth piecewise linear function"]
             #[inline(always)]
             pub const fn b5(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 6th piece wise linear function"]
+            #[doc = "y-intercept of sixth piecewise linear function"]
             #[inline(always)]
             pub fn set_b5(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -21224,13 +27736,13 @@ pub mod temp {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for DATARDY event"]
+            #[doc = "Write '1' to disable interrupt for event DATARDY"]
             #[inline(always)]
             pub const fn datardy(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for DATARDY event"]
+            #[doc = "Write '1' to disable interrupt for event DATARDY"]
             #[inline(always)]
             pub fn set_datardy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -21242,18 +27754,18 @@ pub mod temp {
                 Inten(0)
             }
         }
-        #[doc = "End point of 1st piece wise linear function"]
+        #[doc = "End point of first piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T0(pub u32);
         impl T0 {
-            #[doc = "End point of 1st piece wise linear function"]
+            #[doc = "End point of first piecewise linear function"]
             #[inline(always)]
             pub const fn t0(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 1st piece wise linear function"]
+            #[doc = "End point of first piecewise linear function"]
             #[inline(always)]
             pub fn set_t0(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -21265,18 +27777,18 @@ pub mod temp {
                 T0(0)
             }
         }
-        #[doc = "End point of 2nd piece wise linear function"]
+        #[doc = "End point of second piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T1(pub u32);
         impl T1 {
-            #[doc = "End point of 2nd piece wise linear function"]
+            #[doc = "End point of second piecewise linear function"]
             #[inline(always)]
             pub const fn t1(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 2nd piece wise linear function"]
+            #[doc = "End point of second piecewise linear function"]
             #[inline(always)]
             pub fn set_t1(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -21288,18 +27800,18 @@ pub mod temp {
                 T1(0)
             }
         }
-        #[doc = "End point of 3rd piece wise linear function"]
+        #[doc = "End point of third piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T2(pub u32);
         impl T2 {
-            #[doc = "End point of 3rd piece wise linear function"]
+            #[doc = "End point of third piecewise linear function"]
             #[inline(always)]
             pub const fn t2(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 3rd piece wise linear function"]
+            #[doc = "End point of third piecewise linear function"]
             #[inline(always)]
             pub fn set_t2(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -21311,18 +27823,18 @@ pub mod temp {
                 T2(0)
             }
         }
-        #[doc = "End point of 4th piece wise linear function"]
+        #[doc = "End point of fourth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T3(pub u32);
         impl T3 {
-            #[doc = "End point of 4th piece wise linear function"]
+            #[doc = "End point of fourth piecewise linear function"]
             #[inline(always)]
             pub const fn t3(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 4th piece wise linear function"]
+            #[doc = "End point of fourth piecewise linear function"]
             #[inline(always)]
             pub fn set_t3(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -21334,18 +27846,18 @@ pub mod temp {
                 T3(0)
             }
         }
-        #[doc = "End point of 5th piece wise linear function"]
+        #[doc = "End point of fifth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T4(pub u32);
         impl T4 {
-            #[doc = "End point of 5th piece wise linear function"]
+            #[doc = "End point of fifth piecewise linear function"]
             #[inline(always)]
             pub const fn t4(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 5th piece wise linear function"]
+            #[doc = "End point of fifth piecewise linear function"]
             #[inline(always)]
             pub fn set_t4(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -21401,19 +27913,19 @@ pub mod timer {
         pub const fn tasks_shutdown(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Capture Timer value to CC\\[n\\] register"]
+        #[doc = "Description collection: Capture Timer value to CC\\[n\\] register"]
         #[inline(always)]
         pub const fn tasks_capture(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
-            assert!(n < 4usize);
+            assert!(n < 6usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x40usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Compare event on CC\\[n\\] match"]
+        #[doc = "Description collection: Compare event on CC\\[n\\] match"]
         #[inline(always)]
         pub const fn events_compare(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 4usize);
+            assert!(n < 6usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0140usize + n * 4usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -21443,308 +27955,7 @@ pub mod timer {
         pub const fn prescaler(self) -> crate::common::Reg<regs::Prescaler, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Capture/Compare register n"]
-        #[inline(always)]
-        pub const fn cc(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize + n * 4usize) as _) }
-        }
-    }
-    pub mod regs {
-        #[doc = "Configure the number of bits used by the TIMER"]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Bitmode(pub u32);
-        impl Bitmode {
-            #[doc = "Timer bit width"]
-            #[inline(always)]
-            pub const fn bitmode(&self) -> super::vals::Bitmode {
-                let val = (self.0 >> 0usize) & 0x03;
-                super::vals::Bitmode::from_bits(val as u8)
-            }
-            #[doc = "Timer bit width"]
-            #[inline(always)]
-            pub fn set_bitmode(&mut self, val: super::vals::Bitmode) {
-                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
-            }
-        }
-        impl Default for Bitmode {
-            #[inline(always)]
-            fn default() -> Bitmode {
-                Bitmode(0)
-            }
-        }
-        #[doc = "Disable interrupt"]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Inten(pub u32);
-        impl Inten {
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[0\\] event"]
-            #[inline(always)]
-            pub const fn compare(&self, n: usize) -> bool {
-                assert!(n < 4usize);
-                let offs = 16usize + n * 1usize;
-                let val = (self.0 >> offs) & 0x01;
-                val != 0
-            }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[0\\] event"]
-            #[inline(always)]
-            pub fn set_compare(&mut self, n: usize, val: bool) {
-                assert!(n < 4usize);
-                let offs = 16usize + n * 1usize;
-                self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-            }
-        }
-        impl Default for Inten {
-            #[inline(always)]
-            fn default() -> Inten {
-                Inten(0)
-            }
-        }
-        #[doc = "Timer mode selection"]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Mode(pub u32);
-        impl Mode {
-            #[doc = "Timer mode"]
-            #[inline(always)]
-            pub const fn mode(&self) -> super::vals::Mode {
-                let val = (self.0 >> 0usize) & 0x03;
-                super::vals::Mode::from_bits(val as u8)
-            }
-            #[doc = "Timer mode"]
-            #[inline(always)]
-            pub fn set_mode(&mut self, val: super::vals::Mode) {
-                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
-            }
-        }
-        impl Default for Mode {
-            #[inline(always)]
-            fn default() -> Mode {
-                Mode(0)
-            }
-        }
-        #[doc = "Timer prescaler register"]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Prescaler(pub u32);
-        impl Prescaler {
-            #[doc = "Prescaler value"]
-            #[inline(always)]
-            pub const fn prescaler(&self) -> u8 {
-                let val = (self.0 >> 0usize) & 0x0f;
-                val as u8
-            }
-            #[doc = "Prescaler value"]
-            #[inline(always)]
-            pub fn set_prescaler(&mut self, val: u8) {
-                self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
-            }
-        }
-        impl Default for Prescaler {
-            #[inline(always)]
-            fn default() -> Prescaler {
-                Prescaler(0)
-            }
-        }
-        #[doc = "Shortcut register"]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Shorts(pub u32);
-        impl Shorts {
-            #[doc = "Shortcut between COMPARE\\[0\\] event and CLEAR task"]
-            #[inline(always)]
-            pub const fn compare_clear(&self, n: usize) -> bool {
-                assert!(n < 4usize);
-                let offs = 0usize + n * 1usize;
-                let val = (self.0 >> offs) & 0x01;
-                val != 0
-            }
-            #[doc = "Shortcut between COMPARE\\[0\\] event and CLEAR task"]
-            #[inline(always)]
-            pub fn set_compare_clear(&mut self, n: usize, val: bool) {
-                assert!(n < 4usize);
-                let offs = 0usize + n * 1usize;
-                self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-            }
-            #[doc = "Shortcut between COMPARE\\[0\\] event and STOP task"]
-            #[inline(always)]
-            pub const fn compare_stop(&self, n: usize) -> bool {
-                assert!(n < 4usize);
-                let offs = 8usize + n * 1usize;
-                let val = (self.0 >> offs) & 0x01;
-                val != 0
-            }
-            #[doc = "Shortcut between COMPARE\\[0\\] event and STOP task"]
-            #[inline(always)]
-            pub fn set_compare_stop(&mut self, n: usize, val: bool) {
-                assert!(n < 4usize);
-                let offs = 8usize + n * 1usize;
-                self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
-            }
-        }
-        impl Default for Shorts {
-            #[inline(always)]
-            fn default() -> Shorts {
-                Shorts(0)
-            }
-        }
-    }
-    pub mod vals {
-        #[repr(u8)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub enum Bitmode {
-            #[doc = "16 bit timer bit width"]
-            _16BIT = 0x0,
-            #[doc = "8 bit timer bit width"]
-            _08BIT = 0x01,
-            #[doc = "24 bit timer bit width"]
-            _24BIT = 0x02,
-            #[doc = "32 bit timer bit width"]
-            _32BIT = 0x03,
-        }
-        impl Bitmode {
-            #[inline(always)]
-            pub const fn from_bits(val: u8) -> Bitmode {
-                unsafe { core::mem::transmute(val & 0x03) }
-            }
-            #[inline(always)]
-            pub const fn to_bits(self) -> u8 {
-                unsafe { core::mem::transmute(self) }
-            }
-        }
-        impl From<u8> for Bitmode {
-            #[inline(always)]
-            fn from(val: u8) -> Bitmode {
-                Bitmode::from_bits(val)
-            }
-        }
-        impl From<Bitmode> for u8 {
-            #[inline(always)]
-            fn from(val: Bitmode) -> u8 {
-                Bitmode::to_bits(val)
-            }
-        }
-        #[repr(u8)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub enum Mode {
-            #[doc = "Select Timer mode"]
-            TIMER = 0x0,
-            #[doc = "Deprecated enumerator - Select Counter mode"]
-            COUNTER = 0x01,
-            #[doc = "Select Low Power Counter mode"]
-            LOW_POWER_COUNTER = 0x02,
-            _RESERVED_3 = 0x03,
-        }
-        impl Mode {
-            #[inline(always)]
-            pub const fn from_bits(val: u8) -> Mode {
-                unsafe { core::mem::transmute(val & 0x03) }
-            }
-            #[inline(always)]
-            pub const fn to_bits(self) -> u8 {
-                unsafe { core::mem::transmute(self) }
-            }
-        }
-        impl From<u8> for Mode {
-            #[inline(always)]
-            fn from(val: u8) -> Mode {
-                Mode::from_bits(val)
-            }
-        }
-        impl From<Mode> for u8 {
-            #[inline(always)]
-            fn from(val: Mode) -> u8 {
-                Mode::to_bits(val)
-            }
-        }
-    }
-}
-pub mod timer3 {
-    #[doc = "Timer/Counter 3"]
-    #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Timer3 {
-        ptr: *mut u8,
-    }
-    unsafe impl Send for Timer3 {}
-    unsafe impl Sync for Timer3 {}
-    impl Timer3 {
-        #[inline(always)]
-        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
-            Self { ptr: ptr as _ }
-        }
-        #[inline(always)]
-        pub const fn as_ptr(&self) -> *mut () {
-            self.ptr as _
-        }
-        #[doc = "Start Timer"]
-        #[inline(always)]
-        pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
-        }
-        #[doc = "Stop Timer"]
-        #[inline(always)]
-        pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
-        }
-        #[doc = "Increment Timer (Counter mode only)"]
-        #[inline(always)]
-        pub const fn tasks_count(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
-        }
-        #[doc = "Clear time"]
-        #[inline(always)]
-        pub const fn tasks_clear(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
-        }
-        #[doc = "Deprecated register - Shut down timer"]
-        #[inline(always)]
-        pub const fn tasks_shutdown(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
-        }
-        #[doc = "Description collection\\[n\\]: Capture Timer value to CC\\[n\\] register"]
-        #[inline(always)]
-        pub const fn tasks_capture(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
-            assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x40usize + n * 4usize) as _) }
-        }
-        #[doc = "Description collection\\[n\\]: Compare event on CC\\[n\\] match"]
-        #[inline(always)]
-        pub const fn events_compare(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0140usize + n * 4usize) as _) }
-        }
-        #[doc = "Shortcut register"]
-        #[inline(always)]
-        pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
-        }
-        #[doc = "Enable interrupt"]
-        #[inline(always)]
-        pub const fn intenset(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
-        }
-        #[doc = "Disable interrupt"]
-        #[inline(always)]
-        pub const fn intenclr(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
-        }
-        #[doc = "Timer mode selection"]
-        #[inline(always)]
-        pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
-        }
-        #[doc = "Configure the number of bits used by the TIMER"]
-        #[inline(always)]
-        pub const fn bitmode(self) -> crate::common::Reg<regs::Bitmode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
-        }
-        #[doc = "Timer prescaler register"]
-        #[inline(always)]
-        pub const fn prescaler(self) -> crate::common::Reg<regs::Prescaler, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
-        }
-        #[doc = "Description collection\\[n\\]: Capture/Compare register n"]
+        #[doc = "Description collection: Capture/Compare register n"]
         #[inline(always)]
         pub const fn cc(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 6usize);
@@ -21780,7 +27991,7 @@ pub mod timer3 {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub const fn compare(&self, n: usize) -> bool {
                 assert!(n < 6usize);
@@ -21788,7 +27999,7 @@ pub mod timer3 {
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for COMPARE\\[0\\] event"]
+            #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub fn set_compare(&mut self, n: usize, val: bool) {
                 assert!(n < 6usize);
@@ -21848,12 +28059,12 @@ pub mod timer3 {
                 Prescaler(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between COMPARE\\[0\\] event and CLEAR task"]
+            #[doc = "Shortcut between event COMPARE\\[0\\] and task CLEAR"]
             #[inline(always)]
             pub const fn compare_clear(&self, n: usize) -> bool {
                 assert!(n < 6usize);
@@ -21861,14 +28072,14 @@ pub mod timer3 {
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between COMPARE\\[0\\] event and CLEAR task"]
+            #[doc = "Shortcut between event COMPARE\\[0\\] and task CLEAR"]
             #[inline(always)]
             pub fn set_compare_clear(&mut self, n: usize, val: bool) {
                 assert!(n < 6usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
-            #[doc = "Shortcut between COMPARE\\[0\\] event and STOP task"]
+            #[doc = "Shortcut between event COMPARE\\[0\\] and task STOP"]
             #[inline(always)]
             pub const fn compare_stop(&self, n: usize) -> bool {
                 assert!(n < 6usize);
@@ -21876,7 +28087,7 @@ pub mod timer3 {
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between COMPARE\\[0\\] event and STOP task"]
+            #[doc = "Shortcut between event COMPARE\\[0\\] and task STOP"]
             #[inline(always)]
             pub fn set_compare_stop(&mut self, n: usize, val: bool) {
                 assert!(n < 6usize);
@@ -22060,7 +28271,7 @@ pub mod twi {
         pub const fn events_suspended(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0148usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -22090,7 +28301,7 @@ pub mod twi {
         pub const fn psel(self) -> Psel {
             unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
         }
-        #[doc = "RXD register"]
+        #[doc = "RXD register. Register is cleared on read and the buffer pointer will be modified if read."]
         #[inline(always)]
         pub const fn rxd(self) -> crate::common::Reg<regs::Rxd, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
@@ -22232,68 +28443,68 @@ pub mod twi {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for STOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for STOPPED event"]
+            #[doc = "Write '1' to disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for RXDREADY event"]
+            #[doc = "Write '1' to disable interrupt for event RXDREADY"]
             #[inline(always)]
             pub const fn rxdready(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for RXDREADY event"]
+            #[doc = "Write '1' to disable interrupt for event RXDREADY"]
             #[inline(always)]
             pub fn set_rxdready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Write '1' to disable interrupt for TXDSENT event"]
+            #[doc = "Write '1' to disable interrupt for event TXDSENT"]
             #[inline(always)]
             pub const fn txdsent(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for TXDSENT event"]
+            #[doc = "Write '1' to disable interrupt for event TXDSENT"]
             #[inline(always)]
             pub fn set_txdsent(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Write '1' to disable interrupt for ERROR event"]
+            #[doc = "Write '1' to disable interrupt for event ERROR"]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ERROR event"]
+            #[doc = "Write '1' to disable interrupt for event ERROR"]
             #[inline(always)]
             pub fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
-            #[doc = "Write '1' to disable interrupt for BB event"]
+            #[doc = "Write '1' to disable interrupt for event BB"]
             #[inline(always)]
             pub const fn bb(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for BB event"]
+            #[doc = "Write '1' to disable interrupt for event BB"]
             #[inline(always)]
             pub fn set_bb(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
-            #[doc = "Write '1' to disable interrupt for SUSPENDED event"]
+            #[doc = "Write '1' to disable interrupt for event SUSPENDED"]
             #[inline(always)]
             pub const fn suspended(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for SUSPENDED event"]
+            #[doc = "Write '1' to disable interrupt for event SUSPENDED"]
             #[inline(always)]
             pub fn set_suspended(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
@@ -22305,7 +28516,7 @@ pub mod twi {
                 Inten(0)
             }
         }
-        #[doc = "RXD register"]
+        #[doc = "RXD register. Register is cleared on read and the buffer pointer will be modified if read."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rxd(pub u32);
@@ -22328,29 +28539,29 @@ pub mod twi {
                 Rxd(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between BB event and SUSPEND task"]
+            #[doc = "Shortcut between event BB and task SUSPEND"]
             #[inline(always)]
             pub const fn bb_suspend(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between BB event and SUSPEND task"]
+            #[doc = "Shortcut between event BB and task SUSPEND"]
             #[inline(always)]
             pub fn set_bb_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between BB event and STOP task"]
+            #[doc = "Shortcut between event BB and task STOP"]
             #[inline(always)]
             pub const fn bb_stop(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between BB event and STOP task"]
+            #[doc = "Shortcut between event BB and task STOP"]
             #[inline(always)]
             pub fn set_bb_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -22580,7 +28791,7 @@ pub mod twim {
         pub const fn events_error(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0124usize) as _) }
         }
-        #[doc = "Last byte has been sent out after the SUSPEND task has been issued, TWI traffic is now suspended."]
+        #[doc = "SUSPEND task has been issued, TWI traffic is now suspended."]
         #[inline(always)]
         pub const fn events_suspended(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0148usize) as _) }
@@ -22605,7 +28816,7 @@ pub mod twim {
         pub const fn events_lasttx(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0160usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -22819,79 +29030,79 @@ pub mod twim {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
-            #[doc = "Enable or disable interrupt for SUSPENDED event"]
+            #[doc = "Enable or disable interrupt for event SUSPENDED"]
             #[inline(always)]
             pub const fn suspended(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for SUSPENDED event"]
+            #[doc = "Enable or disable interrupt for event SUSPENDED"]
             #[inline(always)]
             pub fn set_suspended(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
-            #[doc = "Enable or disable interrupt for RXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
             pub const fn rxstarted(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
             pub fn set_rxstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
-            #[doc = "Enable or disable interrupt for TXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
             pub const fn txstarted(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
             pub fn set_txstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
-            #[doc = "Enable or disable interrupt for LASTRX event"]
+            #[doc = "Enable or disable interrupt for event LASTRX"]
             #[inline(always)]
             pub const fn lastrx(&self) -> bool {
                 let val = (self.0 >> 23usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for LASTRX event"]
+            #[doc = "Enable or disable interrupt for event LASTRX"]
             #[inline(always)]
             pub fn set_lastrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
             }
-            #[doc = "Enable or disable interrupt for LASTTX event"]
+            #[doc = "Enable or disable interrupt for event LASTTX"]
             #[inline(always)]
             pub const fn lasttx(&self) -> bool {
                 let val = (self.0 >> 24usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for LASTTX event"]
+            #[doc = "Enable or disable interrupt for event LASTTX"]
             #[inline(always)]
             pub fn set_lasttx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
@@ -22972,73 +29183,73 @@ pub mod twim {
                 RxdMaxcnt(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between LASTTX event and STARTRX task"]
+            #[doc = "Shortcut between event LASTTX and task STARTRX"]
             #[inline(always)]
             pub const fn lasttx_startrx(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LASTTX event and STARTRX task"]
+            #[doc = "Shortcut between event LASTTX and task STARTRX"]
             #[inline(always)]
             pub fn set_lasttx_startrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Shortcut between LASTTX event and SUSPEND task"]
+            #[doc = "Shortcut between event LASTTX and task SUSPEND"]
             #[inline(always)]
             pub const fn lasttx_suspend(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LASTTX event and SUSPEND task"]
+            #[doc = "Shortcut between event LASTTX and task SUSPEND"]
             #[inline(always)]
             pub fn set_lasttx_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
-            #[doc = "Shortcut between LASTTX event and STOP task"]
+            #[doc = "Shortcut between event LASTTX and task STOP"]
             #[inline(always)]
             pub const fn lasttx_stop(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LASTTX event and STOP task"]
+            #[doc = "Shortcut between event LASTTX and task STOP"]
             #[inline(always)]
             pub fn set_lasttx_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
-            #[doc = "Shortcut between LASTRX event and STARTTX task"]
+            #[doc = "Shortcut between event LASTRX and task STARTTX"]
             #[inline(always)]
             pub const fn lastrx_starttx(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LASTRX event and STARTTX task"]
+            #[doc = "Shortcut between event LASTRX and task STARTTX"]
             #[inline(always)]
             pub fn set_lastrx_starttx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
-            #[doc = "Shortcut between LASTRX event and SUSPEND task"]
+            #[doc = "Shortcut between event LASTRX and task SUSPEND"]
             #[inline(always)]
             pub const fn lastrx_suspend(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LASTRX event and SUSPEND task"]
+            #[doc = "Shortcut between event LASTRX and task SUSPEND"]
             #[inline(always)]
             pub fn set_lastrx_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
-            #[doc = "Shortcut between LASTRX event and STOP task"]
+            #[doc = "Shortcut between event LASTRX and task STOP"]
             #[inline(always)]
             pub const fn lastrx_stop(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between LASTRX event and STOP task"]
+            #[doc = "Shortcut between event LASTRX and task STOP"]
             #[inline(always)]
             pub fn set_lastrx_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
@@ -23329,6 +29540,11 @@ pub mod twis {
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+        }
     }
     #[doc = "I2C compatible Two-Wire Slave Interface with EasyDMA 0"]
     #[derive(Copy, Clone, Eq, PartialEq)]
@@ -23401,7 +29617,7 @@ pub mod twis {
         pub const fn events_read(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0168usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -23451,7 +29667,7 @@ pub mod twis {
         pub const fn txd(self) -> Txd {
             unsafe { Txd::from_ptr(self.ptr.add(0x0544usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: TWI slave address n"]
+        #[doc = "Description collection: TWI slave address n"]
         #[inline(always)]
         pub const fn address(
             self,
@@ -23502,9 +29718,14 @@ pub mod twis {
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
         }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+        }
     }
     pub mod regs {
-        #[doc = "Description collection\\[n\\]: TWI slave address n"]
+        #[doc = "Description collection: TWI slave address n"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Address(pub u32);
@@ -23634,68 +29855,68 @@ pub mod twis {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STOPPED event"]
+            #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
             pub fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
-            #[doc = "Enable or disable interrupt for RXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
             pub const fn rxstarted(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
             pub fn set_rxstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
-            #[doc = "Enable or disable interrupt for TXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
             pub const fn txstarted(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
             pub fn set_txstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
-            #[doc = "Enable or disable interrupt for WRITE event"]
+            #[doc = "Enable or disable interrupt for event WRITE"]
             #[inline(always)]
             pub const fn write(&self) -> bool {
                 let val = (self.0 >> 25usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for WRITE event"]
+            #[doc = "Enable or disable interrupt for event WRITE"]
             #[inline(always)]
             pub fn set_write(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
             }
-            #[doc = "Enable or disable interrupt for READ event"]
+            #[doc = "Enable or disable interrupt for event READ"]
             #[inline(always)]
             pub const fn read(&self) -> bool {
                 let val = (self.0 >> 26usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for READ event"]
+            #[doc = "Enable or disable interrupt for event READ"]
             #[inline(always)]
             pub fn set_read(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
@@ -23712,13 +29933,13 @@ pub mod twis {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Match(pub u32);
         impl Match {
-            #[doc = "Which of the addresses in {ADDRESS} matched the incoming address"]
+            #[doc = "Indication of which address in ADDRESS that matched the incoming address"]
             #[inline(always)]
             pub const fn match_(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Which of the addresses in {ADDRESS} matched the incoming address"]
+            #[doc = "Indication of which address in ADDRESS that matched the incoming address"]
             #[inline(always)]
             pub fn set_match_(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -23776,6 +29997,29 @@ pub mod twis {
                 RxdAmount(0)
             }
         }
+        #[doc = "EasyDMA list type"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct RxdList(pub u32);
+        impl RxdList {
+            #[doc = "List type"]
+            #[inline(always)]
+            pub const fn list(&self) -> super::vals::RxdListList {
+                let val = (self.0 >> 0usize) & 0x03;
+                super::vals::RxdListList::from_bits(val as u8)
+            }
+            #[doc = "List type"]
+            #[inline(always)]
+            pub fn set_list(&mut self, val: super::vals::RxdListList) {
+                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
+            }
+        }
+        impl Default for RxdList {
+            #[inline(always)]
+            fn default() -> RxdList {
+                RxdList(0)
+            }
+        }
         #[doc = "Maximum number of bytes in RXD buffer"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -23799,29 +30043,29 @@ pub mod twis {
                 RxdMaxcnt(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between WRITE event and SUSPEND task"]
+            #[doc = "Shortcut between event WRITE and task SUSPEND"]
             #[inline(always)]
             pub const fn write_suspend(&self) -> bool {
                 let val = (self.0 >> 13usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between WRITE event and SUSPEND task"]
+            #[doc = "Shortcut between event WRITE and task SUSPEND"]
             #[inline(always)]
             pub fn set_write_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
             }
-            #[doc = "Shortcut between READ event and SUSPEND task"]
+            #[doc = "Shortcut between event READ and task SUSPEND"]
             #[inline(always)]
             pub const fn read_suspend(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between READ event and SUSPEND task"]
+            #[doc = "Shortcut between event READ and task SUSPEND"]
             #[inline(always)]
             pub fn set_read_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
@@ -23854,6 +30098,29 @@ pub mod twis {
             #[inline(always)]
             fn default() -> TxdAmount {
                 TxdAmount(0)
+            }
+        }
+        #[doc = "EasyDMA list type"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TxdList(pub u32);
+        impl TxdList {
+            #[doc = "List type"]
+            #[inline(always)]
+            pub const fn list(&self) -> super::vals::TxdListList {
+                let val = (self.0 >> 0usize) & 0x03;
+                super::vals::TxdListList::from_bits(val as u8)
+            }
+            #[doc = "List type"]
+            #[inline(always)]
+            pub fn set_list(&mut self, val: super::vals::TxdListList) {
+                self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
+            }
+        }
+        impl Default for TxdList {
+            #[inline(always)]
+            fn default() -> TxdList {
+                TxdList(0)
             }
         }
         #[doc = "Maximum number of bytes in TXD buffer"]
@@ -23923,6 +30190,70 @@ pub mod twis {
             #[inline(always)]
             fn from(val: Enable) -> u8 {
                 Enable::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum RxdListList {
+            #[doc = "Disable EasyDMA list"]
+            DISABLED = 0x0,
+            #[doc = "Use array list"]
+            ARRAY_LIST = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+        }
+        impl RxdListList {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> RxdListList {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for RxdListList {
+            #[inline(always)]
+            fn from(val: u8) -> RxdListList {
+                RxdListList::from_bits(val)
+            }
+        }
+        impl From<RxdListList> for u8 {
+            #[inline(always)]
+            fn from(val: RxdListList) -> u8 {
+                RxdListList::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum TxdListList {
+            #[doc = "Disable EasyDMA list"]
+            DISABLED = 0x0,
+            #[doc = "Use array list"]
+            ARRAY_LIST = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+        }
+        impl TxdListList {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> TxdListList {
+                unsafe { core::mem::transmute(val & 0x03) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for TxdListList {
+            #[inline(always)]
+            fn from(val: u8) -> TxdListList {
+                TxdListList::from_bits(val)
+            }
+        }
+        impl From<TxdListList> for u8 {
+            #[inline(always)]
+            fn from(val: TxdListList) -> u8 {
+                TxdListList::to_bits(val)
             }
         }
     }
@@ -24036,7 +30367,7 @@ pub mod uart {
         pub const fn events_rxto(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0144usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -24066,7 +30397,7 @@ pub mod uart {
         pub const fn psel(self) -> Psel {
             unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
         }
-        #[doc = "RXD register"]
+        #[doc = "RXD register. Register is cleared on read and the double buffered byte will be moved to RXD if it exists."]
         #[inline(always)]
         pub const fn rxd(self) -> crate::common::Reg<regs::Rxd, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
@@ -24138,6 +30469,17 @@ pub mod uart {
             #[inline(always)]
             pub fn set_parity(&mut self, val: super::vals::ConfigParity) {
                 self.0 = (self.0 & !(0x07 << 1usize)) | (((val.to_bits() as u32) & 0x07) << 1usize);
+            }
+            #[doc = "Stop bits"]
+            #[inline(always)]
+            pub const fn stop(&self) -> super::vals::Stop {
+                let val = (self.0 >> 4usize) & 0x01;
+                super::vals::Stop::from_bits(val as u8)
+            }
+            #[doc = "Stop bits"]
+            #[inline(always)]
+            pub fn set_stop(&mut self, val: super::vals::Stop) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
             }
         }
         impl Default for Config {
@@ -24230,68 +30572,68 @@ pub mod uart {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for CTS event"]
+            #[doc = "Write '1' to disable interrupt for event CTS"]
             #[inline(always)]
             pub const fn cts(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for CTS event"]
+            #[doc = "Write '1' to disable interrupt for event CTS"]
             #[inline(always)]
             pub fn set_cts(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Write '1' to disable interrupt for NCTS event"]
+            #[doc = "Write '1' to disable interrupt for event NCTS"]
             #[inline(always)]
             pub const fn ncts(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for NCTS event"]
+            #[doc = "Write '1' to disable interrupt for event NCTS"]
             #[inline(always)]
             pub fn set_ncts(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Write '1' to disable interrupt for RXDRDY event"]
+            #[doc = "Write '1' to disable interrupt for event RXDRDY"]
             #[inline(always)]
             pub const fn rxdrdy(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for RXDRDY event"]
+            #[doc = "Write '1' to disable interrupt for event RXDRDY"]
             #[inline(always)]
             pub fn set_rxdrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Write '1' to disable interrupt for TXDRDY event"]
+            #[doc = "Write '1' to disable interrupt for event TXDRDY"]
             #[inline(always)]
             pub const fn txdrdy(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for TXDRDY event"]
+            #[doc = "Write '1' to disable interrupt for event TXDRDY"]
             #[inline(always)]
             pub fn set_txdrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Write '1' to disable interrupt for ERROR event"]
+            #[doc = "Write '1' to disable interrupt for event ERROR"]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for ERROR event"]
+            #[doc = "Write '1' to disable interrupt for event ERROR"]
             #[inline(always)]
             pub fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
-            #[doc = "Write '1' to disable interrupt for RXTO event"]
+            #[doc = "Write '1' to disable interrupt for event RXTO"]
             #[inline(always)]
             pub const fn rxto(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for RXTO event"]
+            #[doc = "Write '1' to disable interrupt for event RXTO"]
             #[inline(always)]
             pub fn set_rxto(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
@@ -24303,7 +30645,7 @@ pub mod uart {
                 Inten(0)
             }
         }
-        #[doc = "RXD register"]
+        #[doc = "RXD register. Register is cleared on read and the double buffered byte will be moved to RXD if it exists."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rxd(pub u32);
@@ -24326,29 +30668,29 @@ pub mod uart {
                 Rxd(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between CTS event and STARTRX task"]
+            #[doc = "Shortcut between event CTS and task STARTRX"]
             #[inline(always)]
             pub const fn cts_startrx(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between CTS event and STARTRX task"]
+            #[doc = "Shortcut between event CTS and task STARTRX"]
             #[inline(always)]
             pub fn set_cts_startrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Shortcut between NCTS event and STOPRX task"]
+            #[doc = "Shortcut between event NCTS and task STOPRX"]
             #[inline(always)]
             pub const fn ncts_stoprx(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between NCTS event and STOPRX task"]
+            #[doc = "Shortcut between event NCTS and task STOPRX"]
             #[inline(always)]
             pub fn set_ncts_stoprx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -24524,6 +30866,36 @@ pub mod uart {
             #[inline(always)]
             fn from(val: Enable) -> u8 {
                 Enable::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub enum Stop {
+            #[doc = "One stop bit"]
+            ONE = 0x0,
+            #[doc = "Two stop bits"]
+            TWO = 0x01,
+        }
+        impl Stop {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> Stop {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for Stop {
+            #[inline(always)]
+            fn from(val: u8) -> Stop {
+                Stop::from_bits(val)
+            }
+        }
+        impl From<Stop> for u8 {
+            #[inline(always)]
+            fn from(val: Stop) -> u8 {
+                Stop::to_bits(val)
             }
         }
     }
@@ -24726,7 +31098,7 @@ pub mod uarte {
         pub const fn events_txstopped(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0158usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -24746,7 +31118,7 @@ pub mod uarte {
         pub const fn intenclr(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
         }
-        #[doc = "Error source Note : this register is read / write one to clear."]
+        #[doc = "Error source This register is read/write one to clear."]
         #[inline(always)]
         pub const fn errorsrc(self) -> crate::common::Reg<regs::Errorsrc, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0480usize) as _) }
@@ -24875,7 +31247,7 @@ pub mod uarte {
                 Enable(0)
             }
         }
-        #[doc = "Error source Note : this register is read / write one to clear."]
+        #[doc = "Error source This register is read/write one to clear."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Errorsrc(pub u32);
@@ -24936,123 +31308,123 @@ pub mod uarte {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for CTS event"]
+            #[doc = "Enable or disable interrupt for event CTS"]
             #[inline(always)]
             pub const fn cts(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for CTS event"]
+            #[doc = "Enable or disable interrupt for event CTS"]
             #[inline(always)]
             pub fn set_cts(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable interrupt for NCTS event"]
+            #[doc = "Enable or disable interrupt for event NCTS"]
             #[inline(always)]
             pub const fn ncts(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for NCTS event"]
+            #[doc = "Enable or disable interrupt for event NCTS"]
             #[inline(always)]
             pub fn set_ncts(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for RXDRDY event"]
+            #[doc = "Enable or disable interrupt for event RXDRDY"]
             #[inline(always)]
             pub const fn rxdrdy(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXDRDY event"]
+            #[doc = "Enable or disable interrupt for event RXDRDY"]
             #[inline(always)]
             pub fn set_rxdrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Enable or disable interrupt for ENDRX event"]
+            #[doc = "Enable or disable interrupt for event ENDRX"]
             #[inline(always)]
             pub const fn endrx(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDRX event"]
+            #[doc = "Enable or disable interrupt for event ENDRX"]
             #[inline(always)]
             pub fn set_endrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "Enable or disable interrupt for TXDRDY event"]
+            #[doc = "Enable or disable interrupt for event TXDRDY"]
             #[inline(always)]
             pub const fn txdrdy(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXDRDY event"]
+            #[doc = "Enable or disable interrupt for event TXDRDY"]
             #[inline(always)]
             pub fn set_txdrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
-            #[doc = "Enable or disable interrupt for ENDTX event"]
+            #[doc = "Enable or disable interrupt for event ENDTX"]
             #[inline(always)]
             pub const fn endtx(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDTX event"]
+            #[doc = "Enable or disable interrupt for event ENDTX"]
             #[inline(always)]
             pub fn set_endtx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ERROR event"]
+            #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
             pub fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
-            #[doc = "Enable or disable interrupt for RXTO event"]
+            #[doc = "Enable or disable interrupt for event RXTO"]
             #[inline(always)]
             pub const fn rxto(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXTO event"]
+            #[doc = "Enable or disable interrupt for event RXTO"]
             #[inline(always)]
             pub fn set_rxto(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
-            #[doc = "Enable or disable interrupt for RXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
             pub const fn rxstarted(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for RXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
             pub fn set_rxstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
-            #[doc = "Enable or disable interrupt for TXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
             pub const fn txstarted(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXSTARTED event"]
+            #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
             pub fn set_txstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
-            #[doc = "Enable or disable interrupt for TXSTOPPED event"]
+            #[doc = "Enable or disable interrupt for event TXSTOPPED"]
             #[inline(always)]
             pub const fn txstopped(&self) -> bool {
                 let val = (self.0 >> 22usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for TXSTOPPED event"]
+            #[doc = "Enable or disable interrupt for event TXSTOPPED"]
             #[inline(always)]
             pub fn set_txstopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
@@ -25110,29 +31482,29 @@ pub mod uarte {
                 RxdMaxcnt(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between ENDRX event and STARTRX task"]
+            #[doc = "Shortcut between event ENDRX and task STARTRX"]
             #[inline(always)]
             pub const fn endrx_startrx(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between ENDRX event and STARTRX task"]
+            #[doc = "Shortcut between event ENDRX and task STARTRX"]
             #[inline(always)]
             pub fn set_endrx_startrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "Shortcut between ENDRX event and STOPRX task"]
+            #[doc = "Shortcut between event ENDRX and task STOPRX"]
             #[inline(always)]
             pub const fn endrx_stoprx(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between ENDRX event and STOPRX task"]
+            #[doc = "Shortcut between event ENDRX and task STOPRX"]
             #[inline(always)]
             pub fn set_endrx_stoprx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
@@ -25230,7 +31602,7 @@ pub mod uarte {
             pub const BAUD460800: Self = Self(0x0740_0000);
             #[doc = "921600 baud (actual rate: 941176)"]
             pub const BAUD921600: Self = Self(0x0f00_0000);
-            #[doc = "1Mega baud"]
+            #[doc = "1 megabaud"]
             pub const BAUD1M: Self = Self(0x1000_0000);
         }
         impl Baudrate {
@@ -25382,45 +31754,25 @@ pub mod uicr {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Unspecified"]
-        #[inline(always)]
-        pub const fn unused0(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
-        }
-        #[doc = "Unspecified"]
-        #[inline(always)]
-        pub const fn unused1(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
-        }
-        #[doc = "Unspecified"]
-        #[inline(always)]
-        pub const fn unused2(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
-        }
-        #[doc = "Unspecified"]
-        #[inline(always)]
-        pub const fn unused3(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
-        }
-        #[doc = "Description collection\\[n\\]: Reserved for Nordic firmware design"]
+        #[doc = "Description collection: Reserved for Nordic firmware design"]
         #[inline(always)]
         pub const fn nrffw(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 15usize);
+            assert!(n < 13usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Reserved for Nordic hardware design"]
+        #[doc = "Description collection: Reserved for Nordic hardware design"]
         #[inline(always)]
         pub const fn nrfhw(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 12usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x50usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Reserved for customer"]
+        #[doc = "Description collection: Reserved for customer"]
         #[inline(always)]
         pub const fn customer(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 32usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Mapping of the nRESET function"]
+        #[doc = "Description collection: Mapping of the nRESET function (see POWER chapter for details)"]
         #[inline(always)]
         pub const fn pselreset(
             self,
@@ -25444,7 +31796,7 @@ pub mod uicr {
         pub const fn debugctrl(self) -> crate::common::Reg<regs::Debugctrl, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0210usize) as _) }
         }
-        #[doc = "GPIO reference voltage / external output supply voltage in high voltage mode"]
+        #[doc = "Output voltage from REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - V_VDDH-VDD."]
         #[inline(always)]
         pub const fn regout0(self) -> crate::common::Reg<regs::Regout0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
@@ -25531,18 +31883,18 @@ pub mod uicr {
                 Nfcpins(0)
             }
         }
-        #[doc = "GPIO reference voltage / external output supply voltage in high voltage mode"]
+        #[doc = "Output voltage from REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - V_VDDH-VDD."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Regout0(pub u32);
         impl Regout0 {
-            #[doc = "Output voltage from of REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - VEXDIF."]
+            #[doc = "Output voltage from REG0 regulator stage."]
             #[inline(always)]
             pub const fn vout(&self) -> super::vals::Vout {
                 let val = (self.0 >> 0usize) & 0x07;
                 super::vals::Vout::from_bits(val as u8)
             }
-            #[doc = "Output voltage from of REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - VEXDIF."]
+            #[doc = "Output voltage from REG0 regulator stage."]
             #[inline(always)]
             pub fn set_vout(&mut self, val: super::vals::Vout) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
@@ -25620,7 +31972,9 @@ pub mod uicr {
         impl Pall {
             #[doc = "Enable"]
             pub const ENABLED: Self = Self(0x0);
-            #[doc = "Disable"]
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware and software"]
+            pub const HW_DISABLED: Self = Self(0x5a);
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware"]
             pub const DISABLED: Self = Self(0xff);
         }
         impl Pall {
@@ -25646,9 +32000,9 @@ pub mod uicr {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Protect {
-            #[doc = "Operation as GPIO pins. Same protection as normal GPIO pins"]
+            #[doc = "Operation as GPIO pins. Same protection as normal GPIO pins."]
             DISABLED = 0x0,
-            #[doc = "Operation as NFC antenna pins. Configures the protection for NFC operation"]
+            #[doc = "Operation as NFC antenna pins. Configures the protection for NFC operation."]
             NFC = 0x01,
         }
         impl Protect {
@@ -25733,17 +32087,17 @@ pub mod usbd {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Data pointer"]
+        #[doc = "Description cluster: Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Maximum number of bytes to transfer"]
+        #[doc = "Description cluster: Maximum number of bytes to transfer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::EpinMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Number of bytes transferred in the last transaction"]
+        #[doc = "Description cluster: Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::EpinAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
@@ -25765,17 +32119,17 @@ pub mod usbd {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster\\[n\\]: Data pointer"]
+        #[doc = "Description cluster: Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Maximum number of bytes to transfer"]
+        #[doc = "Description cluster: Maximum number of bytes to transfer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::EpoutMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
         }
-        #[doc = "Description cluster\\[n\\]: Number of bytes transferred in the last transaction"]
+        #[doc = "Description cluster: Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::EpoutAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
@@ -25797,13 +32151,13 @@ pub mod usbd {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description collection\\[n\\]: IN endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
+        #[doc = "Description collection: IN endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
         #[inline(always)]
         pub const fn epin(self, n: usize) -> crate::common::Reg<regs::Epin, crate::common::R> {
             assert!(n < 8usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: OUT endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
+        #[doc = "Description collection: OUT endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
         #[inline(always)]
         pub const fn epout(
             self,
@@ -25893,7 +32247,7 @@ pub mod usbd {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description collection\\[n\\]: Number of bytes received last in the data stage of this OUT endpoint"]
+        #[doc = "Description collection: Number of bytes received last in the data stage of this OUT endpoint"]
         #[inline(always)]
         pub const fn epout(
             self,
@@ -25924,7 +32278,7 @@ pub mod usbd {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description collection\\[n\\]: Captures the EPIN\\[n\\].PTR and EPIN\\[n\\].MAXCNT registers values, and enables endpoint IN n to respond to traffic from host"]
+        #[doc = "Description collection: Captures the EPIN\\[n\\].PTR and EPIN\\[n\\].MAXCNT registers values, and enables endpoint IN n to respond to traffic from host"]
         #[inline(always)]
         pub const fn tasks_startepin(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
@@ -25935,7 +32289,7 @@ pub mod usbd {
         pub const fn tasks_startisoin(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Captures the EPOUT\\[n\\].PTR and EPOUT\\[n\\].MAXCNT registers values, and enables endpoint n to respond to traffic from host"]
+        #[doc = "Description collection: Captures the EPOUT\\[n\\].PTR and EPOUT\\[n\\].MAXCNT registers values, and enables endpoint n to respond to traffic from host"]
         #[inline(always)]
         pub const fn tasks_startepout(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
@@ -25981,7 +32335,7 @@ pub mod usbd {
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: The whole EPIN\\[n\\] buffer has been consumed. The RAM buffer can be accessed safely by software."]
+        #[doc = "Description collection: The whole EPIN\\[n\\] buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endepin(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 8usize);
@@ -25992,18 +32346,18 @@ pub mod usbd {
         pub const fn events_ep0datadone(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0128usize) as _) }
         }
-        #[doc = "The whole ISOIN buffer has been consumed. The RAM buffer can be accessed safely by software."]
+        #[doc = "The whole ISOIN buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endisoin(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x012cusize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: The whole EPOUT\\[n\\] buffer has been consumed. The RAM buffer can be accessed safely by software."]
+        #[doc = "Description collection: The whole EPOUT\\[n\\] buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endepout(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 8usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0130usize + n * 4usize) as _) }
         }
-        #[doc = "The whole ISOOUT buffer has been consumed. The RAM buffer can be accessed safely by software."]
+        #[doc = "The whole ISOOUT buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endisoout(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0150usize) as _) }
@@ -26028,7 +32382,7 @@ pub mod usbd {
         pub const fn events_epdata(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0160usize) as _) }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
@@ -26402,7 +32756,7 @@ pub mod usbd {
                 Epdatastatus(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: IN endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
+        #[doc = "Description collection: IN endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Epin(pub u32);
@@ -26426,7 +32780,7 @@ pub mod usbd {
                 Epin(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Number of bytes transferred in the last transaction"]
+        #[doc = "Description cluster: Number of bytes transferred in the last transaction"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct EpinAmount(pub u32);
@@ -26449,7 +32803,7 @@ pub mod usbd {
                 EpinAmount(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Maximum number of bytes to transfer"]
+        #[doc = "Description cluster: Maximum number of bytes to transfer"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct EpinMaxcnt(pub u32);
@@ -26510,7 +32864,7 @@ pub mod usbd {
                 Epinen(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Number of bytes transferred in the last transaction"]
+        #[doc = "Description cluster: Number of bytes transferred in the last transaction"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct EpoutAmount(pub u32);
@@ -26533,7 +32887,7 @@ pub mod usbd {
                 EpoutAmount(0)
             }
         }
-        #[doc = "Description cluster\\[n\\]: Maximum number of bytes to transfer"]
+        #[doc = "Description cluster: Maximum number of bytes to transfer"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct EpoutMaxcnt(pub u32);
@@ -26771,7 +33125,7 @@ pub mod usbd {
                 Framecntr(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: OUT endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
+        #[doc = "Description collection: OUT endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct HaltedEpout(pub u32);
@@ -26800,29 +33154,29 @@ pub mod usbd {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Enable or disable interrupt for USBRESET event"]
+            #[doc = "Enable or disable interrupt for event USBRESET"]
             #[inline(always)]
             pub const fn usbreset(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for USBRESET event"]
+            #[doc = "Enable or disable interrupt for event USBRESET"]
             #[inline(always)]
             pub fn set_usbreset(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for STARTED event"]
+            #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
             pub fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Enable or disable interrupt for ENDEPIN\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event ENDEPIN\\[0\\]"]
             #[inline(always)]
             pub const fn endepin(&self, n: usize) -> bool {
                 assert!(n < 8usize);
@@ -26830,36 +33184,36 @@ pub mod usbd {
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDEPIN\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event ENDEPIN\\[0\\]"]
             #[inline(always)]
             pub fn set_endepin(&mut self, n: usize, val: bool) {
                 assert!(n < 8usize);
                 let offs = 2usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
-            #[doc = "Enable or disable interrupt for EP0DATADONE event"]
+            #[doc = "Enable or disable interrupt for event EP0DATADONE"]
             #[inline(always)]
             pub const fn ep0datadone(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for EP0DATADONE event"]
+            #[doc = "Enable or disable interrupt for event EP0DATADONE"]
             #[inline(always)]
             pub fn set_ep0datadone(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
-            #[doc = "Enable or disable interrupt for ENDISOIN event"]
+            #[doc = "Enable or disable interrupt for event ENDISOIN"]
             #[inline(always)]
             pub const fn endisoin(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDISOIN event"]
+            #[doc = "Enable or disable interrupt for event ENDISOIN"]
             #[inline(always)]
             pub fn set_endisoin(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
-            #[doc = "Enable or disable interrupt for ENDEPOUT\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event ENDEPOUT\\[0\\]"]
             #[inline(always)]
             pub const fn endepout(&self, n: usize) -> bool {
                 assert!(n < 8usize);
@@ -26867,64 +33221,64 @@ pub mod usbd {
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDEPOUT\\[0\\] event"]
+            #[doc = "Enable or disable interrupt for event ENDEPOUT\\[0\\]"]
             #[inline(always)]
             pub fn set_endepout(&mut self, n: usize, val: bool) {
                 assert!(n < 8usize);
                 let offs = 12usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
-            #[doc = "Enable or disable interrupt for ENDISOOUT event"]
+            #[doc = "Enable or disable interrupt for event ENDISOOUT"]
             #[inline(always)]
             pub const fn endisoout(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for ENDISOOUT event"]
+            #[doc = "Enable or disable interrupt for event ENDISOOUT"]
             #[inline(always)]
             pub fn set_endisoout(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
-            #[doc = "Enable or disable interrupt for SOF event"]
+            #[doc = "Enable or disable interrupt for event SOF"]
             #[inline(always)]
             pub const fn sof(&self) -> bool {
                 let val = (self.0 >> 21usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for SOF event"]
+            #[doc = "Enable or disable interrupt for event SOF"]
             #[inline(always)]
             pub fn set_sof(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
             }
-            #[doc = "Enable or disable interrupt for USBEVENT event"]
+            #[doc = "Enable or disable interrupt for event USBEVENT"]
             #[inline(always)]
             pub const fn usbevent(&self) -> bool {
                 let val = (self.0 >> 22usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for USBEVENT event"]
+            #[doc = "Enable or disable interrupt for event USBEVENT"]
             #[inline(always)]
             pub fn set_usbevent(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
             }
-            #[doc = "Enable or disable interrupt for EP0SETUP event"]
+            #[doc = "Enable or disable interrupt for event EP0SETUP"]
             #[inline(always)]
             pub const fn ep0setup(&self) -> bool {
                 let val = (self.0 >> 23usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for EP0SETUP event"]
+            #[doc = "Enable or disable interrupt for event EP0SETUP"]
             #[inline(always)]
             pub fn set_ep0setup(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
             }
-            #[doc = "Enable or disable interrupt for EPDATA event"]
+            #[doc = "Enable or disable interrupt for event EPDATA"]
             #[inline(always)]
             pub const fn epdata(&self) -> bool {
                 let val = (self.0 >> 24usize) & 0x01;
                 val != 0
             }
-            #[doc = "Enable or disable interrupt for EPDATA event"]
+            #[doc = "Enable or disable interrupt for event EPDATA"]
             #[inline(always)]
             pub fn set_epdata(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
@@ -27133,62 +33487,62 @@ pub mod usbd {
                 Lowpower(0)
             }
         }
-        #[doc = "Shortcut register"]
+        #[doc = "Shortcuts between local events and tasks"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Shorts(pub u32);
         impl Shorts {
-            #[doc = "Shortcut between EP0DATADONE event and STARTEPIN\\[0\\] task"]
+            #[doc = "Shortcut between event EP0DATADONE and task STARTEPIN\\[0\\]"]
             #[inline(always)]
             pub const fn ep0datadone_startepin0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between EP0DATADONE event and STARTEPIN\\[0\\] task"]
+            #[doc = "Shortcut between event EP0DATADONE and task STARTEPIN\\[0\\]"]
             #[inline(always)]
             pub fn set_ep0datadone_startepin0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Shortcut between EP0DATADONE event and STARTEPOUT\\[0\\] task"]
+            #[doc = "Shortcut between event EP0DATADONE and task STARTEPOUT\\[0\\]"]
             #[inline(always)]
             pub const fn ep0datadone_startepout0(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between EP0DATADONE event and STARTEPOUT\\[0\\] task"]
+            #[doc = "Shortcut between event EP0DATADONE and task STARTEPOUT\\[0\\]"]
             #[inline(always)]
             pub fn set_ep0datadone_startepout0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "Shortcut between EP0DATADONE event and EP0STATUS task"]
+            #[doc = "Shortcut between event EP0DATADONE and task EP0STATUS"]
             #[inline(always)]
             pub const fn ep0datadone_ep0status(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between EP0DATADONE event and EP0STATUS task"]
+            #[doc = "Shortcut between event EP0DATADONE and task EP0STATUS"]
             #[inline(always)]
             pub fn set_ep0datadone_ep0status(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "Shortcut between ENDEPOUT\\[0\\] event and EP0STATUS task"]
+            #[doc = "Shortcut between event ENDEPOUT\\[0\\] and task EP0STATUS"]
             #[inline(always)]
             pub const fn endepout0_ep0status(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between ENDEPOUT\\[0\\] event and EP0STATUS task"]
+            #[doc = "Shortcut between event ENDEPOUT\\[0\\] and task EP0STATUS"]
             #[inline(always)]
             pub fn set_endepout0_ep0status(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "Shortcut between ENDEPOUT\\[0\\] event and EP0RCVOUT task"]
+            #[doc = "Shortcut between event ENDEPOUT\\[0\\] and task EP0RCVOUT"]
             #[inline(always)]
             pub const fn endepout0_ep0rcvout(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "Shortcut between ENDEPOUT\\[0\\] event and EP0RCVOUT task"]
+            #[doc = "Shortcut between event ENDEPOUT\\[0\\] and task EP0RCVOUT"]
             #[inline(always)]
             pub fn set_endepout0_ep0rcvout(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -27200,7 +33554,7 @@ pub mod usbd {
                 Shorts(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: Number of bytes received last in the data stage of this OUT endpoint"]
+        #[doc = "Description collection: Number of bytes received last in the data stage of this OUT endpoint"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct SizeEpout(pub u32);
@@ -27858,7 +34212,7 @@ pub mod usbd {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Split(pub u16);
         impl Split {
-            #[doc = "Full buffer dedicated to either iso IN or OUT"]
+            #[doc = "Full buffer dedicated to either ISO IN or OUT"]
             pub const ONE_DIR: Self = Self(0x0);
             #[doc = "Lower half for IN, upper half for OUT"]
             pub const HALF_IN: Self = Self(0x80);
@@ -28074,7 +34428,7 @@ pub mod wdt {
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
         }
-        #[doc = "Description collection\\[n\\]: Reload request n"]
+        #[doc = "Description collection: Reload request n"]
         #[inline(always)]
         pub const fn rr(self, n: usize) -> crate::common::Reg<regs::Rr, crate::common::W> {
             assert!(n < 8usize);
@@ -28121,13 +34475,13 @@ pub mod wdt {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Inten(pub u32);
         impl Inten {
-            #[doc = "Write '1' to disable interrupt for TIMEOUT event"]
+            #[doc = "Write '1' to disable interrupt for event TIMEOUT"]
             #[inline(always)]
             pub const fn timeout(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Write '1' to disable interrupt for TIMEOUT event"]
+            #[doc = "Write '1' to disable interrupt for event TIMEOUT"]
             #[inline(always)]
             pub fn set_timeout(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -28166,7 +34520,7 @@ pub mod wdt {
                 Reqstatus(0)
             }
         }
-        #[doc = "Description collection\\[n\\]: Reload request n"]
+        #[doc = "Description collection: Reload request n"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rr(pub u32);

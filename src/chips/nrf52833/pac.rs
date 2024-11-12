@@ -1,4 +1,4 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (218daa7 2024-01-15))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (4df74f6 2024-11-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - POWER_CLOCK"]
@@ -220,6 +220,9 @@ mod _vectors {
 pub const FICR: ficr::Ficr = unsafe { ficr::Ficr::from_ptr(0x1000_0000usize as _) };
 #[doc = "User information configuration registers"]
 pub const UICR: uicr::Uicr = unsafe { uicr::Uicr::from_ptr(0x1000_1000usize as _) };
+#[doc = "Access Port Protection"]
+pub const APPROTECT: approtect::Approtect =
+    unsafe { approtect::Approtect::from_ptr(0x4000_0000usize as _) };
 #[doc = "Clock control"]
 pub const CLOCK: clock::Clock = unsafe { clock::Clock::from_ptr(0x4000_0000usize as _) };
 #[doc = "Power control"]
@@ -276,7 +279,7 @@ pub const RNG: rng::Rng = unsafe { rng::Rng::from_ptr(0x4000_d000usize as _) };
 pub const ECB: ecb::Ecb = unsafe { ecb::Ecb::from_ptr(0x4000_e000usize as _) };
 #[doc = "Accelerated Address Resolver"]
 pub const AAR: aar::Aar = unsafe { aar::Aar::from_ptr(0x4000_f000usize as _) };
-#[doc = "AES CCM Mode Encryption"]
+#[doc = "AES CCM mode encryption"]
 pub const CCM: ccm::Ccm = unsafe { ccm::Ccm::from_ptr(0x4000_f000usize as _) };
 #[doc = "Watchdog Timer"]
 pub const WDT: wdt::Wdt = unsafe { wdt::Wdt::from_ptr(0x4001_0000usize as _) };
@@ -520,13 +523,13 @@ pub mod aar {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Nirk(pub u32);
         impl Nirk {
-            #[doc = "Number of Identity root keys available in the IRK data structure"]
+            #[doc = "Number of Identity Root Keys available in the IRK data structure"]
             #[inline(always)]
             pub const fn nirk(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x1f;
                 val as u8
             }
-            #[doc = "Number of Identity root keys available in the IRK data structure"]
+            #[doc = "Number of Identity Root Keys available in the IRK data structure"]
             #[inline(always)]
             pub fn set_nirk(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
@@ -637,12 +640,12 @@ pub mod acl {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster: Configure the word-aligned start address of region n to protect"]
+        #[doc = "Description cluster: Start address of region to protect. The start address must be word-aligned."]
         #[inline(always)]
         pub const fn addr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster: Size of region to protect counting from address ACL\\[n\\].ADDR. Write '0' as no effect."]
+        #[doc = "Description cluster: Size of region to protect counting from address ACL\\[n\\].ADDR. Writing a '0' has no effect."]
         #[inline(always)]
         pub const fn size(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -659,24 +662,24 @@ pub mod acl {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Perm(pub u32);
         impl Perm {
-            #[doc = "Configure write and erase permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure write and erase permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub const fn write(&self) -> super::vals::Write {
                 let val = (self.0 >> 1usize) & 0x01;
                 super::vals::Write::from_bits(val as u8)
             }
-            #[doc = "Configure write and erase permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure write and erase permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub fn set_write(&mut self, val: super::vals::Write) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
             }
-            #[doc = "Configure read permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure read permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub const fn read(&self) -> super::vals::Read {
                 let val = (self.0 >> 2usize) & 0x01;
                 super::vals::Read::from_bits(val as u8)
             }
-            #[doc = "Configure read permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure read permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub fn set_read(&mut self, val: super::vals::Read) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
@@ -693,9 +696,9 @@ pub mod acl {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Read {
-            #[doc = "Allow read instructions to region n"]
+            #[doc = "Allow read instructions to region n."]
             ENABLE = 0x0,
-            #[doc = "Block read instructions to region n"]
+            #[doc = "Block read instructions to region n."]
             DISABLE = 0x01,
         }
         impl Read {
@@ -723,9 +726,9 @@ pub mod acl {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Write {
-            #[doc = "Allow write and erase instructions to region n"]
+            #[doc = "Allow write and erase instructions to region n."]
             ENABLE = 0x0,
-            #[doc = "Block write and erase instructions to region n"]
+            #[doc = "Block write and erase instructions to region n."]
             DISABLE = 0x01,
         }
         impl Write {
@@ -752,8 +755,143 @@ pub mod acl {
         }
     }
 }
+pub mod approtect {
+    #[doc = "Access Port Protection"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Approtect {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Approtect {}
+    unsafe impl Sync for Approtect {}
+    impl Approtect {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Software force enable APPROTECT mechanism until next reset."]
+        #[inline(always)]
+        pub const fn forceprotect(
+            self,
+        ) -> crate::common::Reg<regs::Forceprotect, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0550usize) as _) }
+        }
+        #[doc = "Software disable APPROTECT mechanism"]
+        #[inline(always)]
+        pub const fn disable(self) -> crate::common::Reg<regs::Disable, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0558usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Software disable APPROTECT mechanism"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Disable(pub u32);
+        impl Disable {
+            #[doc = "Software disable APPROTECT mechanism"]
+            #[inline(always)]
+            pub const fn disable(&self) -> super::vals::Disable {
+                let val = (self.0 >> 0usize) & 0xff;
+                super::vals::Disable::from_bits(val as u8)
+            }
+            #[doc = "Software disable APPROTECT mechanism"]
+            #[inline(always)]
+            pub fn set_disable(&mut self, val: super::vals::Disable) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Disable {
+            #[inline(always)]
+            fn default() -> Disable {
+                Disable(0)
+            }
+        }
+        #[doc = "Software force enable APPROTECT mechanism until next reset."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Forceprotect(pub u32);
+        impl Forceprotect {
+            #[doc = "Write 0x0 to force enable APPROTECT mechanism"]
+            #[inline(always)]
+            pub const fn forceprotect(&self) -> super::vals::Forceprotect {
+                let val = (self.0 >> 0usize) & 0xff;
+                super::vals::Forceprotect::from_bits(val as u8)
+            }
+            #[doc = "Write 0x0 to force enable APPROTECT mechanism"]
+            #[inline(always)]
+            pub fn set_forceprotect(&mut self, val: super::vals::Forceprotect) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Forceprotect {
+            #[inline(always)]
+            fn default() -> Forceprotect {
+                Forceprotect(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub struct Disable(pub u8);
+        impl Disable {
+            #[doc = "Software disable APPROTECT mechanism"]
+            pub const SW_DISABLE: Self = Self(0x5a);
+        }
+        impl Disable {
+            pub const fn from_bits(val: u8) -> Disable {
+                Self(val & 0xff)
+            }
+            pub const fn to_bits(self) -> u8 {
+                self.0
+            }
+        }
+        impl From<u8> for Disable {
+            #[inline(always)]
+            fn from(val: u8) -> Disable {
+                Disable::from_bits(val)
+            }
+        }
+        impl From<Disable> for u8 {
+            #[inline(always)]
+            fn from(val: Disable) -> u8 {
+                Disable::to_bits(val)
+            }
+        }
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub struct Forceprotect(pub u8);
+        impl Forceprotect {
+            #[doc = "Software force enable APPROTECT mechanism"]
+            pub const FORCE: Self = Self(0x0);
+        }
+        impl Forceprotect {
+            pub const fn from_bits(val: u8) -> Forceprotect {
+                Self(val & 0xff)
+            }
+            pub const fn to_bits(self) -> u8 {
+                self.0
+            }
+        }
+        impl From<u8> for Forceprotect {
+            #[inline(always)]
+            fn from(val: u8) -> Forceprotect {
+                Forceprotect::from_bits(val)
+            }
+        }
+        impl From<Forceprotect> for u8 {
+            #[inline(always)]
+            fn from(val: Forceprotect) -> u8 {
+                Forceprotect::to_bits(val)
+            }
+        }
+    }
+}
 pub mod ccm {
-    #[doc = "AES CCM Mode Encryption"]
+    #[doc = "AES CCM mode encryption"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Ccm {
         ptr: *mut u8,
@@ -769,7 +907,7 @@ pub mod ccm {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Start generation of key-stream. This operation will stop by itself when completed."]
+        #[doc = "Start generation of keystream. This operation will stop by itself when completed."]
         #[inline(always)]
         pub const fn tasks_ksgen(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
@@ -789,7 +927,7 @@ pub mod ccm {
         pub const fn tasks_rateoverride(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
         }
-        #[doc = "Key-stream generation complete"]
+        #[doc = "Keystream generation complete"]
         #[inline(always)]
         pub const fn events_endksgen(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
@@ -834,7 +972,7 @@ pub mod ccm {
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
         }
-        #[doc = "Pointer to data structure holding AES key and NONCE vector"]
+        #[doc = "Pointer to data structure holding the AES key and the NONCE vector"]
         #[inline(always)]
         pub const fn cnfptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
@@ -854,7 +992,7 @@ pub mod ccm {
         pub const fn scratchptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
         }
-        #[doc = "Length of key-stream generated when MODE.LENGTH = Extended."]
+        #[doc = "Length of keystream generated when MODE.LENGTH = Extended"]
         #[inline(always)]
         pub const fn maxpacketsize(
             self,
@@ -867,6 +1005,11 @@ pub mod ccm {
             self,
         ) -> crate::common::Reg<regs::Rateoverride, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize) as _) }
+        }
+        #[doc = "Header (S0) mask."]
+        #[inline(always)]
+        pub const fn headermask(self) -> crate::common::Reg<regs::Headermask, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
         }
     }
     pub mod regs {
@@ -891,6 +1034,29 @@ pub mod ccm {
             #[inline(always)]
             fn default() -> Enable {
                 Enable(0)
+            }
+        }
+        #[doc = "Header (S0) mask."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Headermask(pub u32);
+        impl Headermask {
+            #[doc = "Header (S0) mask"]
+            #[inline(always)]
+            pub const fn headermask(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[doc = "Header (S0) mask"]
+            #[inline(always)]
+            pub fn set_headermask(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Headermask {
+            #[inline(always)]
+            fn default() -> Headermask {
+                Headermask(0)
             }
         }
         #[doc = "Disable interrupt"]
@@ -938,18 +1104,18 @@ pub mod ccm {
                 Inten(0)
             }
         }
-        #[doc = "Length of key-stream generated when MODE.LENGTH = Extended."]
+        #[doc = "Length of keystream generated when MODE.LENGTH = Extended"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Maxpacketsize(pub u32);
         impl Maxpacketsize {
-            #[doc = "Length of key-stream generated when MODE.LENGTH = Extended. This value must be greater or equal to the subsequent packet payload to be encrypted/decrypted."]
+            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater than or equal to the subsequent packet payload to be encrypted/decrypted."]
             #[inline(always)]
             pub const fn maxpacketsize(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Length of key-stream generated when MODE.LENGTH = Extended. This value must be greater or equal to the subsequent packet payload to be encrypted/decrypted."]
+            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater than or equal to the subsequent packet payload to be encrypted/decrypted."]
             #[inline(always)]
             pub fn set_maxpacketsize(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -989,13 +1155,13 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Mode(pub u32);
         impl Mode {
-            #[doc = "The mode of operation to be used. The settings in this register apply whenever either the KSGEN or CRYPT tasks are triggered."]
+            #[doc = "The mode of operation to be used. Settings in this register apply whenever either the KSGEN task or the CRYPT task is triggered."]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 0usize) & 0x01;
                 super::vals::Mode::from_bits(val as u8)
             }
-            #[doc = "The mode of operation to be used. The settings in this register apply whenever either the KSGEN or CRYPT tasks are triggered."]
+            #[doc = "The mode of operation to be used. Settings in this register apply whenever either the KSGEN task or the CRYPT task is triggered."]
             #[inline(always)]
             pub fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
@@ -1036,13 +1202,13 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rateoverride(pub u32);
         impl Rateoverride {
-            #[doc = "Data rate override setting."]
+            #[doc = "Data rate override setting"]
             #[inline(always)]
             pub const fn rateoverride(&self) -> super::vals::Rateoverride {
                 let val = (self.0 >> 0usize) & 0x03;
                 super::vals::Rateoverride::from_bits(val as u8)
             }
-            #[doc = "Data rate override setting."]
+            #[doc = "Data rate override setting"]
             #[inline(always)]
             pub fn set_rateoverride(&mut self, val: super::vals::Rateoverride) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
@@ -1086,9 +1252,9 @@ pub mod ccm {
             _1MBIT = 0x0,
             #[doc = "2 Mbps"]
             _2MBIT = 0x01,
-            #[doc = "125 Kbps"]
+            #[doc = "125 kbps"]
             _125KBPS = 0x02,
-            #[doc = "500 Kbps"]
+            #[doc = "500 kbps"]
             _500KBPS = 0x03,
         }
         impl Datarate {
@@ -1148,9 +1314,9 @@ pub mod ccm {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Length {
-            #[doc = "Default length. Effective length of LENGTH field in encrypted/decrypted packet is 5 bits. A key-stream for packet payloads up to 27 bytes will be generated."]
+            #[doc = "Default length. Effective length of LENGTH field in encrypted/decrypted packet is 5 bits. A keystream for packet payloads up to 27 bytes will be generated."]
             DEFAULT = 0x0,
-            #[doc = "Extended length. Effective length of LENGTH field in encrypted/decrypted packet is 8 bits. A key-stream for packet payloads up to MAXPACKETSIZE bytes will be generated."]
+            #[doc = "Extended length. Effective length of LENGTH field in encrypted/decrypted packet is 8 bits. A keystream for packet payloads up to MAXPACKETSIZE bytes will be generated."]
             EXTENDED = 0x01,
         }
         impl Length {
@@ -1242,9 +1408,9 @@ pub mod ccm {
             _1MBIT = 0x0,
             #[doc = "2 Mbps"]
             _2MBIT = 0x01,
-            #[doc = "125 Kbps"]
+            #[doc = "125 kbps"]
             _125KBPS = 0x02,
-            #[doc = "500 Kbps"]
+            #[doc = "500 kbps"]
             _500KBPS = 0x03,
         }
         impl Rateoverride {
@@ -4068,11 +4234,11 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Package(pub u32);
         impl Package {
-            #[doc = "QIxx - 73-pin aQFN"]
+            #[doc = "QIxx - 7x7 73-pin aQFN"]
             pub const QI: Self = Self(0x2004);
-            #[doc = "QDxx - 40-pin QFN"]
+            #[doc = "QDxx - 5x5 40-pin QFN"]
             pub const QD: Self = Self(0x2007);
-            #[doc = "CJxx - WLCSP"]
+            #[doc = "CJxx - 3.175 x 3.175 WLCSP"]
             pub const CJ: Self = Self(0x2008);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
@@ -4101,6 +4267,8 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Part(pub u32);
         impl Part {
+            #[doc = "nRF52820"]
+            pub const N52820: Self = Self(0x0005_2820);
             #[doc = "nRF52833"]
             pub const N52833: Self = Self(0x0005_2833);
             #[doc = "nRF52840"]
@@ -4198,10 +4366,16 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Variant(pub u32);
         impl Variant {
+            #[doc = "AAA0"]
+            pub const AAA0: Self = Self(0x4141_4130);
+            #[doc = "AAA1"]
+            pub const AAA1: Self = Self(0x4141_4131);
             #[doc = "AAAA"]
             pub const AAAA: Self = Self(0x4141_4141);
             #[doc = "AAAB"]
             pub const AAAB: Self = Self(0x4141_4142);
+            #[doc = "AAB0"]
+            pub const AAB0: Self = Self(0x4141_4230);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
         }
@@ -4308,7 +4482,7 @@ pub mod gpio {
         pub const fn latch(self) -> crate::common::Reg<regs::Latch, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
         }
-        #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[inline(always)]
         pub const fn detectmode(self) -> crate::common::Reg<regs::Detectmode, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
@@ -4324,18 +4498,18 @@ pub mod gpio {
         }
     }
     pub mod regs {
-        #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Detectmode(pub u32);
         impl Detectmode {
-            #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+            #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
             #[inline(always)]
             pub const fn detectmode(&self) -> super::vals::Detectmode {
                 let val = (self.0 >> 0usize) & 0x01;
                 super::vals::Detectmode::from_bits(val as u8)
             }
-            #[doc = "Select between default DETECT signal behaviour and LDETECT mode"]
+            #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
             #[inline(always)]
             pub fn set_detectmode(&mut self, val: super::vals::Detectmode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
@@ -4638,7 +4812,7 @@ pub mod gpio {
         pub enum Detectmode {
             #[doc = "DETECT directly connected to PIN DETECT signals"]
             DEFAULT = 0x0,
-            #[doc = "Use the latched LDETECT behaviour"]
+            #[doc = "Use the latched LDETECT behavior"]
             LDETECT = 0x01,
         }
         impl Detectmode {
@@ -10604,12 +10778,12 @@ pub mod ppi {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster: Channel n event end-point"]
+        #[doc = "Description cluster: Channel n event endpoint"]
         #[inline(always)]
         pub const fn eep(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster: Channel n task end-point"]
+        #[doc = "Description cluster: Channel n task endpoint"]
         #[inline(always)]
         pub const fn tep(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -10631,7 +10805,7 @@ pub mod ppi {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster: Channel n task end-point"]
+        #[doc = "Description cluster: Channel n task endpoint"]
         #[inline(always)]
         pub const fn tep(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
@@ -11951,13 +12125,13 @@ pub mod qdec {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Reportper(pub u32);
         impl Reportper {
-            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated"]
+            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated."]
             #[inline(always)]
             pub const fn reportper(&self) -> super::vals::Reportper {
                 let val = (self.0 >> 0usize) & 0x0f;
                 super::vals::Reportper::from_bits(val as u8)
             }
-            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated"]
+            #[doc = "Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated."]
             #[inline(always)]
             pub fn set_reportper(&mut self, val: super::vals::Reportper) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
@@ -12116,23 +12290,23 @@ pub mod qdec {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Reportper {
-            #[doc = "10 samples / report"]
+            #[doc = "10 samples/report"]
             _10SMPL = 0x0,
-            #[doc = "40 samples / report"]
+            #[doc = "40 samples/report"]
             _40SMPL = 0x01,
-            #[doc = "80 samples / report"]
+            #[doc = "80 samples/report"]
             _80SMPL = 0x02,
-            #[doc = "120 samples / report"]
+            #[doc = "120 samples/report"]
             _120SMPL = 0x03,
-            #[doc = "160 samples / report"]
+            #[doc = "160 samples/report"]
             _160SMPL = 0x04,
-            #[doc = "200 samples / report"]
+            #[doc = "200 samples/report"]
             _200SMPL = 0x05,
-            #[doc = "240 samples / report"]
+            #[doc = "240 samples/report"]
             _240SMPL = 0x06,
-            #[doc = "280 samples / report"]
+            #[doc = "280 samples/report"]
             _280SMPL = 0x07,
-            #[doc = "1 sample / report"]
+            #[doc = "1 sample/report"]
             _1SMPL = 0x08,
             _RESERVED_9 = 0x09,
             _RESERVED_a = 0x0a,
@@ -12419,7 +12593,7 @@ pub mod radio {
         pub const fn events_framestart(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0138usize) as _) }
         }
-        #[doc = "Sampling of energy detection complete. A new ED sample is ready for readout from the RADIO.EDSAMPLE register"]
+        #[doc = "Sampling of energy detection complete. A new ED sample is ready for readout from the RADIO.EDSAMPLE register."]
         #[inline(always)]
         pub const fn events_edend(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x013cusize) as _) }
@@ -12841,13 +13015,13 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Crccnf(pub u32);
         impl Crccnf {
-            #[doc = "CRC length in number of bytes."]
+            #[doc = "CRC length in number of bytes For MODE Ble_LR125Kbit and Ble_LR500Kbit, only LEN set to 3 is supported"]
             #[inline(always)]
             pub const fn len(&self) -> super::vals::Len {
                 let val = (self.0 >> 0usize) & 0x03;
                 super::vals::Len::from_bits(val as u8)
             }
-            #[doc = "CRC length in number of bytes."]
+            #[doc = "CRC length in number of bytes For MODE Ble_LR125Kbit and Ble_LR500Kbit, only LEN set to 3 is supported"]
             #[inline(always)]
             pub fn set_len(&mut self, val: super::vals::Len) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
@@ -12990,25 +13164,25 @@ pub mod radio {
             pub fn set_ctetimevalidrange(&mut self, val: super::vals::Ctetimevalidrange) {
                 self.0 = (self.0 & !(0x03 << 6usize)) | (((val.to_bits() as u32) & 0x03) << 6usize);
             }
-            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set"]
+            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set."]
             #[inline(always)]
             pub const fn cteinlinerxmode1us(&self) -> super::vals::Cteinlinerxmode1us {
                 let val = (self.0 >> 10usize) & 0x07;
                 super::vals::Cteinlinerxmode1us::from_bits(val as u8)
             }
-            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set"]
+            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set."]
             #[inline(always)]
             pub fn set_cteinlinerxmode1us(&mut self, val: super::vals::Cteinlinerxmode1us) {
                 self.0 =
                     (self.0 & !(0x07 << 10usize)) | (((val.to_bits() as u32) & 0x07) << 10usize);
             }
-            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set"]
+            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set."]
             #[inline(always)]
             pub const fn cteinlinerxmode2us(&self) -> super::vals::Cteinlinerxmode2us {
                 let val = (self.0 >> 13usize) & 0x07;
                 super::vals::Cteinlinerxmode2us::from_bits(val as u8)
             }
-            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set"]
+            #[doc = "Spacing between samples for the samples in the SWITCHING period when CTEINLINEMODE is set."]
             #[inline(always)]
             pub fn set_cteinlinerxmode2us(&mut self, val: super::vals::Cteinlinerxmode2us) {
                 self.0 =
@@ -13603,13 +13777,13 @@ pub mod radio {
             pub fn set_frequency(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
             }
-            #[doc = "Channel map selection."]
+            #[doc = "Channel map selection"]
             #[inline(always)]
             pub const fn map(&self) -> super::vals::Map {
                 let val = (self.0 >> 8usize) & 0x01;
                 super::vals::Map::from_bits(val as u8)
             }
-            #[doc = "Channel map selection."]
+            #[doc = "Channel map selection"]
             #[inline(always)]
             pub fn set_map(&mut self, val: super::vals::Map) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
@@ -13982,35 +14156,35 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Pcnf0(pub u32);
         impl Pcnf0 {
-            #[doc = "Length on air of LENGTH field in number of bits."]
+            #[doc = "Length on air of LENGTH field in number of bits"]
             #[inline(always)]
             pub const fn lflen(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x0f;
                 val as u8
             }
-            #[doc = "Length on air of LENGTH field in number of bits."]
+            #[doc = "Length on air of LENGTH field in number of bits"]
             #[inline(always)]
             pub fn set_lflen(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
             }
-            #[doc = "Length on air of S0 field in number of bytes."]
+            #[doc = "Length on air of S0 field in number of bytes"]
             #[inline(always)]
             pub const fn s0len(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
-            #[doc = "Length on air of S0 field in number of bytes."]
+            #[doc = "Length on air of S0 field in number of bytes"]
             #[inline(always)]
             pub fn set_s0len(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
-            #[doc = "Length on air of S1 field in number of bits."]
+            #[doc = "Length on air of S1 field in number of bits"]
             #[inline(always)]
             pub const fn s1len(&self) -> u8 {
                 let val = (self.0 >> 16usize) & 0x0f;
                 val as u8
             }
-            #[doc = "Length on air of S1 field in number of bits."]
+            #[doc = "Length on air of S1 field in number of bits"]
             #[inline(always)]
             pub fn set_s1len(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
@@ -14322,13 +14496,13 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rssisample(pub u32);
         impl Rssisample {
-            #[doc = "RSSI sample"]
+            #[doc = "RSSI sample."]
             #[inline(always)]
             pub const fn rssisample(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x7f;
                 val as u8
             }
-            #[doc = "RSSI sample"]
+            #[doc = "RSSI sample."]
             #[inline(always)]
             pub fn set_rssisample(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
@@ -14759,13 +14933,13 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Switchpattern(pub u32);
         impl Switchpattern {
-            #[doc = "Fill array of GPIO patterns for antenna control"]
+            #[doc = "Fill array of GPIO patterns for antenna control."]
             #[inline(always)]
             pub const fn switchpattern(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Fill array of GPIO patterns for antenna control"]
+            #[doc = "Fill array of GPIO patterns for antenna control."]
             #[inline(always)]
             pub fn set_switchpattern(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -14782,13 +14956,13 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Tifs(pub u32);
         impl Tifs {
-            #[doc = "Interframe spacing in us"]
+            #[doc = "Interframe spacing in us."]
             #[inline(always)]
             pub const fn tifs(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x03ff;
                 val as u16
             }
-            #[doc = "Interframe spacing in us"]
+            #[doc = "Interframe spacing in us."]
             #[inline(always)]
             pub fn set_tifs(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x03ff << 0usize)) | (((val as u32) & 0x03ff) << 0usize);
@@ -14983,17 +15157,17 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Cteinlinerxmode1us {
             _RESERVED_0 = 0x0,
-            #[doc = "4us"]
+            #[doc = "4 us"]
             _4US = 0x01,
-            #[doc = "2us"]
+            #[doc = "2 us"]
             _2US = 0x02,
-            #[doc = "1us"]
+            #[doc = "1 us"]
             _1US = 0x03,
-            #[doc = "0.5us"]
+            #[doc = "0.5 us"]
             _500NS = 0x04,
-            #[doc = "0.25us"]
+            #[doc = "0.25 us"]
             _250NS = 0x05,
-            #[doc = "0.125us"]
+            #[doc = "0.125 us"]
             _125NS = 0x06,
             _RESERVED_7 = 0x07,
         }
@@ -15023,17 +15197,17 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Cteinlinerxmode2us {
             _RESERVED_0 = 0x0,
-            #[doc = "4us"]
+            #[doc = "4 us"]
             _4US = 0x01,
-            #[doc = "2us"]
+            #[doc = "2 us"]
             _2US = 0x02,
-            #[doc = "1us"]
+            #[doc = "1 us"]
             _1US = 0x03,
-            #[doc = "0.5us"]
+            #[doc = "0.5 us"]
             _500NS = 0x04,
-            #[doc = "0.25us"]
+            #[doc = "0.25 us"]
             _250NS = 0x05,
-            #[doc = "0.125us"]
+            #[doc = "0.125 us"]
             _125NS = 0x06,
             _RESERVED_7 = 0x07,
         }
@@ -15062,11 +15236,11 @@ pub mod radio {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Ctetimevalidrange {
-            #[doc = "20 in 8us unit (default) Set to 20 if parsed CTETime is larger han 20"]
+            #[doc = "20 in 8 us unit (default) Set to 20 if parsed CTETime is larger than 20"]
             _20 = 0x0,
-            #[doc = "31 in 8us unit"]
+            #[doc = "31 in 8 us unit"]
             _31 = 0x01,
-            #[doc = "63 in 8us unit"]
+            #[doc = "63 in 8 us unit"]
             _63 = 0x02,
             _RESERVED_3 = 0x03,
         }
@@ -15443,7 +15617,7 @@ pub mod radio {
         pub enum Ru {
             #[doc = "Default ramp-up time (tRXEN and tTXEN), compatible with firmware written for nRF51"]
             DEFAULT = 0x0,
-            #[doc = "Fast ramp-up (tRXEN,FAST and tTXEN,FAST), see electrical specification for more information"]
+            #[doc = "Fast ramp-up (tRXEN,FAST and tTXEN,FAST), see electrical specifications for more information"]
             FAST = 0x01,
         }
         impl Ru {
@@ -15686,17 +15860,17 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Tsamplespacing {
             _RESERVED_0 = 0x0,
-            #[doc = "4us"]
+            #[doc = "4 us"]
             _4US = 0x01,
-            #[doc = "2us"]
+            #[doc = "2 us"]
             _2US = 0x02,
-            #[doc = "1us"]
+            #[doc = "1 us"]
             _1US = 0x03,
-            #[doc = "0.5us"]
+            #[doc = "0.5 us"]
             _500NS = 0x04,
-            #[doc = "0.25us"]
+            #[doc = "0.25 us"]
             _250NS = 0x05,
-            #[doc = "0.125us"]
+            #[doc = "0.125 us"]
             _125NS = 0x06,
             _RESERVED_7 = 0x07,
         }
@@ -15726,17 +15900,17 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Tsamplespacingref {
             _RESERVED_0 = 0x0,
-            #[doc = "4us"]
+            #[doc = "4 us"]
             _4US = 0x01,
-            #[doc = "2us"]
+            #[doc = "2 us"]
             _2US = 0x02,
-            #[doc = "1us"]
+            #[doc = "1 us"]
             _1US = 0x03,
-            #[doc = "0.5us"]
+            #[doc = "0.5 us"]
             _500NS = 0x04,
-            #[doc = "0.25us"]
+            #[doc = "0.25 us"]
             _250NS = 0x05,
-            #[doc = "0.125us"]
+            #[doc = "0.125 us"]
             _125NS = 0x06,
             _RESERVED_7 = 0x07,
         }
@@ -15766,11 +15940,11 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Tswitchspacing {
             _RESERVED_0 = 0x0,
-            #[doc = "4us"]
+            #[doc = "4 us"]
             _4US = 0x01,
-            #[doc = "2us"]
+            #[doc = "2 us"]
             _2US = 0x02,
-            #[doc = "1us"]
+            #[doc = "1 us"]
             _1US = 0x03,
             _RESERVED_4 = 0x04,
             _RESERVED_5 = 0x05,
@@ -16334,7 +16508,7 @@ pub mod rtc {
         pub const fn counter(self) -> crate::common::Reg<regs::Counter, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
         }
-        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)).Must be written when RTC is stopped"]
+        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)). Must be written when RTC is stopped."]
         #[inline(always)]
         pub const fn prescaler(self) -> crate::common::Reg<regs::Prescaler, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
@@ -16707,7 +16881,7 @@ pub mod rtc {
                 Inten(0)
             }
         }
-        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)).Must be written when RTC is stopped"]
+        #[doc = "12 bit prescaler for COUNTER frequency (32768/(PRESCALER+1)). Must be written when RTC is stopped."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Prescaler(pub u32);
@@ -18356,13 +18530,13 @@ pub mod spi {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Txd(pub u32);
         impl Txd {
-            #[doc = "TX data to send. Double buffered"]
+            #[doc = "TX data to send. Double buffered."]
             #[inline(always)]
             pub const fn txd(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "TX data to send. Double buffered"]
+            #[doc = "TX data to send. Double buffered."]
             #[inline(always)]
             pub fn set_txd(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -18733,7 +18907,7 @@ pub mod spim {
         pub const fn intenclr(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
         }
-        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register is set to STALL by hardware whenever a stall occurres and can be cleared (set to NOSTALL) by the CPU."]
+        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register are set to STALL by hardware whenever a stall occurs and can be cleared (set to NOSTALL) by the CPU."]
         #[inline(always)]
         pub const fn stallstat(self) -> crate::common::Reg<regs::Stallstat, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
@@ -19200,7 +19374,7 @@ pub mod spim {
                 Shorts(0)
             }
         }
-        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register is set to STALL by hardware whenever a stall occurres and can be cleared (set to NOSTALL) by the CPU."]
+        #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register are set to STALL by hardware whenever a stall occurs and can be cleared (set to NOSTALL) by the CPU."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Stallstat(pub u32);
@@ -20481,105 +20655,105 @@ pub mod temp {
         pub const fn temp(self) -> crate::common::Reg<u32, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
         }
-        #[doc = "Slope of 1st piece wise linear function"]
+        #[doc = "Slope of first piecewise linear function"]
         #[inline(always)]
         pub const fn a0(self) -> crate::common::Reg<regs::A0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
         }
-        #[doc = "Slope of 2nd piece wise linear function"]
+        #[doc = "Slope of second piecewise linear function"]
         #[inline(always)]
         pub const fn a1(self) -> crate::common::Reg<regs::A1, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
         }
-        #[doc = "Slope of 3rd piece wise linear function"]
+        #[doc = "Slope of third piecewise linear function"]
         #[inline(always)]
         pub const fn a2(self) -> crate::common::Reg<regs::A2, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0528usize) as _) }
         }
-        #[doc = "Slope of 4th piece wise linear function"]
+        #[doc = "Slope of fourth piecewise linear function"]
         #[inline(always)]
         pub const fn a3(self) -> crate::common::Reg<regs::A3, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x052cusize) as _) }
         }
-        #[doc = "Slope of 5th piece wise linear function"]
+        #[doc = "Slope of fifth piecewise linear function"]
         #[inline(always)]
         pub const fn a4(self) -> crate::common::Reg<regs::A4, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0530usize) as _) }
         }
-        #[doc = "Slope of 6th piece wise linear function"]
+        #[doc = "Slope of sixth piecewise linear function"]
         #[inline(always)]
         pub const fn a5(self) -> crate::common::Reg<regs::A5, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0534usize) as _) }
         }
-        #[doc = "y-intercept of 1st piece wise linear function"]
+        #[doc = "y-intercept of first piecewise linear function"]
         #[inline(always)]
         pub const fn b0(self) -> crate::common::Reg<regs::B0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize) as _) }
         }
-        #[doc = "y-intercept of 2nd piece wise linear function"]
+        #[doc = "y-intercept of second piecewise linear function"]
         #[inline(always)]
         pub const fn b1(self) -> crate::common::Reg<regs::B1, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0544usize) as _) }
         }
-        #[doc = "y-intercept of 3rd piece wise linear function"]
+        #[doc = "y-intercept of third piecewise linear function"]
         #[inline(always)]
         pub const fn b2(self) -> crate::common::Reg<regs::B2, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0548usize) as _) }
         }
-        #[doc = "y-intercept of 4th piece wise linear function"]
+        #[doc = "y-intercept of fourth piecewise linear function"]
         #[inline(always)]
         pub const fn b3(self) -> crate::common::Reg<regs::B3, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x054cusize) as _) }
         }
-        #[doc = "y-intercept of 5th piece wise linear function"]
+        #[doc = "y-intercept of fifth piecewise linear function"]
         #[inline(always)]
         pub const fn b4(self) -> crate::common::Reg<regs::B4, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0550usize) as _) }
         }
-        #[doc = "y-intercept of 6th piece wise linear function"]
+        #[doc = "y-intercept of sixth piecewise linear function"]
         #[inline(always)]
         pub const fn b5(self) -> crate::common::Reg<regs::B5, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0554usize) as _) }
         }
-        #[doc = "End point of 1st piece wise linear function"]
+        #[doc = "End point of first piecewise linear function"]
         #[inline(always)]
         pub const fn t0(self) -> crate::common::Reg<regs::T0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0560usize) as _) }
         }
-        #[doc = "End point of 2nd piece wise linear function"]
+        #[doc = "End point of second piecewise linear function"]
         #[inline(always)]
         pub const fn t1(self) -> crate::common::Reg<regs::T1, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0564usize) as _) }
         }
-        #[doc = "End point of 3rd piece wise linear function"]
+        #[doc = "End point of third piecewise linear function"]
         #[inline(always)]
         pub const fn t2(self) -> crate::common::Reg<regs::T2, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0568usize) as _) }
         }
-        #[doc = "End point of 4th piece wise linear function"]
+        #[doc = "End point of fourth piecewise linear function"]
         #[inline(always)]
         pub const fn t3(self) -> crate::common::Reg<regs::T3, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x056cusize) as _) }
         }
-        #[doc = "End point of 5th piece wise linear function"]
+        #[doc = "End point of fifth piecewise linear function"]
         #[inline(always)]
         pub const fn t4(self) -> crate::common::Reg<regs::T4, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0570usize) as _) }
         }
     }
     pub mod regs {
-        #[doc = "Slope of 1st piece wise linear function"]
+        #[doc = "Slope of first piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A0(pub u32);
         impl A0 {
-            #[doc = "Slope of 1st piece wise linear function"]
+            #[doc = "Slope of first piecewise linear function"]
             #[inline(always)]
             pub const fn a0(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 1st piece wise linear function"]
+            #[doc = "Slope of first piecewise linear function"]
             #[inline(always)]
             pub fn set_a0(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20591,18 +20765,18 @@ pub mod temp {
                 A0(0)
             }
         }
-        #[doc = "Slope of 2nd piece wise linear function"]
+        #[doc = "Slope of second piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A1(pub u32);
         impl A1 {
-            #[doc = "Slope of 2nd piece wise linear function"]
+            #[doc = "Slope of second piecewise linear function"]
             #[inline(always)]
             pub const fn a1(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 2nd piece wise linear function"]
+            #[doc = "Slope of second piecewise linear function"]
             #[inline(always)]
             pub fn set_a1(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20614,18 +20788,18 @@ pub mod temp {
                 A1(0)
             }
         }
-        #[doc = "Slope of 3rd piece wise linear function"]
+        #[doc = "Slope of third piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A2(pub u32);
         impl A2 {
-            #[doc = "Slope of 3rd piece wise linear function"]
+            #[doc = "Slope of third piecewise linear function"]
             #[inline(always)]
             pub const fn a2(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 3rd piece wise linear function"]
+            #[doc = "Slope of third piecewise linear function"]
             #[inline(always)]
             pub fn set_a2(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20637,18 +20811,18 @@ pub mod temp {
                 A2(0)
             }
         }
-        #[doc = "Slope of 4th piece wise linear function"]
+        #[doc = "Slope of fourth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A3(pub u32);
         impl A3 {
-            #[doc = "Slope of 4th piece wise linear function"]
+            #[doc = "Slope of fourth piecewise linear function"]
             #[inline(always)]
             pub const fn a3(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 4th piece wise linear function"]
+            #[doc = "Slope of fourth piecewise linear function"]
             #[inline(always)]
             pub fn set_a3(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20660,18 +20834,18 @@ pub mod temp {
                 A3(0)
             }
         }
-        #[doc = "Slope of 5th piece wise linear function"]
+        #[doc = "Slope of fifth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A4(pub u32);
         impl A4 {
-            #[doc = "Slope of 5th piece wise linear function"]
+            #[doc = "Slope of fifth piecewise linear function"]
             #[inline(always)]
             pub const fn a4(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 5th piece wise linear function"]
+            #[doc = "Slope of fifth piecewise linear function"]
             #[inline(always)]
             pub fn set_a4(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20683,18 +20857,18 @@ pub mod temp {
                 A4(0)
             }
         }
-        #[doc = "Slope of 6th piece wise linear function"]
+        #[doc = "Slope of sixth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct A5(pub u32);
         impl A5 {
-            #[doc = "Slope of 6th piece wise linear function"]
+            #[doc = "Slope of sixth piecewise linear function"]
             #[inline(always)]
             pub const fn a5(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Slope of 6th piece wise linear function"]
+            #[doc = "Slope of sixth piecewise linear function"]
             #[inline(always)]
             pub fn set_a5(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -20706,18 +20880,18 @@ pub mod temp {
                 A5(0)
             }
         }
-        #[doc = "y-intercept of 1st piece wise linear function"]
+        #[doc = "y-intercept of first piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B0(pub u32);
         impl B0 {
-            #[doc = "y-intercept of 1st piece wise linear function"]
+            #[doc = "y-intercept of first piecewise linear function"]
             #[inline(always)]
             pub const fn b0(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 1st piece wise linear function"]
+            #[doc = "y-intercept of first piecewise linear function"]
             #[inline(always)]
             pub fn set_b0(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -20729,18 +20903,18 @@ pub mod temp {
                 B0(0)
             }
         }
-        #[doc = "y-intercept of 2nd piece wise linear function"]
+        #[doc = "y-intercept of second piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B1(pub u32);
         impl B1 {
-            #[doc = "y-intercept of 2nd piece wise linear function"]
+            #[doc = "y-intercept of second piecewise linear function"]
             #[inline(always)]
             pub const fn b1(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 2nd piece wise linear function"]
+            #[doc = "y-intercept of second piecewise linear function"]
             #[inline(always)]
             pub fn set_b1(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -20752,18 +20926,18 @@ pub mod temp {
                 B1(0)
             }
         }
-        #[doc = "y-intercept of 3rd piece wise linear function"]
+        #[doc = "y-intercept of third piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B2(pub u32);
         impl B2 {
-            #[doc = "y-intercept of 3rd piece wise linear function"]
+            #[doc = "y-intercept of third piecewise linear function"]
             #[inline(always)]
             pub const fn b2(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 3rd piece wise linear function"]
+            #[doc = "y-intercept of third piecewise linear function"]
             #[inline(always)]
             pub fn set_b2(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -20775,18 +20949,18 @@ pub mod temp {
                 B2(0)
             }
         }
-        #[doc = "y-intercept of 4th piece wise linear function"]
+        #[doc = "y-intercept of fourth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B3(pub u32);
         impl B3 {
-            #[doc = "y-intercept of 4th piece wise linear function"]
+            #[doc = "y-intercept of fourth piecewise linear function"]
             #[inline(always)]
             pub const fn b3(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 4th piece wise linear function"]
+            #[doc = "y-intercept of fourth piecewise linear function"]
             #[inline(always)]
             pub fn set_b3(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -20798,18 +20972,18 @@ pub mod temp {
                 B3(0)
             }
         }
-        #[doc = "y-intercept of 5th piece wise linear function"]
+        #[doc = "y-intercept of fifth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B4(pub u32);
         impl B4 {
-            #[doc = "y-intercept of 5th piece wise linear function"]
+            #[doc = "y-intercept of fifth piecewise linear function"]
             #[inline(always)]
             pub const fn b4(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 5th piece wise linear function"]
+            #[doc = "y-intercept of fifth piecewise linear function"]
             #[inline(always)]
             pub fn set_b4(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -20821,18 +20995,18 @@ pub mod temp {
                 B4(0)
             }
         }
-        #[doc = "y-intercept of 6th piece wise linear function"]
+        #[doc = "y-intercept of sixth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct B5(pub u32);
         impl B5 {
-            #[doc = "y-intercept of 6th piece wise linear function"]
+            #[doc = "y-intercept of sixth piecewise linear function"]
             #[inline(always)]
             pub const fn b5(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
                 val as u16
             }
-            #[doc = "y-intercept of 6th piece wise linear function"]
+            #[doc = "y-intercept of sixth piecewise linear function"]
             #[inline(always)]
             pub fn set_b5(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -20867,18 +21041,18 @@ pub mod temp {
                 Inten(0)
             }
         }
-        #[doc = "End point of 1st piece wise linear function"]
+        #[doc = "End point of first piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T0(pub u32);
         impl T0 {
-            #[doc = "End point of 1st piece wise linear function"]
+            #[doc = "End point of first piecewise linear function"]
             #[inline(always)]
             pub const fn t0(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 1st piece wise linear function"]
+            #[doc = "End point of first piecewise linear function"]
             #[inline(always)]
             pub fn set_t0(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -20890,18 +21064,18 @@ pub mod temp {
                 T0(0)
             }
         }
-        #[doc = "End point of 2nd piece wise linear function"]
+        #[doc = "End point of second piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T1(pub u32);
         impl T1 {
-            #[doc = "End point of 2nd piece wise linear function"]
+            #[doc = "End point of second piecewise linear function"]
             #[inline(always)]
             pub const fn t1(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 2nd piece wise linear function"]
+            #[doc = "End point of second piecewise linear function"]
             #[inline(always)]
             pub fn set_t1(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -20913,18 +21087,18 @@ pub mod temp {
                 T1(0)
             }
         }
-        #[doc = "End point of 3rd piece wise linear function"]
+        #[doc = "End point of third piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T2(pub u32);
         impl T2 {
-            #[doc = "End point of 3rd piece wise linear function"]
+            #[doc = "End point of third piecewise linear function"]
             #[inline(always)]
             pub const fn t2(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 3rd piece wise linear function"]
+            #[doc = "End point of third piecewise linear function"]
             #[inline(always)]
             pub fn set_t2(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -20936,18 +21110,18 @@ pub mod temp {
                 T2(0)
             }
         }
-        #[doc = "End point of 4th piece wise linear function"]
+        #[doc = "End point of fourth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T3(pub u32);
         impl T3 {
-            #[doc = "End point of 4th piece wise linear function"]
+            #[doc = "End point of fourth piecewise linear function"]
             #[inline(always)]
             pub const fn t3(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 4th piece wise linear function"]
+            #[doc = "End point of fourth piecewise linear function"]
             #[inline(always)]
             pub fn set_t3(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -20959,18 +21133,18 @@ pub mod temp {
                 T3(0)
             }
         }
-        #[doc = "End point of 5th piece wise linear function"]
+        #[doc = "End point of fifth piecewise linear function"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct T4(pub u32);
         impl T4 {
-            #[doc = "End point of 5th piece wise linear function"]
+            #[doc = "End point of fifth piecewise linear function"]
             #[inline(always)]
             pub const fn t4(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "End point of 5th piece wise linear function"]
+            #[doc = "End point of fifth piecewise linear function"]
             #[inline(always)]
             pub fn set_t4(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -21904,7 +22078,7 @@ pub mod twim {
         pub const fn events_error(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0124usize) as _) }
         }
-        #[doc = "Last byte has been sent out after the SUSPEND task has been issued, TWI traffic is now suspended."]
+        #[doc = "SUSPEND task has been issued, TWI traffic is now suspended."]
         #[inline(always)]
         pub const fn events_suspended(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0148usize) as _) }
@@ -23046,13 +23220,13 @@ pub mod twis {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Match(pub u32);
         impl Match {
-            #[doc = "Which of the addresses in {ADDRESS} matched the incoming address"]
+            #[doc = "Indication of which address in {ADDRESS} that matched the incoming address"]
             #[inline(always)]
             pub const fn match_(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Which of the addresses in {ADDRESS} matched the incoming address"]
+            #[doc = "Indication of which address in {ADDRESS} that matched the incoming address"]
             #[inline(always)]
             pub fn set_match_(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -24272,7 +24446,7 @@ pub mod uarte {
         pub const fn intenclr(self) -> crate::common::Reg<regs::Inten, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
         }
-        #[doc = "Error source Note : this register is read / write one to clear."]
+        #[doc = "Error source This register is read/write one to clear."]
         #[inline(always)]
         pub const fn errorsrc(self) -> crate::common::Reg<regs::Errorsrc, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0480usize) as _) }
@@ -24412,7 +24586,7 @@ pub mod uarte {
                 Enable(0)
             }
         }
-        #[doc = "Error source Note : this register is read / write one to clear."]
+        #[doc = "Error source This register is read/write one to clear."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Errorsrc(pub u32);
@@ -24767,7 +24941,7 @@ pub mod uarte {
             pub const BAUD460800: Self = Self(0x0740_0000);
             #[doc = "921600 baud (actual rate: 941176)"]
             pub const BAUD921600: Self = Self(0x0f00_0000);
-            #[doc = "1Mega baud"]
+            #[doc = "1 megabaud"]
             pub const BAUD1M: Self = Self(0x1000_0000);
         }
         impl Baudrate {
@@ -24991,7 +25165,7 @@ pub mod uicr {
         pub const fn debugctrl(self) -> crate::common::Reg<regs::Debugctrl, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0210usize) as _) }
         }
-        #[doc = "Output voltage from REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - VREG0DROP."]
+        #[doc = "Output voltage from REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - V_VDDH-VDD."]
         #[inline(always)]
         pub const fn regout0(self) -> crate::common::Reg<regs::Regout0, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
@@ -25078,7 +25252,7 @@ pub mod uicr {
                 Nfcpins(0)
             }
         }
-        #[doc = "Output voltage from REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - VREG0DROP."]
+        #[doc = "Output voltage from REG0 regulator stage. The maximum output voltage from this stage is given as VDDH - V_VDDH-VDD."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Regout0(pub u32);
@@ -25167,7 +25341,9 @@ pub mod uicr {
         impl Pall {
             #[doc = "Enable"]
             pub const ENABLED: Self = Self(0x0);
-            #[doc = "Disable"]
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware and software"]
+            pub const HW_DISABLED: Self = Self(0x5a);
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware"]
             pub const DISABLED: Self = Self(0xff);
         }
         impl Pall {
@@ -25193,9 +25369,9 @@ pub mod uicr {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Protect {
-            #[doc = "Operation as GPIO pins. Same protection as normal GPIO pins"]
+            #[doc = "Operation as GPIO pins. Same protection as normal GPIO pins."]
             DISABLED = 0x0,
-            #[doc = "Operation as NFC antenna pins. Configures the protection for NFC operation"]
+            #[doc = "Operation as NFC antenna pins. Configures the protection for NFC operation."]
             NFC = 0x01,
         }
         impl Protect {
@@ -27405,7 +27581,7 @@ pub mod usbd {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Split(pub u16);
         impl Split {
-            #[doc = "Full buffer dedicated to either iso IN or OUT"]
+            #[doc = "Full buffer dedicated to either ISO IN or OUT"]
             pub const ONE_DIR: Self = Self(0x0);
             #[doc = "Lower half for IN, upper half for OUT"]
             pub const HALF_IN: Self = Self(0x80);

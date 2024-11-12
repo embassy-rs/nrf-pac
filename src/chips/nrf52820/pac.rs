@@ -1,4 +1,4 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (218daa7 2024-01-15))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (4df74f6 2024-11-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - POWER_CLOCK"]
@@ -218,7 +218,7 @@ pub const RNG: rng::Rng = unsafe { rng::Rng::from_ptr(0x4000_d000usize as _) };
 pub const ECB: ecb::Ecb = unsafe { ecb::Ecb::from_ptr(0x4000_e000usize as _) };
 #[doc = "Accelerated Address Resolver"]
 pub const AAR: aar::Aar = unsafe { aar::Aar::from_ptr(0x4000_f000usize as _) };
-#[doc = "AES CCM Mode Encryption"]
+#[doc = "AES CCM mode encryption"]
 pub const CCM: ccm::Ccm = unsafe { ccm::Ccm::from_ptr(0x4000_f000usize as _) };
 #[doc = "Watchdog Timer"]
 pub const WDT: wdt::Wdt = unsafe { wdt::Wdt::from_ptr(0x4001_0000usize as _) };
@@ -550,7 +550,7 @@ pub mod acl {
         pub const fn addr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Description cluster: Size of region to protect counting from address ACL\\[n\\].ADDR. Write '0' as no effect."]
+        #[doc = "Description cluster: Size of region to protect counting from address ACL\\[n\\].ADDR. Writing a '0' has no effect."]
         #[inline(always)]
         pub const fn size(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -567,24 +567,24 @@ pub mod acl {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Perm(pub u32);
         impl Perm {
-            #[doc = "Configure write and erase permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure write and erase permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub const fn write(&self) -> super::vals::Write {
                 let val = (self.0 >> 1usize) & 0x01;
                 super::vals::Write::from_bits(val as u8)
             }
-            #[doc = "Configure write and erase permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure write and erase permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub fn set_write(&mut self, val: super::vals::Write) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
             }
-            #[doc = "Configure read permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure read permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub const fn read(&self) -> super::vals::Read {
                 let val = (self.0 >> 2usize) & 0x01;
                 super::vals::Read::from_bits(val as u8)
             }
-            #[doc = "Configure read permissions for region n. Write '0' has no effect."]
+            #[doc = "Configure read permissions for region n. Writing a '0' has no effect."]
             #[inline(always)]
             pub fn set_read(&mut self, val: super::vals::Read) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
@@ -601,9 +601,9 @@ pub mod acl {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Read {
-            #[doc = "Allow read instructions to region n"]
+            #[doc = "Allow read instructions to region n."]
             ENABLE = 0x0,
-            #[doc = "Block read instructions to region n"]
+            #[doc = "Block read instructions to region n."]
             DISABLE = 0x01,
         }
         impl Read {
@@ -631,9 +631,9 @@ pub mod acl {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Write {
-            #[doc = "Allow write and erase instructions to region n"]
+            #[doc = "Allow write and erase instructions to region n."]
             ENABLE = 0x0,
-            #[doc = "Block write and erase instructions to region n"]
+            #[doc = "Block write and erase instructions to region n."]
             DISABLE = 0x01,
         }
         impl Write {
@@ -796,7 +796,7 @@ pub mod approtect {
     }
 }
 pub mod ccm {
-    #[doc = "AES CCM Mode Encryption"]
+    #[doc = "AES CCM mode encryption"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Ccm {
         ptr: *mut u8,
@@ -877,7 +877,7 @@ pub mod ccm {
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
         }
-        #[doc = "Pointer to data structure holding AES key and NONCE vector"]
+        #[doc = "Pointer to data structure holding the AES key and the NONCE vector"]
         #[inline(always)]
         pub const fn cnfptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
@@ -897,7 +897,7 @@ pub mod ccm {
         pub const fn scratchptr(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
         }
-        #[doc = "Length of keystream generated when MODE.LENGTH = Extended."]
+        #[doc = "Length of keystream generated when MODE.LENGTH = Extended"]
         #[inline(always)]
         pub const fn maxpacketsize(
             self,
@@ -910,6 +910,11 @@ pub mod ccm {
             self,
         ) -> crate::common::Reg<regs::Rateoverride, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize) as _) }
+        }
+        #[doc = "Header (S0) mask."]
+        #[inline(always)]
+        pub const fn headermask(self) -> crate::common::Reg<regs::Headermask, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
         }
     }
     pub mod regs {
@@ -934,6 +939,29 @@ pub mod ccm {
             #[inline(always)]
             fn default() -> Enable {
                 Enable(0)
+            }
+        }
+        #[doc = "Header (S0) mask."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Headermask(pub u32);
+        impl Headermask {
+            #[doc = "Header (S0) mask"]
+            #[inline(always)]
+            pub const fn headermask(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[doc = "Header (S0) mask"]
+            #[inline(always)]
+            pub fn set_headermask(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Headermask {
+            #[inline(always)]
+            fn default() -> Headermask {
+                Headermask(0)
             }
         }
         #[doc = "Disable interrupt"]
@@ -981,18 +1009,18 @@ pub mod ccm {
                 Inten(0)
             }
         }
-        #[doc = "Length of keystream generated when MODE.LENGTH = Extended."]
+        #[doc = "Length of keystream generated when MODE.LENGTH = Extended"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Maxpacketsize(pub u32);
         impl Maxpacketsize {
-            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater or equal to the subsequent packet payload to be encrypted/decrypted."]
+            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater than or equal to the subsequent packet payload to be encrypted/decrypted."]
             #[inline(always)]
             pub const fn maxpacketsize(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater or equal to the subsequent packet payload to be encrypted/decrypted."]
+            #[doc = "Length of keystream generated when MODE.LENGTH = Extended. This value must be greater than or equal to the subsequent packet payload to be encrypted/decrypted."]
             #[inline(always)]
             pub fn set_maxpacketsize(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1032,13 +1060,13 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Mode(pub u32);
         impl Mode {
-            #[doc = "The mode of operation to be used. The settings in this register apply whenever either the KSGEN or CRYPT tasks are triggered."]
+            #[doc = "The mode of operation to be used. Settings in this register apply whenever either the KSGEN task or the CRYPT task is triggered."]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 0usize) & 0x01;
                 super::vals::Mode::from_bits(val as u8)
             }
-            #[doc = "The mode of operation to be used. The settings in this register apply whenever either the KSGEN or CRYPT tasks are triggered."]
+            #[doc = "The mode of operation to be used. Settings in this register apply whenever either the KSGEN task or the CRYPT task is triggered."]
             #[inline(always)]
             pub fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
@@ -1079,13 +1107,13 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rateoverride(pub u32);
         impl Rateoverride {
-            #[doc = "Data rate override setting."]
+            #[doc = "Data rate override setting"]
             #[inline(always)]
             pub const fn rateoverride(&self) -> super::vals::Rateoverride {
                 let val = (self.0 >> 0usize) & 0x03;
                 super::vals::Rateoverride::from_bits(val as u8)
             }
-            #[doc = "Data rate override setting."]
+            #[doc = "Data rate override setting"]
             #[inline(always)]
             pub fn set_rateoverride(&mut self, val: super::vals::Rateoverride) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
@@ -1129,9 +1157,9 @@ pub mod ccm {
             _1MBIT = 0x0,
             #[doc = "2 Mbps"]
             _2MBIT = 0x01,
-            #[doc = "125 Kbps"]
+            #[doc = "125 kbps"]
             _125KBPS = 0x02,
-            #[doc = "500 Kbps"]
+            #[doc = "500 kbps"]
             _500KBPS = 0x03,
         }
         impl Datarate {
@@ -1285,9 +1313,9 @@ pub mod ccm {
             _1MBIT = 0x0,
             #[doc = "2 Mbps"]
             _2MBIT = 0x01,
-            #[doc = "125 Kbps"]
+            #[doc = "125 kbps"]
             _125KBPS = 0x02,
-            #[doc = "500 Kbps"]
+            #[doc = "500 kbps"]
             _500KBPS = 0x03,
         }
         impl Rateoverride {
@@ -3694,15 +3722,15 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Flash(pub u32);
         impl Flash {
-            #[doc = "128 kByte FLASH"]
+            #[doc = "128 kB FLASH"]
             pub const K128: Self = Self(0x80);
-            #[doc = "256 kByte FLASH"]
+            #[doc = "256 kB FLASH"]
             pub const K256: Self = Self(0x0100);
-            #[doc = "512 kByte FLASH"]
+            #[doc = "512 kB FLASH"]
             pub const K512: Self = Self(0x0200);
-            #[doc = "1 MByte FLASH"]
+            #[doc = "1 MB FLASH"]
             pub const K1024: Self = Self(0x0400);
-            #[doc = "2 MByte FLASH"]
+            #[doc = "2 MB FLASH"]
             pub const K2048: Self = Self(0x0800);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
@@ -3822,15 +3850,15 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Ram(pub u32);
         impl Ram {
-            #[doc = "16 kByte RAM"]
+            #[doc = "16 kB RAM"]
             pub const K16: Self = Self(0x10);
-            #[doc = "32 kByte RAM"]
+            #[doc = "32 kB RAM"]
             pub const K32: Self = Self(0x20);
-            #[doc = "64 kByte RAM"]
+            #[doc = "64 kB RAM"]
             pub const K64: Self = Self(0x40);
-            #[doc = "128 kByte RAM"]
+            #[doc = "128 kB RAM"]
             pub const K128: Self = Self(0x80);
-            #[doc = "256 kByte RAM"]
+            #[doc = "256 kB RAM"]
             pub const K256: Self = Self(0x0100);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
@@ -3867,6 +3895,8 @@ pub mod ficr {
             pub const AAC0: Self = Self(0x4141_4330);
             #[doc = "AAC1"]
             pub const AAC1: Self = Self(0x4141_4331);
+            #[doc = "AAD0"]
+            pub const AAD0: Self = Self(0x4141_4430);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
         }
@@ -7872,24 +7902,24 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Dfectrl2(pub u32);
         impl Dfectrl2 {
-            #[doc = "Signed value offset after the end of the CRC before starting switching in number of 16M cycles"]
+            #[doc = "Signed value offset after the end of the CRC before starting switching in number of 16 MHz clock cycles"]
             #[inline(always)]
             pub const fn tswitchoffset(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
                 val as u16
             }
-            #[doc = "Signed value offset after the end of the CRC before starting switching in number of 16M cycles"]
+            #[doc = "Signed value offset after the end of the CRC before starting switching in number of 16 MHz clock cycles"]
             #[inline(always)]
             pub fn set_tswitchoffset(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
-            #[doc = "Signed value offset before starting sampling in number of 16M cycles relative to the beginning of the REFERENCE state - 12 us after switching start"]
+            #[doc = "Signed value offset in number of 16 MHz clock cycles for fine tuning of the sampling instant for all IQ samples. With TSAMPLEOFFSET=0 the first sample is taken immediately at the start of the reference period"]
             #[inline(always)]
             pub const fn tsampleoffset(&self) -> u16 {
                 let val = (self.0 >> 16usize) & 0x0fff;
                 val as u16
             }
-            #[doc = "Signed value offset before starting sampling in number of 16M cycles relative to the beginning of the REFERENCE state - 12 us after switching start"]
+            #[doc = "Signed value offset in number of 16 MHz clock cycles for fine tuning of the sampling instant for all IQ samples. With TSAMPLEOFFSET=0 the first sample is taken immediately at the start of the reference period"]
             #[inline(always)]
             pub fn set_tsampleoffset(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 16usize)) | (((val as u32) & 0x0fff) << 16usize);
@@ -8445,13 +8475,13 @@ pub mod radio {
                 self.0 =
                     (self.0 & !(0x01 << 20usize)) | (((val.to_bits() as u32) & 0x01) << 20usize);
             }
-            #[doc = "Length of code indicator - long range"]
+            #[doc = "Length of code indicator - Long Range"]
             #[inline(always)]
             pub const fn cilen(&self) -> u8 {
                 let val = (self.0 >> 22usize) & 0x03;
                 val as u8
             }
-            #[doc = "Length of code indicator - long range"]
+            #[doc = "Length of code indicator - Long Range"]
             #[inline(always)]
             pub fn set_cilen(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x03 << 22usize)) | (((val as u32) & 0x03) << 22usize);
@@ -9673,9 +9703,9 @@ pub mod radio {
         #[repr(u8)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub enum Map {
-            #[doc = "Channel map between 2400 MHZ .. 2500 MHz"]
+            #[doc = "Channel map between 2400 MHz and 2500 MHz"]
             DEFAULT = 0x0,
-            #[doc = "Channel map between 2360 MHZ .. 2460 MHz"]
+            #[doc = "Channel map between 2360 MHz and 2460 MHz"]
             LOW = 0x01,
         }
         impl Map {
@@ -9712,9 +9742,9 @@ pub mod radio {
             BLE_1MBIT = 0x03,
             #[doc = "2 Mbps BLE"]
             BLE_2MBIT = 0x04,
-            #[doc = "Long range 125 kbps TX, 125 kbps and 500 kbps RX"]
+            #[doc = "Long Range 125 kbps TX, 125 kbps and 500 kbps RX"]
             BLE_LR125KBIT = 0x05,
-            #[doc = "Long range 500 kbps TX, 125 kbps and 500 kbps RX"]
+            #[doc = "Long Range 500 kbps TX, 125 kbps and 500 kbps RX"]
             BLE_LR500KBIT = 0x06,
             _RESERVED_7 = 0x07,
             _RESERVED_8 = 0x08,
@@ -9788,7 +9818,7 @@ pub mod radio {
             _16BIT = 0x01,
             #[doc = "32-bit zero preamble - used for IEEE 802.15.4"]
             _32BIT_ZERO = 0x02,
-            #[doc = "Preamble - used for BLE long range"]
+            #[doc = "Preamble - used for Bluetooth LE Long Range"]
             LONG_RANGE = 0x03,
         }
         impl Plen {

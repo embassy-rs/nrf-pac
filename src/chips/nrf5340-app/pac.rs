@@ -1,4 +1,4 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (218daa7 2024-01-15))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (4df74f6 2024-11-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - FPU"]
@@ -6769,7 +6769,7 @@ pub mod ficr_s {
         }
         #[doc = "Description cluster: Address of the PAR register which will be written"]
         #[inline(always)]
-        pub const fn addr(self) -> crate::common::Reg<u32, crate::common::RW> {
+        pub const fn addr(self) -> crate::common::Reg<u32, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Data"]
@@ -7437,6 +7437,8 @@ pub mod ficr_s {
         impl Package {
             #[doc = "QKxx - 94-pin aQFN"]
             pub const QK: Self = Self(0x2000);
+            #[doc = "CLxx - WLCSP"]
+            pub const CL: Self = Self(0x2005);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
         }
@@ -7532,6 +7534,8 @@ pub mod ficr_s {
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
         pub struct Variant(pub u32);
         impl Variant {
+            #[doc = "CLAA"]
+            pub const CLAA: Self = Self(0x434c_4141);
             #[doc = "QKAA"]
             pub const QKAA: Self = Self(0x514b_4141);
             #[doc = "Unspecified"]
@@ -17052,24 +17056,24 @@ pub mod qspi_ns {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Dpmdur(pub u32);
         impl Dpmdur {
-            #[doc = "Duration needed by external flash to enter DPM. Duration is given as ENTER * 256 * 62.5 ns."]
+            #[doc = "Duration needed by external flash to enter DPM. Duration is given as ENTER * 256 * 31.25 ns"]
             #[inline(always)]
             pub const fn enter(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0xffff;
                 val as u16
             }
-            #[doc = "Duration needed by external flash to enter DPM. Duration is given as ENTER * 256 * 62.5 ns."]
+            #[doc = "Duration needed by external flash to enter DPM. Duration is given as ENTER * 256 * 31.25 ns"]
             #[inline(always)]
             pub fn set_enter(&mut self, val: u16) {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
-            #[doc = "Duration needed by external flash to exit DPM. Duration is given as EXIT * 256 * 62.5 ns."]
+            #[doc = "Duration needed by external flash to exit DPM. Duration is given as EXIT * 256 * 31.25 ns."]
             #[inline(always)]
             pub const fn exit(&self) -> u16 {
                 let val = (self.0 >> 16usize) & 0xffff;
                 val as u16
             }
-            #[doc = "Duration needed by external flash to exit DPM. Duration is given as EXIT * 256 * 62.5 ns."]
+            #[doc = "Duration needed by external flash to exit DPM. Duration is given as EXIT * 256 * 31.25 ns."]
             #[inline(always)]
             pub fn set_exit(&mut self, val: u16) {
                 self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
@@ -17154,13 +17158,13 @@ pub mod qspi_ns {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Ifconfig1(pub u32);
         impl Ifconfig1 {
-            #[doc = "Minimum amount of time that the CSN pin must stay high before it can go low again. Value is specified in number of 16 MHz periods (62.5 ns)."]
+            #[doc = "Minimum amount of time that the CSN pin must stay high before it can go low again. Value is specified in number of 32 MHz periods (31.25 ns)."]
             #[inline(always)]
             pub const fn sckdelay(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Minimum amount of time that the CSN pin must stay high before it can go low again. Value is specified in number of 16 MHz periods (62.5 ns)."]
+            #[doc = "Minimum amount of time that the CSN pin must stay high before it can go low again. Value is specified in number of 32 MHz periods (31.25 ns)."]
             #[inline(always)]
             pub fn set_sckdelay(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -20494,7 +20498,7 @@ pub mod spim_ns {
         pub const fn rxdelay(self) -> crate::common::Reg<regs::Rxdelay, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
         }
-        #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions"]
+        #[doc = "Minimum duration between edge of CSN and edge of SCK. When SHORTS.END_START is used, this is also the minimum duration CSN must stay high between transactions."]
         #[inline(always)]
         pub const fn csndur(self) -> crate::common::Reg<regs::Csndur, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
@@ -20863,18 +20867,18 @@ pub mod spim_ns {
                 Config(0)
             }
         }
-        #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions"]
+        #[doc = "Minimum duration between edge of CSN and edge of SCK. When SHORTS.END_START is used, this is also the minimum duration CSN must stay high between transactions."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Csndur(pub u32);
         impl Csndur {
-            #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
+            #[doc = "Minimum duration between edge of CSN and edge of SCK. When SHORTS.END_START is used, this is the minimum duration CSN must stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
             #[inline(always)]
             pub const fn csndur(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Minimum duration between edge of CSN and edge of SCK and minimum duration CSN must stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
+            #[doc = "Minimum duration between edge of CSN and edge of SCK. When SHORTS.END_START is used, this is the minimum duration CSN must stay high between transactions. The value is specified in number of 64 MHz clock cycles (15.625 ns)."]
             #[inline(always)]
             pub fn set_csndur(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);

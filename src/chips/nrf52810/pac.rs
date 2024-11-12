@@ -1,4 +1,4 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (218daa7 2024-01-15))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (4df74f6 2024-11-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Interrupt {
     #[doc = "0 - POWER_CLOCK"]
@@ -150,6 +150,9 @@ pub const FICR: ficr::Ficr = unsafe { ficr::Ficr::from_ptr(0x1000_0000usize as _
 pub const UICR: uicr::Uicr = unsafe { uicr::Uicr::from_ptr(0x1000_1000usize as _) };
 #[doc = "Block Protect"]
 pub const BPROT: bprot::Bprot = unsafe { bprot::Bprot::from_ptr(0x4000_0000usize as _) };
+#[doc = "Only for emulation on devices that support hardened AP-PROTECT."]
+pub const APPROTECT: approtect::Approtect =
+    unsafe { approtect::Approtect::from_ptr(0x4000_0000usize as _) };
 #[doc = "Clock control"]
 pub const CLOCK: clock::Clock = unsafe { clock::Clock::from_ptr(0x4000_0000usize as _) };
 #[doc = "Power control"]
@@ -465,6 +468,141 @@ pub mod aar {
             #[inline(always)]
             fn from(val: Enable) -> u8 {
                 Enable::to_bits(val)
+            }
+        }
+    }
+}
+pub mod approtect {
+    #[doc = "Only for emulation on devices that support hardened AP-PROTECT."]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Approtect {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Approtect {}
+    unsafe impl Sync for Approtect {}
+    impl Approtect {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Software force enable APPROTECT mechanism until next reset."]
+        #[inline(always)]
+        pub const fn forceprotect(
+            self,
+        ) -> crate::common::Reg<regs::Forceprotect, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0550usize) as _) }
+        }
+        #[doc = "Software disable APPROTECT mechanism"]
+        #[inline(always)]
+        pub const fn disable(self) -> crate::common::Reg<regs::Disable, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0558usize) as _) }
+        }
+    }
+    pub mod regs {
+        #[doc = "Software disable APPROTECT mechanism"]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Disable(pub u32);
+        impl Disable {
+            #[doc = "Software disable APPROTECT mechanism"]
+            #[inline(always)]
+            pub const fn disable(&self) -> super::vals::Disable {
+                let val = (self.0 >> 0usize) & 0xff;
+                super::vals::Disable::from_bits(val as u8)
+            }
+            #[doc = "Software disable APPROTECT mechanism"]
+            #[inline(always)]
+            pub fn set_disable(&mut self, val: super::vals::Disable) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Disable {
+            #[inline(always)]
+            fn default() -> Disable {
+                Disable(0)
+            }
+        }
+        #[doc = "Software force enable APPROTECT mechanism until next reset."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Forceprotect(pub u32);
+        impl Forceprotect {
+            #[doc = "Write 0x0 to force enable APPROTECT mechanism"]
+            #[inline(always)]
+            pub const fn forceprotect(&self) -> super::vals::Forceprotect {
+                let val = (self.0 >> 0usize) & 0xff;
+                super::vals::Forceprotect::from_bits(val as u8)
+            }
+            #[doc = "Write 0x0 to force enable APPROTECT mechanism"]
+            #[inline(always)]
+            pub fn set_forceprotect(&mut self, val: super::vals::Forceprotect) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
+            }
+        }
+        impl Default for Forceprotect {
+            #[inline(always)]
+            fn default() -> Forceprotect {
+                Forceprotect(0)
+            }
+        }
+    }
+    pub mod vals {
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub struct Disable(pub u8);
+        impl Disable {
+            #[doc = "Software disable APPROTECT mechanism"]
+            pub const SW_DISABLE: Self = Self(0x5a);
+        }
+        impl Disable {
+            pub const fn from_bits(val: u8) -> Disable {
+                Self(val & 0xff)
+            }
+            pub const fn to_bits(self) -> u8 {
+                self.0
+            }
+        }
+        impl From<u8> for Disable {
+            #[inline(always)]
+            fn from(val: u8) -> Disable {
+                Disable::from_bits(val)
+            }
+        }
+        impl From<Disable> for u8 {
+            #[inline(always)]
+            fn from(val: Disable) -> u8 {
+                Disable::to_bits(val)
+            }
+        }
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+        pub struct Forceprotect(pub u8);
+        impl Forceprotect {
+            #[doc = "Software force enable APPROTECT mechanism"]
+            pub const FORCE: Self = Self(0x0);
+        }
+        impl Forceprotect {
+            pub const fn from_bits(val: u8) -> Forceprotect {
+                Self(val & 0xff)
+            }
+            pub const fn to_bits(self) -> u8 {
+                self.0
+            }
+        }
+        impl From<u8> for Forceprotect {
+            #[inline(always)]
+            fn from(val: u8) -> Forceprotect {
+                Forceprotect::from_bits(val)
+            }
+        }
+        impl From<Forceprotect> for u8 {
+            #[inline(always)]
+            fn from(val: Forceprotect) -> u8 {
+                Forceprotect::to_bits(val)
             }
         }
     }
@@ -3869,6 +4007,8 @@ pub mod ficr {
             pub const QF: Self = Self(0x2000);
             #[doc = "QCxx - 32-pin QFN"]
             pub const QC: Self = Self(0x2003);
+            #[doc = "CAxx - WLCSP"]
+            pub const CA: Self = Self(0x2004);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
         }
@@ -3898,6 +4038,10 @@ pub mod ficr {
         impl Part {
             #[doc = "nRF52810"]
             pub const N52810: Self = Self(0x0005_2810);
+            #[doc = "nRF52811"]
+            pub const N52811: Self = Self(0x0005_2811);
+            #[doc = "nRF52832"]
+            pub const N52832: Self = Self(0x0005_2832);
             #[doc = "Unspecified"]
             pub const UNSPECIFIED: Self = Self(0xffff_ffff);
         }
@@ -5615,12 +5759,12 @@ pub mod power {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Enable constant latency mode"]
+        #[doc = "Enable Constant Latency mode"]
         #[inline(always)]
         pub const fn tasks_constlat(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x78usize) as _) }
         }
-        #[doc = "Enable low power mode (variable latency)"]
+        #[doc = "Enable Low-power mode (variable latency)"]
         #[inline(always)]
         pub const fn tasks_lowpwr(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x7cusize) as _) }
@@ -14572,13 +14716,13 @@ pub mod timer {
         #[doc = "Description collection: Capture Timer value to CC\\[n\\] register"]
         #[inline(always)]
         pub const fn tasks_capture(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
-            assert!(n < 4usize);
+            assert!(n < 6usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x40usize + n * 4usize) as _) }
         }
         #[doc = "Description collection: Compare event on CC\\[n\\] match"]
         #[inline(always)]
         pub const fn events_compare(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 4usize);
+            assert!(n < 6usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0140usize + n * 4usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -14614,7 +14758,7 @@ pub mod timer {
         #[doc = "Description collection: Capture/Compare register n"]
         #[inline(always)]
         pub const fn cc(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 4usize);
+            assert!(n < 6usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize + n * 4usize) as _) }
         }
     }
@@ -14650,7 +14794,7 @@ pub mod timer {
             #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub const fn compare(&self, n: usize) -> bool {
-                assert!(n < 4usize);
+                assert!(n < 6usize);
                 let offs = 16usize + n * 1usize;
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
@@ -14658,7 +14802,7 @@ pub mod timer {
             #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
             pub fn set_compare(&mut self, n: usize, val: bool) {
-                assert!(n < 4usize);
+                assert!(n < 6usize);
                 let offs = 16usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
@@ -14723,7 +14867,7 @@ pub mod timer {
             #[doc = "Shortcut between event COMPARE\\[0\\] and task CLEAR"]
             #[inline(always)]
             pub const fn compare_clear(&self, n: usize) -> bool {
-                assert!(n < 4usize);
+                assert!(n < 6usize);
                 let offs = 0usize + n * 1usize;
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
@@ -14731,14 +14875,14 @@ pub mod timer {
             #[doc = "Shortcut between event COMPARE\\[0\\] and task CLEAR"]
             #[inline(always)]
             pub fn set_compare_clear(&mut self, n: usize, val: bool) {
-                assert!(n < 4usize);
+                assert!(n < 6usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
             #[doc = "Shortcut between event COMPARE\\[0\\] and task STOP"]
             #[inline(always)]
             pub const fn compare_stop(&self, n: usize) -> bool {
-                assert!(n < 4usize);
+                assert!(n < 6usize);
                 let offs = 8usize + n * 1usize;
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
@@ -14746,7 +14890,7 @@ pub mod timer {
             #[doc = "Shortcut between event COMPARE\\[0\\] and task STOP"]
             #[inline(always)]
             pub fn set_compare_stop(&mut self, n: usize, val: bool) {
-                assert!(n < 4usize);
+                assert!(n < 6usize);
                 let offs = 8usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
@@ -18413,7 +18557,7 @@ pub mod uicr {
         #[doc = "Description collection: Reserved for Nordic firmware design"]
         #[inline(always)]
         pub const fn nrffw(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 15usize);
+            assert!(n < 13usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize + n * 4usize) as _) }
         }
         #[doc = "Description collection: Reserved for Nordic hardware design"]
@@ -18427,6 +18571,12 @@ pub mod uicr {
         pub const fn customer(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 32usize);
             unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize + n * 4usize) as _) }
+        }
+        #[doc = "Description collection: Reserved for Nordic MDK"]
+        #[inline(always)]
+        pub const fn nrfmdk(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 8usize);
+            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize + n * 4usize) as _) }
         }
         #[doc = "Description collection: Mapping of the nRESET function (see POWER chapter for details)"]
         #[inline(always)]
@@ -18475,7 +18625,9 @@ pub mod uicr {
         impl Pall {
             #[doc = "Enable"]
             pub const ENABLED: Self = Self(0x0);
-            #[doc = "Disable"]
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware and software"]
+            pub const HW_DISABLED: Self = Self(0x5a);
+            #[doc = "Hardware disable of access port protection for devices where access port protection is controlled by hardware"]
             pub const DISABLED: Self = Self(0xff);
         }
         impl Pall {
