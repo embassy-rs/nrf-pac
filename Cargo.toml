@@ -10,9 +10,11 @@ documentation = "https://docs.embassy.dev/nrf-pac"
 [dependencies]
 cortex-m = "0.7.1"
 cortex-m-rt = { version = ">=0.6.15,<0.8", optional = true }
+defmt = { version = "0.3.10", optional = true }
 
 [features]
 rt = ["cortex-m-rt/device"]
+defmt = ["dep:defmt"]
 
 nrf51 = []
 nrf52805 = []
