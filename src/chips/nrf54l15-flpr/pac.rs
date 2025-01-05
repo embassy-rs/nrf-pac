@@ -1,4 +1,4 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (e09c27d 2025-01-02))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 ( ))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -173,11 +173,103 @@ pub enum Interrupt {
     #[doc = "270 - CLOCK_POWER"]
     CLOCK_POWER = 270,
 }
-unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
+unsafe impl riscv::InterruptNumber for Interrupt {
+    #[doc = r" Returns the number of the interrupt"]
     #[inline(always)]
-    fn number(self) -> u16 {
-        self as u16
+    fn number(self) -> usize {
+        self as usize
     }
+    fn from_number(number: usize) -> riscv::result::Result<Self> {
+        match number {
+            0 => Ok(Interrupt::VPRCLIC_0),
+            1 => Ok(Interrupt::VPRCLIC_1),
+            2 => Ok(Interrupt::VPRCLIC_2),
+            3 => Ok(Interrupt::VPRCLIC_3),
+            4 => Ok(Interrupt::VPRCLIC_4),
+            5 => Ok(Interrupt::VPRCLIC_5),
+            6 => Ok(Interrupt::VPRCLIC_6),
+            7 => Ok(Interrupt::VPRCLIC_7),
+            8 => Ok(Interrupt::VPRCLIC_8),
+            9 => Ok(Interrupt::VPRCLIC_9),
+            10 => Ok(Interrupt::VPRCLIC_10),
+            11 => Ok(Interrupt::VPRCLIC_11),
+            12 => Ok(Interrupt::VPRCLIC_12),
+            13 => Ok(Interrupt::VPRCLIC_13),
+            14 => Ok(Interrupt::VPRCLIC_14),
+            15 => Ok(Interrupt::VPRCLIC_15),
+            16 => Ok(Interrupt::VPRCLIC_16),
+            17 => Ok(Interrupt::VPRCLIC_17),
+            18 => Ok(Interrupt::VPRCLIC_18),
+            19 => Ok(Interrupt::VPRCLIC_19),
+            20 => Ok(Interrupt::VPRCLIC_20),
+            21 => Ok(Interrupt::VPRCLIC_21),
+            22 => Ok(Interrupt::VPRCLIC_22),
+            23 => Ok(Interrupt::VPRCLIC_23),
+            24 => Ok(Interrupt::VPRCLIC_24),
+            25 => Ok(Interrupt::VPRCLIC_25),
+            26 => Ok(Interrupt::VPRCLIC_26),
+            27 => Ok(Interrupt::VPRCLIC_27),
+            28 => Ok(Interrupt::VPRCLIC_28),
+            29 => Ok(Interrupt::VPRCLIC_29),
+            30 => Ok(Interrupt::VPRCLIC_30),
+            31 => Ok(Interrupt::VPRCLIC_31),
+            64 => Ok(Interrupt::SPU00),
+            65 => Ok(Interrupt::MPC00),
+            70 => Ok(Interrupt::AAR00_CCM00),
+            71 => Ok(Interrupt::ECB00),
+            72 => Ok(Interrupt::CRACEN),
+            74 => Ok(Interrupt::SERIAL00),
+            75 => Ok(Interrupt::RRAMC),
+            76 => Ok(Interrupt::VPR00),
+            82 => Ok(Interrupt::CTRLAP),
+            85 => Ok(Interrupt::TIMER00),
+            128 => Ok(Interrupt::SPU10),
+            133 => Ok(Interrupt::TIMER10),
+            134 => Ok(Interrupt::RTC10),
+            135 => Ok(Interrupt::EGU10),
+            138 => Ok(Interrupt::RADIO_0),
+            139 => Ok(Interrupt::RADIO_1),
+            192 => Ok(Interrupt::SPU20),
+            198 => Ok(Interrupt::SERIAL20),
+            199 => Ok(Interrupt::SERIAL21),
+            200 => Ok(Interrupt::SERIAL22),
+            201 => Ok(Interrupt::EGU20),
+            202 => Ok(Interrupt::TIMER20),
+            203 => Ok(Interrupt::TIMER21),
+            204 => Ok(Interrupt::TIMER22),
+            205 => Ok(Interrupt::TIMER23),
+            206 => Ok(Interrupt::TIMER24),
+            208 => Ok(Interrupt::PDM20),
+            209 => Ok(Interrupt::PDM21),
+            210 => Ok(Interrupt::PWM20),
+            211 => Ok(Interrupt::PWM21),
+            212 => Ok(Interrupt::PWM22),
+            213 => Ok(Interrupt::SAADC),
+            214 => Ok(Interrupt::NFCT),
+            215 => Ok(Interrupt::TEMP),
+            218 => Ok(Interrupt::GPIOTE20_0),
+            219 => Ok(Interrupt::GPIOTE20_1),
+            220 => Ok(Interrupt::TAMPC),
+            221 => Ok(Interrupt::I2S20),
+            224 => Ok(Interrupt::QDEC20),
+            225 => Ok(Interrupt::QDEC21),
+            226 => Ok(Interrupt::GRTC_0),
+            227 => Ok(Interrupt::GRTC_1),
+            228 => Ok(Interrupt::GRTC_2),
+            229 => Ok(Interrupt::GRTC_3),
+            256 => Ok(Interrupt::SPU30),
+            260 => Ok(Interrupt::SERIAL30),
+            261 => Ok(Interrupt::RTC30),
+            262 => Ok(Interrupt::COMP_LPCOMP),
+            264 => Ok(Interrupt::WDT30),
+            265 => Ok(Interrupt::WDT31),
+            268 => Ok(Interrupt::GPIOTE30_0),
+            269 => Ok(Interrupt::GPIOTE30_1),
+            270 => Ok(Interrupt::CLOCK_POWER),
+            _ => Err(riscv::result::Error::InvalidVariant(number)),
+        }
+    }
+    const MAX_INTERRUPT_NUMBER: usize = 270;
 }
 #[cfg(feature = "rt")]
 mod _vectors {
@@ -633,8 +725,7 @@ pub const UICR_S: uicr::Uicr = unsafe { uicr::Uicr::from_ptr(0x00ff_d000usize as
 #[doc = "Factory Information Configuration Registers"]
 pub const SICR_S: sicr::Sicr = unsafe { sicr::Sicr::from_ptr(0x00ff_e000usize as _) };
 #[doc = "Distributed programmable peripheral interconnect controller 0"]
-pub const DPPIC00_NS: dppic::Dppic =
-    unsafe { dppic::Dppic::from_ptr(0x4004_2000usize as _) };
+pub const DPPIC00_NS: dppic::Dppic = unsafe { dppic::Dppic::from_ptr(0x4004_2000usize as _) };
 #[doc = "PPIB APB registers 0"]
 pub const PPIB00_NS: ppib::Ppib = unsafe { ppib::Ppib::from_ptr(0x4004_3000usize as _) };
 #[doc = "PPIB APB registers 2"]
@@ -650,8 +741,7 @@ pub const SPIM00_NS: spim::Spim = unsafe { spim::Spim::from_ptr(0x4004_a000usize
 #[doc = "SPI Slave 0"]
 pub const SPIS00_NS: spis::Spis = unsafe { spis::Spis::from_ptr(0x4004_a000usize as _) };
 #[doc = "UART with EasyDMA 0"]
-pub const UARTE00_NS: uarte::Uarte =
-    unsafe { uarte::Uarte::from_ptr(0x4004_a000usize as _) };
+pub const UARTE00_NS: uarte::Uarte = unsafe { uarte::Uarte::from_ptr(0x4004_a000usize as _) };
 #[doc = "VPR peripheral registers 0"]
 pub const VPR00_NS: vpr::Vpr = unsafe { vpr::Vpr::from_ptr(0x4004_c000usize as _) };
 #[doc = "GPIO Port 0"]
@@ -662,18 +752,15 @@ pub const CTRLAP_NS: ctrlapperi::Ctrlapperi =
 #[doc = "Trace and debug control 0"]
 pub const TAD_NS: tad::Tad = unsafe { tad::Tad::from_ptr(0x4005_3000usize as _) };
 #[doc = "Timer/Counter 0"]
-pub const TIMER00_NS: timer::Timer =
-    unsafe { timer::Timer::from_ptr(0x4005_5000usize as _) };
+pub const TIMER00_NS: timer::Timer = unsafe { timer::Timer::from_ptr(0x4005_5000usize as _) };
 #[doc = "Distributed programmable peripheral interconnect controller 2"]
-pub const DPPIC10_NS: dppic::Dppic =
-    unsafe { dppic::Dppic::from_ptr(0x4008_2000usize as _) };
+pub const DPPIC10_NS: dppic::Dppic = unsafe { dppic::Dppic::from_ptr(0x4008_2000usize as _) };
 #[doc = "PPIB APB registers 4"]
 pub const PPIB10_NS: ppib::Ppib = unsafe { ppib::Ppib::from_ptr(0x4008_3000usize as _) };
 #[doc = "PPIB APB registers 6"]
 pub const PPIB11_NS: ppib::Ppib = unsafe { ppib::Ppib::from_ptr(0x4008_4000usize as _) };
 #[doc = "Timer/Counter 2"]
-pub const TIMER10_NS: timer::Timer =
-    unsafe { timer::Timer::from_ptr(0x4008_5000usize as _) };
+pub const TIMER10_NS: timer::Timer = unsafe { timer::Timer::from_ptr(0x4008_5000usize as _) };
 #[doc = "Real-time counter 0"]
 pub const RTC10_NS: rtc::Rtc = unsafe { rtc::Rtc::from_ptr(0x4008_6000usize as _) };
 #[doc = "Event generator unit 0"]
@@ -681,8 +768,7 @@ pub const EGU10_NS: egu::Egu = unsafe { egu::Egu::from_ptr(0x4008_7000usize as _
 #[doc = "2.4 GHz radio 0"]
 pub const RADIO_NS: radio::Radio = unsafe { radio::Radio::from_ptr(0x4008_a000usize as _) };
 #[doc = "Distributed programmable peripheral interconnect controller 4"]
-pub const DPPIC20_NS: dppic::Dppic =
-    unsafe { dppic::Dppic::from_ptr(0x400c_2000usize as _) };
+pub const DPPIC20_NS: dppic::Dppic = unsafe { dppic::Dppic::from_ptr(0x400c_2000usize as _) };
 #[doc = "PPIB APB registers 8"]
 pub const PPIB20_NS: ppib::Ppib = unsafe { ppib::Ppib::from_ptr(0x400c_3000usize as _) };
 #[doc = "PPIB APB registers 10"]
@@ -698,8 +784,7 @@ pub const TWIM20_NS: twim::Twim = unsafe { twim::Twim::from_ptr(0x400c_6000usize
 #[doc = "I2C compatible Two-Wire Slave Interface with EasyDMA 0"]
 pub const TWIS20_NS: twis::Twis = unsafe { twis::Twis::from_ptr(0x400c_6000usize as _) };
 #[doc = "UART with EasyDMA 2"]
-pub const UARTE20_NS: uarte::Uarte =
-    unsafe { uarte::Uarte::from_ptr(0x400c_6000usize as _) };
+pub const UARTE20_NS: uarte::Uarte = unsafe { uarte::Uarte::from_ptr(0x400c_6000usize as _) };
 #[doc = "Serial Peripheral Interface Master with EasyDMA 4"]
 pub const SPIM21_NS: spim::Spim = unsafe { spim::Spim::from_ptr(0x400c_7000usize as _) };
 #[doc = "SPI Slave 4"]
@@ -709,8 +794,7 @@ pub const TWIM21_NS: twim::Twim = unsafe { twim::Twim::from_ptr(0x400c_7000usize
 #[doc = "I2C compatible Two-Wire Slave Interface with EasyDMA 2"]
 pub const TWIS21_NS: twis::Twis = unsafe { twis::Twis::from_ptr(0x400c_7000usize as _) };
 #[doc = "UART with EasyDMA 4"]
-pub const UARTE21_NS: uarte::Uarte =
-    unsafe { uarte::Uarte::from_ptr(0x400c_7000usize as _) };
+pub const UARTE21_NS: uarte::Uarte = unsafe { uarte::Uarte::from_ptr(0x400c_7000usize as _) };
 #[doc = "Serial Peripheral Interface Master with EasyDMA 6"]
 pub const SPIM22_NS: spim::Spim = unsafe { spim::Spim::from_ptr(0x400c_8000usize as _) };
 #[doc = "SPI Slave 6"]
@@ -720,25 +804,19 @@ pub const TWIM22_NS: twim::Twim = unsafe { twim::Twim::from_ptr(0x400c_8000usize
 #[doc = "I2C compatible Two-Wire Slave Interface with EasyDMA 4"]
 pub const TWIS22_NS: twis::Twis = unsafe { twis::Twis::from_ptr(0x400c_8000usize as _) };
 #[doc = "UART with EasyDMA 6"]
-pub const UARTE22_NS: uarte::Uarte =
-    unsafe { uarte::Uarte::from_ptr(0x400c_8000usize as _) };
+pub const UARTE22_NS: uarte::Uarte = unsafe { uarte::Uarte::from_ptr(0x400c_8000usize as _) };
 #[doc = "Event generator unit 2"]
 pub const EGU20_NS: egu::Egu = unsafe { egu::Egu::from_ptr(0x400c_9000usize as _) };
 #[doc = "Timer/Counter 4"]
-pub const TIMER20_NS: timer::Timer =
-    unsafe { timer::Timer::from_ptr(0x400c_a000usize as _) };
+pub const TIMER20_NS: timer::Timer = unsafe { timer::Timer::from_ptr(0x400c_a000usize as _) };
 #[doc = "Timer/Counter 6"]
-pub const TIMER21_NS: timer::Timer =
-    unsafe { timer::Timer::from_ptr(0x400c_b000usize as _) };
+pub const TIMER21_NS: timer::Timer = unsafe { timer::Timer::from_ptr(0x400c_b000usize as _) };
 #[doc = "Timer/Counter 8"]
-pub const TIMER22_NS: timer::Timer =
-    unsafe { timer::Timer::from_ptr(0x400c_c000usize as _) };
+pub const TIMER22_NS: timer::Timer = unsafe { timer::Timer::from_ptr(0x400c_c000usize as _) };
 #[doc = "Timer/Counter 10"]
-pub const TIMER23_NS: timer::Timer =
-    unsafe { timer::Timer::from_ptr(0x400c_d000usize as _) };
+pub const TIMER23_NS: timer::Timer = unsafe { timer::Timer::from_ptr(0x400c_d000usize as _) };
 #[doc = "Timer/Counter 12"]
-pub const TIMER24_NS: timer::Timer =
-    unsafe { timer::Timer::from_ptr(0x400c_e000usize as _) };
+pub const TIMER24_NS: timer::Timer = unsafe { timer::Timer::from_ptr(0x400c_e000usize as _) };
 #[doc = "Memory configuration 0"]
 pub const MEMCONF_NS: memconf::Memconf =
     unsafe { memconf::Memconf::from_ptr(0x400c_f000usize as _) };
@@ -761,8 +839,7 @@ pub const TEMP_NS: temp::Temp = unsafe { temp::Temp::from_ptr(0x400d_7000usize a
 #[doc = "GPIO Port 2"]
 pub const P1_NS: gpio::Gpio = unsafe { gpio::Gpio::from_ptr(0x400d_8200usize as _) };
 #[doc = "GPIO Tasks and Events 0"]
-pub const GPIOTE20_NS: gpiote::Gpiote =
-    unsafe { gpiote::Gpiote::from_ptr(0x400d_a000usize as _) };
+pub const GPIOTE20_NS: gpiote::Gpiote = unsafe { gpiote::Gpiote::from_ptr(0x400d_a000usize as _) };
 #[doc = "Inter-IC Sound 0"]
 pub const I2S20_NS: i2s::I2s = unsafe { i2s::I2s::from_ptr(0x400d_d000usize as _) };
 #[doc = "Quadrature Decoder 0"]
@@ -772,8 +849,7 @@ pub const QDEC21_NS: qdec::Qdec = unsafe { qdec::Qdec::from_ptr(0x400e_1000usize
 #[doc = "Global Real-time counter 0"]
 pub const GRTC_NS: grtc::Grtc = unsafe { grtc::Grtc::from_ptr(0x400e_2000usize as _) };
 #[doc = "Distributed programmable peripheral interconnect controller 6"]
-pub const DPPIC30_NS: dppic::Dppic =
-    unsafe { dppic::Dppic::from_ptr(0x4010_2000usize as _) };
+pub const DPPIC30_NS: dppic::Dppic = unsafe { dppic::Dppic::from_ptr(0x4010_2000usize as _) };
 #[doc = "PPIB APB registers 14"]
 pub const PPIB30_NS: ppib::Ppib = unsafe { ppib::Ppib::from_ptr(0x4010_3000usize as _) };
 #[doc = "Serial Peripheral Interface Master with EasyDMA 8"]
@@ -785,22 +861,19 @@ pub const TWIM30_NS: twim::Twim = unsafe { twim::Twim::from_ptr(0x4010_4000usize
 #[doc = "I2C compatible Two-Wire Slave Interface with EasyDMA 6"]
 pub const TWIS30_NS: twis::Twis = unsafe { twis::Twis::from_ptr(0x4010_4000usize as _) };
 #[doc = "UART with EasyDMA 8"]
-pub const UARTE30_NS: uarte::Uarte =
-    unsafe { uarte::Uarte::from_ptr(0x4010_4000usize as _) };
+pub const UARTE30_NS: uarte::Uarte = unsafe { uarte::Uarte::from_ptr(0x4010_4000usize as _) };
 #[doc = "Real-time counter 2"]
 pub const RTC30_NS: rtc::Rtc = unsafe { rtc::Rtc::from_ptr(0x4010_5000usize as _) };
 #[doc = "Comparator 0"]
 pub const COMP_NS: comp::Comp = unsafe { comp::Comp::from_ptr(0x4010_6000usize as _) };
 #[doc = "Low-power comparator 0"]
-pub const LPCOMP_NS: lpcomp::Lpcomp =
-    unsafe { lpcomp::Lpcomp::from_ptr(0x4010_6000usize as _) };
+pub const LPCOMP_NS: lpcomp::Lpcomp = unsafe { lpcomp::Lpcomp::from_ptr(0x4010_6000usize as _) };
 #[doc = "Watchdog Timer 1"]
 pub const WDT31_NS: wdt::Wdt = unsafe { wdt::Wdt::from_ptr(0x4010_9000usize as _) };
 #[doc = "GPIO Port 4"]
 pub const P0_NS: gpio::Gpio = unsafe { gpio::Gpio::from_ptr(0x4010_a000usize as _) };
 #[doc = "GPIO Tasks and Events 2"]
-pub const GPIOTE30_NS: gpiote::Gpiote =
-    unsafe { gpiote::Gpiote::from_ptr(0x4010_c000usize as _) };
+pub const GPIOTE30_NS: gpiote::Gpiote = unsafe { gpiote::Gpiote::from_ptr(0x4010_c000usize as _) };
 #[doc = "Clock management 0"]
 pub const CLOCK_NS: clock::Clock = unsafe { clock::Clock::from_ptr(0x4010_e000usize as _) };
 #[doc = "Power control 0"]
@@ -832,8 +905,7 @@ pub const CCM00_S: ccm::Ccm = unsafe { ccm::Ccm::from_ptr(0x5004_6000usize as _)
 #[doc = "AES ECB Mode Encryption 1"]
 pub const ECB00_S: ecb::Ecb = unsafe { ecb::Ecb::from_ptr(0x5004_7000usize as _) };
 #[doc = "CRACEN"]
-pub const CRACEN_S: cracen::Cracen =
-    unsafe { cracen::Cracen::from_ptr(0x5004_8000usize as _) };
+pub const CRACEN_S: cracen::Cracen = unsafe { cracen::Cracen::from_ptr(0x5004_8000usize as _) };
 #[doc = "Serial Peripheral Interface Master with EasyDMA 1"]
 pub const SPIM00_S: spim::Spim = unsafe { spim::Spim::from_ptr(0x5004_a000usize as _) };
 #[doc = "SPI Slave 1"]
@@ -946,8 +1018,7 @@ pub const TEMP_S: temp::Temp = unsafe { temp::Temp::from_ptr(0x500d_7000usize as
 #[doc = "GPIO Port 3"]
 pub const P1_S: gpio::Gpio = unsafe { gpio::Gpio::from_ptr(0x500d_8200usize as _) };
 #[doc = "GPIO Tasks and Events 1"]
-pub const GPIOTE20_S: gpiote::Gpiote =
-    unsafe { gpiote::Gpiote::from_ptr(0x500d_a000usize as _) };
+pub const GPIOTE20_S: gpiote::Gpiote = unsafe { gpiote::Gpiote::from_ptr(0x500d_a000usize as _) };
 #[doc = "Tamper controller"]
 pub const TAMPC_S: tampc::Tampc = unsafe { tampc::Tampc::from_ptr(0x500d_c000usize as _) };
 #[doc = "Inter-IC Sound 1"]
@@ -979,8 +1050,7 @@ pub const RTC30_S: rtc::Rtc = unsafe { rtc::Rtc::from_ptr(0x5010_5000usize as _)
 #[doc = "Comparator 1"]
 pub const COMP_S: comp::Comp = unsafe { comp::Comp::from_ptr(0x5010_6000usize as _) };
 #[doc = "Low-power comparator 1"]
-pub const LPCOMP_S: lpcomp::Lpcomp =
-    unsafe { lpcomp::Lpcomp::from_ptr(0x5010_6000usize as _) };
+pub const LPCOMP_S: lpcomp::Lpcomp = unsafe { lpcomp::Lpcomp::from_ptr(0x5010_6000usize as _) };
 #[doc = "Watchdog Timer 0"]
 pub const WDT30_S: wdt::Wdt = unsafe { wdt::Wdt::from_ptr(0x5010_8000usize as _) };
 #[doc = "Watchdog Timer 2"]
@@ -988,8 +1058,7 @@ pub const WDT31_S: wdt::Wdt = unsafe { wdt::Wdt::from_ptr(0x5010_9000usize as _)
 #[doc = "GPIO Port 5"]
 pub const P0_S: gpio::Gpio = unsafe { gpio::Gpio::from_ptr(0x5010_a000usize as _) };
 #[doc = "GPIO Tasks and Events 3"]
-pub const GPIOTE30_S: gpiote::Gpiote =
-    unsafe { gpiote::Gpiote::from_ptr(0x5010_c000usize as _) };
+pub const GPIOTE30_S: gpiote::Gpiote = unsafe { gpiote::Gpiote::from_ptr(0x5010_c000usize as _) };
 #[doc = "Clock management 1"]
 pub const CLOCK_S: clock::Clock = unsafe { clock::Clock::from_ptr(0x5010_e000usize as _) };
 #[doc = "Power control 1"]
@@ -1007,8 +1076,6 @@ pub const CRACENCORE_S: cracencore::Cracencore =
     unsafe { cracencore::Cracencore::from_ptr(0x5180_0000usize as _) };
 #[doc = "VPR CLIC registers"]
 pub const VPRCLIC_NS: clic::Clic = unsafe { clic::Clic::from_ptr(0xf000_0000usize as _) };
-#[cfg(feature = "rt")]
-pub use cortex_m_rt::interrupt;
 #[cfg(feature = "rt")]
 pub use Interrupt as interrupt;
 pub mod aar {
