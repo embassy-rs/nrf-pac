@@ -1,8 +1,11 @@
 [toolchain]
 channel = "nightly-2024-11-04"
-components = [ "rust-src", "rustfmt" ]
+components = ["rust-src", "rustfmt"]
 targets = [
     "thumbv6m-none-eabi",
     "thumbv7em-none-eabihf",
     "thumbv8m.main-none-eabihf",
+
+    # Tier 3 target, so it cannot be installed with rustup
+    # "riscv32emc-unknown-none-elf"
 ]

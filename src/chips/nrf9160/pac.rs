@@ -1,4 +1,4 @@
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (e09c27d 2025-01-02))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 ( ))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -66,6 +66,7 @@ pub enum Interrupt {
     CRYPTOCELL = 64,
 }
 unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
+    #[doc = r" Returns the number of the interrupt"]
     #[inline(always)]
     fn number(self) -> u16 {
         self as u16
