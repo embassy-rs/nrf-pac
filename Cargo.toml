@@ -3,6 +3,7 @@ name = "nrf-pac"
 version = "0.1.0"
 edition = "2021"
 license = "BSD-3-Clause"
+description = "Peripheral Access Crate (PAC) for Nordic Semiconductor nRF chips."
 keywords = ["no-std", "arm", "cortex-m", "nrf", "peripherals"]
 repository = "https://github.com/embassy-rs/nrf-pac"
 documentation = "https://docs.embassy.dev/nrf-pac"
