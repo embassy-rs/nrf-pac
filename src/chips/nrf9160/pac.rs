@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
 #![doc = "Peripheral access API (generated using chiptool v0.1.0 (26983da 2025-01-02))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
@@ -73,7 +75,7 @@ unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
 }
 #[cfg(feature = "rt")]
 mod _vectors {
-    extern "C" {
+    unsafe extern "C" {
         fn SPU();
         fn CLOCK_POWER();
         fn SERIAL0();
@@ -110,8 +112,8 @@ mod _vectors {
         _handler: unsafe extern "C" fn(),
         _reserved: u32,
     }
-    #[link_section = ".vector_table.interrupts"]
-    #[no_mangle]
+    #[unsafe(link_section = ".vector_table.interrupts")]
+    #[unsafe(no_mangle)]
     pub static __INTERRUPTS: [Vector; 65] = [
         Vector { _reserved: 0 },
         Vector { _reserved: 0 },
@@ -474,6 +476,7 @@ pub mod cc_host_rgf {
         pub struct HostCryptokeySel(pub u32);
         impl HostCryptokeySel {
             #[doc = "Select the source of the HW key that is used by the AES engine"]
+            #[must_use]
             #[inline(always)]
             pub const fn host_cryptokey_sel(&self) -> super::vals::HostCryptokeySel {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -481,7 +484,7 @@ pub mod cc_host_rgf {
             }
             #[doc = "Select the source of the HW key that is used by the AES engine"]
             #[inline(always)]
-            pub fn set_host_cryptokey_sel(&mut self, val: super::vals::HostCryptokeySel) {
+            pub const fn set_host_cryptokey_sel(&mut self, val: super::vals::HostCryptokeySel) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -501,14 +504,11 @@ pub mod cc_host_rgf {
         #[cfg(feature = "defmt")]
         impl defmt::Format for HostCryptokeySel {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct HostCryptokeySel {
-                    host_cryptokey_sel: super::vals::HostCryptokeySel,
-                }
-                let proxy = HostCryptokeySel {
-                    host_cryptokey_sel: self.host_cryptokey_sel(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "HostCryptokeySel {{ host_cryptokey_sel: {:?} }}",
+                    self.host_cryptokey_sel()
+                )
             }
         }
         #[doc = "This write-once register is the K_PRTL lock register. When this register is set, K_PRTL cannot be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
@@ -517,6 +517,7 @@ pub mod cc_host_rgf {
         pub struct HostIotKprtlLock(pub u32);
         impl HostIotKprtlLock {
             #[doc = "This register is the K_PRTL lock register. When this register is set, K_PRTL cannot be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
+            #[must_use]
             #[inline(always)]
             pub const fn host_iot_kprtl_lock(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -524,7 +525,7 @@ pub mod cc_host_rgf {
             }
             #[doc = "This register is the K_PRTL lock register. When this register is set, K_PRTL cannot be used and a zeroed key will be used instead. The value of this register is saved in the CRYPTOCELL AO power domain."]
             #[inline(always)]
-            pub fn set_host_iot_kprtl_lock(&mut self, val: bool) {
+            pub const fn set_host_iot_kprtl_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -544,14 +545,11 @@ pub mod cc_host_rgf {
         #[cfg(feature = "defmt")]
         impl defmt::Format for HostIotKprtlLock {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct HostIotKprtlLock {
-                    host_iot_kprtl_lock: bool,
-                }
-                let proxy = HostIotKprtlLock {
-                    host_iot_kprtl_lock: self.host_iot_kprtl_lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "HostIotKprtlLock {{ host_iot_kprtl_lock: {=bool:?} }}",
+                    self.host_iot_kprtl_lock()
+                )
             }
         }
         #[doc = "Controls lifecycle state (LCS) for CRYPTOCELL subsystem"]
@@ -560,6 +558,7 @@ pub mod cc_host_rgf {
         pub struct HostIotLcs(pub u32);
         impl HostIotLcs {
             #[doc = "Lifecycle state value. This field is write-once per reset."]
+            #[must_use]
             #[inline(always)]
             pub const fn lcs(&self) -> super::vals::Lcs {
                 let val = (self.0 >> 0usize) & 0x07;
@@ -567,10 +566,11 @@ pub mod cc_host_rgf {
             }
             #[doc = "Lifecycle state value. This field is write-once per reset."]
             #[inline(always)]
-            pub fn set_lcs(&mut self, val: super::vals::Lcs) {
+            pub const fn set_lcs(&mut self, val: super::vals::Lcs) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
             }
             #[doc = "Read-only field. Indicates if CRYPTOCELL LCS has been successfully configured since last reset."]
+            #[must_use]
             #[inline(always)]
             pub const fn lcs_is_valid(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -578,7 +578,7 @@ pub mod cc_host_rgf {
             }
             #[doc = "Read-only field. Indicates if CRYPTOCELL LCS has been successfully configured since last reset."]
             #[inline(always)]
-            pub fn set_lcs_is_valid(&mut self, val: bool) {
+            pub const fn set_lcs_is_valid(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -599,16 +599,12 @@ pub mod cc_host_rgf {
         #[cfg(feature = "defmt")]
         impl defmt::Format for HostIotLcs {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct HostIotLcs {
-                    lcs: super::vals::Lcs,
-                    lcs_is_valid: bool,
-                }
-                let proxy = HostIotLcs {
-                    lcs: self.lcs(),
-                    lcs_is_valid: self.lcs_is_valid(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "HostIotLcs {{ lcs: {:?}, lcs_is_valid: {=bool:?} }}",
+                    self.lcs(),
+                    self.lcs_is_valid()
+                )
             }
         }
     }
@@ -835,6 +831,7 @@ pub mod clock {
         pub struct Hfclkrun(pub u32);
         impl Hfclkrun {
             #[doc = "HFCLKSTART task triggered or not"]
+            #[must_use]
             #[inline(always)]
             pub const fn status(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -842,7 +839,7 @@ pub mod clock {
             }
             #[doc = "HFCLKSTART task triggered or not"]
             #[inline(always)]
-            pub fn set_status(&mut self, val: bool) {
+            pub const fn set_status(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -862,14 +859,7 @@ pub mod clock {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Hfclkrun {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Hfclkrun {
-                    status: bool,
-                }
-                let proxy = Hfclkrun {
-                    status: self.status(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Hfclkrun {{ status: {=bool:?} }}", self.status())
             }
         }
         #[doc = "The register shows if HFXO has been requested by triggering HFCLKSTART task and if it has been started (STATE)"]
@@ -878,6 +868,7 @@ pub mod clock {
         pub struct Hfclkstat(pub u32);
         impl Hfclkstat {
             #[doc = "Active clock source"]
+            #[must_use]
             #[inline(always)]
             pub const fn src(&self) -> super::vals::HfclkstatSrc {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -885,10 +876,11 @@ pub mod clock {
             }
             #[doc = "Active clock source"]
             #[inline(always)]
-            pub fn set_src(&mut self, val: super::vals::HfclkstatSrc) {
+            pub const fn set_src(&mut self, val: super::vals::HfclkstatSrc) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
             #[doc = "HFCLK state"]
+            #[must_use]
             #[inline(always)]
             pub const fn state(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
@@ -896,7 +888,7 @@ pub mod clock {
             }
             #[doc = "HFCLK state"]
             #[inline(always)]
-            pub fn set_state(&mut self, val: bool) {
+            pub const fn set_state(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
         }
@@ -917,16 +909,12 @@ pub mod clock {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Hfclkstat {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Hfclkstat {
-                    src: super::vals::HfclkstatSrc,
-                    state: bool,
-                }
-                let proxy = Hfclkstat {
-                    src: self.src(),
-                    state: self.state(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Hfclkstat {{ src: {:?}, state: {=bool:?} }}",
+                    self.src(),
+                    self.state()
+                )
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -935,6 +923,7 @@ pub mod clock {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event HFCLKSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn hfclkstarted(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -942,10 +931,11 @@ pub mod clock {
             }
             #[doc = "Enable or disable interrupt for event HFCLKSTARTED"]
             #[inline(always)]
-            pub fn set_hfclkstarted(&mut self, val: bool) {
+            pub const fn set_hfclkstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable interrupt for event LFCLKSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn lfclkstarted(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -953,7 +943,7 @@ pub mod clock {
             }
             #[doc = "Enable or disable interrupt for event LFCLKSTARTED"]
             #[inline(always)]
-            pub fn set_lfclkstarted(&mut self, val: bool) {
+            pub const fn set_lfclkstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
         }
@@ -974,16 +964,12 @@ pub mod clock {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    hfclkstarted: bool,
-                    lfclkstarted: bool,
-                }
-                let proxy = Int {
-                    hfclkstarted: self.hfclkstarted(),
-                    lfclkstarted: self.lfclkstarted(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Int {{ hfclkstarted: {=bool:?}, lfclkstarted: {=bool:?} }}",
+                    self.hfclkstarted(),
+                    self.lfclkstarted()
+                )
             }
         }
         #[doc = "Status indicating that LFCLKSTART task has been triggered"]
@@ -992,6 +978,7 @@ pub mod clock {
         pub struct Lfclkrun(pub u32);
         impl Lfclkrun {
             #[doc = "LFCLKSTART task triggered or not"]
+            #[must_use]
             #[inline(always)]
             pub const fn status(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -999,7 +986,7 @@ pub mod clock {
             }
             #[doc = "LFCLKSTART task triggered or not"]
             #[inline(always)]
-            pub fn set_status(&mut self, val: bool) {
+            pub const fn set_status(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -1019,14 +1006,7 @@ pub mod clock {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Lfclkrun {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Lfclkrun {
-                    status: bool,
-                }
-                let proxy = Lfclkrun {
-                    status: self.status(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Lfclkrun {{ status: {=bool:?} }}", self.status())
             }
         }
         #[doc = "Clock source for the LFCLK. LFCLKSTART task starts starts a clock source selected with this register."]
@@ -1035,6 +1015,7 @@ pub mod clock {
         pub struct Lfclksrc(pub u32);
         impl Lfclksrc {
             #[doc = "Clock source"]
+            #[must_use]
             #[inline(always)]
             pub const fn src(&self) -> super::vals::Lfclksrc {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -1042,7 +1023,7 @@ pub mod clock {
             }
             #[doc = "Clock source"]
             #[inline(always)]
-            pub fn set_src(&mut self, val: super::vals::Lfclksrc) {
+            pub const fn set_src(&mut self, val: super::vals::Lfclksrc) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -1062,12 +1043,7 @@ pub mod clock {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Lfclksrc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Lfclksrc {
-                    src: super::vals::Lfclksrc,
-                }
-                let proxy = Lfclksrc { src: self.src() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Lfclksrc {{ src: {:?} }}", self.src())
             }
         }
         #[doc = "Copy of LFCLKSRC register, set after LFCLKSTART task has been triggered"]
@@ -1076,6 +1052,7 @@ pub mod clock {
         pub struct Lfclksrccopy(pub u32);
         impl Lfclksrccopy {
             #[doc = "Clock source"]
+            #[must_use]
             #[inline(always)]
             pub const fn src(&self) -> super::vals::Lfclksrc {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -1083,7 +1060,7 @@ pub mod clock {
             }
             #[doc = "Clock source"]
             #[inline(always)]
-            pub fn set_src(&mut self, val: super::vals::Lfclksrc) {
+            pub const fn set_src(&mut self, val: super::vals::Lfclksrc) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -1103,12 +1080,7 @@ pub mod clock {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Lfclksrccopy {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Lfclksrccopy {
-                    src: super::vals::Lfclksrc,
-                }
-                let proxy = Lfclksrccopy { src: self.src() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Lfclksrccopy {{ src: {:?} }}", self.src())
             }
         }
         #[doc = "The register shows which LFCLK source has been requested (SRC) when triggering LFCLKSTART task and if the source has been started (STATE)"]
@@ -1117,6 +1089,7 @@ pub mod clock {
         pub struct Lfclkstat(pub u32);
         impl Lfclkstat {
             #[doc = "Active clock source"]
+            #[must_use]
             #[inline(always)]
             pub const fn src(&self) -> super::vals::Lfclksrc {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -1124,10 +1097,11 @@ pub mod clock {
             }
             #[doc = "Active clock source"]
             #[inline(always)]
-            pub fn set_src(&mut self, val: super::vals::Lfclksrc) {
+            pub const fn set_src(&mut self, val: super::vals::Lfclksrc) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
             #[doc = "LFCLK state"]
+            #[must_use]
             #[inline(always)]
             pub const fn state(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
@@ -1135,7 +1109,7 @@ pub mod clock {
             }
             #[doc = "LFCLK state"]
             #[inline(always)]
-            pub fn set_state(&mut self, val: bool) {
+            pub const fn set_state(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
         }
@@ -1156,16 +1130,12 @@ pub mod clock {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Lfclkstat {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Lfclkstat {
-                    src: super::vals::Lfclksrc,
-                    state: bool,
-                }
-                let proxy = Lfclkstat {
-                    src: self.src(),
-                    state: self.state(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Lfclkstat {{ src: {:?}, state: {=bool:?} }}",
+                    self.src(),
+                    self.state()
+                )
             }
         }
     }
@@ -1297,20 +1267,18 @@ pub mod common {
     }
     impl<T: Default + Copy, A: Write> Reg<T, A> {
         #[inline(always)]
-        pub fn write<R>(&self, f: impl FnOnce(&mut T) -> R) -> R {
+        pub fn write(&self, f: impl FnOnce(&mut T)) {
             let mut val = Default::default();
-            let res = f(&mut val);
+            f(&mut val);
             self.write_value(val);
-            res
         }
     }
     impl<T: Copy, A: Read + Write> Reg<T, A> {
         #[inline(always)]
-        pub fn modify<R>(&self, f: impl FnOnce(&mut T) -> R) -> R {
+        pub fn modify(&self, f: impl FnOnce(&mut T)) {
             let mut val = self.read();
-            let res = f(&mut val);
+            f(&mut val);
             self.write_value(val);
-            res
         }
     }
 }
@@ -1344,6 +1312,7 @@ pub mod cryptocell {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable the CRYPTOCELL subsystem"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -1351,7 +1320,7 @@ pub mod cryptocell {
             }
             #[doc = "Enable or disable the CRYPTOCELL subsystem"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: bool) {
+            pub const fn set_enable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -1371,14 +1340,7 @@ pub mod cryptocell {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: bool,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {=bool:?} }}", self.enable())
             }
         }
     }
@@ -1482,6 +1444,7 @@ pub mod ctrlapperi {
         pub struct Lock(pub u32);
         impl Lock {
             #[doc = "Lock ERASEPROTECT.DISABLE register from being written until next reset"]
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -1489,7 +1452,7 @@ pub mod ctrlapperi {
             }
             #[doc = "Lock ERASEPROTECT.DISABLE register from being written until next reset"]
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -1507,12 +1470,7 @@ pub mod ctrlapperi {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Lock {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Lock {
-                    lock: bool,
-                }
-                let proxy = Lock { lock: self.lock() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Lock {{ lock: {=bool:?} }}", self.lock())
             }
         }
         #[doc = "This register shows a status that indicates if data sent from the debugger to the CPU has been read."]
@@ -1521,6 +1479,7 @@ pub mod ctrlapperi {
         pub struct Rxstatus(pub u32);
         impl Rxstatus {
             #[doc = "Status of data in register RXDATA"]
+            #[must_use]
             #[inline(always)]
             pub const fn rxstatus(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -1528,7 +1487,7 @@ pub mod ctrlapperi {
             }
             #[doc = "Status of data in register RXDATA"]
             #[inline(always)]
-            pub fn set_rxstatus(&mut self, val: bool) {
+            pub const fn set_rxstatus(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -1548,14 +1507,7 @@ pub mod ctrlapperi {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Rxstatus {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Rxstatus {
-                    rxstatus: bool,
-                }
-                let proxy = Rxstatus {
-                    rxstatus: self.rxstatus(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Rxstatus {{ rxstatus: {=bool:?} }}", self.rxstatus())
             }
         }
         #[doc = "This register shows a status that indicates if the data sent from the CPU to the debugger has been read."]
@@ -1564,6 +1516,7 @@ pub mod ctrlapperi {
         pub struct Txstatus(pub u32);
         impl Txstatus {
             #[doc = "Status of data in register TXDATA"]
+            #[must_use]
             #[inline(always)]
             pub const fn txstatus(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -1571,7 +1524,7 @@ pub mod ctrlapperi {
             }
             #[doc = "Status of data in register TXDATA"]
             #[inline(always)]
-            pub fn set_txstatus(&mut self, val: bool) {
+            pub const fn set_txstatus(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -1591,14 +1544,7 @@ pub mod ctrlapperi {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Txstatus {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Txstatus {
-                    txstatus: bool,
-                }
-                let proxy = Txstatus {
-                    txstatus: self.txstatus(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Txstatus {{ txstatus: {=bool:?} }}", self.txstatus())
             }
         }
     }
@@ -1719,6 +1665,7 @@ pub mod dppic {
         pub struct Chen(pub u32);
         impl Chen {
             #[doc = "Enable or disable channel 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn ch(&self, n: usize) -> bool {
                 assert!(n < 16usize);
@@ -1728,7 +1675,7 @@ pub mod dppic {
             }
             #[doc = "Enable or disable channel 0"]
             #[inline(always)]
-            pub fn set_ch(&mut self, n: usize, val: bool) {
+            pub const fn set_ch(&mut self, n: usize, val: bool) {
                 assert!(n < 16usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -1743,58 +1690,29 @@ pub mod dppic {
         impl core::fmt::Debug for Chen {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Chen")
-                    .field(
-                        "ch",
-                        &[
-                            self.ch(0usize),
-                            self.ch(1usize),
-                            self.ch(2usize),
-                            self.ch(3usize),
-                            self.ch(4usize),
-                            self.ch(5usize),
-                            self.ch(6usize),
-                            self.ch(7usize),
-                            self.ch(8usize),
-                            self.ch(9usize),
-                            self.ch(10usize),
-                            self.ch(11usize),
-                            self.ch(12usize),
-                            self.ch(13usize),
-                            self.ch(14usize),
-                            self.ch(15usize),
-                        ],
-                    )
+                    .field("ch[0]", &self.ch(0usize))
+                    .field("ch[1]", &self.ch(1usize))
+                    .field("ch[2]", &self.ch(2usize))
+                    .field("ch[3]", &self.ch(3usize))
+                    .field("ch[4]", &self.ch(4usize))
+                    .field("ch[5]", &self.ch(5usize))
+                    .field("ch[6]", &self.ch(6usize))
+                    .field("ch[7]", &self.ch(7usize))
+                    .field("ch[8]", &self.ch(8usize))
+                    .field("ch[9]", &self.ch(9usize))
+                    .field("ch[10]", &self.ch(10usize))
+                    .field("ch[11]", &self.ch(11usize))
+                    .field("ch[12]", &self.ch(12usize))
+                    .field("ch[13]", &self.ch(13usize))
+                    .field("ch[14]", &self.ch(14usize))
+                    .field("ch[15]", &self.ch(15usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Chen {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Chen {
-                    ch: [bool; 16usize],
-                }
-                let proxy = Chen {
-                    ch: [
-                        self.ch(0usize),
-                        self.ch(1usize),
-                        self.ch(2usize),
-                        self.ch(3usize),
-                        self.ch(4usize),
-                        self.ch(5usize),
-                        self.ch(6usize),
-                        self.ch(7usize),
-                        self.ch(8usize),
-                        self.ch(9usize),
-                        self.ch(10usize),
-                        self.ch(11usize),
-                        self.ch(12usize),
-                        self.ch(13usize),
-                        self.ch(14usize),
-                        self.ch(15usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Chen {{ ch[0]: {=bool:?}, ch[1]: {=bool:?}, ch[2]: {=bool:?}, ch[3]: {=bool:?}, ch[4]: {=bool:?}, ch[5]: {=bool:?}, ch[6]: {=bool:?}, ch[7]: {=bool:?}, ch[8]: {=bool:?}, ch[9]: {=bool:?}, ch[10]: {=bool:?}, ch[11]: {=bool:?}, ch[12]: {=bool:?}, ch[13]: {=bool:?}, ch[14]: {=bool:?}, ch[15]: {=bool:?} }}" , self . ch (0usize) , self . ch (1usize) , self . ch (2usize) , self . ch (3usize) , self . ch (4usize) , self . ch (5usize) , self . ch (6usize) , self . ch (7usize) , self . ch (8usize) , self . ch (9usize) , self . ch (10usize) , self . ch (11usize) , self . ch (12usize) , self . ch (13usize) , self . ch (14usize) , self . ch (15usize))
             }
         }
         #[doc = "Description collection: Channel group n Note: Writes to this register are ignored if either SUBSCRIBE_CHG\\[n\\].EN or SUBSCRIBE_CHG\\[n\\].DIS is enabled"]
@@ -1803,6 +1721,7 @@ pub mod dppic {
         pub struct Chg(pub u32);
         impl Chg {
             #[doc = "Include or exclude channel 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn ch(&self, n: usize) -> bool {
                 assert!(n < 16usize);
@@ -1812,7 +1731,7 @@ pub mod dppic {
             }
             #[doc = "Include or exclude channel 0"]
             #[inline(always)]
-            pub fn set_ch(&mut self, n: usize, val: bool) {
+            pub const fn set_ch(&mut self, n: usize, val: bool) {
                 assert!(n < 16usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -1827,58 +1746,29 @@ pub mod dppic {
         impl core::fmt::Debug for Chg {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Chg")
-                    .field(
-                        "ch",
-                        &[
-                            self.ch(0usize),
-                            self.ch(1usize),
-                            self.ch(2usize),
-                            self.ch(3usize),
-                            self.ch(4usize),
-                            self.ch(5usize),
-                            self.ch(6usize),
-                            self.ch(7usize),
-                            self.ch(8usize),
-                            self.ch(9usize),
-                            self.ch(10usize),
-                            self.ch(11usize),
-                            self.ch(12usize),
-                            self.ch(13usize),
-                            self.ch(14usize),
-                            self.ch(15usize),
-                        ],
-                    )
+                    .field("ch[0]", &self.ch(0usize))
+                    .field("ch[1]", &self.ch(1usize))
+                    .field("ch[2]", &self.ch(2usize))
+                    .field("ch[3]", &self.ch(3usize))
+                    .field("ch[4]", &self.ch(4usize))
+                    .field("ch[5]", &self.ch(5usize))
+                    .field("ch[6]", &self.ch(6usize))
+                    .field("ch[7]", &self.ch(7usize))
+                    .field("ch[8]", &self.ch(8usize))
+                    .field("ch[9]", &self.ch(9usize))
+                    .field("ch[10]", &self.ch(10usize))
+                    .field("ch[11]", &self.ch(11usize))
+                    .field("ch[12]", &self.ch(12usize))
+                    .field("ch[13]", &self.ch(13usize))
+                    .field("ch[14]", &self.ch(14usize))
+                    .field("ch[15]", &self.ch(15usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Chg {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Chg {
-                    ch: [bool; 16usize],
-                }
-                let proxy = Chg {
-                    ch: [
-                        self.ch(0usize),
-                        self.ch(1usize),
-                        self.ch(2usize),
-                        self.ch(3usize),
-                        self.ch(4usize),
-                        self.ch(5usize),
-                        self.ch(6usize),
-                        self.ch(7usize),
-                        self.ch(8usize),
-                        self.ch(9usize),
-                        self.ch(10usize),
-                        self.ch(11usize),
-                        self.ch(12usize),
-                        self.ch(13usize),
-                        self.ch(14usize),
-                        self.ch(15usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Chg {{ ch[0]: {=bool:?}, ch[1]: {=bool:?}, ch[2]: {=bool:?}, ch[3]: {=bool:?}, ch[4]: {=bool:?}, ch[5]: {=bool:?}, ch[6]: {=bool:?}, ch[7]: {=bool:?}, ch[8]: {=bool:?}, ch[9]: {=bool:?}, ch[10]: {=bool:?}, ch[11]: {=bool:?}, ch[12]: {=bool:?}, ch[13]: {=bool:?}, ch[14]: {=bool:?}, ch[15]: {=bool:?} }}" , self . ch (0usize) , self . ch (1usize) , self . ch (2usize) , self . ch (3usize) , self . ch (4usize) , self . ch (5usize) , self . ch (6usize) , self . ch (7usize) , self . ch (8usize) , self . ch (9usize) , self . ch (10usize) , self . ch (11usize) , self . ch (12usize) , self . ch (13usize) , self . ch (14usize) , self . ch (15usize))
             }
         }
     }
@@ -1956,6 +1846,7 @@ pub mod egu {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event TRIGGERED\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn triggered(&self, n: usize) -> bool {
                 assert!(n < 16usize);
@@ -1965,7 +1856,7 @@ pub mod egu {
             }
             #[doc = "Enable or disable interrupt for event TRIGGERED\\[0\\]"]
             #[inline(always)]
-            pub fn set_triggered(&mut self, n: usize, val: bool) {
+            pub const fn set_triggered(&mut self, n: usize, val: bool) {
                 assert!(n < 16usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -1980,58 +1871,29 @@ pub mod egu {
         impl core::fmt::Debug for Int {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Int")
-                    .field(
-                        "triggered",
-                        &[
-                            self.triggered(0usize),
-                            self.triggered(1usize),
-                            self.triggered(2usize),
-                            self.triggered(3usize),
-                            self.triggered(4usize),
-                            self.triggered(5usize),
-                            self.triggered(6usize),
-                            self.triggered(7usize),
-                            self.triggered(8usize),
-                            self.triggered(9usize),
-                            self.triggered(10usize),
-                            self.triggered(11usize),
-                            self.triggered(12usize),
-                            self.triggered(13usize),
-                            self.triggered(14usize),
-                            self.triggered(15usize),
-                        ],
-                    )
+                    .field("triggered[0]", &self.triggered(0usize))
+                    .field("triggered[1]", &self.triggered(1usize))
+                    .field("triggered[2]", &self.triggered(2usize))
+                    .field("triggered[3]", &self.triggered(3usize))
+                    .field("triggered[4]", &self.triggered(4usize))
+                    .field("triggered[5]", &self.triggered(5usize))
+                    .field("triggered[6]", &self.triggered(6usize))
+                    .field("triggered[7]", &self.triggered(7usize))
+                    .field("triggered[8]", &self.triggered(8usize))
+                    .field("triggered[9]", &self.triggered(9usize))
+                    .field("triggered[10]", &self.triggered(10usize))
+                    .field("triggered[11]", &self.triggered(11usize))
+                    .field("triggered[12]", &self.triggered(12usize))
+                    .field("triggered[13]", &self.triggered(13usize))
+                    .field("triggered[14]", &self.triggered(14usize))
+                    .field("triggered[15]", &self.triggered(15usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    triggered: [bool; 16usize],
-                }
-                let proxy = Int {
-                    triggered: [
-                        self.triggered(0usize),
-                        self.triggered(1usize),
-                        self.triggered(2usize),
-                        self.triggered(3usize),
-                        self.triggered(4usize),
-                        self.triggered(5usize),
-                        self.triggered(6usize),
-                        self.triggered(7usize),
-                        self.triggered(8usize),
-                        self.triggered(9usize),
-                        self.triggered(10usize),
-                        self.triggered(11usize),
-                        self.triggered(12usize),
-                        self.triggered(13usize),
-                        self.triggered(14usize),
-                        self.triggered(15usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ triggered[0]: {=bool:?}, triggered[1]: {=bool:?}, triggered[2]: {=bool:?}, triggered[3]: {=bool:?}, triggered[4]: {=bool:?}, triggered[5]: {=bool:?}, triggered[6]: {=bool:?}, triggered[7]: {=bool:?}, triggered[8]: {=bool:?}, triggered[9]: {=bool:?}, triggered[10]: {=bool:?}, triggered[11]: {=bool:?}, triggered[12]: {=bool:?}, triggered[13]: {=bool:?}, triggered[14]: {=bool:?}, triggered[15]: {=bool:?} }}" , self . triggered (0usize) , self . triggered (1usize) , self . triggered (2usize) , self . triggered (3usize) , self . triggered (4usize) , self . triggered (5usize) , self . triggered (6usize) , self . triggered (7usize) , self . triggered (8usize) , self . triggered (9usize) , self . triggered (10usize) , self . triggered (11usize) , self . triggered (12usize) , self . triggered (13usize) , self . triggered (14usize) , self . triggered (15usize))
             }
         }
     }
@@ -2265,6 +2127,7 @@ pub mod ficr {
         pub struct Codepagesize(pub u32);
         impl Codepagesize {
             #[doc = "Code memory page size"]
+            #[must_use]
             #[inline(always)]
             pub const fn codepagesize(&self) -> super::vals::Codepagesize {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2272,7 +2135,7 @@ pub mod ficr {
             }
             #[doc = "Code memory page size"]
             #[inline(always)]
-            pub fn set_codepagesize(&mut self, val: super::vals::Codepagesize) {
+            pub const fn set_codepagesize(&mut self, val: super::vals::Codepagesize) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2293,14 +2156,11 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Codepagesize {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Codepagesize {
-                    codepagesize: super::vals::Codepagesize,
-                }
-                let proxy = Codepagesize {
-                    codepagesize: self.codepagesize(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Codepagesize {{ codepagesize: {:?} }}",
+                    self.codepagesize()
+                )
             }
         }
         #[doc = "Code memory size"]
@@ -2309,6 +2169,7 @@ pub mod ficr {
         pub struct Codesize(pub u32);
         impl Codesize {
             #[doc = "Code memory size in number of pages Total code space is: CODEPAGESIZE * CODESIZE"]
+            #[must_use]
             #[inline(always)]
             pub const fn codesize(&self) -> super::vals::Codesize {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2316,7 +2177,7 @@ pub mod ficr {
             }
             #[doc = "Code memory size in number of pages Total code space is: CODEPAGESIZE * CODESIZE"]
             #[inline(always)]
-            pub fn set_codesize(&mut self, val: super::vals::Codesize) {
+            pub const fn set_codesize(&mut self, val: super::vals::Codesize) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2337,14 +2198,7 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Codesize {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Codesize {
-                    codesize: super::vals::Codesize,
-                }
-                let proxy = Codesize {
-                    codesize: self.codesize(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Codesize {{ codesize: {:?} }}", self.codesize())
             }
         }
         #[doc = "Device type"]
@@ -2353,6 +2207,7 @@ pub mod ficr {
         pub struct Devicetype(pub u32);
         impl Devicetype {
             #[doc = "Device type"]
+            #[must_use]
             #[inline(always)]
             pub const fn devicetype(&self) -> super::vals::Devicetype {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2360,7 +2215,7 @@ pub mod ficr {
             }
             #[doc = "Device type"]
             #[inline(always)]
-            pub fn set_devicetype(&mut self, val: super::vals::Devicetype) {
+            pub const fn set_devicetype(&mut self, val: super::vals::Devicetype) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2381,14 +2236,7 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Devicetype {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Devicetype {
-                    devicetype: super::vals::Devicetype,
-                }
-                let proxy = Devicetype {
-                    devicetype: self.devicetype(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Devicetype {{ devicetype: {:?} }}", self.devicetype())
             }
         }
         #[doc = "Flash variant"]
@@ -2397,6 +2245,7 @@ pub mod ficr {
         pub struct Flash(pub u32);
         impl Flash {
             #[doc = "Flash variant"]
+            #[must_use]
             #[inline(always)]
             pub const fn flash(&self) -> super::vals::Flash {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2404,7 +2253,7 @@ pub mod ficr {
             }
             #[doc = "Flash variant"]
             #[inline(always)]
-            pub fn set_flash(&mut self, val: super::vals::Flash) {
+            pub const fn set_flash(&mut self, val: super::vals::Flash) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2425,14 +2274,7 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Flash {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Flash {
-                    flash: super::vals::Flash,
-                }
-                let proxy = Flash {
-                    flash: self.flash(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Flash {{ flash: {:?} }}", self.flash())
             }
         }
         #[doc = "Part Variant, Hardware version and Production configuration"]
@@ -2441,6 +2283,7 @@ pub mod ficr {
         pub struct InfoVariant(pub u32);
         impl InfoVariant {
             #[doc = "Part Variant, Hardware version and Production configuration, encoded as ASCII"]
+            #[must_use]
             #[inline(always)]
             pub const fn variant(&self) -> super::vals::Variant {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2448,7 +2291,7 @@ pub mod ficr {
             }
             #[doc = "Part Variant, Hardware version and Production configuration, encoded as ASCII"]
             #[inline(always)]
-            pub fn set_variant(&mut self, val: super::vals::Variant) {
+            pub const fn set_variant(&mut self, val: super::vals::Variant) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2469,14 +2312,7 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for InfoVariant {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct InfoVariant {
-                    variant: super::vals::Variant,
-                }
-                let proxy = InfoVariant {
-                    variant: self.variant(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "InfoVariant {{ variant: {:?} }}", self.variant())
             }
         }
         #[doc = "Package option"]
@@ -2485,6 +2321,7 @@ pub mod ficr {
         pub struct Package(pub u32);
         impl Package {
             #[doc = "Package option"]
+            #[must_use]
             #[inline(always)]
             pub const fn package(&self) -> super::vals::Package {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2492,7 +2329,7 @@ pub mod ficr {
             }
             #[doc = "Package option"]
             #[inline(always)]
-            pub fn set_package(&mut self, val: super::vals::Package) {
+            pub const fn set_package(&mut self, val: super::vals::Package) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2513,14 +2350,7 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Package {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Package {
-                    package: super::vals::Package,
-                }
-                let proxy = Package {
-                    package: self.package(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Package {{ package: {:?} }}", self.package())
             }
         }
         #[doc = "Part code"]
@@ -2529,6 +2359,7 @@ pub mod ficr {
         pub struct Part(pub u32);
         impl Part {
             #[doc = "Part code"]
+            #[must_use]
             #[inline(always)]
             pub const fn part(&self) -> super::vals::Part {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2536,7 +2367,7 @@ pub mod ficr {
             }
             #[doc = "Part code"]
             #[inline(always)]
-            pub fn set_part(&mut self, val: super::vals::Part) {
+            pub const fn set_part(&mut self, val: super::vals::Part) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2555,12 +2386,7 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Part {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Part {
-                    part: super::vals::Part,
-                }
-                let proxy = Part { part: self.part() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Part {{ part: {:?} }}", self.part())
             }
         }
         #[doc = "SIP part number"]
@@ -2568,13 +2394,14 @@ pub mod ficr {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Partno(pub u32);
         impl Partno {
+            #[must_use]
             #[inline(always)]
             pub const fn partno(&self) -> super::vals::Partno {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
                 super::vals::Partno::from_bits(val as u32)
             }
             #[inline(always)]
-            pub fn set_partno(&mut self, val: super::vals::Partno) {
+            pub const fn set_partno(&mut self, val: super::vals::Partno) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2595,14 +2422,7 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Partno {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Partno {
-                    partno: super::vals::Partno,
-                }
-                let proxy = Partno {
-                    partno: self.partno(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Partno {{ partno: {:?} }}", self.partno())
             }
         }
         #[doc = "RAM variant"]
@@ -2611,6 +2431,7 @@ pub mod ficr {
         pub struct Ram(pub u32);
         impl Ram {
             #[doc = "RAM variant"]
+            #[must_use]
             #[inline(always)]
             pub const fn ram(&self) -> super::vals::Ram {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -2618,7 +2439,7 @@ pub mod ficr {
             }
             #[doc = "RAM variant"]
             #[inline(always)]
-            pub fn set_ram(&mut self, val: super::vals::Ram) {
+            pub const fn set_ram(&mut self, val: super::vals::Ram) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -2637,19 +2458,14 @@ pub mod ficr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Ram {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Ram {
-                    ram: super::vals::Ram,
-                }
-                let proxy = Ram { ram: self.ram() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Ram {{ ram: {:?} }}", self.ram())
             }
         }
     }
     pub mod vals {
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Codepagesize(pub u32);
+        pub struct Codepagesize(u32);
         impl Codepagesize {
             #[doc = "4 kByte"]
             pub const K4096: Self = Self(0x1000);
@@ -2693,7 +2509,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Codesize(pub u32);
+        pub struct Codesize(u32);
         impl Codesize {
             #[doc = "256 pages"]
             pub const P256: Self = Self(0x0100);
@@ -2737,7 +2553,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Devicetype(pub u32);
+        pub struct Devicetype(u32);
         impl Devicetype {
             #[doc = "Device is an physical DIE"]
             pub const DIE: Self = Self(0x0);
@@ -2785,7 +2601,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Flash(pub u32);
+        pub struct Flash(u32);
         impl Flash {
             #[doc = "1 MByte FLASH"]
             pub const K1024: Self = Self(0x0400);
@@ -2829,7 +2645,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Package(pub u32);
+        pub struct Package(u32);
         impl Package {
             #[doc = "CFxx - 236 ball wlCSP"]
             pub const CF: Self = Self(0x2002);
@@ -2873,7 +2689,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Part(pub u32);
+        pub struct Part(u32);
         impl Part {
             #[doc = "nRF9120"]
             pub const N9120: Self = Self(0x9120);
@@ -2921,7 +2737,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Partno(pub u32);
+        pub struct Partno(u32);
         impl Partno {
             #[doc = "Device is an nRF9160 sip"]
             pub const _9160: Self = Self(0x9160);
@@ -2965,7 +2781,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Ram(pub u32);
+        pub struct Ram(u32);
         impl Ram {
             #[doc = "256 kByte RAM"]
             pub const K256: Self = Self(0x0100);
@@ -3013,7 +2829,7 @@ pub mod ficr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Variant(pub u32);
+        pub struct Variant(u32);
         impl Variant {
             #[doc = "AAA0"]
             pub const AAA0: Self = Self(0x4141_4130);
@@ -3179,6 +2995,7 @@ pub mod gpio {
         pub struct Detectmode(pub u32);
         impl Detectmode {
             #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn detectmode(&self) -> super::vals::Detectmode {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -3186,7 +3003,7 @@ pub mod gpio {
             }
             #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
             #[inline(always)]
-            pub fn set_detectmode(&mut self, val: super::vals::Detectmode) {
+            pub const fn set_detectmode(&mut self, val: super::vals::Detectmode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -3206,14 +3023,7 @@ pub mod gpio {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Detectmode {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Detectmode {
-                    detectmode: super::vals::Detectmode,
-                }
-                let proxy = Detectmode {
-                    detectmode: self.detectmode(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Detectmode {{ detectmode: {:?} }}", self.detectmode())
             }
         }
         #[doc = "Select between default DETECT signal behavior and LDETECT mode (For secure pin only)"]
@@ -3222,6 +3032,7 @@ pub mod gpio {
         pub struct DetectmodeSec(pub u32);
         impl DetectmodeSec {
             #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn detectmode(&self) -> super::vals::Detectmode {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -3229,7 +3040,7 @@ pub mod gpio {
             }
             #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
             #[inline(always)]
-            pub fn set_detectmode(&mut self, val: super::vals::Detectmode) {
+            pub const fn set_detectmode(&mut self, val: super::vals::Detectmode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -3249,14 +3060,7 @@ pub mod gpio {
         #[cfg(feature = "defmt")]
         impl defmt::Format for DetectmodeSec {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct DetectmodeSec {
-                    detectmode: super::vals::Detectmode,
-                }
-                let proxy = DetectmodeSec {
-                    detectmode: self.detectmode(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "DetectmodeSec {{ detectmode: {:?} }}", self.detectmode())
             }
         }
         #[doc = "Direction of GPIO pins"]
@@ -3265,6 +3069,7 @@ pub mod gpio {
         pub struct Dir(pub u32);
         impl Dir {
             #[doc = "Pin 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> super::vals::Dir {
                 assert!(n < 32usize);
@@ -3274,7 +3079,7 @@ pub mod gpio {
             }
             #[doc = "Pin 0"]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: super::vals::Dir) {
+            pub const fn set_pin(&mut self, n: usize, val: super::vals::Dir) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val.to_bits() as u32) & 0x01) << offs);
@@ -3289,90 +3094,45 @@ pub mod gpio {
         impl core::fmt::Debug for Dir {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Dir")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Dir {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Dir {
-                    pin: [super::vals::Dir; 32usize],
-                }
-                let proxy = Dir {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Dir {{ pin[0]: {:?}, pin[1]: {:?}, pin[2]: {:?}, pin[3]: {:?}, pin[4]: {:?}, pin[5]: {:?}, pin[6]: {:?}, pin[7]: {:?}, pin[8]: {:?}, pin[9]: {:?}, pin[10]: {:?}, pin[11]: {:?}, pin[12]: {:?}, pin[13]: {:?}, pin[14]: {:?}, pin[15]: {:?}, pin[16]: {:?}, pin[17]: {:?}, pin[18]: {:?}, pin[19]: {:?}, pin[20]: {:?}, pin[21]: {:?}, pin[22]: {:?}, pin[23]: {:?}, pin[24]: {:?}, pin[25]: {:?}, pin[26]: {:?}, pin[27]: {:?}, pin[28]: {:?}, pin[29]: {:?}, pin[30]: {:?}, pin[31]: {:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "DIR clear register"]
@@ -3381,6 +3141,7 @@ pub mod gpio {
         pub struct Dirclr(pub u32);
         impl Dirclr {
             #[doc = "Set as input pin 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> bool {
                 assert!(n < 32usize);
@@ -3390,7 +3151,7 @@ pub mod gpio {
             }
             #[doc = "Set as input pin 0"]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: bool) {
+            pub const fn set_pin(&mut self, n: usize, val: bool) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -3405,90 +3166,45 @@ pub mod gpio {
         impl core::fmt::Debug for Dirclr {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Dirclr")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Dirclr {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Dirclr {
-                    pin: [bool; 32usize],
-                }
-                let proxy = Dirclr {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Dirclr {{ pin[0]: {=bool:?}, pin[1]: {=bool:?}, pin[2]: {=bool:?}, pin[3]: {=bool:?}, pin[4]: {=bool:?}, pin[5]: {=bool:?}, pin[6]: {=bool:?}, pin[7]: {=bool:?}, pin[8]: {=bool:?}, pin[9]: {=bool:?}, pin[10]: {=bool:?}, pin[11]: {=bool:?}, pin[12]: {=bool:?}, pin[13]: {=bool:?}, pin[14]: {=bool:?}, pin[15]: {=bool:?}, pin[16]: {=bool:?}, pin[17]: {=bool:?}, pin[18]: {=bool:?}, pin[19]: {=bool:?}, pin[20]: {=bool:?}, pin[21]: {=bool:?}, pin[22]: {=bool:?}, pin[23]: {=bool:?}, pin[24]: {=bool:?}, pin[25]: {=bool:?}, pin[26]: {=bool:?}, pin[27]: {=bool:?}, pin[28]: {=bool:?}, pin[29]: {=bool:?}, pin[30]: {=bool:?}, pin[31]: {=bool:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "DIR set register"]
@@ -3497,6 +3213,7 @@ pub mod gpio {
         pub struct Dirset(pub u32);
         impl Dirset {
             #[doc = "Set as output pin 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> bool {
                 assert!(n < 32usize);
@@ -3506,7 +3223,7 @@ pub mod gpio {
             }
             #[doc = "Set as output pin 0"]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: bool) {
+            pub const fn set_pin(&mut self, n: usize, val: bool) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -3521,90 +3238,45 @@ pub mod gpio {
         impl core::fmt::Debug for Dirset {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Dirset")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Dirset {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Dirset {
-                    pin: [bool; 32usize],
-                }
-                let proxy = Dirset {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Dirset {{ pin[0]: {=bool:?}, pin[1]: {=bool:?}, pin[2]: {=bool:?}, pin[3]: {=bool:?}, pin[4]: {=bool:?}, pin[5]: {=bool:?}, pin[6]: {=bool:?}, pin[7]: {=bool:?}, pin[8]: {=bool:?}, pin[9]: {=bool:?}, pin[10]: {=bool:?}, pin[11]: {=bool:?}, pin[12]: {=bool:?}, pin[13]: {=bool:?}, pin[14]: {=bool:?}, pin[15]: {=bool:?}, pin[16]: {=bool:?}, pin[17]: {=bool:?}, pin[18]: {=bool:?}, pin[19]: {=bool:?}, pin[20]: {=bool:?}, pin[21]: {=bool:?}, pin[22]: {=bool:?}, pin[23]: {=bool:?}, pin[24]: {=bool:?}, pin[25]: {=bool:?}, pin[26]: {=bool:?}, pin[27]: {=bool:?}, pin[28]: {=bool:?}, pin[29]: {=bool:?}, pin[30]: {=bool:?}, pin[31]: {=bool:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "Read GPIO port"]
@@ -3613,6 +3285,7 @@ pub mod gpio {
         pub struct In(pub u32);
         impl In {
             #[doc = "Pin 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> bool {
                 assert!(n < 32usize);
@@ -3622,7 +3295,7 @@ pub mod gpio {
             }
             #[doc = "Pin 0"]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: bool) {
+            pub const fn set_pin(&mut self, n: usize, val: bool) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -3637,90 +3310,45 @@ pub mod gpio {
         impl core::fmt::Debug for In {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("In")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for In {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct In {
-                    pin: [bool; 32usize],
-                }
-                let proxy = In {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "In {{ pin[0]: {=bool:?}, pin[1]: {=bool:?}, pin[2]: {=bool:?}, pin[3]: {=bool:?}, pin[4]: {=bool:?}, pin[5]: {=bool:?}, pin[6]: {=bool:?}, pin[7]: {=bool:?}, pin[8]: {=bool:?}, pin[9]: {=bool:?}, pin[10]: {=bool:?}, pin[11]: {=bool:?}, pin[12]: {=bool:?}, pin[13]: {=bool:?}, pin[14]: {=bool:?}, pin[15]: {=bool:?}, pin[16]: {=bool:?}, pin[17]: {=bool:?}, pin[18]: {=bool:?}, pin[19]: {=bool:?}, pin[20]: {=bool:?}, pin[21]: {=bool:?}, pin[22]: {=bool:?}, pin[23]: {=bool:?}, pin[24]: {=bool:?}, pin[25]: {=bool:?}, pin[26]: {=bool:?}, pin[27]: {=bool:?}, pin[28]: {=bool:?}, pin[29]: {=bool:?}, pin[30]: {=bool:?}, pin[31]: {=bool:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "Latch register indicating what GPIO pins that have met the criteria set in the PIN_CNF\\[n\\].SENSE registers"]
@@ -3729,6 +3357,7 @@ pub mod gpio {
         pub struct Latch(pub u32);
         impl Latch {
             #[doc = "Status on whether PIN\\[0\\] has met criteria set in PIN_CNF\\[0\\].SENSE register. Write '1' to clear."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> bool {
                 assert!(n < 32usize);
@@ -3738,7 +3367,7 @@ pub mod gpio {
             }
             #[doc = "Status on whether PIN\\[0\\] has met criteria set in PIN_CNF\\[0\\].SENSE register. Write '1' to clear."]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: bool) {
+            pub const fn set_pin(&mut self, n: usize, val: bool) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -3753,90 +3382,45 @@ pub mod gpio {
         impl core::fmt::Debug for Latch {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Latch")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Latch {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Latch {
-                    pin: [bool; 32usize],
-                }
-                let proxy = Latch {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Latch {{ pin[0]: {=bool:?}, pin[1]: {=bool:?}, pin[2]: {=bool:?}, pin[3]: {=bool:?}, pin[4]: {=bool:?}, pin[5]: {=bool:?}, pin[6]: {=bool:?}, pin[7]: {=bool:?}, pin[8]: {=bool:?}, pin[9]: {=bool:?}, pin[10]: {=bool:?}, pin[11]: {=bool:?}, pin[12]: {=bool:?}, pin[13]: {=bool:?}, pin[14]: {=bool:?}, pin[15]: {=bool:?}, pin[16]: {=bool:?}, pin[17]: {=bool:?}, pin[18]: {=bool:?}, pin[19]: {=bool:?}, pin[20]: {=bool:?}, pin[21]: {=bool:?}, pin[22]: {=bool:?}, pin[23]: {=bool:?}, pin[24]: {=bool:?}, pin[25]: {=bool:?}, pin[26]: {=bool:?}, pin[27]: {=bool:?}, pin[28]: {=bool:?}, pin[29]: {=bool:?}, pin[30]: {=bool:?}, pin[31]: {=bool:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "Write GPIO port"]
@@ -3845,6 +3429,7 @@ pub mod gpio {
         pub struct Out(pub u32);
         impl Out {
             #[doc = "Pin 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> bool {
                 assert!(n < 32usize);
@@ -3854,7 +3439,7 @@ pub mod gpio {
             }
             #[doc = "Pin 0"]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: bool) {
+            pub const fn set_pin(&mut self, n: usize, val: bool) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -3869,90 +3454,45 @@ pub mod gpio {
         impl core::fmt::Debug for Out {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Out")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Out {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Out {
-                    pin: [bool; 32usize],
-                }
-                let proxy = Out {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Out {{ pin[0]: {=bool:?}, pin[1]: {=bool:?}, pin[2]: {=bool:?}, pin[3]: {=bool:?}, pin[4]: {=bool:?}, pin[5]: {=bool:?}, pin[6]: {=bool:?}, pin[7]: {=bool:?}, pin[8]: {=bool:?}, pin[9]: {=bool:?}, pin[10]: {=bool:?}, pin[11]: {=bool:?}, pin[12]: {=bool:?}, pin[13]: {=bool:?}, pin[14]: {=bool:?}, pin[15]: {=bool:?}, pin[16]: {=bool:?}, pin[17]: {=bool:?}, pin[18]: {=bool:?}, pin[19]: {=bool:?}, pin[20]: {=bool:?}, pin[21]: {=bool:?}, pin[22]: {=bool:?}, pin[23]: {=bool:?}, pin[24]: {=bool:?}, pin[25]: {=bool:?}, pin[26]: {=bool:?}, pin[27]: {=bool:?}, pin[28]: {=bool:?}, pin[29]: {=bool:?}, pin[30]: {=bool:?}, pin[31]: {=bool:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "Clear individual bits in GPIO port"]
@@ -3961,6 +3501,7 @@ pub mod gpio {
         pub struct Outclr(pub u32);
         impl Outclr {
             #[doc = "Pin 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> bool {
                 assert!(n < 32usize);
@@ -3970,7 +3511,7 @@ pub mod gpio {
             }
             #[doc = "Pin 0"]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: bool) {
+            pub const fn set_pin(&mut self, n: usize, val: bool) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -3985,90 +3526,45 @@ pub mod gpio {
         impl core::fmt::Debug for Outclr {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Outclr")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Outclr {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Outclr {
-                    pin: [bool; 32usize],
-                }
-                let proxy = Outclr {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Outclr {{ pin[0]: {=bool:?}, pin[1]: {=bool:?}, pin[2]: {=bool:?}, pin[3]: {=bool:?}, pin[4]: {=bool:?}, pin[5]: {=bool:?}, pin[6]: {=bool:?}, pin[7]: {=bool:?}, pin[8]: {=bool:?}, pin[9]: {=bool:?}, pin[10]: {=bool:?}, pin[11]: {=bool:?}, pin[12]: {=bool:?}, pin[13]: {=bool:?}, pin[14]: {=bool:?}, pin[15]: {=bool:?}, pin[16]: {=bool:?}, pin[17]: {=bool:?}, pin[18]: {=bool:?}, pin[19]: {=bool:?}, pin[20]: {=bool:?}, pin[21]: {=bool:?}, pin[22]: {=bool:?}, pin[23]: {=bool:?}, pin[24]: {=bool:?}, pin[25]: {=bool:?}, pin[26]: {=bool:?}, pin[27]: {=bool:?}, pin[28]: {=bool:?}, pin[29]: {=bool:?}, pin[30]: {=bool:?}, pin[31]: {=bool:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "Set individual bits in GPIO port"]
@@ -4077,6 +3573,7 @@ pub mod gpio {
         pub struct Outset(pub u32);
         impl Outset {
             #[doc = "Pin 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self, n: usize) -> bool {
                 assert!(n < 32usize);
@@ -4086,7 +3583,7 @@ pub mod gpio {
             }
             #[doc = "Pin 0"]
             #[inline(always)]
-            pub fn set_pin(&mut self, n: usize, val: bool) {
+            pub const fn set_pin(&mut self, n: usize, val: bool) {
                 assert!(n < 32usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -4101,90 +3598,45 @@ pub mod gpio {
         impl core::fmt::Debug for Outset {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Outset")
-                    .field(
-                        "pin",
-                        &[
-                            self.pin(0usize),
-                            self.pin(1usize),
-                            self.pin(2usize),
-                            self.pin(3usize),
-                            self.pin(4usize),
-                            self.pin(5usize),
-                            self.pin(6usize),
-                            self.pin(7usize),
-                            self.pin(8usize),
-                            self.pin(9usize),
-                            self.pin(10usize),
-                            self.pin(11usize),
-                            self.pin(12usize),
-                            self.pin(13usize),
-                            self.pin(14usize),
-                            self.pin(15usize),
-                            self.pin(16usize),
-                            self.pin(17usize),
-                            self.pin(18usize),
-                            self.pin(19usize),
-                            self.pin(20usize),
-                            self.pin(21usize),
-                            self.pin(22usize),
-                            self.pin(23usize),
-                            self.pin(24usize),
-                            self.pin(25usize),
-                            self.pin(26usize),
-                            self.pin(27usize),
-                            self.pin(28usize),
-                            self.pin(29usize),
-                            self.pin(30usize),
-                            self.pin(31usize),
-                        ],
-                    )
+                    .field("pin[0]", &self.pin(0usize))
+                    .field("pin[1]", &self.pin(1usize))
+                    .field("pin[2]", &self.pin(2usize))
+                    .field("pin[3]", &self.pin(3usize))
+                    .field("pin[4]", &self.pin(4usize))
+                    .field("pin[5]", &self.pin(5usize))
+                    .field("pin[6]", &self.pin(6usize))
+                    .field("pin[7]", &self.pin(7usize))
+                    .field("pin[8]", &self.pin(8usize))
+                    .field("pin[9]", &self.pin(9usize))
+                    .field("pin[10]", &self.pin(10usize))
+                    .field("pin[11]", &self.pin(11usize))
+                    .field("pin[12]", &self.pin(12usize))
+                    .field("pin[13]", &self.pin(13usize))
+                    .field("pin[14]", &self.pin(14usize))
+                    .field("pin[15]", &self.pin(15usize))
+                    .field("pin[16]", &self.pin(16usize))
+                    .field("pin[17]", &self.pin(17usize))
+                    .field("pin[18]", &self.pin(18usize))
+                    .field("pin[19]", &self.pin(19usize))
+                    .field("pin[20]", &self.pin(20usize))
+                    .field("pin[21]", &self.pin(21usize))
+                    .field("pin[22]", &self.pin(22usize))
+                    .field("pin[23]", &self.pin(23usize))
+                    .field("pin[24]", &self.pin(24usize))
+                    .field("pin[25]", &self.pin(25usize))
+                    .field("pin[26]", &self.pin(26usize))
+                    .field("pin[27]", &self.pin(27usize))
+                    .field("pin[28]", &self.pin(28usize))
+                    .field("pin[29]", &self.pin(29usize))
+                    .field("pin[30]", &self.pin(30usize))
+                    .field("pin[31]", &self.pin(31usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Outset {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Outset {
-                    pin: [bool; 32usize],
-                }
-                let proxy = Outset {
-                    pin: [
-                        self.pin(0usize),
-                        self.pin(1usize),
-                        self.pin(2usize),
-                        self.pin(3usize),
-                        self.pin(4usize),
-                        self.pin(5usize),
-                        self.pin(6usize),
-                        self.pin(7usize),
-                        self.pin(8usize),
-                        self.pin(9usize),
-                        self.pin(10usize),
-                        self.pin(11usize),
-                        self.pin(12usize),
-                        self.pin(13usize),
-                        self.pin(14usize),
-                        self.pin(15usize),
-                        self.pin(16usize),
-                        self.pin(17usize),
-                        self.pin(18usize),
-                        self.pin(19usize),
-                        self.pin(20usize),
-                        self.pin(21usize),
-                        self.pin(22usize),
-                        self.pin(23usize),
-                        self.pin(24usize),
-                        self.pin(25usize),
-                        self.pin(26usize),
-                        self.pin(27usize),
-                        self.pin(28usize),
-                        self.pin(29usize),
-                        self.pin(30usize),
-                        self.pin(31usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Outset {{ pin[0]: {=bool:?}, pin[1]: {=bool:?}, pin[2]: {=bool:?}, pin[3]: {=bool:?}, pin[4]: {=bool:?}, pin[5]: {=bool:?}, pin[6]: {=bool:?}, pin[7]: {=bool:?}, pin[8]: {=bool:?}, pin[9]: {=bool:?}, pin[10]: {=bool:?}, pin[11]: {=bool:?}, pin[12]: {=bool:?}, pin[13]: {=bool:?}, pin[14]: {=bool:?}, pin[15]: {=bool:?}, pin[16]: {=bool:?}, pin[17]: {=bool:?}, pin[18]: {=bool:?}, pin[19]: {=bool:?}, pin[20]: {=bool:?}, pin[21]: {=bool:?}, pin[22]: {=bool:?}, pin[23]: {=bool:?}, pin[24]: {=bool:?}, pin[25]: {=bool:?}, pin[26]: {=bool:?}, pin[27]: {=bool:?}, pin[28]: {=bool:?}, pin[29]: {=bool:?}, pin[30]: {=bool:?}, pin[31]: {=bool:?} }}" , self . pin (0usize) , self . pin (1usize) , self . pin (2usize) , self . pin (3usize) , self . pin (4usize) , self . pin (5usize) , self . pin (6usize) , self . pin (7usize) , self . pin (8usize) , self . pin (9usize) , self . pin (10usize) , self . pin (11usize) , self . pin (12usize) , self . pin (13usize) , self . pin (14usize) , self . pin (15usize) , self . pin (16usize) , self . pin (17usize) , self . pin (18usize) , self . pin (19usize) , self . pin (20usize) , self . pin (21usize) , self . pin (22usize) , self . pin (23usize) , self . pin (24usize) , self . pin (25usize) , self . pin (26usize) , self . pin (27usize) , self . pin (28usize) , self . pin (29usize) , self . pin (30usize) , self . pin (31usize))
             }
         }
         #[doc = "Description collection: Configuration of GPIO pins"]
@@ -4193,6 +3645,7 @@ pub mod gpio {
         pub struct PinCnf(pub u32);
         impl PinCnf {
             #[doc = "Pin direction. Same physical register as DIR register"]
+            #[must_use]
             #[inline(always)]
             pub const fn dir(&self) -> super::vals::Dir {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -4200,10 +3653,11 @@ pub mod gpio {
             }
             #[doc = "Pin direction. Same physical register as DIR register"]
             #[inline(always)]
-            pub fn set_dir(&mut self, val: super::vals::Dir) {
+            pub const fn set_dir(&mut self, val: super::vals::Dir) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
             #[doc = "Connect or disconnect input buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn input(&self) -> super::vals::Input {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -4211,10 +3665,11 @@ pub mod gpio {
             }
             #[doc = "Connect or disconnect input buffer"]
             #[inline(always)]
-            pub fn set_input(&mut self, val: super::vals::Input) {
+            pub const fn set_input(&mut self, val: super::vals::Input) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
             }
             #[doc = "Pull configuration"]
+            #[must_use]
             #[inline(always)]
             pub const fn pull(&self) -> super::vals::Pull {
                 let val = (self.0 >> 2usize) & 0x03;
@@ -4222,10 +3677,11 @@ pub mod gpio {
             }
             #[doc = "Pull configuration"]
             #[inline(always)]
-            pub fn set_pull(&mut self, val: super::vals::Pull) {
+            pub const fn set_pull(&mut self, val: super::vals::Pull) {
                 self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
             }
             #[doc = "Drive configuration"]
+            #[must_use]
             #[inline(always)]
             pub const fn drive(&self) -> super::vals::Drive {
                 let val = (self.0 >> 8usize) & 0x07;
@@ -4233,10 +3689,11 @@ pub mod gpio {
             }
             #[doc = "Drive configuration"]
             #[inline(always)]
-            pub fn set_drive(&mut self, val: super::vals::Drive) {
+            pub const fn set_drive(&mut self, val: super::vals::Drive) {
                 self.0 = (self.0 & !(0x07 << 8usize)) | (((val.to_bits() as u32) & 0x07) << 8usize);
             }
             #[doc = "Pin sensing mechanism"]
+            #[must_use]
             #[inline(always)]
             pub const fn sense(&self) -> super::vals::Sense {
                 let val = (self.0 >> 16usize) & 0x03;
@@ -4244,7 +3701,7 @@ pub mod gpio {
             }
             #[doc = "Pin sensing mechanism"]
             #[inline(always)]
-            pub fn set_sense(&mut self, val: super::vals::Sense) {
+            pub const fn set_sense(&mut self, val: super::vals::Sense) {
                 self.0 =
                     (self.0 & !(0x03 << 16usize)) | (((val.to_bits() as u32) & 0x03) << 16usize);
             }
@@ -4269,22 +3726,15 @@ pub mod gpio {
         #[cfg(feature = "defmt")]
         impl defmt::Format for PinCnf {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct PinCnf {
-                    dir: super::vals::Dir,
-                    input: super::vals::Input,
-                    pull: super::vals::Pull,
-                    drive: super::vals::Drive,
-                    sense: super::vals::Sense,
-                }
-                let proxy = PinCnf {
-                    dir: self.dir(),
-                    input: self.input(),
-                    pull: self.pull(),
-                    drive: self.drive(),
-                    sense: self.sense(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "PinCnf {{ dir: {:?}, input: {:?}, pull: {:?}, drive: {:?}, sense: {:?} }}",
+                    self.dir(),
+                    self.input(),
+                    self.pull(),
+                    self.drive(),
+                    self.sense()
+                )
             }
         }
     }
@@ -4608,6 +4058,7 @@ pub mod gpiote {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -4615,10 +4066,11 @@ pub mod gpiote {
             }
             #[doc = "Mode"]
             #[inline(always)]
-            pub fn set_mode(&mut self, val: super::vals::Mode) {
+            pub const fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
             #[doc = "GPIO number associated with SET\\[n\\], CLR\\[n\\], and OUT\\[n\\] tasks and IN\\[n\\] event"]
+            #[must_use]
             #[inline(always)]
             pub const fn psel(&self) -> u8 {
                 let val = (self.0 >> 8usize) & 0x1f;
@@ -4626,10 +4078,11 @@ pub mod gpiote {
             }
             #[doc = "GPIO number associated with SET\\[n\\], CLR\\[n\\], and OUT\\[n\\] tasks and IN\\[n\\] event"]
             #[inline(always)]
-            pub fn set_psel(&mut self, val: u8) {
+            pub const fn set_psel(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x1f << 8usize)) | (((val as u32) & 0x1f) << 8usize);
             }
             #[doc = "When In task mode: Operation to be performed on output when OUT\\[n\\] task is triggered. When In event mode: Operation on input that shall trigger IN\\[n\\] event."]
+            #[must_use]
             #[inline(always)]
             pub const fn polarity(&self) -> super::vals::Polarity {
                 let val = (self.0 >> 16usize) & 0x03;
@@ -4637,11 +4090,12 @@ pub mod gpiote {
             }
             #[doc = "When In task mode: Operation to be performed on output when OUT\\[n\\] task is triggered. When In event mode: Operation on input that shall trigger IN\\[n\\] event."]
             #[inline(always)]
-            pub fn set_polarity(&mut self, val: super::vals::Polarity) {
+            pub const fn set_polarity(&mut self, val: super::vals::Polarity) {
                 self.0 =
                     (self.0 & !(0x03 << 16usize)) | (((val.to_bits() as u32) & 0x03) << 16usize);
             }
             #[doc = "When in task mode: Initial value of the output when the GPIOTE channel is configured. When in event mode: No effect."]
+            #[must_use]
             #[inline(always)]
             pub const fn outinit(&self) -> super::vals::Outinit {
                 let val = (self.0 >> 20usize) & 0x01;
@@ -4649,7 +4103,7 @@ pub mod gpiote {
             }
             #[doc = "When in task mode: Initial value of the output when the GPIOTE channel is configured. When in event mode: No effect."]
             #[inline(always)]
-            pub fn set_outinit(&mut self, val: super::vals::Outinit) {
+            pub const fn set_outinit(&mut self, val: super::vals::Outinit) {
                 self.0 =
                     (self.0 & !(0x01 << 20usize)) | (((val.to_bits() as u32) & 0x01) << 20usize);
             }
@@ -4673,20 +4127,14 @@ pub mod gpiote {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    mode: super::vals::Mode,
-                    psel: u8,
-                    polarity: super::vals::Polarity,
-                    outinit: super::vals::Outinit,
-                }
-                let proxy = Config {
-                    mode: self.mode(),
-                    psel: self.psel(),
-                    polarity: self.polarity(),
-                    outinit: self.outinit(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Config {{ mode: {:?}, psel: {=u8:?}, polarity: {:?}, outinit: {:?} }}",
+                    self.mode(),
+                    self.psel(),
+                    self.polarity(),
+                    self.outinit()
+                )
             }
         }
         #[doc = "Disable interrupt"]
@@ -4695,6 +4143,7 @@ pub mod gpiote {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Write '1' to disable interrupt for event IN\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn in_(&self, n: usize) -> bool {
                 assert!(n < 8usize);
@@ -4704,12 +4153,13 @@ pub mod gpiote {
             }
             #[doc = "Write '1' to disable interrupt for event IN\\[0\\]"]
             #[inline(always)]
-            pub fn set_in_(&mut self, n: usize, val: bool) {
+            pub const fn set_in_(&mut self, n: usize, val: bool) {
                 assert!(n < 8usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
             #[doc = "Write '1' to disable interrupt for event PORT"]
+            #[must_use]
             #[inline(always)]
             pub const fn port(&self) -> bool {
                 let val = (self.0 >> 31usize) & 0x01;
@@ -4717,7 +4167,7 @@ pub mod gpiote {
             }
             #[doc = "Write '1' to disable interrupt for event PORT"]
             #[inline(always)]
-            pub fn set_port(&mut self, val: bool) {
+            pub const fn set_port(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
             }
         }
@@ -4730,19 +4180,14 @@ pub mod gpiote {
         impl core::fmt::Debug for Int {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Int")
-                    .field(
-                        "in_",
-                        &[
-                            self.in_(0usize),
-                            self.in_(1usize),
-                            self.in_(2usize),
-                            self.in_(3usize),
-                            self.in_(4usize),
-                            self.in_(5usize),
-                            self.in_(6usize),
-                            self.in_(7usize),
-                        ],
-                    )
+                    .field("in_[0]", &self.in_(0usize))
+                    .field("in_[1]", &self.in_(1usize))
+                    .field("in_[2]", &self.in_(2usize))
+                    .field("in_[3]", &self.in_(3usize))
+                    .field("in_[4]", &self.in_(4usize))
+                    .field("in_[5]", &self.in_(5usize))
+                    .field("in_[6]", &self.in_(6usize))
+                    .field("in_[7]", &self.in_(7usize))
                     .field("port", &self.port())
                     .finish()
             }
@@ -4750,25 +4195,7 @@ pub mod gpiote {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    in_: [bool; 8usize],
-                    port: bool,
-                }
-                let proxy = Int {
-                    in_: [
-                        self.in_(0usize),
-                        self.in_(1usize),
-                        self.in_(2usize),
-                        self.in_(3usize),
-                        self.in_(4usize),
-                        self.in_(5usize),
-                        self.in_(6usize),
-                        self.in_(7usize),
-                    ],
-                    port: self.port(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ in_[0]: {=bool:?}, in_[1]: {=bool:?}, in_[2]: {=bool:?}, in_[3]: {=bool:?}, in_[4]: {=bool:?}, in_[5]: {=bool:?}, in_[6]: {=bool:?}, in_[7]: {=bool:?}, port: {=bool:?} }}" , self . in_ (0usize) , self . in_ (1usize) , self . in_ (2usize) , self . in_ (3usize) , self . in_ (4usize) , self . in_ (5usize) , self . in_ (6usize) , self . in_ (7usize) , self . port ())
             }
         }
     }
@@ -5186,6 +4613,7 @@ pub mod i2s {
         pub struct Align(pub u32);
         impl Align {
             #[doc = "Alignment of sample within a frame."]
+            #[must_use]
             #[inline(always)]
             pub const fn align(&self) -> super::vals::Align {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -5193,7 +4621,7 @@ pub mod i2s {
             }
             #[doc = "Alignment of sample within a frame."]
             #[inline(always)]
-            pub fn set_align(&mut self, val: super::vals::Align) {
+            pub const fn set_align(&mut self, val: super::vals::Align) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -5213,14 +4641,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Align {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Align {
-                    align: super::vals::Align,
-                }
-                let proxy = Align {
-                    align: self.align(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Align {{ align: {:?} }}", self.align())
             }
         }
         #[doc = "Enable channels."]
@@ -5229,6 +4650,7 @@ pub mod i2s {
         pub struct Channels(pub u32);
         impl Channels {
             #[doc = "Enable channels."]
+            #[must_use]
             #[inline(always)]
             pub const fn channels(&self) -> super::vals::Channels {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -5236,7 +4658,7 @@ pub mod i2s {
             }
             #[doc = "Enable channels."]
             #[inline(always)]
-            pub fn set_channels(&mut self, val: super::vals::Channels) {
+            pub const fn set_channels(&mut self, val: super::vals::Channels) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -5256,14 +4678,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Channels {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Channels {
-                    channels: super::vals::Channels,
-                }
-                let proxy = Channels {
-                    channels: self.channels(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Channels {{ channels: {:?} }}", self.channels())
             }
         }
         #[doc = "Enable I2S module."]
@@ -5272,6 +4687,7 @@ pub mod i2s {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable I2S module."]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -5279,7 +4695,7 @@ pub mod i2s {
             }
             #[doc = "Enable I2S module."]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: bool) {
+            pub const fn set_enable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -5299,14 +4715,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: bool,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {=bool:?} }}", self.enable())
             }
         }
         #[doc = "Frame format."]
@@ -5315,6 +4724,7 @@ pub mod i2s {
         pub struct Format(pub u32);
         impl Format {
             #[doc = "Frame format."]
+            #[must_use]
             #[inline(always)]
             pub const fn format(&self) -> super::vals::Format {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -5322,7 +4732,7 @@ pub mod i2s {
             }
             #[doc = "Frame format."]
             #[inline(always)]
-            pub fn set_format(&mut self, val: super::vals::Format) {
+            pub const fn set_format(&mut self, val: super::vals::Format) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -5342,14 +4752,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Format {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Format {
-                    format: super::vals::Format,
-                }
-                let proxy = Format {
-                    format: self.format(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Format {{ format: {:?} }}", self.format())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -5358,6 +4761,7 @@ pub mod i2s {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event RXPTRUPD"]
+            #[must_use]
             #[inline(always)]
             pub const fn rxptrupd(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -5365,10 +4769,11 @@ pub mod i2s {
             }
             #[doc = "Enable or disable interrupt for event RXPTRUPD"]
             #[inline(always)]
-            pub fn set_rxptrupd(&mut self, val: bool) {
+            pub const fn set_rxptrupd(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -5376,10 +4781,11 @@ pub mod i2s {
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
-            pub fn set_stopped(&mut self, val: bool) {
+            pub const fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable or disable interrupt for event TXPTRUPD"]
+            #[must_use]
             #[inline(always)]
             pub const fn txptrupd(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -5387,7 +4793,7 @@ pub mod i2s {
             }
             #[doc = "Enable or disable interrupt for event TXPTRUPD"]
             #[inline(always)]
-            pub fn set_txptrupd(&mut self, val: bool) {
+            pub const fn set_txptrupd(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
         }
@@ -5409,18 +4815,13 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    rxptrupd: bool,
-                    stopped: bool,
-                    txptrupd: bool,
-                }
-                let proxy = Int {
-                    rxptrupd: self.rxptrupd(),
-                    stopped: self.stopped(),
-                    txptrupd: self.txptrupd(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Int {{ rxptrupd: {=bool:?}, stopped: {=bool:?}, txptrupd: {=bool:?} }}",
+                    self.rxptrupd(),
+                    self.stopped(),
+                    self.txptrupd()
+                )
             }
         }
         #[doc = "Size of RXD and TXD buffers."]
@@ -5429,6 +4830,7 @@ pub mod i2s {
         pub struct Maxcnt(pub u32);
         impl Maxcnt {
             #[doc = "Size of RXD and TXD buffers in number of 32 bit words."]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x3fff;
@@ -5436,7 +4838,7 @@ pub mod i2s {
             }
             #[doc = "Size of RXD and TXD buffers in number of 32 bit words."]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
             }
         }
@@ -5456,14 +4858,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Maxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Maxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = Maxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Maxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Master clock generator enable."]
@@ -5472,6 +4867,7 @@ pub mod i2s {
         pub struct Mcken(pub u32);
         impl Mcken {
             #[doc = "Master clock generator enable."]
+            #[must_use]
             #[inline(always)]
             pub const fn mcken(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -5479,7 +4875,7 @@ pub mod i2s {
             }
             #[doc = "Master clock generator enable."]
             #[inline(always)]
-            pub fn set_mcken(&mut self, val: bool) {
+            pub const fn set_mcken(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -5499,14 +4895,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Mcken {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Mcken {
-                    mcken: bool,
-                }
-                let proxy = Mcken {
-                    mcken: self.mcken(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Mcken {{ mcken: {=bool:?} }}", self.mcken())
             }
         }
         #[doc = "Master clock generator frequency."]
@@ -5515,6 +4904,7 @@ pub mod i2s {
         pub struct Mckfreq(pub u32);
         impl Mckfreq {
             #[doc = "Master clock generator frequency."]
+            #[must_use]
             #[inline(always)]
             pub const fn mckfreq(&self) -> super::vals::Mckfreq {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -5522,7 +4912,7 @@ pub mod i2s {
             }
             #[doc = "Master clock generator frequency."]
             #[inline(always)]
-            pub fn set_mckfreq(&mut self, val: super::vals::Mckfreq) {
+            pub const fn set_mckfreq(&mut self, val: super::vals::Mckfreq) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -5543,14 +4933,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Mckfreq {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Mckfreq {
-                    mckfreq: super::vals::Mckfreq,
-                }
-                let proxy = Mckfreq {
-                    mckfreq: self.mckfreq(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Mckfreq {{ mckfreq: {:?} }}", self.mckfreq())
             }
         }
         #[doc = "I2S mode."]
@@ -5559,6 +4942,7 @@ pub mod i2s {
         pub struct Mode(pub u32);
         impl Mode {
             #[doc = "I2S mode."]
+            #[must_use]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -5566,7 +4950,7 @@ pub mod i2s {
             }
             #[doc = "I2S mode."]
             #[inline(always)]
-            pub fn set_mode(&mut self, val: super::vals::Mode) {
+            pub const fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -5584,12 +4968,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Mode {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Mode {
-                    mode: super::vals::Mode,
-                }
-                let proxy = Mode { mode: self.mode() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Mode {{ mode: {:?} }}", self.mode())
             }
         }
         #[doc = "MCK / LRCK ratio."]
@@ -5598,6 +4977,7 @@ pub mod i2s {
         pub struct Ratio(pub u32);
         impl Ratio {
             #[doc = "MCK / LRCK ratio."]
+            #[must_use]
             #[inline(always)]
             pub const fn ratio(&self) -> super::vals::Ratio {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -5605,7 +4985,7 @@ pub mod i2s {
             }
             #[doc = "MCK / LRCK ratio."]
             #[inline(always)]
-            pub fn set_ratio(&mut self, val: super::vals::Ratio) {
+            pub const fn set_ratio(&mut self, val: super::vals::Ratio) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
         }
@@ -5625,14 +5005,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Ratio {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Ratio {
-                    ratio: super::vals::Ratio,
-                }
-                let proxy = Ratio {
-                    ratio: self.ratio(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Ratio {{ ratio: {:?} }}", self.ratio())
             }
         }
         #[doc = "Reception (RX) enable."]
@@ -5641,6 +5014,7 @@ pub mod i2s {
         pub struct Rxen(pub u32);
         impl Rxen {
             #[doc = "Reception (RX) enable."]
+            #[must_use]
             #[inline(always)]
             pub const fn rxen(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -5648,7 +5022,7 @@ pub mod i2s {
             }
             #[doc = "Reception (RX) enable."]
             #[inline(always)]
-            pub fn set_rxen(&mut self, val: bool) {
+            pub const fn set_rxen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -5666,12 +5040,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Rxen {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Rxen {
-                    rxen: bool,
-                }
-                let proxy = Rxen { rxen: self.rxen() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Rxen {{ rxen: {=bool:?} }}", self.rxen())
             }
         }
         #[doc = "Sample width."]
@@ -5680,6 +5049,7 @@ pub mod i2s {
         pub struct Swidth(pub u32);
         impl Swidth {
             #[doc = "Sample width."]
+            #[must_use]
             #[inline(always)]
             pub const fn swidth(&self) -> super::vals::Swidth {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -5687,7 +5057,7 @@ pub mod i2s {
             }
             #[doc = "Sample width."]
             #[inline(always)]
-            pub fn set_swidth(&mut self, val: super::vals::Swidth) {
+            pub const fn set_swidth(&mut self, val: super::vals::Swidth) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -5707,14 +5077,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Swidth {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Swidth {
-                    swidth: super::vals::Swidth,
-                }
-                let proxy = Swidth {
-                    swidth: self.swidth(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Swidth {{ swidth: {:?} }}", self.swidth())
             }
         }
         #[doc = "Transmission (TX) enable."]
@@ -5723,6 +5086,7 @@ pub mod i2s {
         pub struct Txen(pub u32);
         impl Txen {
             #[doc = "Transmission (TX) enable."]
+            #[must_use]
             #[inline(always)]
             pub const fn txen(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -5730,7 +5094,7 @@ pub mod i2s {
             }
             #[doc = "Transmission (TX) enable."]
             #[inline(always)]
-            pub fn set_txen(&mut self, val: bool) {
+            pub const fn set_txen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -5748,12 +5112,7 @@ pub mod i2s {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Txen {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Txen {
-                    txen: bool,
-                }
-                let proxy = Txen { txen: self.txen() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Txen {{ txen: {=bool:?} }}", self.txen())
             }
         }
     }
@@ -5856,7 +5215,7 @@ pub mod i2s {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Mckfreq(pub u32);
+        pub struct Mckfreq(u32);
         impl Mckfreq {
             #[doc = "32 MHz / 125 = 0.256 MHz"]
             pub const _32MDIV125: Self = Self(0x020c_0000);
@@ -6164,6 +5523,7 @@ pub mod ipc {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event RECEIVE\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -6171,10 +5531,11 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[0\\]"]
             #[inline(always)]
-            pub fn set_receive0(&mut self, val: bool) {
+            pub const fn set_receive0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[1\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -6182,10 +5543,11 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[1\\]"]
             #[inline(always)]
-            pub fn set_receive1(&mut self, val: bool) {
+            pub const fn set_receive1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[2\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -6193,10 +5555,11 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[2\\]"]
             #[inline(always)]
-            pub fn set_receive2(&mut self, val: bool) {
+            pub const fn set_receive2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[3\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -6204,10 +5567,11 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[3\\]"]
             #[inline(always)]
-            pub fn set_receive3(&mut self, val: bool) {
+            pub const fn set_receive3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[4\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -6215,10 +5579,11 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[4\\]"]
             #[inline(always)]
-            pub fn set_receive4(&mut self, val: bool) {
+            pub const fn set_receive4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[5\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -6226,10 +5591,11 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[5\\]"]
             #[inline(always)]
-            pub fn set_receive5(&mut self, val: bool) {
+            pub const fn set_receive5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[6\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -6237,10 +5603,11 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[6\\]"]
             #[inline(always)]
-            pub fn set_receive6(&mut self, val: bool) {
+            pub const fn set_receive6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[7\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn receive7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -6248,7 +5615,7 @@ pub mod ipc {
             }
             #[doc = "Enable or disable interrupt for event RECEIVE\\[7\\]"]
             #[inline(always)]
-            pub fn set_receive7(&mut self, val: bool) {
+            pub const fn set_receive7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
         }
@@ -6275,28 +5642,7 @@ pub mod ipc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    receive0: bool,
-                    receive1: bool,
-                    receive2: bool,
-                    receive3: bool,
-                    receive4: bool,
-                    receive5: bool,
-                    receive6: bool,
-                    receive7: bool,
-                }
-                let proxy = Int {
-                    receive0: self.receive0(),
-                    receive1: self.receive1(),
-                    receive2: self.receive2(),
-                    receive3: self.receive3(),
-                    receive4: self.receive4(),
-                    receive5: self.receive5(),
-                    receive6: self.receive6(),
-                    receive7: self.receive7(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ receive0: {=bool:?}, receive1: {=bool:?}, receive2: {=bool:?}, receive3: {=bool:?}, receive4: {=bool:?}, receive5: {=bool:?}, receive6: {=bool:?}, receive7: {=bool:?} }}" , self . receive0 () , self . receive1 () , self . receive2 () , self . receive3 () , self . receive4 () , self . receive5 () , self . receive6 () , self . receive7 ())
             }
         }
         #[doc = "Description collection: Receive event configuration for EVENTS_RECEIVE\\[n\\]"]
@@ -6305,6 +5651,7 @@ pub mod ipc {
         pub struct ReceiveCnf(pub u32);
         impl ReceiveCnf {
             #[doc = "Enable subscription to IPC channel 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -6312,10 +5659,11 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 0"]
             #[inline(always)]
-            pub fn set_chen0(&mut self, val: bool) {
+            pub const fn set_chen0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable subscription to IPC channel 1"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -6323,10 +5671,11 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 1"]
             #[inline(always)]
-            pub fn set_chen1(&mut self, val: bool) {
+            pub const fn set_chen1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable subscription to IPC channel 2"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -6334,10 +5683,11 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 2"]
             #[inline(always)]
-            pub fn set_chen2(&mut self, val: bool) {
+            pub const fn set_chen2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable subscription to IPC channel 3"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -6345,10 +5695,11 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 3"]
             #[inline(always)]
-            pub fn set_chen3(&mut self, val: bool) {
+            pub const fn set_chen3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Enable subscription to IPC channel 4"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -6356,10 +5707,11 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 4"]
             #[inline(always)]
-            pub fn set_chen4(&mut self, val: bool) {
+            pub const fn set_chen4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Enable subscription to IPC channel 5"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -6367,10 +5719,11 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 5"]
             #[inline(always)]
-            pub fn set_chen5(&mut self, val: bool) {
+            pub const fn set_chen5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Enable subscription to IPC channel 6"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -6378,10 +5731,11 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 6"]
             #[inline(always)]
-            pub fn set_chen6(&mut self, val: bool) {
+            pub const fn set_chen6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
             #[doc = "Enable subscription to IPC channel 7"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -6389,7 +5743,7 @@ pub mod ipc {
             }
             #[doc = "Enable subscription to IPC channel 7"]
             #[inline(always)]
-            pub fn set_chen7(&mut self, val: bool) {
+            pub const fn set_chen7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
         }
@@ -6416,28 +5770,7 @@ pub mod ipc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for ReceiveCnf {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct ReceiveCnf {
-                    chen0: bool,
-                    chen1: bool,
-                    chen2: bool,
-                    chen3: bool,
-                    chen4: bool,
-                    chen5: bool,
-                    chen6: bool,
-                    chen7: bool,
-                }
-                let proxy = ReceiveCnf {
-                    chen0: self.chen0(),
-                    chen1: self.chen1(),
-                    chen2: self.chen2(),
-                    chen3: self.chen3(),
-                    chen4: self.chen4(),
-                    chen5: self.chen5(),
-                    chen6: self.chen6(),
-                    chen7: self.chen7(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "ReceiveCnf {{ chen0: {=bool:?}, chen1: {=bool:?}, chen2: {=bool:?}, chen3: {=bool:?}, chen4: {=bool:?}, chen5: {=bool:?}, chen6: {=bool:?}, chen7: {=bool:?} }}" , self . chen0 () , self . chen1 () , self . chen2 () , self . chen3 () , self . chen4 () , self . chen5 () , self . chen6 () , self . chen7 ())
             }
         }
         #[doc = "Description collection: Send event configuration for TASKS_SEND\\[n\\]"]
@@ -6446,6 +5779,7 @@ pub mod ipc {
         pub struct SendCnf(pub u32);
         impl SendCnf {
             #[doc = "Enable broadcasting on IPC channel 0"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -6453,10 +5787,11 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 0"]
             #[inline(always)]
-            pub fn set_chen0(&mut self, val: bool) {
+            pub const fn set_chen0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable broadcasting on IPC channel 1"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -6464,10 +5799,11 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 1"]
             #[inline(always)]
-            pub fn set_chen1(&mut self, val: bool) {
+            pub const fn set_chen1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable broadcasting on IPC channel 2"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -6475,10 +5811,11 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 2"]
             #[inline(always)]
-            pub fn set_chen2(&mut self, val: bool) {
+            pub const fn set_chen2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable broadcasting on IPC channel 3"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -6486,10 +5823,11 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 3"]
             #[inline(always)]
-            pub fn set_chen3(&mut self, val: bool) {
+            pub const fn set_chen3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Enable broadcasting on IPC channel 4"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -6497,10 +5835,11 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 4"]
             #[inline(always)]
-            pub fn set_chen4(&mut self, val: bool) {
+            pub const fn set_chen4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Enable broadcasting on IPC channel 5"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -6508,10 +5847,11 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 5"]
             #[inline(always)]
-            pub fn set_chen5(&mut self, val: bool) {
+            pub const fn set_chen5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Enable broadcasting on IPC channel 6"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -6519,10 +5859,11 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 6"]
             #[inline(always)]
-            pub fn set_chen6(&mut self, val: bool) {
+            pub const fn set_chen6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
             #[doc = "Enable broadcasting on IPC channel 7"]
+            #[must_use]
             #[inline(always)]
             pub const fn chen7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -6530,7 +5871,7 @@ pub mod ipc {
             }
             #[doc = "Enable broadcasting on IPC channel 7"]
             #[inline(always)]
-            pub fn set_chen7(&mut self, val: bool) {
+            pub const fn set_chen7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
         }
@@ -6557,28 +5898,7 @@ pub mod ipc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for SendCnf {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct SendCnf {
-                    chen0: bool,
-                    chen1: bool,
-                    chen2: bool,
-                    chen3: bool,
-                    chen4: bool,
-                    chen5: bool,
-                    chen6: bool,
-                    chen7: bool,
-                }
-                let proxy = SendCnf {
-                    chen0: self.chen0(),
-                    chen1: self.chen1(),
-                    chen2: self.chen2(),
-                    chen3: self.chen3(),
-                    chen4: self.chen4(),
-                    chen5: self.chen5(),
-                    chen6: self.chen6(),
-                    chen7: self.chen7(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "SendCnf {{ chen0: {=bool:?}, chen1: {=bool:?}, chen2: {=bool:?}, chen3: {=bool:?}, chen4: {=bool:?}, chen5: {=bool:?}, chen6: {=bool:?}, chen7: {=bool:?} }}" , self . chen0 () , self . chen1 () , self . chen2 () , self . chen3 () , self . chen4 () , self . chen5 () , self . chen6 () , self . chen7 ())
             }
         }
     }
@@ -6660,6 +5980,7 @@ pub mod kmu {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event KEYSLOT_PUSHED"]
+            #[must_use]
             #[inline(always)]
             pub const fn keyslot_pushed(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -6667,10 +5988,11 @@ pub mod kmu {
             }
             #[doc = "Enable or disable interrupt for event KEYSLOT_PUSHED"]
             #[inline(always)]
-            pub fn set_keyslot_pushed(&mut self, val: bool) {
+            pub const fn set_keyslot_pushed(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable interrupt for event KEYSLOT_REVOKED"]
+            #[must_use]
             #[inline(always)]
             pub const fn keyslot_revoked(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -6678,10 +6000,11 @@ pub mod kmu {
             }
             #[doc = "Enable or disable interrupt for event KEYSLOT_REVOKED"]
             #[inline(always)]
-            pub fn set_keyslot_revoked(&mut self, val: bool) {
+            pub const fn set_keyslot_revoked(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event KEYSLOT_ERROR"]
+            #[must_use]
             #[inline(always)]
             pub const fn keyslot_error(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -6689,7 +6012,7 @@ pub mod kmu {
             }
             #[doc = "Enable or disable interrupt for event KEYSLOT_ERROR"]
             #[inline(always)]
-            pub fn set_keyslot_error(&mut self, val: bool) {
+            pub const fn set_keyslot_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
         }
@@ -6711,18 +6034,7 @@ pub mod kmu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    keyslot_pushed: bool,
-                    keyslot_revoked: bool,
-                    keyslot_error: bool,
-                }
-                let proxy = Int {
-                    keyslot_pushed: self.keyslot_pushed(),
-                    keyslot_revoked: self.keyslot_revoked(),
-                    keyslot_error: self.keyslot_error(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ keyslot_pushed: {=bool:?}, keyslot_revoked: {=bool:?}, keyslot_error: {=bool:?} }}" , self . keyslot_pushed () , self . keyslot_revoked () , self . keyslot_error ())
             }
         }
         #[doc = "Select key slot to be read over AHB or pushed over secure APB when TASKS_PUSH_KEYSLOT is started"]
@@ -6731,6 +6043,7 @@ pub mod kmu {
         pub struct Selectkeyslot(pub u32);
         impl Selectkeyslot {
             #[doc = "Select key slot ID to be read over AHB, or pushed over secure APB, when TASKS_PUSH_KEYSLOT is started. NOTE: ID=0 is not a valid key slot ID. The 0 ID should be used when the KMU is idle or not in use. NOTE: Index N in UICR-&gt;KEYSLOT.KEY\\[N\\] and UICR-&gt;KEYSLOT.CONFIG\\[N\\] corresponds to KMU key slot ID=N+1."]
+            #[must_use]
             #[inline(always)]
             pub const fn id(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -6738,7 +6051,7 @@ pub mod kmu {
             }
             #[doc = "Select key slot ID to be read over AHB, or pushed over secure APB, when TASKS_PUSH_KEYSLOT is started. NOTE: ID=0 is not a valid key slot ID. The 0 ID should be used when the KMU is idle or not in use. NOTE: Index N in UICR-&gt;KEYSLOT.KEY\\[N\\] and UICR-&gt;KEYSLOT.CONFIG\\[N\\] corresponds to KMU key slot ID=N+1."]
             #[inline(always)]
-            pub fn set_id(&mut self, val: u8) {
+            pub const fn set_id(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
         }
@@ -6758,12 +6071,7 @@ pub mod kmu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Selectkeyslot {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Selectkeyslot {
-                    id: u8,
-                }
-                let proxy = Selectkeyslot { id: self.id() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Selectkeyslot {{ id: {=u8:?} }}", self.id())
             }
         }
         #[doc = "Status bits for KMU operation"]
@@ -6772,6 +6080,7 @@ pub mod kmu {
         pub struct Status(pub u32);
         impl Status {
             #[doc = "Key slot ID successfully selected by the KMU"]
+            #[must_use]
             #[inline(always)]
             pub const fn selected(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -6779,10 +6088,11 @@ pub mod kmu {
             }
             #[doc = "Key slot ID successfully selected by the KMU"]
             #[inline(always)]
-            pub fn set_selected(&mut self, val: bool) {
+            pub const fn set_selected(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Violation status"]
+            #[must_use]
             #[inline(always)]
             pub const fn blocked(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -6790,7 +6100,7 @@ pub mod kmu {
             }
             #[doc = "Violation status"]
             #[inline(always)]
-            pub fn set_blocked(&mut self, val: bool) {
+            pub const fn set_blocked(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
         }
@@ -6811,16 +6121,12 @@ pub mod kmu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Status {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Status {
-                    selected: bool,
-                    blocked: bool,
-                }
-                let proxy = Status {
-                    selected: self.selected(),
-                    blocked: self.blocked(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Status {{ selected: {=bool:?}, blocked: {=bool:?} }}",
+                    self.selected(),
+                    self.blocked()
+                )
             }
         }
     }
@@ -6902,6 +6208,7 @@ pub mod nvmc {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Program memory access mode. It is strongly recommended to only activate erase and write modes when they are actively used. Enabling write or erase will invalidate the cache and keep it invalidated."]
+            #[must_use]
             #[inline(always)]
             pub const fn wen(&self) -> super::vals::Wen {
                 let val = (self.0 >> 0usize) & 0x07;
@@ -6909,7 +6216,7 @@ pub mod nvmc {
             }
             #[doc = "Program memory access mode. It is strongly recommended to only activate erase and write modes when they are actively used. Enabling write or erase will invalidate the cache and keep it invalidated."]
             #[inline(always)]
-            pub fn set_wen(&mut self, val: super::vals::Wen) {
+            pub const fn set_wen(&mut self, val: super::vals::Wen) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
             }
         }
@@ -6927,12 +6234,7 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    wen: super::vals::Wen,
-                }
-                let proxy = Config { wen: self.wen() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Config {{ wen: {:?} }}", self.wen())
             }
         }
         #[doc = "Unspecified"]
@@ -6941,6 +6243,7 @@ pub mod nvmc {
         pub struct Configns(pub u32);
         impl Configns {
             #[doc = "Program memory access mode. It is strongly recommended to only activate erase and write modes when they are actively used. Enabling write or erase will invalidate the cache and keep it invalidated."]
+            #[must_use]
             #[inline(always)]
             pub const fn wen(&self) -> super::vals::ConfignsWen {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -6948,7 +6251,7 @@ pub mod nvmc {
             }
             #[doc = "Program memory access mode. It is strongly recommended to only activate erase and write modes when they are actively used. Enabling write or erase will invalidate the cache and keep it invalidated."]
             #[inline(always)]
-            pub fn set_wen(&mut self, val: super::vals::ConfignsWen) {
+            pub const fn set_wen(&mut self, val: super::vals::ConfignsWen) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -6968,12 +6271,7 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Configns {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Configns {
-                    wen: super::vals::ConfignsWen,
-                }
-                let proxy = Configns { wen: self.wen() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Configns {{ wen: {:?} }}", self.wen())
             }
         }
         #[doc = "Register for erasing all non-volatile user memory"]
@@ -6982,6 +6280,7 @@ pub mod nvmc {
         pub struct Eraseall(pub u32);
         impl Eraseall {
             #[doc = "Erase all non-volatile memory including UICR registers. Note that erasing must be enabled by setting CONFIG.WEN = Een before the non-volatile memory can be erased."]
+            #[must_use]
             #[inline(always)]
             pub const fn eraseall(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -6989,7 +6288,7 @@ pub mod nvmc {
             }
             #[doc = "Erase all non-volatile memory including UICR registers. Note that erasing must be enabled by setting CONFIG.WEN = Een before the non-volatile memory can be erased."]
             #[inline(always)]
-            pub fn set_eraseall(&mut self, val: bool) {
+            pub const fn set_eraseall(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -7009,14 +6308,7 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Eraseall {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Eraseall {
-                    eraseall: bool,
-                }
-                let proxy = Eraseall {
-                    eraseall: self.eraseall(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Eraseall {{ eraseall: {=bool:?} }}", self.eraseall())
             }
         }
         #[doc = "Register for partial erase configuration"]
@@ -7025,6 +6317,7 @@ pub mod nvmc {
         pub struct Erasepagepartialcfg(pub u32);
         impl Erasepagepartialcfg {
             #[doc = "Duration of the partial erase in milliseconds"]
+            #[must_use]
             #[inline(always)]
             pub const fn duration(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x7f;
@@ -7032,7 +6325,7 @@ pub mod nvmc {
             }
             #[doc = "Duration of the partial erase in milliseconds"]
             #[inline(always)]
-            pub fn set_duration(&mut self, val: u8) {
+            pub const fn set_duration(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
             }
         }
@@ -7052,14 +6345,11 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Erasepagepartialcfg {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Erasepagepartialcfg {
-                    duration: u8,
-                }
-                let proxy = Erasepagepartialcfg {
-                    duration: self.duration(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Erasepagepartialcfg {{ duration: {=u8:?} }}",
+                    self.duration()
+                )
             }
         }
         #[doc = "I-code cache configuration register"]
@@ -7068,6 +6358,7 @@ pub mod nvmc {
         pub struct Icachecnf(pub u32);
         impl Icachecnf {
             #[doc = "Cache enable"]
+            #[must_use]
             #[inline(always)]
             pub const fn cacheen(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7075,10 +6366,11 @@ pub mod nvmc {
             }
             #[doc = "Cache enable"]
             #[inline(always)]
-            pub fn set_cacheen(&mut self, val: bool) {
+            pub const fn set_cacheen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Cache profiling enable"]
+            #[must_use]
             #[inline(always)]
             pub const fn cacheprofen(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -7086,7 +6378,7 @@ pub mod nvmc {
             }
             #[doc = "Cache profiling enable"]
             #[inline(always)]
-            pub fn set_cacheprofen(&mut self, val: bool) {
+            pub const fn set_cacheprofen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -7107,16 +6399,12 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Icachecnf {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Icachecnf {
-                    cacheen: bool,
-                    cacheprofen: bool,
-                }
-                let proxy = Icachecnf {
-                    cacheen: self.cacheen(),
-                    cacheprofen: self.cacheprofen(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Icachecnf {{ cacheen: {=bool:?}, cacheprofen: {=bool:?} }}",
+                    self.cacheen(),
+                    self.cacheprofen()
+                )
             }
         }
         #[doc = "Ready flag"]
@@ -7125,6 +6413,7 @@ pub mod nvmc {
         pub struct Ready(pub u32);
         impl Ready {
             #[doc = "NVMC is ready or busy"]
+            #[must_use]
             #[inline(always)]
             pub const fn ready(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7132,7 +6421,7 @@ pub mod nvmc {
             }
             #[doc = "NVMC is ready or busy"]
             #[inline(always)]
-            pub fn set_ready(&mut self, val: bool) {
+            pub const fn set_ready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -7152,14 +6441,7 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Ready {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Ready {
-                    ready: bool,
-                }
-                let proxy = Ready {
-                    ready: self.ready(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Ready {{ ready: {=bool:?} }}", self.ready())
             }
         }
         #[doc = "Ready flag"]
@@ -7168,6 +6450,7 @@ pub mod nvmc {
         pub struct Readynext(pub u32);
         impl Readynext {
             #[doc = "NVMC can accept a new write operation"]
+            #[must_use]
             #[inline(always)]
             pub const fn readynext(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7175,7 +6458,7 @@ pub mod nvmc {
             }
             #[doc = "NVMC can accept a new write operation"]
             #[inline(always)]
-            pub fn set_readynext(&mut self, val: bool) {
+            pub const fn set_readynext(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -7195,14 +6478,7 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Readynext {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Readynext {
-                    readynext: bool,
-                }
-                let proxy = Readynext {
-                    readynext: self.readynext(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Readynext {{ readynext: {=bool:?} }}", self.readynext())
             }
         }
         #[doc = "Non-secure APPROTECT enable register"]
@@ -7211,6 +6487,7 @@ pub mod nvmc {
         pub struct Writeuicrns(pub u32);
         impl Writeuicrns {
             #[doc = "Allow non-secure code to set APPROTECT"]
+            #[must_use]
             #[inline(always)]
             pub const fn set(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7218,10 +6495,11 @@ pub mod nvmc {
             }
             #[doc = "Allow non-secure code to set APPROTECT"]
             #[inline(always)]
-            pub fn set_set(&mut self, val: bool) {
+            pub const fn set_set(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Key to write in order to validate the write operation"]
+            #[must_use]
             #[inline(always)]
             pub const fn key(&self) -> super::vals::Key {
                 let val = (self.0 >> 4usize) & 0x0fff_ffff;
@@ -7229,7 +6507,7 @@ pub mod nvmc {
             }
             #[doc = "Key to write in order to validate the write operation"]
             #[inline(always)]
-            pub fn set_key(&mut self, val: super::vals::Key) {
+            pub const fn set_key(&mut self, val: super::vals::Key) {
                 self.0 = (self.0 & !(0x0fff_ffff << 4usize))
                     | (((val.to_bits() as u32) & 0x0fff_ffff) << 4usize);
             }
@@ -7251,16 +6529,12 @@ pub mod nvmc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Writeuicrns {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Writeuicrns {
-                    set: bool,
-                    key: super::vals::Key,
-                }
-                let proxy = Writeuicrns {
-                    set: self.set(),
-                    key: self.key(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Writeuicrns {{ set: {=bool:?}, key: {:?} }}",
+                    self.set(),
+                    self.key()
+                )
             }
         }
     }
@@ -7301,7 +6575,7 @@ pub mod nvmc {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Key(pub u32);
+        pub struct Key(u32);
         impl Key {
             #[doc = "Key value"]
             pub const KEYVALID: Self = Self(0x0afb_e5a7);
@@ -7578,6 +6852,7 @@ pub mod pdm {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable PDM module"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7585,7 +6860,7 @@ pub mod pdm {
             }
             #[doc = "Enable or disable PDM module"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: bool) {
+            pub const fn set_enable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -7605,14 +6880,7 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: bool,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {=bool:?} }}", self.enable())
             }
         }
         #[doc = "Left output gain adjustment"]
@@ -7621,6 +6889,7 @@ pub mod pdm {
         pub struct Gainl(pub u32);
         impl Gainl {
             #[doc = "Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) 0x00 -20 dB gain adjust 0x01 -19.5 dB gain adjust (...) 0x27 -0.5 dB gain adjust 0x28 0 dB gain adjust 0x29 +0.5 dB gain adjust (...) 0x4F +19.5 dB gain adjust 0x50 +20 dB gain adjust"]
+            #[must_use]
             #[inline(always)]
             pub const fn gainl(&self) -> super::vals::Gain {
                 let val = (self.0 >> 0usize) & 0x7f;
@@ -7628,7 +6897,7 @@ pub mod pdm {
             }
             #[doc = "Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) 0x00 -20 dB gain adjust 0x01 -19.5 dB gain adjust (...) 0x27 -0.5 dB gain adjust 0x28 0 dB gain adjust 0x29 +0.5 dB gain adjust (...) 0x4F +19.5 dB gain adjust 0x50 +20 dB gain adjust"]
             #[inline(always)]
-            pub fn set_gainl(&mut self, val: super::vals::Gain) {
+            pub const fn set_gainl(&mut self, val: super::vals::Gain) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val.to_bits() as u32) & 0x7f) << 0usize);
             }
         }
@@ -7648,14 +6917,7 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Gainl {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Gainl {
-                    gainl: super::vals::Gain,
-                }
-                let proxy = Gainl {
-                    gainl: self.gainl(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Gainl {{ gainl: {:?} }}", self.gainl())
             }
         }
         #[doc = "Right output gain adjustment"]
@@ -7664,6 +6926,7 @@ pub mod pdm {
         pub struct Gainr(pub u32);
         impl Gainr {
             #[doc = "Right output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters)"]
+            #[must_use]
             #[inline(always)]
             pub const fn gainr(&self) -> super::vals::Gain {
                 let val = (self.0 >> 0usize) & 0x7f;
@@ -7671,7 +6934,7 @@ pub mod pdm {
             }
             #[doc = "Right output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters)"]
             #[inline(always)]
-            pub fn set_gainr(&mut self, val: super::vals::Gain) {
+            pub const fn set_gainr(&mut self, val: super::vals::Gain) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val.to_bits() as u32) & 0x7f) << 0usize);
             }
         }
@@ -7691,14 +6954,7 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Gainr {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Gainr {
-                    gainr: super::vals::Gain,
-                }
-                let proxy = Gainr {
-                    gainr: self.gainr(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Gainr {{ gainr: {:?} }}", self.gainr())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -7707,6 +6963,7 @@ pub mod pdm {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event STARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7714,10 +6971,11 @@ pub mod pdm {
             }
             #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
-            pub fn set_started(&mut self, val: bool) {
+            pub const fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -7725,10 +6983,11 @@ pub mod pdm {
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
-            pub fn set_stopped(&mut self, val: bool) {
+            pub const fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event END"]
+            #[must_use]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -7736,7 +6995,7 @@ pub mod pdm {
             }
             #[doc = "Enable or disable interrupt for event END"]
             #[inline(always)]
-            pub fn set_end(&mut self, val: bool) {
+            pub const fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
         }
@@ -7758,18 +7017,13 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    started: bool,
-                    stopped: bool,
-                    end: bool,
-                }
-                let proxy = Int {
-                    started: self.started(),
-                    stopped: self.stopped(),
-                    end: self.end(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Int {{ started: {=bool:?}, stopped: {=bool:?}, end: {=bool:?} }}",
+                    self.started(),
+                    self.stopped(),
+                    self.end()
+                )
             }
         }
         #[doc = "Number of samples to allocate memory for in EasyDMA mode"]
@@ -7778,6 +7032,7 @@ pub mod pdm {
         pub struct Maxcnt(pub u32);
         impl Maxcnt {
             #[doc = "Length of DMA RAM allocation in number of samples"]
+            #[must_use]
             #[inline(always)]
             pub const fn buffsize(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x7fff;
@@ -7785,7 +7040,7 @@ pub mod pdm {
             }
             #[doc = "Length of DMA RAM allocation in number of samples"]
             #[inline(always)]
-            pub fn set_buffsize(&mut self, val: u16) {
+            pub const fn set_buffsize(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x7fff << 0usize)) | (((val as u32) & 0x7fff) << 0usize);
             }
         }
@@ -7805,14 +7060,7 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Maxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Maxcnt {
-                    buffsize: u16,
-                }
-                let proxy = Maxcnt {
-                    buffsize: self.buffsize(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Maxcnt {{ buffsize: {=u16:?} }}", self.buffsize())
             }
         }
         #[doc = "Defines the routing of the connected PDM microphones' signals"]
@@ -7821,6 +7069,7 @@ pub mod pdm {
         pub struct Mode(pub u32);
         impl Mode {
             #[doc = "Mono or stereo operation"]
+            #[must_use]
             #[inline(always)]
             pub const fn operation(&self) -> super::vals::Operation {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7828,10 +7077,11 @@ pub mod pdm {
             }
             #[doc = "Mono or stereo operation"]
             #[inline(always)]
-            pub fn set_operation(&mut self, val: super::vals::Operation) {
+            pub const fn set_operation(&mut self, val: super::vals::Operation) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
             #[doc = "Defines on which PDM_CLK edge left (or mono) is sampled"]
+            #[must_use]
             #[inline(always)]
             pub const fn edge(&self) -> super::vals::Edge {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -7839,7 +7089,7 @@ pub mod pdm {
             }
             #[doc = "Defines on which PDM_CLK edge left (or mono) is sampled"]
             #[inline(always)]
-            pub fn set_edge(&mut self, val: super::vals::Edge) {
+            pub const fn set_edge(&mut self, val: super::vals::Edge) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
             }
         }
@@ -7860,16 +7110,12 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Mode {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Mode {
-                    operation: super::vals::Operation,
-                    edge: super::vals::Edge,
-                }
-                let proxy = Mode {
-                    operation: self.operation(),
-                    edge: self.edge(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Mode {{ operation: {:?}, edge: {:?} }}",
+                    self.operation(),
+                    self.edge()
+                )
             }
         }
         #[doc = "PDM clock generator control"]
@@ -7878,6 +7124,7 @@ pub mod pdm {
         pub struct Pdmclkctrl(pub u32);
         impl Pdmclkctrl {
             #[doc = "PDM_CLK frequency configuration."]
+            #[must_use]
             #[inline(always)]
             pub const fn freq(&self) -> super::vals::Freq {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -7885,7 +7132,7 @@ pub mod pdm {
             }
             #[doc = "PDM_CLK frequency configuration."]
             #[inline(always)]
-            pub fn set_freq(&mut self, val: super::vals::Freq) {
+            pub const fn set_freq(&mut self, val: super::vals::Freq) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -7906,12 +7153,7 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Pdmclkctrl {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Pdmclkctrl {
-                    freq: super::vals::Freq,
-                }
-                let proxy = Pdmclkctrl { freq: self.freq() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Pdmclkctrl {{ freq: {:?} }}", self.freq())
             }
         }
         #[doc = "Selects the ratio between PDM_CLK and output sample rate. Change PDMCLKCTRL accordingly."]
@@ -7920,6 +7162,7 @@ pub mod pdm {
         pub struct Ratio(pub u32);
         impl Ratio {
             #[doc = "Selects the ratio between PDM_CLK and output sample rate"]
+            #[must_use]
             #[inline(always)]
             pub const fn ratio(&self) -> super::vals::Ratio {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -7927,7 +7170,7 @@ pub mod pdm {
             }
             #[doc = "Selects the ratio between PDM_CLK and output sample rate"]
             #[inline(always)]
-            pub fn set_ratio(&mut self, val: super::vals::Ratio) {
+            pub const fn set_ratio(&mut self, val: super::vals::Ratio) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -7947,14 +7190,7 @@ pub mod pdm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Ratio {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Ratio {
-                    ratio: super::vals::Ratio,
-                }
-                let proxy = Ratio {
-                    ratio: self.ratio(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Ratio {{ ratio: {:?} }}", self.ratio())
             }
         }
     }
@@ -7992,7 +7228,7 @@ pub mod pdm {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Freq(pub u32);
+        pub struct Freq(u32);
         impl Freq {
             #[doc = "PDM_CLK = 32 MHz / 32 = 1.000 MHz"]
             pub const _1000K: Self = Self(0x0800_0000);
@@ -8056,7 +7292,7 @@ pub mod pdm {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Gain(pub u8);
+        pub struct Gain(u8);
         impl Gain {
             #[doc = "-20 dB gain adjustment (minimum)"]
             pub const MIN_GAIN: Self = Self(0x0);
@@ -8321,6 +7557,7 @@ pub mod power {
         pub struct Forceoff(pub u32);
         impl Forceoff {
             #[doc = "Force off LTE modem"]
+            #[must_use]
             #[inline(always)]
             pub const fn forceoff(&self) -> super::vals::Forceoff {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -8328,7 +7565,7 @@ pub mod power {
             }
             #[doc = "Force off LTE modem"]
             #[inline(always)]
-            pub fn set_forceoff(&mut self, val: super::vals::Forceoff) {
+            pub const fn set_forceoff(&mut self, val: super::vals::Forceoff) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -8348,14 +7585,7 @@ pub mod power {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Forceoff {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Forceoff {
-                    forceoff: super::vals::Forceoff,
-                }
-                let proxy = Forceoff {
-                    forceoff: self.forceoff(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Forceoff {{ forceoff: {:?} }}", self.forceoff())
             }
         }
         #[doc = "Description collection: General purpose retention register"]
@@ -8364,6 +7594,7 @@ pub mod power {
         pub struct Gpregret(pub u32);
         impl Gpregret {
             #[doc = "General purpose retention register"]
+            #[must_use]
             #[inline(always)]
             pub const fn gpregret(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -8371,7 +7602,7 @@ pub mod power {
             }
             #[doc = "General purpose retention register"]
             #[inline(always)]
-            pub fn set_gpregret(&mut self, val: u8) {
+            pub const fn set_gpregret(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
         }
@@ -8391,14 +7622,7 @@ pub mod power {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Gpregret {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Gpregret {
-                    gpregret: u8,
-                }
-                let proxy = Gpregret {
-                    gpregret: self.gpregret(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Gpregret {{ gpregret: {=u8:?} }}", self.gpregret())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -8407,6 +7631,7 @@ pub mod power {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event POFWARN"]
+            #[must_use]
             #[inline(always)]
             pub const fn pofwarn(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -8414,10 +7639,11 @@ pub mod power {
             }
             #[doc = "Enable or disable interrupt for event POFWARN"]
             #[inline(always)]
-            pub fn set_pofwarn(&mut self, val: bool) {
+            pub const fn set_pofwarn(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable or disable interrupt for event SLEEPENTER"]
+            #[must_use]
             #[inline(always)]
             pub const fn sleepenter(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -8425,10 +7651,11 @@ pub mod power {
             }
             #[doc = "Enable or disable interrupt for event SLEEPENTER"]
             #[inline(always)]
-            pub fn set_sleepenter(&mut self, val: bool) {
+            pub const fn set_sleepenter(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Enable or disable interrupt for event SLEEPEXIT"]
+            #[must_use]
             #[inline(always)]
             pub const fn sleepexit(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -8436,7 +7663,7 @@ pub mod power {
             }
             #[doc = "Enable or disable interrupt for event SLEEPEXIT"]
             #[inline(always)]
-            pub fn set_sleepexit(&mut self, val: bool) {
+            pub const fn set_sleepexit(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
         }
@@ -8458,18 +7685,13 @@ pub mod power {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    pofwarn: bool,
-                    sleepenter: bool,
-                    sleepexit: bool,
-                }
-                let proxy = Int {
-                    pofwarn: self.pofwarn(),
-                    sleepenter: self.sleepenter(),
-                    sleepexit: self.sleepexit(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Int {{ pofwarn: {=bool:?}, sleepenter: {=bool:?}, sleepexit: {=bool:?} }}",
+                    self.pofwarn(),
+                    self.sleepenter(),
+                    self.sleepexit()
+                )
             }
         }
         #[doc = "Modem domain power status"]
@@ -8478,6 +7700,7 @@ pub mod power {
         pub struct Power(pub u32);
         impl Power {
             #[doc = "LTE modem domain status"]
+            #[must_use]
             #[inline(always)]
             pub const fn ltemodem(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -8485,7 +7708,7 @@ pub mod power {
             }
             #[doc = "LTE modem domain status"]
             #[inline(always)]
-            pub fn set_ltemodem(&mut self, val: bool) {
+            pub const fn set_ltemodem(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -8505,14 +7728,7 @@ pub mod power {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Power {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Power {
-                    ltemodem: bool,
-                }
-                let proxy = Power {
-                    ltemodem: self.ltemodem(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Power {{ ltemodem: {=bool:?} }}", self.ltemodem())
             }
         }
         #[doc = "Reset reason"]
@@ -8521,6 +7737,7 @@ pub mod power {
         pub struct Resetreas(pub u32);
         impl Resetreas {
             #[doc = "Reset from pin reset detected"]
+            #[must_use]
             #[inline(always)]
             pub const fn resetpin(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -8528,10 +7745,11 @@ pub mod power {
             }
             #[doc = "Reset from pin reset detected"]
             #[inline(always)]
-            pub fn set_resetpin(&mut self, val: bool) {
+            pub const fn set_resetpin(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Reset from global watchdog detected"]
+            #[must_use]
             #[inline(always)]
             pub const fn dog(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -8539,10 +7757,11 @@ pub mod power {
             }
             #[doc = "Reset from global watchdog detected"]
             #[inline(always)]
-            pub fn set_dog(&mut self, val: bool) {
+            pub const fn set_dog(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Reset due to wakeup from System OFF mode, when wakeup is triggered by DETECT signal from GPIO"]
+            #[must_use]
             #[inline(always)]
             pub const fn off(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -8550,10 +7769,11 @@ pub mod power {
             }
             #[doc = "Reset due to wakeup from System OFF mode, when wakeup is triggered by DETECT signal from GPIO"]
             #[inline(always)]
-            pub fn set_off(&mut self, val: bool) {
+            pub const fn set_off(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Reset due to wakeup from System OFF mode, when wakeup is triggered by entering debug interface mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn dif(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -8561,10 +7781,11 @@ pub mod power {
             }
             #[doc = "Reset due to wakeup from System OFF mode, when wakeup is triggered by entering debug interface mode"]
             #[inline(always)]
-            pub fn set_dif(&mut self, val: bool) {
+            pub const fn set_dif(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Reset from AIRCR.SYSRESETREQ detected"]
+            #[must_use]
             #[inline(always)]
             pub const fn sreq(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
@@ -8572,10 +7793,11 @@ pub mod power {
             }
             #[doc = "Reset from AIRCR.SYSRESETREQ detected"]
             #[inline(always)]
-            pub fn set_sreq(&mut self, val: bool) {
+            pub const fn set_sreq(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
             #[doc = "Reset from CPU lock-up detected"]
+            #[must_use]
             #[inline(always)]
             pub const fn lockup(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
@@ -8583,10 +7805,11 @@ pub mod power {
             }
             #[doc = "Reset from CPU lock-up detected"]
             #[inline(always)]
-            pub fn set_lockup(&mut self, val: bool) {
+            pub const fn set_lockup(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
             #[doc = "Reset triggered through CTRL-AP"]
+            #[must_use]
             #[inline(always)]
             pub const fn ctrlap(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
@@ -8594,7 +7817,7 @@ pub mod power {
             }
             #[doc = "Reset triggered through CTRL-AP"]
             #[inline(always)]
-            pub fn set_ctrlap(&mut self, val: bool) {
+            pub const fn set_ctrlap(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
         }
@@ -8620,26 +7843,7 @@ pub mod power {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Resetreas {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Resetreas {
-                    resetpin: bool,
-                    dog: bool,
-                    off: bool,
-                    dif: bool,
-                    sreq: bool,
-                    lockup: bool,
-                    ctrlap: bool,
-                }
-                let proxy = Resetreas {
-                    resetpin: self.resetpin(),
-                    dog: self.dog(),
-                    off: self.off(),
-                    dif: self.dif(),
-                    sreq: self.sreq(),
-                    lockup: self.lockup(),
-                    ctrlap: self.ctrlap(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Resetreas {{ resetpin: {=bool:?}, dog: {=bool:?}, off: {=bool:?}, dif: {=bool:?}, sreq: {=bool:?}, lockup: {=bool:?}, ctrlap: {=bool:?} }}" , self . resetpin () , self . dog () , self . off () , self . dif () , self . sreq () , self . lockup () , self . ctrlap ())
             }
         }
         #[doc = "Start LTE modem"]
@@ -8648,6 +7852,7 @@ pub mod power {
         pub struct Startn(pub u32);
         impl Startn {
             #[doc = "Start LTE modem"]
+            #[must_use]
             #[inline(always)]
             pub const fn startn(&self) -> super::vals::Startn {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -8655,7 +7860,7 @@ pub mod power {
             }
             #[doc = "Start LTE modem"]
             #[inline(always)]
-            pub fn set_startn(&mut self, val: super::vals::Startn) {
+            pub const fn set_startn(&mut self, val: super::vals::Startn) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -8675,14 +7880,7 @@ pub mod power {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Startn {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Startn {
-                    startn: super::vals::Startn,
-                }
-                let proxy = Startn {
-                    startn: self.startn(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Startn {{ startn: {:?} }}", self.startn())
             }
         }
     }
@@ -9008,6 +8206,7 @@ pub mod pwm {
         pub struct Cnt(pub u32);
         impl Cnt {
             #[doc = "Number of values (duty cycles) in this sequence"]
+            #[must_use]
             #[inline(always)]
             pub const fn cnt(&self) -> super::vals::CntCnt {
                 let val = (self.0 >> 0usize) & 0x7fff;
@@ -9015,7 +8214,7 @@ pub mod pwm {
             }
             #[doc = "Number of values (duty cycles) in this sequence"]
             #[inline(always)]
-            pub fn set_cnt(&mut self, val: super::vals::CntCnt) {
+            pub const fn set_cnt(&mut self, val: super::vals::CntCnt) {
                 self.0 =
                     (self.0 & !(0x7fff << 0usize)) | (((val.to_bits() as u32) & 0x7fff) << 0usize);
             }
@@ -9034,12 +8233,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Cnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Cnt {
-                    cnt: super::vals::CntCnt,
-                }
-                let proxy = Cnt { cnt: self.cnt() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Cnt {{ cnt: {:?} }}", self.cnt())
             }
         }
         #[doc = "Value up to which the pulse generator counter counts"]
@@ -9048,6 +8242,7 @@ pub mod pwm {
         pub struct Countertop(pub u32);
         impl Countertop {
             #[doc = "Value up to which the pulse generator counter counts. This register is ignored when DECODER.MODE=WaveForm and only values from RAM are used."]
+            #[must_use]
             #[inline(always)]
             pub const fn countertop(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x7fff;
@@ -9055,7 +8250,7 @@ pub mod pwm {
             }
             #[doc = "Value up to which the pulse generator counter counts. This register is ignored when DECODER.MODE=WaveForm and only values from RAM are used."]
             #[inline(always)]
-            pub fn set_countertop(&mut self, val: u16) {
+            pub const fn set_countertop(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x7fff << 0usize)) | (((val as u32) & 0x7fff) << 0usize);
             }
         }
@@ -9075,14 +8270,11 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Countertop {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Countertop {
-                    countertop: u16,
-                }
-                let proxy = Countertop {
-                    countertop: self.countertop(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Countertop {{ countertop: {=u16:?} }}",
+                    self.countertop()
+                )
             }
         }
         #[doc = "Configuration of the decoder"]
@@ -9091,6 +8283,7 @@ pub mod pwm {
         pub struct Decoder(pub u32);
         impl Decoder {
             #[doc = "How a sequence is read from RAM and spread to the compare register"]
+            #[must_use]
             #[inline(always)]
             pub const fn load(&self) -> super::vals::Load {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -9098,10 +8291,11 @@ pub mod pwm {
             }
             #[doc = "How a sequence is read from RAM and spread to the compare register"]
             #[inline(always)]
-            pub fn set_load(&mut self, val: super::vals::Load) {
+            pub const fn set_load(&mut self, val: super::vals::Load) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
             #[doc = "Selects source for advancing the active sequence"]
+            #[must_use]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -9109,7 +8303,7 @@ pub mod pwm {
             }
             #[doc = "Selects source for advancing the active sequence"]
             #[inline(always)]
-            pub fn set_mode(&mut self, val: super::vals::Mode) {
+            pub const fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
             }
         }
@@ -9130,16 +8324,12 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Decoder {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Decoder {
-                    load: super::vals::Load,
-                    mode: super::vals::Mode,
-                }
-                let proxy = Decoder {
-                    load: self.load(),
-                    mode: self.mode(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Decoder {{ load: {:?}, mode: {:?} }}",
+                    self.load(),
+                    self.mode()
+                )
             }
         }
         #[doc = "PWM module enable register"]
@@ -9148,6 +8338,7 @@ pub mod pwm {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable PWM module"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -9155,7 +8346,7 @@ pub mod pwm {
             }
             #[doc = "Enable or disable PWM module"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: bool) {
+            pub const fn set_enable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -9175,14 +8366,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: bool,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {=bool:?} }}", self.enable())
             }
         }
         #[doc = "Description cluster: Time added after the sequence"]
@@ -9191,6 +8375,7 @@ pub mod pwm {
         pub struct Enddelay(pub u32);
         impl Enddelay {
             #[doc = "Time added after the sequence in PWM periods"]
+            #[must_use]
             #[inline(always)]
             pub const fn cnt(&self) -> u32 {
                 let val = (self.0 >> 0usize) & 0x00ff_ffff;
@@ -9198,7 +8383,7 @@ pub mod pwm {
             }
             #[doc = "Time added after the sequence in PWM periods"]
             #[inline(always)]
-            pub fn set_cnt(&mut self, val: u32) {
+            pub const fn set_cnt(&mut self, val: u32) {
                 self.0 =
                     (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
             }
@@ -9219,12 +8404,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enddelay {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enddelay {
-                    cnt: u32,
-                }
-                let proxy = Enddelay { cnt: self.cnt() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enddelay {{ cnt: {=u32:?} }}", self.cnt())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -9233,6 +8413,7 @@ pub mod pwm {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event STOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -9240,10 +8421,11 @@ pub mod pwm {
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
-            pub fn set_stopped(&mut self, val: bool) {
+            pub const fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event SEQSTARTED\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn seqstarted0(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -9251,10 +8433,11 @@ pub mod pwm {
             }
             #[doc = "Enable or disable interrupt for event SEQSTARTED\\[0\\]"]
             #[inline(always)]
-            pub fn set_seqstarted0(&mut self, val: bool) {
+            pub const fn set_seqstarted0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable or disable interrupt for event SEQSTARTED\\[1\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn seqstarted1(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -9262,10 +8445,11 @@ pub mod pwm {
             }
             #[doc = "Enable or disable interrupt for event SEQSTARTED\\[1\\]"]
             #[inline(always)]
-            pub fn set_seqstarted1(&mut self, val: bool) {
+            pub const fn set_seqstarted1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Enable or disable interrupt for event SEQEND\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn seqend0(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -9273,10 +8457,11 @@ pub mod pwm {
             }
             #[doc = "Enable or disable interrupt for event SEQEND\\[0\\]"]
             #[inline(always)]
-            pub fn set_seqend0(&mut self, val: bool) {
+            pub const fn set_seqend0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Enable or disable interrupt for event SEQEND\\[1\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn seqend1(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -9284,10 +8469,11 @@ pub mod pwm {
             }
             #[doc = "Enable or disable interrupt for event SEQEND\\[1\\]"]
             #[inline(always)]
-            pub fn set_seqend1(&mut self, val: bool) {
+            pub const fn set_seqend1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Enable or disable interrupt for event PWMPERIODEND"]
+            #[must_use]
             #[inline(always)]
             pub const fn pwmperiodend(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -9295,10 +8481,11 @@ pub mod pwm {
             }
             #[doc = "Enable or disable interrupt for event PWMPERIODEND"]
             #[inline(always)]
-            pub fn set_pwmperiodend(&mut self, val: bool) {
+            pub const fn set_pwmperiodend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
             #[doc = "Enable or disable interrupt for event LOOPSDONE"]
+            #[must_use]
             #[inline(always)]
             pub const fn loopsdone(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -9306,7 +8493,7 @@ pub mod pwm {
             }
             #[doc = "Enable or disable interrupt for event LOOPSDONE"]
             #[inline(always)]
-            pub fn set_loopsdone(&mut self, val: bool) {
+            pub const fn set_loopsdone(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
         }
@@ -9332,26 +8519,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    stopped: bool,
-                    seqstarted0: bool,
-                    seqstarted1: bool,
-                    seqend0: bool,
-                    seqend1: bool,
-                    pwmperiodend: bool,
-                    loopsdone: bool,
-                }
-                let proxy = Int {
-                    stopped: self.stopped(),
-                    seqstarted0: self.seqstarted0(),
-                    seqstarted1: self.seqstarted1(),
-                    seqend0: self.seqend0(),
-                    seqend1: self.seqend1(),
-                    pwmperiodend: self.pwmperiodend(),
-                    loopsdone: self.loopsdone(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ stopped: {=bool:?}, seqstarted0: {=bool:?}, seqstarted1: {=bool:?}, seqend0: {=bool:?}, seqend1: {=bool:?}, pwmperiodend: {=bool:?}, loopsdone: {=bool:?} }}" , self . stopped () , self . seqstarted0 () , self . seqstarted1 () , self . seqend0 () , self . seqend1 () , self . pwmperiodend () , self . loopsdone ())
             }
         }
         #[doc = "Number of playbacks of a loop"]
@@ -9360,6 +8528,7 @@ pub mod pwm {
         pub struct Loop(pub u32);
         impl Loop {
             #[doc = "Number of playbacks of pattern cycles"]
+            #[must_use]
             #[inline(always)]
             pub const fn cnt(&self) -> super::vals::LoopCnt {
                 let val = (self.0 >> 0usize) & 0xffff;
@@ -9367,7 +8536,7 @@ pub mod pwm {
             }
             #[doc = "Number of playbacks of pattern cycles"]
             #[inline(always)]
-            pub fn set_cnt(&mut self, val: super::vals::LoopCnt) {
+            pub const fn set_cnt(&mut self, val: super::vals::LoopCnt) {
                 self.0 =
                     (self.0 & !(0xffff << 0usize)) | (((val.to_bits() as u32) & 0xffff) << 0usize);
             }
@@ -9386,12 +8555,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Loop {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Loop {
-                    cnt: super::vals::LoopCnt,
-                }
-                let proxy = Loop { cnt: self.cnt() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Loop {{ cnt: {:?} }}", self.cnt())
             }
         }
         #[doc = "Selects operating mode of the wave counter"]
@@ -9400,6 +8564,7 @@ pub mod pwm {
         pub struct Mode(pub u32);
         impl Mode {
             #[doc = "Selects up mode or up-and-down mode for the counter"]
+            #[must_use]
             #[inline(always)]
             pub const fn updown(&self) -> super::vals::Updown {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -9407,7 +8572,7 @@ pub mod pwm {
             }
             #[doc = "Selects up mode or up-and-down mode for the counter"]
             #[inline(always)]
-            pub fn set_updown(&mut self, val: super::vals::Updown) {
+            pub const fn set_updown(&mut self, val: super::vals::Updown) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -9427,14 +8592,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Mode {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Mode {
-                    updown: super::vals::Updown,
-                }
-                let proxy = Mode {
-                    updown: self.updown(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Mode {{ updown: {:?} }}", self.updown())
             }
         }
         #[doc = "Configuration for PWM_CLK"]
@@ -9443,6 +8601,7 @@ pub mod pwm {
         pub struct Prescaler(pub u32);
         impl Prescaler {
             #[doc = "Prescaler of PWM_CLK"]
+            #[must_use]
             #[inline(always)]
             pub const fn prescaler(&self) -> super::vals::Prescaler {
                 let val = (self.0 >> 0usize) & 0x07;
@@ -9450,7 +8609,7 @@ pub mod pwm {
             }
             #[doc = "Prescaler of PWM_CLK"]
             #[inline(always)]
-            pub fn set_prescaler(&mut self, val: super::vals::Prescaler) {
+            pub const fn set_prescaler(&mut self, val: super::vals::Prescaler) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
             }
         }
@@ -9470,14 +8629,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Prescaler {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Prescaler {
-                    prescaler: super::vals::Prescaler,
-                }
-                let proxy = Prescaler {
-                    prescaler: self.prescaler(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Prescaler {{ prescaler: {:?} }}", self.prescaler())
             }
         }
         #[doc = "Description cluster: Number of additional PWM periods between samples loaded into compare register"]
@@ -9486,6 +8638,7 @@ pub mod pwm {
         pub struct Refresh(pub u32);
         impl Refresh {
             #[doc = "Number of additional PWM periods between samples loaded into compare register (load every REFRESH.CNT+1 PWM periods)"]
+            #[must_use]
             #[inline(always)]
             pub const fn cnt(&self) -> super::vals::RefreshCnt {
                 let val = (self.0 >> 0usize) & 0x00ff_ffff;
@@ -9493,7 +8646,7 @@ pub mod pwm {
             }
             #[doc = "Number of additional PWM periods between samples loaded into compare register (load every REFRESH.CNT+1 PWM periods)"]
             #[inline(always)]
-            pub fn set_cnt(&mut self, val: super::vals::RefreshCnt) {
+            pub const fn set_cnt(&mut self, val: super::vals::RefreshCnt) {
                 self.0 = (self.0 & !(0x00ff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0x00ff_ffff) << 0usize);
             }
@@ -9512,12 +8665,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Refresh {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Refresh {
-                    cnt: super::vals::RefreshCnt,
-                }
-                let proxy = Refresh { cnt: self.cnt() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Refresh {{ cnt: {:?} }}", self.cnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -9526,6 +8674,7 @@ pub mod pwm {
         pub struct Shorts(pub u32);
         impl Shorts {
             #[doc = "Shortcut between event SEQEND\\[0\\] and task STOP"]
+            #[must_use]
             #[inline(always)]
             pub const fn seqend0_stop(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -9533,10 +8682,11 @@ pub mod pwm {
             }
             #[doc = "Shortcut between event SEQEND\\[0\\] and task STOP"]
             #[inline(always)]
-            pub fn set_seqend0_stop(&mut self, val: bool) {
+            pub const fn set_seqend0_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Shortcut between event SEQEND\\[1\\] and task STOP"]
+            #[must_use]
             #[inline(always)]
             pub const fn seqend1_stop(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -9544,10 +8694,11 @@ pub mod pwm {
             }
             #[doc = "Shortcut between event SEQEND\\[1\\] and task STOP"]
             #[inline(always)]
-            pub fn set_seqend1_stop(&mut self, val: bool) {
+            pub const fn set_seqend1_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn loopsdone_seqstart0(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -9555,10 +8706,11 @@ pub mod pwm {
             }
             #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[0\\]"]
             #[inline(always)]
-            pub fn set_loopsdone_seqstart0(&mut self, val: bool) {
+            pub const fn set_loopsdone_seqstart0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[1\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn loopsdone_seqstart1(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -9566,10 +8718,11 @@ pub mod pwm {
             }
             #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[1\\]"]
             #[inline(always)]
-            pub fn set_loopsdone_seqstart1(&mut self, val: bool) {
+            pub const fn set_loopsdone_seqstart1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Shortcut between event LOOPSDONE and task STOP"]
+            #[must_use]
             #[inline(always)]
             pub const fn loopsdone_stop(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -9577,7 +8730,7 @@ pub mod pwm {
             }
             #[doc = "Shortcut between event LOOPSDONE and task STOP"]
             #[inline(always)]
-            pub fn set_loopsdone_stop(&mut self, val: bool) {
+            pub const fn set_loopsdone_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
         }
@@ -9601,29 +8754,14 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Shorts {
-                    seqend0_stop: bool,
-                    seqend1_stop: bool,
-                    loopsdone_seqstart0: bool,
-                    loopsdone_seqstart1: bool,
-                    loopsdone_stop: bool,
-                }
-                let proxy = Shorts {
-                    seqend0_stop: self.seqend0_stop(),
-                    seqend1_stop: self.seqend1_stop(),
-                    loopsdone_seqstart0: self.loopsdone_seqstart0(),
-                    loopsdone_seqstart1: self.loopsdone_seqstart1(),
-                    loopsdone_stop: self.loopsdone_stop(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Shorts {{ seqend0_stop: {=bool:?}, seqend1_stop: {=bool:?}, loopsdone_seqstart0: {=bool:?}, loopsdone_seqstart1: {=bool:?}, loopsdone_stop: {=bool:?} }}" , self . seqend0_stop () , self . seqend1_stop () , self . loopsdone_seqstart0 () , self . loopsdone_seqstart1 () , self . loopsdone_stop ())
             }
         }
     }
     pub mod vals {
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct CntCnt(pub u16);
+        pub struct CntCnt(u16);
         impl CntCnt {
             #[doc = "Sequence is disabled, and shall not be started as it is empty"]
             pub const DISABLED: Self = Self(0x0);
@@ -9702,7 +8840,7 @@ pub mod pwm {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct LoopCnt(pub u16);
+        pub struct LoopCnt(u16);
         impl LoopCnt {
             #[doc = "Looping disabled (stop at the end of the sequence)"]
             pub const DISABLED: Self = Self(0x0);
@@ -9820,7 +8958,7 @@ pub mod pwm {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct RefreshCnt(pub u32);
+        pub struct RefreshCnt(u32);
         impl RefreshCnt {
             #[doc = "Update every PWM period"]
             pub const CONTINUOUS: Self = Self(0x0);
@@ -9935,6 +9073,7 @@ pub mod regulators {
         pub struct Dcdcen(pub u32);
         impl Dcdcen {
             #[doc = "Enable DC/DC converter"]
+            #[must_use]
             #[inline(always)]
             pub const fn dcdcen(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -9942,7 +9081,7 @@ pub mod regulators {
             }
             #[doc = "Enable DC/DC converter"]
             #[inline(always)]
-            pub fn set_dcdcen(&mut self, val: bool) {
+            pub const fn set_dcdcen(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -9962,14 +9101,7 @@ pub mod regulators {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Dcdcen {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Dcdcen {
-                    dcdcen: bool,
-                }
-                let proxy = Dcdcen {
-                    dcdcen: self.dcdcen(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Dcdcen {{ dcdcen: {=bool:?} }}", self.dcdcen())
             }
         }
         #[doc = "External power failure warning configuration"]
@@ -9978,6 +9110,7 @@ pub mod regulators {
         pub struct Extpofcon(pub u32);
         impl Extpofcon {
             #[doc = "Enable or disable external power failure warning"]
+            #[must_use]
             #[inline(always)]
             pub const fn pof(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -9985,7 +9118,7 @@ pub mod regulators {
             }
             #[doc = "Enable or disable external power failure warning"]
             #[inline(always)]
-            pub fn set_pof(&mut self, val: bool) {
+            pub const fn set_pof(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -10005,12 +9138,7 @@ pub mod regulators {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Extpofcon {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Extpofcon {
-                    pof: bool,
-                }
-                let proxy = Extpofcon { pof: self.pof() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Extpofcon {{ pof: {=bool:?} }}", self.pof())
             }
         }
         #[doc = "System OFF register"]
@@ -10019,6 +9147,7 @@ pub mod regulators {
         pub struct Systemoff(pub u32);
         impl Systemoff {
             #[doc = "Enable System OFF mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn systemoff(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -10026,7 +9155,7 @@ pub mod regulators {
             }
             #[doc = "Enable System OFF mode"]
             #[inline(always)]
-            pub fn set_systemoff(&mut self, val: bool) {
+            pub const fn set_systemoff(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -10046,14 +9175,7 @@ pub mod regulators {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Systemoff {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Systemoff {
-                    systemoff: bool,
-                }
-                let proxy = Systemoff {
-                    systemoff: self.systemoff(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Systemoff {{ systemoff: {=bool:?} }}", self.systemoff())
             }
         }
     }
@@ -10211,6 +9333,7 @@ pub mod rtc {
         pub struct Cc(pub u32);
         impl Cc {
             #[doc = "Compare value"]
+            #[must_use]
             #[inline(always)]
             pub const fn compare(&self) -> u32 {
                 let val = (self.0 >> 0usize) & 0x00ff_ffff;
@@ -10218,7 +9341,7 @@ pub mod rtc {
             }
             #[doc = "Compare value"]
             #[inline(always)]
-            pub fn set_compare(&mut self, val: u32) {
+            pub const fn set_compare(&mut self, val: u32) {
                 self.0 =
                     (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
             }
@@ -10239,14 +9362,7 @@ pub mod rtc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Cc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Cc {
-                    compare: u32,
-                }
-                let proxy = Cc {
-                    compare: self.compare(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Cc {{ compare: {=u32:?} }}", self.compare())
             }
         }
         #[doc = "Current counter value"]
@@ -10255,6 +9371,7 @@ pub mod rtc {
         pub struct Counter(pub u32);
         impl Counter {
             #[doc = "Counter value"]
+            #[must_use]
             #[inline(always)]
             pub const fn counter(&self) -> u32 {
                 let val = (self.0 >> 0usize) & 0x00ff_ffff;
@@ -10262,7 +9379,7 @@ pub mod rtc {
             }
             #[doc = "Counter value"]
             #[inline(always)]
-            pub fn set_counter(&mut self, val: u32) {
+            pub const fn set_counter(&mut self, val: u32) {
                 self.0 =
                     (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
             }
@@ -10283,14 +9400,7 @@ pub mod rtc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Counter {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Counter {
-                    counter: u32,
-                }
-                let proxy = Counter {
-                    counter: self.counter(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Counter {{ counter: {=u32:?} }}", self.counter())
             }
         }
         #[doc = "Enable or disable event routing"]
@@ -10299,6 +9409,7 @@ pub mod rtc {
         pub struct Evt(pub u32);
         impl Evt {
             #[doc = "Enable or disable event routing for event TICK"]
+            #[must_use]
             #[inline(always)]
             pub const fn tick(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -10306,10 +9417,11 @@ pub mod rtc {
             }
             #[doc = "Enable or disable event routing for event TICK"]
             #[inline(always)]
-            pub fn set_tick(&mut self, val: bool) {
+            pub const fn set_tick(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable event routing for event OVRFLW"]
+            #[must_use]
             #[inline(always)]
             pub const fn ovrflw(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -10317,10 +9429,11 @@ pub mod rtc {
             }
             #[doc = "Enable or disable event routing for event OVRFLW"]
             #[inline(always)]
-            pub fn set_ovrflw(&mut self, val: bool) {
+            pub const fn set_ovrflw(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable event routing for event COMPARE\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn compare(&self, n: usize) -> bool {
                 assert!(n < 4usize);
@@ -10330,7 +9443,7 @@ pub mod rtc {
             }
             #[doc = "Enable or disable event routing for event COMPARE\\[0\\]"]
             #[inline(always)]
-            pub fn set_compare(&mut self, n: usize, val: bool) {
+            pub const fn set_compare(&mut self, n: usize, val: bool) {
                 assert!(n < 4usize);
                 let offs = 16usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -10347,38 +9460,17 @@ pub mod rtc {
                 f.debug_struct("Evt")
                     .field("tick", &self.tick())
                     .field("ovrflw", &self.ovrflw())
-                    .field(
-                        "compare",
-                        &[
-                            self.compare(0usize),
-                            self.compare(1usize),
-                            self.compare(2usize),
-                            self.compare(3usize),
-                        ],
-                    )
+                    .field("compare[0]", &self.compare(0usize))
+                    .field("compare[1]", &self.compare(1usize))
+                    .field("compare[2]", &self.compare(2usize))
+                    .field("compare[3]", &self.compare(3usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Evt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Evt {
-                    tick: bool,
-                    ovrflw: bool,
-                    compare: [bool; 4usize],
-                }
-                let proxy = Evt {
-                    tick: self.tick(),
-                    ovrflw: self.ovrflw(),
-                    compare: [
-                        self.compare(0usize),
-                        self.compare(1usize),
-                        self.compare(2usize),
-                        self.compare(3usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Evt {{ tick: {=bool:?}, ovrflw: {=bool:?}, compare[0]: {=bool:?}, compare[1]: {=bool:?}, compare[2]: {=bool:?}, compare[3]: {=bool:?} }}" , self . tick () , self . ovrflw () , self . compare (0usize) , self . compare (1usize) , self . compare (2usize) , self . compare (3usize))
             }
         }
         #[doc = "Disable interrupt"]
@@ -10387,6 +9479,7 @@ pub mod rtc {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Write '1' to disable interrupt for event TICK"]
+            #[must_use]
             #[inline(always)]
             pub const fn tick(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -10394,10 +9487,11 @@ pub mod rtc {
             }
             #[doc = "Write '1' to disable interrupt for event TICK"]
             #[inline(always)]
-            pub fn set_tick(&mut self, val: bool) {
+            pub const fn set_tick(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Write '1' to disable interrupt for event OVRFLW"]
+            #[must_use]
             #[inline(always)]
             pub const fn ovrflw(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -10405,10 +9499,11 @@ pub mod rtc {
             }
             #[doc = "Write '1' to disable interrupt for event OVRFLW"]
             #[inline(always)]
-            pub fn set_ovrflw(&mut self, val: bool) {
+            pub const fn set_ovrflw(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn compare(&self, n: usize) -> bool {
                 assert!(n < 4usize);
@@ -10418,7 +9513,7 @@ pub mod rtc {
             }
             #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
-            pub fn set_compare(&mut self, n: usize, val: bool) {
+            pub const fn set_compare(&mut self, n: usize, val: bool) {
                 assert!(n < 4usize);
                 let offs = 16usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -10435,38 +9530,17 @@ pub mod rtc {
                 f.debug_struct("Int")
                     .field("tick", &self.tick())
                     .field("ovrflw", &self.ovrflw())
-                    .field(
-                        "compare",
-                        &[
-                            self.compare(0usize),
-                            self.compare(1usize),
-                            self.compare(2usize),
-                            self.compare(3usize),
-                        ],
-                    )
+                    .field("compare[0]", &self.compare(0usize))
+                    .field("compare[1]", &self.compare(1usize))
+                    .field("compare[2]", &self.compare(2usize))
+                    .field("compare[3]", &self.compare(3usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    tick: bool,
-                    ovrflw: bool,
-                    compare: [bool; 4usize],
-                }
-                let proxy = Int {
-                    tick: self.tick(),
-                    ovrflw: self.ovrflw(),
-                    compare: [
-                        self.compare(0usize),
-                        self.compare(1usize),
-                        self.compare(2usize),
-                        self.compare(3usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ tick: {=bool:?}, ovrflw: {=bool:?}, compare[0]: {=bool:?}, compare[1]: {=bool:?}, compare[2]: {=bool:?}, compare[3]: {=bool:?} }}" , self . tick () , self . ovrflw () , self . compare (0usize) , self . compare (1usize) , self . compare (2usize) , self . compare (3usize))
             }
         }
         #[doc = "12-bit prescaler for counter frequency (32768/(PRESCALER+1)). Must be written when RTC is stopped."]
@@ -10475,6 +9549,7 @@ pub mod rtc {
         pub struct Prescaler(pub u32);
         impl Prescaler {
             #[doc = "Prescaler value"]
+            #[must_use]
             #[inline(always)]
             pub const fn prescaler(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x0fff;
@@ -10482,7 +9557,7 @@ pub mod rtc {
             }
             #[doc = "Prescaler value"]
             #[inline(always)]
-            pub fn set_prescaler(&mut self, val: u16) {
+            pub const fn set_prescaler(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
             }
         }
@@ -10502,14 +9577,7 @@ pub mod rtc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Prescaler {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Prescaler {
-                    prescaler: u16,
-                }
-                let proxy = Prescaler {
-                    prescaler: self.prescaler(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Prescaler {{ prescaler: {=u16:?} }}", self.prescaler())
             }
         }
     }
@@ -10849,6 +9917,7 @@ pub mod saadc {
         pub struct Amount(pub u32);
         impl Amount {
             #[doc = "Number of buffer words transferred since last START. This register can be read after an END or STOPPED event."]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x7fff;
@@ -10856,7 +9925,7 @@ pub mod saadc {
             }
             #[doc = "Number of buffer words transferred since last START. This register can be read after an END or STOPPED event."]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x7fff << 0usize)) | (((val as u32) & 0x7fff) << 0usize);
             }
         }
@@ -10876,14 +9945,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Amount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Amount {
-                    amount: u16,
-                }
-                let proxy = Amount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Amount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "Description cluster: Input configuration for CH\\[n\\]"]
@@ -10892,6 +9954,7 @@ pub mod saadc {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Positive channel resistor control"]
+            #[must_use]
             #[inline(always)]
             pub const fn resp(&self) -> super::vals::Resp {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -10899,10 +9962,11 @@ pub mod saadc {
             }
             #[doc = "Positive channel resistor control"]
             #[inline(always)]
-            pub fn set_resp(&mut self, val: super::vals::Resp) {
+            pub const fn set_resp(&mut self, val: super::vals::Resp) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
             #[doc = "Negative channel resistor control"]
+            #[must_use]
             #[inline(always)]
             pub const fn resn(&self) -> super::vals::Resn {
                 let val = (self.0 >> 4usize) & 0x03;
@@ -10910,10 +9974,11 @@ pub mod saadc {
             }
             #[doc = "Negative channel resistor control"]
             #[inline(always)]
-            pub fn set_resn(&mut self, val: super::vals::Resn) {
+            pub const fn set_resn(&mut self, val: super::vals::Resn) {
                 self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
             }
             #[doc = "Gain control"]
+            #[must_use]
             #[inline(always)]
             pub const fn gain(&self) -> super::vals::Gain {
                 let val = (self.0 >> 8usize) & 0x07;
@@ -10921,10 +9986,11 @@ pub mod saadc {
             }
             #[doc = "Gain control"]
             #[inline(always)]
-            pub fn set_gain(&mut self, val: super::vals::Gain) {
+            pub const fn set_gain(&mut self, val: super::vals::Gain) {
                 self.0 = (self.0 & !(0x07 << 8usize)) | (((val.to_bits() as u32) & 0x07) << 8usize);
             }
             #[doc = "Reference control"]
+            #[must_use]
             #[inline(always)]
             pub const fn refsel(&self) -> super::vals::Refsel {
                 let val = (self.0 >> 12usize) & 0x01;
@@ -10932,11 +9998,12 @@ pub mod saadc {
             }
             #[doc = "Reference control"]
             #[inline(always)]
-            pub fn set_refsel(&mut self, val: super::vals::Refsel) {
+            pub const fn set_refsel(&mut self, val: super::vals::Refsel) {
                 self.0 =
                     (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
             }
             #[doc = "Acquisition time, the time the ADC uses to sample the input voltage"]
+            #[must_use]
             #[inline(always)]
             pub const fn tacq(&self) -> super::vals::Tacq {
                 let val = (self.0 >> 16usize) & 0x07;
@@ -10944,11 +10011,12 @@ pub mod saadc {
             }
             #[doc = "Acquisition time, the time the ADC uses to sample the input voltage"]
             #[inline(always)]
-            pub fn set_tacq(&mut self, val: super::vals::Tacq) {
+            pub const fn set_tacq(&mut self, val: super::vals::Tacq) {
                 self.0 =
                     (self.0 & !(0x07 << 16usize)) | (((val.to_bits() as u32) & 0x07) << 16usize);
             }
             #[doc = "Enable differential mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::ConfigMode {
                 let val = (self.0 >> 20usize) & 0x01;
@@ -10956,11 +10024,12 @@ pub mod saadc {
             }
             #[doc = "Enable differential mode"]
             #[inline(always)]
-            pub fn set_mode(&mut self, val: super::vals::ConfigMode) {
+            pub const fn set_mode(&mut self, val: super::vals::ConfigMode) {
                 self.0 =
                     (self.0 & !(0x01 << 20usize)) | (((val.to_bits() as u32) & 0x01) << 20usize);
             }
             #[doc = "Enable burst mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn burst(&self) -> bool {
                 let val = (self.0 >> 24usize) & 0x01;
@@ -10968,7 +10037,7 @@ pub mod saadc {
             }
             #[doc = "Enable burst mode"]
             #[inline(always)]
-            pub fn set_burst(&mut self, val: bool) {
+            pub const fn set_burst(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
             }
         }
@@ -10994,26 +10063,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    resp: super::vals::Resp,
-                    resn: super::vals::Resn,
-                    gain: super::vals::Gain,
-                    refsel: super::vals::Refsel,
-                    tacq: super::vals::Tacq,
-                    mode: super::vals::ConfigMode,
-                    burst: bool,
-                }
-                let proxy = Config {
-                    resp: self.resp(),
-                    resn: self.resn(),
-                    gain: self.gain(),
-                    refsel: self.refsel(),
-                    tacq: self.tacq(),
-                    mode: self.mode(),
-                    burst: self.burst(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Config {{ resp: {:?}, resn: {:?}, gain: {:?}, refsel: {:?}, tacq: {:?}, mode: {:?}, burst: {=bool:?} }}" , self . resp () , self . resn () , self . gain () , self . refsel () , self . tacq () , self . mode () , self . burst ())
             }
         }
         #[doc = "Enable or disable ADC"]
@@ -11022,6 +10072,7 @@ pub mod saadc {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable ADC"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -11029,7 +10080,7 @@ pub mod saadc {
             }
             #[doc = "Enable or disable ADC"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: bool) {
+            pub const fn set_enable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -11049,14 +10100,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: bool,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {=bool:?} }}", self.enable())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -11065,6 +10109,7 @@ pub mod saadc {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event STARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -11072,10 +10117,11 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event STARTED"]
             #[inline(always)]
-            pub fn set_started(&mut self, val: bool) {
+            pub const fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable interrupt for event END"]
+            #[must_use]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -11083,10 +10129,11 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event END"]
             #[inline(always)]
-            pub fn set_end(&mut self, val: bool) {
+            pub const fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event DONE"]
+            #[must_use]
             #[inline(always)]
             pub const fn done(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -11094,10 +10141,11 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event DONE"]
             #[inline(always)]
-            pub fn set_done(&mut self, val: bool) {
+            pub const fn set_done(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable or disable interrupt for event RESULTDONE"]
+            #[must_use]
             #[inline(always)]
             pub const fn resultdone(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -11105,10 +10153,11 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event RESULTDONE"]
             #[inline(always)]
-            pub fn set_resultdone(&mut self, val: bool) {
+            pub const fn set_resultdone(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Enable or disable interrupt for event CALIBRATEDONE"]
+            #[must_use]
             #[inline(always)]
             pub const fn calibratedone(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -11116,10 +10165,11 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event CALIBRATEDONE"]
             #[inline(always)]
-            pub fn set_calibratedone(&mut self, val: bool) {
+            pub const fn set_calibratedone(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -11127,10 +10177,11 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
-            pub fn set_stopped(&mut self, val: bool) {
+            pub const fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Enable or disable interrupt for event CH0LIMITH"]
+            #[must_use]
             #[inline(always)]
             pub const fn chlimith(&self, n: usize) -> bool {
                 assert!(n < 8usize);
@@ -11140,12 +10191,13 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event CH0LIMITH"]
             #[inline(always)]
-            pub fn set_chlimith(&mut self, n: usize, val: bool) {
+            pub const fn set_chlimith(&mut self, n: usize, val: bool) {
                 assert!(n < 8usize);
                 let offs = 6usize + n * 2usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
             #[doc = "Enable or disable interrupt for event CH0LIMITL"]
+            #[must_use]
             #[inline(always)]
             pub const fn chlimitl(&self, n: usize) -> bool {
                 assert!(n < 8usize);
@@ -11155,7 +10207,7 @@ pub mod saadc {
             }
             #[doc = "Enable or disable interrupt for event CH0LIMITL"]
             #[inline(always)]
-            pub fn set_chlimitl(&mut self, n: usize, val: bool) {
+            pub const fn set_chlimitl(&mut self, n: usize, val: bool) {
                 assert!(n < 8usize);
                 let offs = 7usize + n * 2usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -11176,78 +10228,29 @@ pub mod saadc {
                     .field("resultdone", &self.resultdone())
                     .field("calibratedone", &self.calibratedone())
                     .field("stopped", &self.stopped())
-                    .field(
-                        "chlimith",
-                        &[
-                            self.chlimith(0usize),
-                            self.chlimith(1usize),
-                            self.chlimith(2usize),
-                            self.chlimith(3usize),
-                            self.chlimith(4usize),
-                            self.chlimith(5usize),
-                            self.chlimith(6usize),
-                            self.chlimith(7usize),
-                        ],
-                    )
-                    .field(
-                        "chlimitl",
-                        &[
-                            self.chlimitl(0usize),
-                            self.chlimitl(1usize),
-                            self.chlimitl(2usize),
-                            self.chlimitl(3usize),
-                            self.chlimitl(4usize),
-                            self.chlimitl(5usize),
-                            self.chlimitl(6usize),
-                            self.chlimitl(7usize),
-                        ],
-                    )
+                    .field("chlimith[0]", &self.chlimith(0usize))
+                    .field("chlimith[1]", &self.chlimith(1usize))
+                    .field("chlimith[2]", &self.chlimith(2usize))
+                    .field("chlimith[3]", &self.chlimith(3usize))
+                    .field("chlimith[4]", &self.chlimith(4usize))
+                    .field("chlimith[5]", &self.chlimith(5usize))
+                    .field("chlimith[6]", &self.chlimith(6usize))
+                    .field("chlimith[7]", &self.chlimith(7usize))
+                    .field("chlimitl[0]", &self.chlimitl(0usize))
+                    .field("chlimitl[1]", &self.chlimitl(1usize))
+                    .field("chlimitl[2]", &self.chlimitl(2usize))
+                    .field("chlimitl[3]", &self.chlimitl(3usize))
+                    .field("chlimitl[4]", &self.chlimitl(4usize))
+                    .field("chlimitl[5]", &self.chlimitl(5usize))
+                    .field("chlimitl[6]", &self.chlimitl(6usize))
+                    .field("chlimitl[7]", &self.chlimitl(7usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    started: bool,
-                    end: bool,
-                    done: bool,
-                    resultdone: bool,
-                    calibratedone: bool,
-                    stopped: bool,
-                    chlimith: [bool; 8usize],
-                    chlimitl: [bool; 8usize],
-                }
-                let proxy = Int {
-                    started: self.started(),
-                    end: self.end(),
-                    done: self.done(),
-                    resultdone: self.resultdone(),
-                    calibratedone: self.calibratedone(),
-                    stopped: self.stopped(),
-                    chlimith: [
-                        self.chlimith(0usize),
-                        self.chlimith(1usize),
-                        self.chlimith(2usize),
-                        self.chlimith(3usize),
-                        self.chlimith(4usize),
-                        self.chlimith(5usize),
-                        self.chlimith(6usize),
-                        self.chlimith(7usize),
-                    ],
-                    chlimitl: [
-                        self.chlimitl(0usize),
-                        self.chlimitl(1usize),
-                        self.chlimitl(2usize),
-                        self.chlimitl(3usize),
-                        self.chlimitl(4usize),
-                        self.chlimitl(5usize),
-                        self.chlimitl(6usize),
-                        self.chlimitl(7usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ started: {=bool:?}, end: {=bool:?}, done: {=bool:?}, resultdone: {=bool:?}, calibratedone: {=bool:?}, stopped: {=bool:?}, chlimith[0]: {=bool:?}, chlimith[1]: {=bool:?}, chlimith[2]: {=bool:?}, chlimith[3]: {=bool:?}, chlimith[4]: {=bool:?}, chlimith[5]: {=bool:?}, chlimith[6]: {=bool:?}, chlimith[7]: {=bool:?}, chlimitl[0]: {=bool:?}, chlimitl[1]: {=bool:?}, chlimitl[2]: {=bool:?}, chlimitl[3]: {=bool:?}, chlimitl[4]: {=bool:?}, chlimitl[5]: {=bool:?}, chlimitl[6]: {=bool:?}, chlimitl[7]: {=bool:?} }}" , self . started () , self . end () , self . done () , self . resultdone () , self . calibratedone () , self . stopped () , self . chlimith (0usize) , self . chlimith (1usize) , self . chlimith (2usize) , self . chlimith (3usize) , self . chlimith (4usize) , self . chlimith (5usize) , self . chlimith (6usize) , self . chlimith (7usize) , self . chlimitl (0usize) , self . chlimitl (1usize) , self . chlimitl (2usize) , self . chlimitl (3usize) , self . chlimitl (4usize) , self . chlimitl (5usize) , self . chlimitl (6usize) , self . chlimitl (7usize))
             }
         }
         #[doc = "Description cluster: High/low limits for event monitoring a channel"]
@@ -11256,6 +10259,7 @@ pub mod saadc {
         pub struct Limit(pub u32);
         impl Limit {
             #[doc = "Low level limit"]
+            #[must_use]
             #[inline(always)]
             pub const fn low(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0xffff;
@@ -11263,10 +10267,11 @@ pub mod saadc {
             }
             #[doc = "Low level limit"]
             #[inline(always)]
-            pub fn set_low(&mut self, val: u16) {
+            pub const fn set_low(&mut self, val: u16) {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
             #[doc = "High level limit"]
+            #[must_use]
             #[inline(always)]
             pub const fn high(&self) -> u16 {
                 let val = (self.0 >> 16usize) & 0xffff;
@@ -11274,7 +10279,7 @@ pub mod saadc {
             }
             #[doc = "High level limit"]
             #[inline(always)]
-            pub fn set_high(&mut self, val: u16) {
+            pub const fn set_high(&mut self, val: u16) {
                 self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
             }
         }
@@ -11295,16 +10300,12 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Limit {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Limit {
-                    low: u16,
-                    high: u16,
-                }
-                let proxy = Limit {
-                    low: self.low(),
-                    high: self.high(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Limit {{ low: {=u16:?}, high: {=u16:?} }}",
+                    self.low(),
+                    self.high()
+                )
             }
         }
         #[doc = "Maximum number of buffer words to transfer"]
@@ -11313,6 +10314,7 @@ pub mod saadc {
         pub struct Maxcnt(pub u32);
         impl Maxcnt {
             #[doc = "Maximum number of buffer words to transfer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x7fff;
@@ -11320,7 +10322,7 @@ pub mod saadc {
             }
             #[doc = "Maximum number of buffer words to transfer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x7fff << 0usize)) | (((val as u32) & 0x7fff) << 0usize);
             }
         }
@@ -11340,14 +10342,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Maxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Maxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = Maxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Maxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Oversampling configuration. OVERSAMPLE should not be combined with SCAN. The RESOLUTION is applied before averaging, thus for high OVERSAMPLE a higher RESOLUTION should be used."]
@@ -11356,6 +10351,7 @@ pub mod saadc {
         pub struct Oversample(pub u32);
         impl Oversample {
             #[doc = "Oversample control"]
+            #[must_use]
             #[inline(always)]
             pub const fn oversample(&self) -> super::vals::Oversample {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -11363,7 +10359,7 @@ pub mod saadc {
             }
             #[doc = "Oversample control"]
             #[inline(always)]
-            pub fn set_oversample(&mut self, val: super::vals::Oversample) {
+            pub const fn set_oversample(&mut self, val: super::vals::Oversample) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
         }
@@ -11383,14 +10379,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Oversample {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Oversample {
-                    oversample: super::vals::Oversample,
-                }
-                let proxy = Oversample {
-                    oversample: self.oversample(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Oversample {{ oversample: {:?} }}", self.oversample())
             }
         }
         #[doc = "Description cluster: Input negative pin selection for CH\\[n\\]"]
@@ -11399,6 +10388,7 @@ pub mod saadc {
         pub struct Pseln(pub u32);
         impl Pseln {
             #[doc = "Analog negative input, enables differential channel"]
+            #[must_use]
             #[inline(always)]
             pub const fn pseln(&self) -> super::vals::Psel {
                 let val = (self.0 >> 0usize) & 0x1f;
@@ -11406,7 +10396,7 @@ pub mod saadc {
             }
             #[doc = "Analog negative input, enables differential channel"]
             #[inline(always)]
-            pub fn set_pseln(&mut self, val: super::vals::Psel) {
+            pub const fn set_pseln(&mut self, val: super::vals::Psel) {
                 self.0 = (self.0 & !(0x1f << 0usize)) | (((val.to_bits() as u32) & 0x1f) << 0usize);
             }
         }
@@ -11426,14 +10416,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Pseln {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Pseln {
-                    pseln: super::vals::Psel,
-                }
-                let proxy = Pseln {
-                    pseln: self.pseln(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Pseln {{ pseln: {:?} }}", self.pseln())
             }
         }
         #[doc = "Description cluster: Input positive pin selection for CH\\[n\\]"]
@@ -11442,6 +10425,7 @@ pub mod saadc {
         pub struct Pselp(pub u32);
         impl Pselp {
             #[doc = "Analog positive input channel"]
+            #[must_use]
             #[inline(always)]
             pub const fn pselp(&self) -> super::vals::Psel {
                 let val = (self.0 >> 0usize) & 0x1f;
@@ -11449,7 +10433,7 @@ pub mod saadc {
             }
             #[doc = "Analog positive input channel"]
             #[inline(always)]
-            pub fn set_pselp(&mut self, val: super::vals::Psel) {
+            pub const fn set_pselp(&mut self, val: super::vals::Psel) {
                 self.0 = (self.0 & !(0x1f << 0usize)) | (((val.to_bits() as u32) & 0x1f) << 0usize);
             }
         }
@@ -11469,14 +10453,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Pselp {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Pselp {
-                    pselp: super::vals::Psel,
-                }
-                let proxy = Pselp {
-                    pselp: self.pselp(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Pselp {{ pselp: {:?} }}", self.pselp())
             }
         }
         #[doc = "Resolution configuration"]
@@ -11485,6 +10462,7 @@ pub mod saadc {
         pub struct Resolution(pub u32);
         impl Resolution {
             #[doc = "Set the resolution"]
+            #[must_use]
             #[inline(always)]
             pub const fn val(&self) -> super::vals::Val {
                 let val = (self.0 >> 0usize) & 0x07;
@@ -11492,7 +10470,7 @@ pub mod saadc {
             }
             #[doc = "Set the resolution"]
             #[inline(always)]
-            pub fn set_val(&mut self, val: super::vals::Val) {
+            pub const fn set_val(&mut self, val: super::vals::Val) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
             }
         }
@@ -11512,12 +10490,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Resolution {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Resolution {
-                    val: super::vals::Val,
-                }
-                let proxy = Resolution { val: self.val() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Resolution {{ val: {:?} }}", self.val())
             }
         }
         #[doc = "Controls normal or continuous sample rate"]
@@ -11526,6 +10499,7 @@ pub mod saadc {
         pub struct Samplerate(pub u32);
         impl Samplerate {
             #[doc = "Capture and compare value. Sample rate is 16 MHz/CC"]
+            #[must_use]
             #[inline(always)]
             pub const fn cc(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x07ff;
@@ -11533,10 +10507,11 @@ pub mod saadc {
             }
             #[doc = "Capture and compare value. Sample rate is 16 MHz/CC"]
             #[inline(always)]
-            pub fn set_cc(&mut self, val: u16) {
+            pub const fn set_cc(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x07ff << 0usize)) | (((val as u32) & 0x07ff) << 0usize);
             }
             #[doc = "Select mode for sample rate control"]
+            #[must_use]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::SamplerateMode {
                 let val = (self.0 >> 12usize) & 0x01;
@@ -11544,7 +10519,7 @@ pub mod saadc {
             }
             #[doc = "Select mode for sample rate control"]
             #[inline(always)]
-            pub fn set_mode(&mut self, val: super::vals::SamplerateMode) {
+            pub const fn set_mode(&mut self, val: super::vals::SamplerateMode) {
                 self.0 =
                     (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
             }
@@ -11566,16 +10541,12 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Samplerate {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Samplerate {
-                    cc: u16,
-                    mode: super::vals::SamplerateMode,
-                }
-                let proxy = Samplerate {
-                    cc: self.cc(),
-                    mode: self.mode(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Samplerate {{ cc: {=u16:?}, mode: {:?} }}",
+                    self.cc(),
+                    self.mode()
+                )
             }
         }
         #[doc = "Status"]
@@ -11584,6 +10555,7 @@ pub mod saadc {
         pub struct Status(pub u32);
         impl Status {
             #[doc = "Status"]
+            #[must_use]
             #[inline(always)]
             pub const fn status(&self) -> super::vals::Status {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -11591,7 +10563,7 @@ pub mod saadc {
             }
             #[doc = "Status"]
             #[inline(always)]
-            pub fn set_status(&mut self, val: super::vals::Status) {
+            pub const fn set_status(&mut self, val: super::vals::Status) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -11611,14 +10583,7 @@ pub mod saadc {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Status {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Status {
-                    status: super::vals::Status,
-                }
-                let proxy = Status {
-                    status: self.status(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Status {{ status: {:?} }}", self.status())
             }
         }
     }
@@ -12071,6 +11036,7 @@ pub mod shared {
         pub struct Psel(pub u32);
         impl Psel {
             #[doc = "Pin number"]
+            #[must_use]
             #[inline(always)]
             pub const fn pin(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x1f;
@@ -12078,10 +11044,11 @@ pub mod shared {
             }
             #[doc = "Pin number"]
             #[inline(always)]
-            pub fn set_pin(&mut self, val: u8) {
+            pub const fn set_pin(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
             }
             #[doc = "Connection"]
+            #[must_use]
             #[inline(always)]
             pub const fn connect(&self) -> super::vals::Connect {
                 let val = (self.0 >> 31usize) & 0x01;
@@ -12089,7 +11056,7 @@ pub mod shared {
             }
             #[doc = "Connection"]
             #[inline(always)]
-            pub fn set_connect(&mut self, val: super::vals::Connect) {
+            pub const fn set_connect(&mut self, val: super::vals::Connect) {
                 self.0 =
                     (self.0 & !(0x01 << 31usize)) | (((val.to_bits() as u32) & 0x01) << 31usize);
             }
@@ -12111,16 +11078,12 @@ pub mod shared {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Psel {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Psel {
-                    pin: u8,
-                    connect: super::vals::Connect,
-                }
-                let proxy = Psel {
-                    pin: self.pin(),
-                    connect: self.connect(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Psel {{ pin: {=u8:?}, connect: {:?} }}",
+                    self.pin(),
+                    self.connect()
+                )
             }
         }
         #[doc = "Publish configuration for event HFCLKSTARTED"]
@@ -12129,6 +11092,7 @@ pub mod shared {
         pub struct Publish(pub u32);
         impl Publish {
             #[doc = "DPPI channel that event HFCLKSTARTED will publish to"]
+            #[must_use]
             #[inline(always)]
             pub const fn chidx(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -12136,16 +11100,17 @@ pub mod shared {
             }
             #[doc = "DPPI channel that event HFCLKSTARTED will publish to"]
             #[inline(always)]
-            pub fn set_chidx(&mut self, val: u8) {
+            pub const fn set_chidx(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn en(&self) -> bool {
                 let val = (self.0 >> 31usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_en(&mut self, val: bool) {
+            pub const fn set_en(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
             }
         }
@@ -12166,16 +11131,12 @@ pub mod shared {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Publish {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Publish {
-                    chidx: u8,
-                    en: bool,
-                }
-                let proxy = Publish {
-                    chidx: self.chidx(),
-                    en: self.en(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Publish {{ chidx: {=u8:?}, en: {=bool:?} }}",
+                    self.chidx(),
+                    self.en()
+                )
             }
         }
         #[doc = "Subscribe configuration for task HFCLKSTART"]
@@ -12184,6 +11145,7 @@ pub mod shared {
         pub struct Subscribe(pub u32);
         impl Subscribe {
             #[doc = "DPPI channel that task HFCLKSTART will subscribe to"]
+            #[must_use]
             #[inline(always)]
             pub const fn chidx(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -12191,16 +11153,17 @@ pub mod shared {
             }
             #[doc = "DPPI channel that task HFCLKSTART will subscribe to"]
             #[inline(always)]
-            pub fn set_chidx(&mut self, val: u8) {
+            pub const fn set_chidx(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn en(&self) -> bool {
                 let val = (self.0 >> 31usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_en(&mut self, val: bool) {
+            pub const fn set_en(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
             }
         }
@@ -12221,16 +11184,12 @@ pub mod shared {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Subscribe {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Subscribe {
-                    chidx: u8,
-                    en: bool,
-                }
-                let proxy = Subscribe {
-                    chidx: self.chidx(),
-                    en: self.en(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Subscribe {{ chidx: {=u8:?}, en: {=bool:?} }}",
+                    self.chidx(),
+                    self.en()
+                )
             }
         }
     }
@@ -12561,6 +11520,7 @@ pub mod spim {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Bit order"]
+            #[must_use]
             #[inline(always)]
             pub const fn order(&self) -> super::vals::Order {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -12568,10 +11528,11 @@ pub mod spim {
             }
             #[doc = "Bit order"]
             #[inline(always)]
-            pub fn set_order(&mut self, val: super::vals::Order) {
+            pub const fn set_order(&mut self, val: super::vals::Order) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
             #[doc = "Serial clock (SCK) phase"]
+            #[must_use]
             #[inline(always)]
             pub const fn cpha(&self) -> super::vals::Cpha {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -12579,10 +11540,11 @@ pub mod spim {
             }
             #[doc = "Serial clock (SCK) phase"]
             #[inline(always)]
-            pub fn set_cpha(&mut self, val: super::vals::Cpha) {
+            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
             }
             #[doc = "Serial clock (SCK) polarity"]
+            #[must_use]
             #[inline(always)]
             pub const fn cpol(&self) -> super::vals::Cpol {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -12590,7 +11552,7 @@ pub mod spim {
             }
             #[doc = "Serial clock (SCK) polarity"]
             #[inline(always)]
-            pub fn set_cpol(&mut self, val: super::vals::Cpol) {
+            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
             }
         }
@@ -12612,18 +11574,13 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    order: super::vals::Order,
-                    cpha: super::vals::Cpha,
-                    cpol: super::vals::Cpol,
-                }
-                let proxy = Config {
-                    order: self.order(),
-                    cpha: self.cpha(),
-                    cpol: self.cpol(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Config {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
+                    self.order(),
+                    self.cpha(),
+                    self.cpol()
+                )
             }
         }
         #[doc = "Enable SPIM"]
@@ -12632,6 +11589,7 @@ pub mod spim {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable SPIM"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> super::vals::Enable {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -12639,7 +11597,7 @@ pub mod spim {
             }
             #[doc = "Enable or disable SPIM"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: super::vals::Enable) {
+            pub const fn set_enable(&mut self, val: super::vals::Enable) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
         }
@@ -12659,14 +11617,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: super::vals::Enable,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {:?} }}", self.enable())
             }
         }
         #[doc = "SPI frequency. Accuracy depends on the HFCLK source selected."]
@@ -12675,6 +11626,7 @@ pub mod spim {
         pub struct Frequency(pub u32);
         impl Frequency {
             #[doc = "SPI master data rate"]
+            #[must_use]
             #[inline(always)]
             pub const fn frequency(&self) -> super::vals::Frequency {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -12682,7 +11634,7 @@ pub mod spim {
             }
             #[doc = "SPI master data rate"]
             #[inline(always)]
-            pub fn set_frequency(&mut self, val: super::vals::Frequency) {
+            pub const fn set_frequency(&mut self, val: super::vals::Frequency) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -12703,14 +11655,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Frequency {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Frequency {
-                    frequency: super::vals::Frequency,
-                }
-                let proxy = Frequency {
-                    frequency: self.frequency(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Frequency {{ frequency: {:?} }}", self.frequency())
             }
         }
         #[doc = "Disable interrupt"]
@@ -12719,6 +11664,7 @@ pub mod spim {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Write '1' to disable interrupt for event STOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -12726,10 +11672,11 @@ pub mod spim {
             }
             #[doc = "Write '1' to disable interrupt for event STOPPED"]
             #[inline(always)]
-            pub fn set_stopped(&mut self, val: bool) {
+            pub const fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Write '1' to disable interrupt for event ENDRX"]
+            #[must_use]
             #[inline(always)]
             pub const fn endrx(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -12737,10 +11684,11 @@ pub mod spim {
             }
             #[doc = "Write '1' to disable interrupt for event ENDRX"]
             #[inline(always)]
-            pub fn set_endrx(&mut self, val: bool) {
+            pub const fn set_endrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Write '1' to disable interrupt for event END"]
+            #[must_use]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -12748,10 +11696,11 @@ pub mod spim {
             }
             #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
-            pub fn set_end(&mut self, val: bool) {
+            pub const fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
             #[doc = "Write '1' to disable interrupt for event ENDTX"]
+            #[must_use]
             #[inline(always)]
             pub const fn endtx(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -12759,10 +11708,11 @@ pub mod spim {
             }
             #[doc = "Write '1' to disable interrupt for event ENDTX"]
             #[inline(always)]
-            pub fn set_endtx(&mut self, val: bool) {
+            pub const fn set_endtx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
             #[doc = "Write '1' to disable interrupt for event STARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn started(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
@@ -12770,7 +11720,7 @@ pub mod spim {
             }
             #[doc = "Write '1' to disable interrupt for event STARTED"]
             #[inline(always)]
-            pub fn set_started(&mut self, val: bool) {
+            pub const fn set_started(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
         }
@@ -12794,22 +11744,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    stopped: bool,
-                    endrx: bool,
-                    end: bool,
-                    endtx: bool,
-                    started: bool,
-                }
-                let proxy = Int {
-                    stopped: self.stopped(),
-                    endrx: self.endrx(),
-                    end: self.end(),
-                    endtx: self.endtx(),
-                    started: self.started(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ stopped: {=bool:?}, endrx: {=bool:?}, end: {=bool:?}, endtx: {=bool:?}, started: {=bool:?} }}" , self . stopped () , self . endrx () , self . end () , self . endtx () , self . started ())
             }
         }
         #[doc = "Over-read character. Character clocked out in case an over-read of the TXD buffer."]
@@ -12818,6 +11753,7 @@ pub mod spim {
         pub struct Orc(pub u32);
         impl Orc {
             #[doc = "Over-read character. Character clocked out in case an over-read of the TXD buffer."]
+            #[must_use]
             #[inline(always)]
             pub const fn orc(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -12825,7 +11761,7 @@ pub mod spim {
             }
             #[doc = "Over-read character. Character clocked out in case an over-read of the TXD buffer."]
             #[inline(always)]
-            pub fn set_orc(&mut self, val: u8) {
+            pub const fn set_orc(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
         }
@@ -12843,12 +11779,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Orc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Orc {
-                    orc: u8,
-                }
-                let proxy = Orc { orc: self.orc() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Orc {{ orc: {=u8:?} }}", self.orc())
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
@@ -12857,6 +11788,7 @@ pub mod spim {
         pub struct RxdAmount(pub u32);
         impl RxdAmount {
             #[doc = "Number of bytes transferred in the last transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -12864,7 +11796,7 @@ pub mod spim {
             }
             #[doc = "Number of bytes transferred in the last transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -12884,14 +11816,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdAmount {
-                    amount: u16,
-                }
-                let proxy = RxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -12900,6 +11825,7 @@ pub mod spim {
         pub struct RxdList(pub u32);
         impl RxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::RxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -12907,7 +11833,7 @@ pub mod spim {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -12927,12 +11853,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdList {
-                    list: super::vals::RxdListList,
-                }
-                let proxy = RxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
@@ -12941,6 +11862,7 @@ pub mod spim {
         pub struct RxdMaxcnt(pub u32);
         impl RxdMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -12948,7 +11870,7 @@ pub mod spim {
             }
             #[doc = "Maximum number of bytes in receive buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -12968,14 +11890,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = RxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -12984,6 +11899,7 @@ pub mod spim {
         pub struct Shorts(pub u32);
         impl Shorts {
             #[doc = "Shortcut between event END and task START"]
+            #[must_use]
             #[inline(always)]
             pub const fn end_start(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
@@ -12991,7 +11907,7 @@ pub mod spim {
             }
             #[doc = "Shortcut between event END and task START"]
             #[inline(always)]
-            pub fn set_end_start(&mut self, val: bool) {
+            pub const fn set_end_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
         }
@@ -13011,14 +11927,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Shorts {
-                    end_start: bool,
-                }
-                let proxy = Shorts {
-                    end_start: self.end_start(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Shorts {{ end_start: {=bool:?} }}", self.end_start())
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
@@ -13027,6 +11936,7 @@ pub mod spim {
         pub struct TxdAmount(pub u32);
         impl TxdAmount {
             #[doc = "Number of bytes transferred in the last transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -13034,7 +11944,7 @@ pub mod spim {
             }
             #[doc = "Number of bytes transferred in the last transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -13054,14 +11964,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdAmount {
-                    amount: u16,
-                }
-                let proxy = TxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -13070,6 +11973,7 @@ pub mod spim {
         pub struct TxdList(pub u32);
         impl TxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::TxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -13077,7 +11981,7 @@ pub mod spim {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -13097,12 +12001,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdList {
-                    list: super::vals::TxdListList,
-                }
-                let proxy = TxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
@@ -13111,6 +12010,7 @@ pub mod spim {
         pub struct TxdMaxcnt(pub u32);
         impl TxdMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -13118,7 +12018,7 @@ pub mod spim {
             }
             #[doc = "Maximum number of bytes in transmit buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -13138,14 +12038,7 @@ pub mod spim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = TxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -13259,7 +12152,7 @@ pub mod spim {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Frequency(pub u32);
+        pub struct Frequency(u32);
         impl Frequency {
             #[doc = "125 kbps"]
             pub const K125: Self = Self(0x0200_0000);
@@ -13684,6 +12577,7 @@ pub mod spis {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Bit order"]
+            #[must_use]
             #[inline(always)]
             pub const fn order(&self) -> super::vals::Order {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -13691,10 +12585,11 @@ pub mod spis {
             }
             #[doc = "Bit order"]
             #[inline(always)]
-            pub fn set_order(&mut self, val: super::vals::Order) {
+            pub const fn set_order(&mut self, val: super::vals::Order) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
             #[doc = "Serial clock (SCK) phase"]
+            #[must_use]
             #[inline(always)]
             pub const fn cpha(&self) -> super::vals::Cpha {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -13702,10 +12597,11 @@ pub mod spis {
             }
             #[doc = "Serial clock (SCK) phase"]
             #[inline(always)]
-            pub fn set_cpha(&mut self, val: super::vals::Cpha) {
+            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
             }
             #[doc = "Serial clock (SCK) polarity"]
+            #[must_use]
             #[inline(always)]
             pub const fn cpol(&self) -> super::vals::Cpol {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -13713,7 +12609,7 @@ pub mod spis {
             }
             #[doc = "Serial clock (SCK) polarity"]
             #[inline(always)]
-            pub fn set_cpol(&mut self, val: super::vals::Cpol) {
+            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
             }
         }
@@ -13735,18 +12631,13 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    order: super::vals::Order,
-                    cpha: super::vals::Cpha,
-                    cpol: super::vals::Cpol,
-                }
-                let proxy = Config {
-                    order: self.order(),
-                    cpha: self.cpha(),
-                    cpol: self.cpol(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Config {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
+                    self.order(),
+                    self.cpha(),
+                    self.cpol()
+                )
             }
         }
         #[doc = "Default character. Character clocked out in case of an ignored transaction."]
@@ -13755,6 +12646,7 @@ pub mod spis {
         pub struct Def(pub u32);
         impl Def {
             #[doc = "Default character. Character clocked out in case of an ignored transaction."]
+            #[must_use]
             #[inline(always)]
             pub const fn def(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -13762,7 +12654,7 @@ pub mod spis {
             }
             #[doc = "Default character. Character clocked out in case of an ignored transaction."]
             #[inline(always)]
-            pub fn set_def(&mut self, val: u8) {
+            pub const fn set_def(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
         }
@@ -13780,12 +12672,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Def {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Def {
-                    def: u8,
-                }
-                let proxy = Def { def: self.def() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Def {{ def: {=u8:?} }}", self.def())
             }
         }
         #[doc = "Enable SPI slave"]
@@ -13794,6 +12681,7 @@ pub mod spis {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable SPI slave"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> super::vals::Enable {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -13801,7 +12689,7 @@ pub mod spis {
             }
             #[doc = "Enable or disable SPI slave"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: super::vals::Enable) {
+            pub const fn set_enable(&mut self, val: super::vals::Enable) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
         }
@@ -13821,14 +12709,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: super::vals::Enable,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {:?} }}", self.enable())
             }
         }
         #[doc = "Disable interrupt"]
@@ -13837,6 +12718,7 @@ pub mod spis {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Write '1' to disable interrupt for event END"]
+            #[must_use]
             #[inline(always)]
             pub const fn end(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -13844,10 +12726,11 @@ pub mod spis {
             }
             #[doc = "Write '1' to disable interrupt for event END"]
             #[inline(always)]
-            pub fn set_end(&mut self, val: bool) {
+            pub const fn set_end(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Write '1' to disable interrupt for event ENDRX"]
+            #[must_use]
             #[inline(always)]
             pub const fn endrx(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -13855,10 +12738,11 @@ pub mod spis {
             }
             #[doc = "Write '1' to disable interrupt for event ENDRX"]
             #[inline(always)]
-            pub fn set_endrx(&mut self, val: bool) {
+            pub const fn set_endrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Write '1' to disable interrupt for event ACQUIRED"]
+            #[must_use]
             #[inline(always)]
             pub const fn acquired(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
@@ -13866,7 +12750,7 @@ pub mod spis {
             }
             #[doc = "Write '1' to disable interrupt for event ACQUIRED"]
             #[inline(always)]
-            pub fn set_acquired(&mut self, val: bool) {
+            pub const fn set_acquired(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
         }
@@ -13888,18 +12772,13 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    end: bool,
-                    endrx: bool,
-                    acquired: bool,
-                }
-                let proxy = Int {
-                    end: self.end(),
-                    endrx: self.endrx(),
-                    acquired: self.acquired(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Int {{ end: {=bool:?}, endrx: {=bool:?}, acquired: {=bool:?} }}",
+                    self.end(),
+                    self.endrx(),
+                    self.acquired()
+                )
             }
         }
         #[doc = "Over-read character"]
@@ -13908,6 +12787,7 @@ pub mod spis {
         pub struct Orc(pub u32);
         impl Orc {
             #[doc = "Over-read character. Character clocked out after an over-read of the transmit buffer."]
+            #[must_use]
             #[inline(always)]
             pub const fn orc(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -13915,7 +12795,7 @@ pub mod spis {
             }
             #[doc = "Over-read character. Character clocked out after an over-read of the transmit buffer."]
             #[inline(always)]
-            pub fn set_orc(&mut self, val: u8) {
+            pub const fn set_orc(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
         }
@@ -13933,12 +12813,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Orc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Orc {
-                    orc: u8,
-                }
-                let proxy = Orc { orc: self.orc() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Orc {{ orc: {=u8:?} }}", self.orc())
             }
         }
         #[doc = "Number of bytes received in last granted transaction"]
@@ -13947,6 +12822,7 @@ pub mod spis {
         pub struct RxdAmount(pub u32);
         impl RxdAmount {
             #[doc = "Number of bytes received in the last granted transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -13954,7 +12830,7 @@ pub mod spis {
             }
             #[doc = "Number of bytes received in the last granted transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -13974,14 +12850,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdAmount {
-                    amount: u16,
-                }
-                let proxy = RxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -13990,6 +12859,7 @@ pub mod spis {
         pub struct RxdList(pub u32);
         impl RxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::RxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -13997,7 +12867,7 @@ pub mod spis {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -14017,12 +12887,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdList {
-                    list: super::vals::RxdListList,
-                }
-                let proxy = RxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
@@ -14031,6 +12896,7 @@ pub mod spis {
         pub struct RxdMaxcnt(pub u32);
         impl RxdMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -14038,7 +12904,7 @@ pub mod spis {
             }
             #[doc = "Maximum number of bytes in receive buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -14058,14 +12924,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = RxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Semaphore status register"]
@@ -14074,6 +12933,7 @@ pub mod spis {
         pub struct Semstat(pub u32);
         impl Semstat {
             #[doc = "Semaphore status"]
+            #[must_use]
             #[inline(always)]
             pub const fn semstat(&self) -> super::vals::Semstat {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -14081,7 +12941,7 @@ pub mod spis {
             }
             #[doc = "Semaphore status"]
             #[inline(always)]
-            pub fn set_semstat(&mut self, val: super::vals::Semstat) {
+            pub const fn set_semstat(&mut self, val: super::vals::Semstat) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -14101,14 +12961,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Semstat {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Semstat {
-                    semstat: super::vals::Semstat,
-                }
-                let proxy = Semstat {
-                    semstat: self.semstat(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Semstat {{ semstat: {:?} }}", self.semstat())
             }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -14117,6 +12970,7 @@ pub mod spis {
         pub struct Shorts(pub u32);
         impl Shorts {
             #[doc = "Shortcut between event END and task ACQUIRE"]
+            #[must_use]
             #[inline(always)]
             pub const fn end_acquire(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -14124,7 +12978,7 @@ pub mod spis {
             }
             #[doc = "Shortcut between event END and task ACQUIRE"]
             #[inline(always)]
-            pub fn set_end_acquire(&mut self, val: bool) {
+            pub const fn set_end_acquire(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
         }
@@ -14144,14 +12998,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Shorts {
-                    end_acquire: bool,
-                }
-                let proxy = Shorts {
-                    end_acquire: self.end_acquire(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Shorts {{ end_acquire: {=bool:?} }}", self.end_acquire())
             }
         }
         #[doc = "Status from last transaction"]
@@ -14160,6 +13007,7 @@ pub mod spis {
         pub struct Status(pub u32);
         impl Status {
             #[doc = "TX buffer over-read detected, and prevented"]
+            #[must_use]
             #[inline(always)]
             pub const fn overread(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -14167,10 +13015,11 @@ pub mod spis {
             }
             #[doc = "TX buffer over-read detected, and prevented"]
             #[inline(always)]
-            pub fn set_overread(&mut self, val: bool) {
+            pub const fn set_overread(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "RX buffer overflow detected, and prevented"]
+            #[must_use]
             #[inline(always)]
             pub const fn overflow(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -14178,7 +13027,7 @@ pub mod spis {
             }
             #[doc = "RX buffer overflow detected, and prevented"]
             #[inline(always)]
-            pub fn set_overflow(&mut self, val: bool) {
+            pub const fn set_overflow(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
         }
@@ -14199,16 +13048,12 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Status {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Status {
-                    overread: bool,
-                    overflow: bool,
-                }
-                let proxy = Status {
-                    overread: self.overread(),
-                    overflow: self.overflow(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Status {{ overread: {=bool:?}, overflow: {=bool:?} }}",
+                    self.overread(),
+                    self.overflow()
+                )
             }
         }
         #[doc = "Number of bytes transmitted in last granted transaction"]
@@ -14217,6 +13062,7 @@ pub mod spis {
         pub struct TxdAmount(pub u32);
         impl TxdAmount {
             #[doc = "Number of bytes transmitted in last granted transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -14224,7 +13070,7 @@ pub mod spis {
             }
             #[doc = "Number of bytes transmitted in last granted transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -14244,14 +13090,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdAmount {
-                    amount: u16,
-                }
-                let proxy = TxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -14260,6 +13099,7 @@ pub mod spis {
         pub struct TxdList(pub u32);
         impl TxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::TxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -14267,7 +13107,7 @@ pub mod spis {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -14287,12 +13127,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdList {
-                    list: super::vals::TxdListList,
-                }
-                let proxy = TxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
@@ -14301,6 +13136,7 @@ pub mod spis {
         pub struct TxdMaxcnt(pub u32);
         impl TxdMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -14308,7 +13144,7 @@ pub mod spis {
             }
             #[doc = "Maximum number of bytes in transmit buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -14328,14 +13164,7 @@ pub mod spis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = TxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -14906,6 +13735,7 @@ pub mod spu {
         pub struct Cap(pub u32);
         impl Cap {
             #[doc = "Show ARM TrustZone status"]
+            #[must_use]
             #[inline(always)]
             pub const fn tzm(&self) -> super::vals::Tzm {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -14913,7 +13743,7 @@ pub mod spu {
             }
             #[doc = "Show ARM TrustZone status"]
             #[inline(always)]
-            pub fn set_tzm(&mut self, val: super::vals::Tzm) {
+            pub const fn set_tzm(&mut self, val: super::vals::Tzm) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -14931,12 +13761,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Cap {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Cap {
-                    tzm: super::vals::Tzm,
-                }
-                let proxy = Cap { tzm: self.tzm() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Cap {{ tzm: {:?} }}", self.tzm())
             }
         }
         #[doc = "Description cluster: Prevent further modification of the corresponding PERM register"]
@@ -14944,13 +13769,14 @@ pub mod spu {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct DppiLock(pub u32);
         impl DppiLock {
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -14970,12 +13796,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for DppiLock {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct DppiLock {
-                    lock: bool,
-                }
-                let proxy = DppiLock { lock: self.lock() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "DppiLock {{ lock: {=bool:?} }}", self.lock())
             }
         }
         #[doc = "Description cluster: Select between secure and non-secure attribute for the DPPI channels."]
@@ -14984,6 +13805,7 @@ pub mod spu {
         pub struct DppiPerm(pub u32);
         impl DppiPerm {
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -14991,10 +13813,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel0(&mut self, val: bool) {
+            pub const fn set_channel0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -15002,10 +13825,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel1(&mut self, val: bool) {
+            pub const fn set_channel1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -15013,10 +13837,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel2(&mut self, val: bool) {
+            pub const fn set_channel2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -15024,10 +13849,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel3(&mut self, val: bool) {
+            pub const fn set_channel3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -15035,10 +13861,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel4(&mut self, val: bool) {
+            pub const fn set_channel4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -15046,10 +13873,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel5(&mut self, val: bool) {
+            pub const fn set_channel5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -15057,10 +13885,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel6(&mut self, val: bool) {
+            pub const fn set_channel6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -15068,10 +13897,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel7(&mut self, val: bool) {
+            pub const fn set_channel7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel8(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -15079,10 +13909,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel8(&mut self, val: bool) {
+            pub const fn set_channel8(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel9(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
@@ -15090,10 +13921,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel9(&mut self, val: bool) {
+            pub const fn set_channel9(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel10(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
@@ -15101,10 +13933,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel10(&mut self, val: bool) {
+            pub const fn set_channel10(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel11(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
@@ -15112,10 +13945,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel11(&mut self, val: bool) {
+            pub const fn set_channel11(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel12(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
@@ -15123,10 +13957,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel12(&mut self, val: bool) {
+            pub const fn set_channel12(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel13(&self) -> bool {
                 let val = (self.0 >> 13usize) & 0x01;
@@ -15134,10 +13969,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel13(&mut self, val: bool) {
+            pub const fn set_channel13(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel14(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
@@ -15145,10 +13981,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel14(&mut self, val: bool) {
+            pub const fn set_channel14(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
             #[doc = "Select secure attribute."]
+            #[must_use]
             #[inline(always)]
             pub const fn channel15(&self) -> bool {
                 let val = (self.0 >> 15usize) & 0x01;
@@ -15156,7 +13993,7 @@ pub mod spu {
             }
             #[doc = "Select secure attribute."]
             #[inline(always)]
-            pub fn set_channel15(&mut self, val: bool) {
+            pub const fn set_channel15(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
             }
         }
@@ -15191,44 +14028,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for DppiPerm {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct DppiPerm {
-                    channel0: bool,
-                    channel1: bool,
-                    channel2: bool,
-                    channel3: bool,
-                    channel4: bool,
-                    channel5: bool,
-                    channel6: bool,
-                    channel7: bool,
-                    channel8: bool,
-                    channel9: bool,
-                    channel10: bool,
-                    channel11: bool,
-                    channel12: bool,
-                    channel13: bool,
-                    channel14: bool,
-                    channel15: bool,
-                }
-                let proxy = DppiPerm {
-                    channel0: self.channel0(),
-                    channel1: self.channel1(),
-                    channel2: self.channel2(),
-                    channel3: self.channel3(),
-                    channel4: self.channel4(),
-                    channel5: self.channel5(),
-                    channel6: self.channel6(),
-                    channel7: self.channel7(),
-                    channel8: self.channel8(),
-                    channel9: self.channel9(),
-                    channel10: self.channel10(),
-                    channel11: self.channel11(),
-                    channel12: self.channel12(),
-                    channel13: self.channel13(),
-                    channel14: self.channel14(),
-                    channel15: self.channel15(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "DppiPerm {{ channel0: {=bool:?}, channel1: {=bool:?}, channel2: {=bool:?}, channel3: {=bool:?}, channel4: {=bool:?}, channel5: {=bool:?}, channel6: {=bool:?}, channel7: {=bool:?}, channel8: {=bool:?}, channel9: {=bool:?}, channel10: {=bool:?}, channel11: {=bool:?}, channel12: {=bool:?}, channel13: {=bool:?}, channel14: {=bool:?}, channel15: {=bool:?} }}" , self . channel0 () , self . channel1 () , self . channel2 () , self . channel3 () , self . channel4 () , self . channel5 () , self . channel6 () , self . channel7 () , self . channel8 () , self . channel9 () , self . channel10 () , self . channel11 () , self . channel12 () , self . channel13 () , self . channel14 () , self . channel15 ())
             }
         }
         #[doc = "Description cluster: Access for bus access generated from the external domain n List capabilities of the external domain n"]
@@ -15237,6 +14037,7 @@ pub mod spu {
         pub struct ExtdomainPerm(pub u32);
         impl ExtdomainPerm {
             #[doc = "Define configuration capabilities for TrustZone Cortex-M secure attribute"]
+            #[must_use]
             #[inline(always)]
             pub const fn securemapping(&self) -> super::vals::ExtdomainPermSecuremapping {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -15244,10 +14045,14 @@ pub mod spu {
             }
             #[doc = "Define configuration capabilities for TrustZone Cortex-M secure attribute"]
             #[inline(always)]
-            pub fn set_securemapping(&mut self, val: super::vals::ExtdomainPermSecuremapping) {
+            pub const fn set_securemapping(
+                &mut self,
+                val: super::vals::ExtdomainPermSecuremapping,
+            ) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
             #[doc = "Peripheral security mapping"]
+            #[must_use]
             #[inline(always)]
             pub const fn secattr(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -15255,16 +14060,17 @@ pub mod spu {
             }
             #[doc = "Peripheral security mapping"]
             #[inline(always)]
-            pub fn set_secattr(&mut self, val: bool) {
+            pub const fn set_secattr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -15286,18 +14092,13 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for ExtdomainPerm {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct ExtdomainPerm {
-                    securemapping: super::vals::ExtdomainPermSecuremapping,
-                    secattr: bool,
-                    lock: bool,
-                }
-                let proxy = ExtdomainPerm {
-                    securemapping: self.securemapping(),
-                    secattr: self.secattr(),
-                    lock: self.lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "ExtdomainPerm {{ securemapping: {:?}, secattr: {=bool:?}, lock: {=bool:?} }}",
+                    self.securemapping(),
+                    self.secattr(),
+                    self.lock()
+                )
             }
         }
         #[doc = "Description cluster: Define which flash region can contain the non-secure callable (NSC) region n"]
@@ -15306,6 +14107,7 @@ pub mod spu {
         pub struct FlashnscRegion(pub u32);
         impl FlashnscRegion {
             #[doc = "Region number"]
+            #[must_use]
             #[inline(always)]
             pub const fn region(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x1f;
@@ -15313,16 +14115,17 @@ pub mod spu {
             }
             #[doc = "Region number"]
             #[inline(always)]
-            pub fn set_region(&mut self, val: u8) {
+            pub const fn set_region(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -15343,16 +14146,12 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for FlashnscRegion {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct FlashnscRegion {
-                    region: u8,
-                    lock: bool,
-                }
-                let proxy = FlashnscRegion {
-                    region: self.region(),
-                    lock: self.lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "FlashnscRegion {{ region: {=u8:?}, lock: {=bool:?} }}",
+                    self.region(),
+                    self.lock()
+                )
             }
         }
         #[doc = "Description cluster: Define the size of the non-secure callable (NSC) region n"]
@@ -15361,6 +14160,7 @@ pub mod spu {
         pub struct FlashnscSize(pub u32);
         impl FlashnscSize {
             #[doc = "Size of the non-secure callable (NSC) region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn size(&self) -> super::vals::FlashnscSizeSize {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -15368,16 +14168,17 @@ pub mod spu {
             }
             #[doc = "Size of the non-secure callable (NSC) region n"]
             #[inline(always)]
-            pub fn set_size(&mut self, val: super::vals::FlashnscSizeSize) {
+            pub const fn set_size(&mut self, val: super::vals::FlashnscSizeSize) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -15398,16 +14199,12 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for FlashnscSize {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct FlashnscSize {
-                    size: super::vals::FlashnscSizeSize,
-                    lock: bool,
-                }
-                let proxy = FlashnscSize {
-                    size: self.size(),
-                    lock: self.lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "FlashnscSize {{ size: {:?}, lock: {=bool:?} }}",
+                    self.size(),
+                    self.lock()
+                )
             }
         }
         #[doc = "Description cluster: Access permissions for flash region n"]
@@ -15416,6 +14213,7 @@ pub mod spu {
         pub struct FlashregionPerm(pub u32);
         impl FlashregionPerm {
             #[doc = "Configure instruction fetch permissions from flash region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn execute(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -15423,10 +14221,11 @@ pub mod spu {
             }
             #[doc = "Configure instruction fetch permissions from flash region n"]
             #[inline(always)]
-            pub fn set_execute(&mut self, val: bool) {
+            pub const fn set_execute(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Configure write permission for flash region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn write(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -15434,10 +14233,11 @@ pub mod spu {
             }
             #[doc = "Configure write permission for flash region n"]
             #[inline(always)]
-            pub fn set_write(&mut self, val: bool) {
+            pub const fn set_write(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Configure read permissions for flash region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn read(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -15445,10 +14245,11 @@ pub mod spu {
             }
             #[doc = "Configure read permissions for flash region n"]
             #[inline(always)]
-            pub fn set_read(&mut self, val: bool) {
+            pub const fn set_read(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Security attribute for flash region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn secattr(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -15456,16 +14257,17 @@ pub mod spu {
             }
             #[doc = "Security attribute for flash region n"]
             #[inline(always)]
-            pub fn set_secattr(&mut self, val: bool) {
+            pub const fn set_secattr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -15489,22 +14291,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for FlashregionPerm {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct FlashregionPerm {
-                    execute: bool,
-                    write: bool,
-                    read: bool,
-                    secattr: bool,
-                    lock: bool,
-                }
-                let proxy = FlashregionPerm {
-                    execute: self.execute(),
-                    write: self.write(),
-                    read: self.read(),
-                    secattr: self.secattr(),
-                    lock: self.lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "FlashregionPerm {{ execute: {=bool:?}, write: {=bool:?}, read: {=bool:?}, secattr: {=bool:?}, lock: {=bool:?} }}" , self . execute () , self . write () , self . read () , self . secattr () , self . lock ())
             }
         }
         #[doc = "Description cluster: Prevent further modification of the corresponding PERM register"]
@@ -15512,13 +14299,14 @@ pub mod spu {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct GpioportLock(pub u32);
         impl GpioportLock {
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -15538,12 +14326,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for GpioportLock {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct GpioportLock {
-                    lock: bool,
-                }
-                let proxy = GpioportLock { lock: self.lock() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "GpioportLock {{ lock: {=bool:?} }}", self.lock())
             }
         }
         #[doc = "Description cluster: Select between secure and non-secure attribute for pins 0 to 31 of port n."]
@@ -15552,6 +14335,7 @@ pub mod spu {
         pub struct GpioportPerm(pub u32);
         impl GpioportPerm {
             #[doc = "Select secure attribute attribute for PIN 0."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -15559,10 +14343,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 0."]
             #[inline(always)]
-            pub fn set_pin0(&mut self, val: bool) {
+            pub const fn set_pin0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Select secure attribute attribute for PIN 1."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -15570,10 +14355,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 1."]
             #[inline(always)]
-            pub fn set_pin1(&mut self, val: bool) {
+            pub const fn set_pin1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Select secure attribute attribute for PIN 2."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -15581,10 +14367,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 2."]
             #[inline(always)]
-            pub fn set_pin2(&mut self, val: bool) {
+            pub const fn set_pin2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Select secure attribute attribute for PIN 3."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -15592,10 +14379,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 3."]
             #[inline(always)]
-            pub fn set_pin3(&mut self, val: bool) {
+            pub const fn set_pin3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
             #[doc = "Select secure attribute attribute for PIN 4."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -15603,10 +14391,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 4."]
             #[inline(always)]
-            pub fn set_pin4(&mut self, val: bool) {
+            pub const fn set_pin4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Select secure attribute attribute for PIN 5."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -15614,10 +14403,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 5."]
             #[inline(always)]
-            pub fn set_pin5(&mut self, val: bool) {
+            pub const fn set_pin5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Select secure attribute attribute for PIN 6."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -15625,10 +14415,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 6."]
             #[inline(always)]
-            pub fn set_pin6(&mut self, val: bool) {
+            pub const fn set_pin6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
             #[doc = "Select secure attribute attribute for PIN 7."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -15636,10 +14427,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 7."]
             #[inline(always)]
-            pub fn set_pin7(&mut self, val: bool) {
+            pub const fn set_pin7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
             #[doc = "Select secure attribute attribute for PIN 8."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin8(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -15647,10 +14439,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 8."]
             #[inline(always)]
-            pub fn set_pin8(&mut self, val: bool) {
+            pub const fn set_pin8(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
             #[doc = "Select secure attribute attribute for PIN 9."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin9(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
@@ -15658,10 +14451,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 9."]
             #[inline(always)]
-            pub fn set_pin9(&mut self, val: bool) {
+            pub const fn set_pin9(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
             #[doc = "Select secure attribute attribute for PIN 10."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin10(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
@@ -15669,10 +14463,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 10."]
             #[inline(always)]
-            pub fn set_pin10(&mut self, val: bool) {
+            pub const fn set_pin10(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
             #[doc = "Select secure attribute attribute for PIN 11."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin11(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
@@ -15680,10 +14475,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 11."]
             #[inline(always)]
-            pub fn set_pin11(&mut self, val: bool) {
+            pub const fn set_pin11(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
             #[doc = "Select secure attribute attribute for PIN 12."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin12(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
@@ -15691,10 +14487,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 12."]
             #[inline(always)]
-            pub fn set_pin12(&mut self, val: bool) {
+            pub const fn set_pin12(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
             }
             #[doc = "Select secure attribute attribute for PIN 13."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin13(&self) -> bool {
                 let val = (self.0 >> 13usize) & 0x01;
@@ -15702,10 +14499,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 13."]
             #[inline(always)]
-            pub fn set_pin13(&mut self, val: bool) {
+            pub const fn set_pin13(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
             }
             #[doc = "Select secure attribute attribute for PIN 14."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin14(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
@@ -15713,10 +14511,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 14."]
             #[inline(always)]
-            pub fn set_pin14(&mut self, val: bool) {
+            pub const fn set_pin14(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
             #[doc = "Select secure attribute attribute for PIN 15."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin15(&self) -> bool {
                 let val = (self.0 >> 15usize) & 0x01;
@@ -15724,10 +14523,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 15."]
             #[inline(always)]
-            pub fn set_pin15(&mut self, val: bool) {
+            pub const fn set_pin15(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
             }
             #[doc = "Select secure attribute attribute for PIN 16."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin16(&self) -> bool {
                 let val = (self.0 >> 16usize) & 0x01;
@@ -15735,10 +14535,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 16."]
             #[inline(always)]
-            pub fn set_pin16(&mut self, val: bool) {
+            pub const fn set_pin16(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
             }
             #[doc = "Select secure attribute attribute for PIN 17."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin17(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
@@ -15746,10 +14547,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 17."]
             #[inline(always)]
-            pub fn set_pin17(&mut self, val: bool) {
+            pub const fn set_pin17(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
             #[doc = "Select secure attribute attribute for PIN 18."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin18(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
@@ -15757,10 +14559,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 18."]
             #[inline(always)]
-            pub fn set_pin18(&mut self, val: bool) {
+            pub const fn set_pin18(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
             #[doc = "Select secure attribute attribute for PIN 19."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin19(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
@@ -15768,10 +14571,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 19."]
             #[inline(always)]
-            pub fn set_pin19(&mut self, val: bool) {
+            pub const fn set_pin19(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
             #[doc = "Select secure attribute attribute for PIN 20."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin20(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
@@ -15779,10 +14583,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 20."]
             #[inline(always)]
-            pub fn set_pin20(&mut self, val: bool) {
+            pub const fn set_pin20(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
             #[doc = "Select secure attribute attribute for PIN 21."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin21(&self) -> bool {
                 let val = (self.0 >> 21usize) & 0x01;
@@ -15790,10 +14595,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 21."]
             #[inline(always)]
-            pub fn set_pin21(&mut self, val: bool) {
+            pub const fn set_pin21(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
             }
             #[doc = "Select secure attribute attribute for PIN 22."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin22(&self) -> bool {
                 let val = (self.0 >> 22usize) & 0x01;
@@ -15801,10 +14607,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 22."]
             #[inline(always)]
-            pub fn set_pin22(&mut self, val: bool) {
+            pub const fn set_pin22(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
             }
             #[doc = "Select secure attribute attribute for PIN 23."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin23(&self) -> bool {
                 let val = (self.0 >> 23usize) & 0x01;
@@ -15812,10 +14619,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 23."]
             #[inline(always)]
-            pub fn set_pin23(&mut self, val: bool) {
+            pub const fn set_pin23(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
             }
             #[doc = "Select secure attribute attribute for PIN 24."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin24(&self) -> bool {
                 let val = (self.0 >> 24usize) & 0x01;
@@ -15823,10 +14631,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 24."]
             #[inline(always)]
-            pub fn set_pin24(&mut self, val: bool) {
+            pub const fn set_pin24(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
             }
             #[doc = "Select secure attribute attribute for PIN 25."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin25(&self) -> bool {
                 let val = (self.0 >> 25usize) & 0x01;
@@ -15834,10 +14643,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 25."]
             #[inline(always)]
-            pub fn set_pin25(&mut self, val: bool) {
+            pub const fn set_pin25(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
             }
             #[doc = "Select secure attribute attribute for PIN 26."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin26(&self) -> bool {
                 let val = (self.0 >> 26usize) & 0x01;
@@ -15845,10 +14655,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 26."]
             #[inline(always)]
-            pub fn set_pin26(&mut self, val: bool) {
+            pub const fn set_pin26(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
             }
             #[doc = "Select secure attribute attribute for PIN 27."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin27(&self) -> bool {
                 let val = (self.0 >> 27usize) & 0x01;
@@ -15856,10 +14667,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 27."]
             #[inline(always)]
-            pub fn set_pin27(&mut self, val: bool) {
+            pub const fn set_pin27(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
             }
             #[doc = "Select secure attribute attribute for PIN 28."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin28(&self) -> bool {
                 let val = (self.0 >> 28usize) & 0x01;
@@ -15867,10 +14679,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 28."]
             #[inline(always)]
-            pub fn set_pin28(&mut self, val: bool) {
+            pub const fn set_pin28(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
             }
             #[doc = "Select secure attribute attribute for PIN 29."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin29(&self) -> bool {
                 let val = (self.0 >> 29usize) & 0x01;
@@ -15878,10 +14691,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 29."]
             #[inline(always)]
-            pub fn set_pin29(&mut self, val: bool) {
+            pub const fn set_pin29(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
             }
             #[doc = "Select secure attribute attribute for PIN 30."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin30(&self) -> bool {
                 let val = (self.0 >> 30usize) & 0x01;
@@ -15889,10 +14703,11 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 30."]
             #[inline(always)]
-            pub fn set_pin30(&mut self, val: bool) {
+            pub const fn set_pin30(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
             }
             #[doc = "Select secure attribute attribute for PIN 31."]
+            #[must_use]
             #[inline(always)]
             pub const fn pin31(&self) -> bool {
                 let val = (self.0 >> 31usize) & 0x01;
@@ -15900,7 +14715,7 @@ pub mod spu {
             }
             #[doc = "Select secure attribute attribute for PIN 31."]
             #[inline(always)]
-            pub fn set_pin31(&mut self, val: bool) {
+            pub const fn set_pin31(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
             }
         }
@@ -15951,76 +14766,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for GpioportPerm {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct GpioportPerm {
-                    pin0: bool,
-                    pin1: bool,
-                    pin2: bool,
-                    pin3: bool,
-                    pin4: bool,
-                    pin5: bool,
-                    pin6: bool,
-                    pin7: bool,
-                    pin8: bool,
-                    pin9: bool,
-                    pin10: bool,
-                    pin11: bool,
-                    pin12: bool,
-                    pin13: bool,
-                    pin14: bool,
-                    pin15: bool,
-                    pin16: bool,
-                    pin17: bool,
-                    pin18: bool,
-                    pin19: bool,
-                    pin20: bool,
-                    pin21: bool,
-                    pin22: bool,
-                    pin23: bool,
-                    pin24: bool,
-                    pin25: bool,
-                    pin26: bool,
-                    pin27: bool,
-                    pin28: bool,
-                    pin29: bool,
-                    pin30: bool,
-                    pin31: bool,
-                }
-                let proxy = GpioportPerm {
-                    pin0: self.pin0(),
-                    pin1: self.pin1(),
-                    pin2: self.pin2(),
-                    pin3: self.pin3(),
-                    pin4: self.pin4(),
-                    pin5: self.pin5(),
-                    pin6: self.pin6(),
-                    pin7: self.pin7(),
-                    pin8: self.pin8(),
-                    pin9: self.pin9(),
-                    pin10: self.pin10(),
-                    pin11: self.pin11(),
-                    pin12: self.pin12(),
-                    pin13: self.pin13(),
-                    pin14: self.pin14(),
-                    pin15: self.pin15(),
-                    pin16: self.pin16(),
-                    pin17: self.pin17(),
-                    pin18: self.pin18(),
-                    pin19: self.pin19(),
-                    pin20: self.pin20(),
-                    pin21: self.pin21(),
-                    pin22: self.pin22(),
-                    pin23: self.pin23(),
-                    pin24: self.pin24(),
-                    pin25: self.pin25(),
-                    pin26: self.pin26(),
-                    pin27: self.pin27(),
-                    pin28: self.pin28(),
-                    pin29: self.pin29(),
-                    pin30: self.pin30(),
-                    pin31: self.pin31(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "GpioportPerm {{ pin0: {=bool:?}, pin1: {=bool:?}, pin2: {=bool:?}, pin3: {=bool:?}, pin4: {=bool:?}, pin5: {=bool:?}, pin6: {=bool:?}, pin7: {=bool:?}, pin8: {=bool:?}, pin9: {=bool:?}, pin10: {=bool:?}, pin11: {=bool:?}, pin12: {=bool:?}, pin13: {=bool:?}, pin14: {=bool:?}, pin15: {=bool:?}, pin16: {=bool:?}, pin17: {=bool:?}, pin18: {=bool:?}, pin19: {=bool:?}, pin20: {=bool:?}, pin21: {=bool:?}, pin22: {=bool:?}, pin23: {=bool:?}, pin24: {=bool:?}, pin25: {=bool:?}, pin26: {=bool:?}, pin27: {=bool:?}, pin28: {=bool:?}, pin29: {=bool:?}, pin30: {=bool:?}, pin31: {=bool:?} }}" , self . pin0 () , self . pin1 () , self . pin2 () , self . pin3 () , self . pin4 () , self . pin5 () , self . pin6 () , self . pin7 () , self . pin8 () , self . pin9 () , self . pin10 () , self . pin11 () , self . pin12 () , self . pin13 () , self . pin14 () , self . pin15 () , self . pin16 () , self . pin17 () , self . pin18 () , self . pin19 () , self . pin20 () , self . pin21 () , self . pin22 () , self . pin23 () , self . pin24 () , self . pin25 () , self . pin26 () , self . pin27 () , self . pin28 () , self . pin29 () , self . pin30 () , self . pin31 ())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -16029,6 +14775,7 @@ pub mod spu {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event RAMACCERR"]
+            #[must_use]
             #[inline(always)]
             pub const fn ramaccerr(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -16036,10 +14783,11 @@ pub mod spu {
             }
             #[doc = "Enable or disable interrupt for event RAMACCERR"]
             #[inline(always)]
-            pub fn set_ramaccerr(&mut self, val: bool) {
+            pub const fn set_ramaccerr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable interrupt for event FLASHACCERR"]
+            #[must_use]
             #[inline(always)]
             pub const fn flashaccerr(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -16047,10 +14795,11 @@ pub mod spu {
             }
             #[doc = "Enable or disable interrupt for event FLASHACCERR"]
             #[inline(always)]
-            pub fn set_flashaccerr(&mut self, val: bool) {
+            pub const fn set_flashaccerr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event PERIPHACCERR"]
+            #[must_use]
             #[inline(always)]
             pub const fn periphaccerr(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -16058,7 +14807,7 @@ pub mod spu {
             }
             #[doc = "Enable or disable interrupt for event PERIPHACCERR"]
             #[inline(always)]
-            pub fn set_periphaccerr(&mut self, val: bool) {
+            pub const fn set_periphaccerr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
         }
@@ -16080,18 +14829,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    ramaccerr: bool,
-                    flashaccerr: bool,
-                    periphaccerr: bool,
-                }
-                let proxy = Int {
-                    ramaccerr: self.ramaccerr(),
-                    flashaccerr: self.flashaccerr(),
-                    periphaccerr: self.periphaccerr(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ ramaccerr: {=bool:?}, flashaccerr: {=bool:?}, periphaccerr: {=bool:?} }}" , self . ramaccerr () , self . flashaccerr () , self . periphaccerr ())
             }
         }
         #[doc = "Description cluster: List capabilities and access permissions for the peripheral with ID n"]
@@ -16100,6 +14838,7 @@ pub mod spu {
         pub struct PeriphidPerm(pub u32);
         impl PeriphidPerm {
             #[doc = "Define configuration capabilities for TrustZone Cortex-M secure attribute"]
+            #[must_use]
             #[inline(always)]
             pub const fn securemapping(&self) -> super::vals::PeriphidPermSecuremapping {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -16107,10 +14846,11 @@ pub mod spu {
             }
             #[doc = "Define configuration capabilities for TrustZone Cortex-M secure attribute"]
             #[inline(always)]
-            pub fn set_securemapping(&mut self, val: super::vals::PeriphidPermSecuremapping) {
+            pub const fn set_securemapping(&mut self, val: super::vals::PeriphidPermSecuremapping) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
             #[doc = "Indicate if the peripheral has DMA capabilities and if DMA transfer can be assigned to a different security attribute than the peripheral itself"]
+            #[must_use]
             #[inline(always)]
             pub const fn dma(&self) -> super::vals::Dma {
                 let val = (self.0 >> 2usize) & 0x03;
@@ -16118,10 +14858,11 @@ pub mod spu {
             }
             #[doc = "Indicate if the peripheral has DMA capabilities and if DMA transfer can be assigned to a different security attribute than the peripheral itself"]
             #[inline(always)]
-            pub fn set_dma(&mut self, val: super::vals::Dma) {
+            pub const fn set_dma(&mut self, val: super::vals::Dma) {
                 self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
             }
             #[doc = "Peripheral security mapping"]
+            #[must_use]
             #[inline(always)]
             pub const fn secattr(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -16129,10 +14870,11 @@ pub mod spu {
             }
             #[doc = "Peripheral security mapping"]
             #[inline(always)]
-            pub fn set_secattr(&mut self, val: bool) {
+            pub const fn set_secattr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Security attribution for the DMA transfer"]
+            #[must_use]
             #[inline(always)]
             pub const fn dmasec(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -16140,19 +14882,21 @@ pub mod spu {
             }
             #[doc = "Security attribution for the DMA transfer"]
             #[inline(always)]
-            pub fn set_dmasec(&mut self, val: bool) {
+            pub const fn set_dmasec(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
             #[doc = "Indicate if a peripheral is present with ID n"]
+            #[must_use]
             #[inline(always)]
             pub const fn present(&self) -> super::vals::Present {
                 let val = (self.0 >> 31usize) & 0x01;
@@ -16160,7 +14904,7 @@ pub mod spu {
             }
             #[doc = "Indicate if a peripheral is present with ID n"]
             #[inline(always)]
-            pub fn set_present(&mut self, val: super::vals::Present) {
+            pub const fn set_present(&mut self, val: super::vals::Present) {
                 self.0 =
                     (self.0 & !(0x01 << 31usize)) | (((val.to_bits() as u32) & 0x01) << 31usize);
             }
@@ -16186,24 +14930,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for PeriphidPerm {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct PeriphidPerm {
-                    securemapping: super::vals::PeriphidPermSecuremapping,
-                    dma: super::vals::Dma,
-                    secattr: bool,
-                    dmasec: bool,
-                    lock: bool,
-                    present: super::vals::Present,
-                }
-                let proxy = PeriphidPerm {
-                    securemapping: self.securemapping(),
-                    dma: self.dma(),
-                    secattr: self.secattr(),
-                    dmasec: self.dmasec(),
-                    lock: self.lock(),
-                    present: self.present(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "PeriphidPerm {{ securemapping: {:?}, dma: {:?}, secattr: {=bool:?}, dmasec: {=bool:?}, lock: {=bool:?}, present: {:?} }}" , self . securemapping () , self . dma () , self . secattr () , self . dmasec () , self . lock () , self . present ())
             }
         }
         #[doc = "Description cluster: Define which RAM region can contain the non-secure callable (NSC) region n"]
@@ -16212,6 +14939,7 @@ pub mod spu {
         pub struct RamnscRegion(pub u32);
         impl RamnscRegion {
             #[doc = "Region number"]
+            #[must_use]
             #[inline(always)]
             pub const fn region(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x1f;
@@ -16219,16 +14947,17 @@ pub mod spu {
             }
             #[doc = "Region number"]
             #[inline(always)]
-            pub fn set_region(&mut self, val: u8) {
+            pub const fn set_region(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -16249,16 +14978,12 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RamnscRegion {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RamnscRegion {
-                    region: u8,
-                    lock: bool,
-                }
-                let proxy = RamnscRegion {
-                    region: self.region(),
-                    lock: self.lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "RamnscRegion {{ region: {=u8:?}, lock: {=bool:?} }}",
+                    self.region(),
+                    self.lock()
+                )
             }
         }
         #[doc = "Description cluster: Define the size of the non-secure callable (NSC) region n"]
@@ -16267,6 +14992,7 @@ pub mod spu {
         pub struct RamnscSize(pub u32);
         impl RamnscSize {
             #[doc = "Size of the non-secure callable (NSC) region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn size(&self) -> super::vals::RamnscSizeSize {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -16274,16 +15000,17 @@ pub mod spu {
             }
             #[doc = "Size of the non-secure callable (NSC) region n"]
             #[inline(always)]
-            pub fn set_size(&mut self, val: super::vals::RamnscSizeSize) {
+            pub const fn set_size(&mut self, val: super::vals::RamnscSizeSize) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -16304,16 +15031,12 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RamnscSize {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RamnscSize {
-                    size: super::vals::RamnscSizeSize,
-                    lock: bool,
-                }
-                let proxy = RamnscSize {
-                    size: self.size(),
-                    lock: self.lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "RamnscSize {{ size: {:?}, lock: {=bool:?} }}",
+                    self.size(),
+                    self.lock()
+                )
             }
         }
         #[doc = "Description cluster: Access permissions for RAM region n"]
@@ -16322,6 +15045,7 @@ pub mod spu {
         pub struct RamregionPerm(pub u32);
         impl RamregionPerm {
             #[doc = "Configure instruction fetch permissions from RAM region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn execute(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -16329,10 +15053,11 @@ pub mod spu {
             }
             #[doc = "Configure instruction fetch permissions from RAM region n"]
             #[inline(always)]
-            pub fn set_execute(&mut self, val: bool) {
+            pub const fn set_execute(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Configure write permission for RAM region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn write(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -16340,10 +15065,11 @@ pub mod spu {
             }
             #[doc = "Configure write permission for RAM region n"]
             #[inline(always)]
-            pub fn set_write(&mut self, val: bool) {
+            pub const fn set_write(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Configure read permissions for RAM region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn read(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -16351,10 +15077,11 @@ pub mod spu {
             }
             #[doc = "Configure read permissions for RAM region n"]
             #[inline(always)]
-            pub fn set_read(&mut self, val: bool) {
+            pub const fn set_read(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Security attribute for RAM region n"]
+            #[must_use]
             #[inline(always)]
             pub const fn secattr(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -16362,16 +15089,17 @@ pub mod spu {
             }
             #[doc = "Security attribute for RAM region n"]
             #[inline(always)]
-            pub fn set_secattr(&mut self, val: bool) {
+            pub const fn set_secattr(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
+            #[must_use]
             #[inline(always)]
             pub const fn lock(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_lock(&mut self, val: bool) {
+            pub const fn set_lock(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
         }
@@ -16395,22 +15123,7 @@ pub mod spu {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RamregionPerm {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RamregionPerm {
-                    execute: bool,
-                    write: bool,
-                    read: bool,
-                    secattr: bool,
-                    lock: bool,
-                }
-                let proxy = RamregionPerm {
-                    execute: self.execute(),
-                    write: self.write(),
-                    read: self.read(),
-                    secattr: self.secattr(),
-                    lock: self.lock(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "RamregionPerm {{ execute: {=bool:?}, write: {=bool:?}, read: {=bool:?}, secattr: {=bool:?}, lock: {=bool:?} }}" , self . execute () , self . write () , self . read () , self . secattr () , self . lock ())
             }
         }
     }
@@ -16789,13 +15502,14 @@ pub mod tad {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Enable(pub u32);
         impl Enable {
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
             #[inline(always)]
-            pub fn set_enable(&mut self, val: bool) {
+            pub const fn set_enable(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -16815,14 +15529,7 @@ pub mod tad {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: bool,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {=bool:?} }}", self.enable())
             }
         }
         #[doc = "Clocking options for the Trace Port debug interface Reset behavior is the same as debug components"]
@@ -16831,6 +15538,7 @@ pub mod tad {
         pub struct Traceportspeed(pub u32);
         impl Traceportspeed {
             #[doc = "Speed of Trace Port clock. Note that the TRACECLK pin output will be divided again by two from the Trace Port clock."]
+            #[must_use]
             #[inline(always)]
             pub const fn traceportspeed(&self) -> super::vals::Traceportspeed {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -16838,7 +15546,7 @@ pub mod tad {
             }
             #[doc = "Speed of Trace Port clock. Note that the TRACECLK pin output will be divided again by two from the Trace Port clock."]
             #[inline(always)]
-            pub fn set_traceportspeed(&mut self, val: super::vals::Traceportspeed) {
+            pub const fn set_traceportspeed(&mut self, val: super::vals::Traceportspeed) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -16858,48 +15566,61 @@ pub mod tad {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Traceportspeed {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Traceportspeed {
-                    traceportspeed: super::vals::Traceportspeed,
-                }
-                let proxy = Traceportspeed {
-                    traceportspeed: self.traceportspeed(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Traceportspeed {{ traceportspeed: {:?} }}",
+                    self.traceportspeed()
+                )
             }
         }
     }
     pub mod vals {
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct PselTraceclkPin(pub u8);
-        impl PselTraceclkPin {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+        #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+        pub enum PselTraceclkPin {
+            _RESERVED_0 = 0x0,
+            _RESERVED_1 = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+            _RESERVED_10 = 0x10,
+            _RESERVED_11 = 0x11,
+            _RESERVED_12 = 0x12,
+            _RESERVED_13 = 0x13,
+            _RESERVED_14 = 0x14,
             #[doc = "TRACECLK pin"]
-            pub const TRACECLK: Self = Self(0x15);
+            TRACECLK = 0x15,
+            _RESERVED_16 = 0x16,
+            _RESERVED_17 = 0x17,
+            _RESERVED_18 = 0x18,
+            _RESERVED_19 = 0x19,
+            _RESERVED_1a = 0x1a,
+            _RESERVED_1b = 0x1b,
+            _RESERVED_1c = 0x1c,
+            _RESERVED_1d = 0x1d,
+            _RESERVED_1e = 0x1e,
+            _RESERVED_1f = 0x1f,
         }
         impl PselTraceclkPin {
+            #[inline(always)]
             pub const fn from_bits(val: u8) -> PselTraceclkPin {
-                Self(val & 0x1f)
+                unsafe { core::mem::transmute(val & 0x1f) }
             }
+            #[inline(always)]
             pub const fn to_bits(self) -> u8 {
-                self.0
-            }
-        }
-        impl core::fmt::Debug for PselTraceclkPin {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                match self.0 {
-                    0x15 => f.write_str("TRACECLK"),
-                    other => core::write!(f, "0x{:02X}", other),
-                }
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for PselTraceclkPin {
-            fn format(&self, f: defmt::Formatter) {
-                match self.0 {
-                    0x15 => defmt::write!(f, "TRACECLK"),
-                    other => defmt::write!(f, "0x{:02X}", other),
-                }
+                unsafe { core::mem::transmute(self) }
             }
         }
         impl From<u8> for PselTraceclkPin {
@@ -16914,36 +15635,52 @@ pub mod tad {
                 PselTraceclkPin::to_bits(val)
             }
         }
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct PselTracedata0Pin(pub u8);
-        impl PselTracedata0Pin {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+        #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+        pub enum PselTracedata0Pin {
+            _RESERVED_0 = 0x0,
+            _RESERVED_1 = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+            _RESERVED_10 = 0x10,
+            _RESERVED_11 = 0x11,
+            _RESERVED_12 = 0x12,
+            _RESERVED_13 = 0x13,
+            _RESERVED_14 = 0x14,
+            _RESERVED_15 = 0x15,
             #[doc = "TRACEDATA0 pin"]
-            pub const TRACEDATA0: Self = Self(0x16);
+            TRACEDATA0 = 0x16,
+            _RESERVED_17 = 0x17,
+            _RESERVED_18 = 0x18,
+            _RESERVED_19 = 0x19,
+            _RESERVED_1a = 0x1a,
+            _RESERVED_1b = 0x1b,
+            _RESERVED_1c = 0x1c,
+            _RESERVED_1d = 0x1d,
+            _RESERVED_1e = 0x1e,
+            _RESERVED_1f = 0x1f,
         }
         impl PselTracedata0Pin {
+            #[inline(always)]
             pub const fn from_bits(val: u8) -> PselTracedata0Pin {
-                Self(val & 0x1f)
+                unsafe { core::mem::transmute(val & 0x1f) }
             }
+            #[inline(always)]
             pub const fn to_bits(self) -> u8 {
-                self.0
-            }
-        }
-        impl core::fmt::Debug for PselTracedata0Pin {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                match self.0 {
-                    0x16 => f.write_str("TRACEDATA0"),
-                    other => core::write!(f, "0x{:02X}", other),
-                }
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for PselTracedata0Pin {
-            fn format(&self, f: defmt::Formatter) {
-                match self.0 {
-                    0x16 => defmt::write!(f, "TRACEDATA0"),
-                    other => defmt::write!(f, "0x{:02X}", other),
-                }
+                unsafe { core::mem::transmute(self) }
             }
         }
         impl From<u8> for PselTracedata0Pin {
@@ -16958,36 +15695,52 @@ pub mod tad {
                 PselTracedata0Pin::to_bits(val)
             }
         }
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct PselTracedata1Pin(pub u8);
-        impl PselTracedata1Pin {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+        #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+        pub enum PselTracedata1Pin {
+            _RESERVED_0 = 0x0,
+            _RESERVED_1 = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+            _RESERVED_10 = 0x10,
+            _RESERVED_11 = 0x11,
+            _RESERVED_12 = 0x12,
+            _RESERVED_13 = 0x13,
+            _RESERVED_14 = 0x14,
+            _RESERVED_15 = 0x15,
+            _RESERVED_16 = 0x16,
             #[doc = "TRACEDATA1 pin"]
-            pub const TRACEDATA1: Self = Self(0x17);
+            TRACEDATA1 = 0x17,
+            _RESERVED_18 = 0x18,
+            _RESERVED_19 = 0x19,
+            _RESERVED_1a = 0x1a,
+            _RESERVED_1b = 0x1b,
+            _RESERVED_1c = 0x1c,
+            _RESERVED_1d = 0x1d,
+            _RESERVED_1e = 0x1e,
+            _RESERVED_1f = 0x1f,
         }
         impl PselTracedata1Pin {
+            #[inline(always)]
             pub const fn from_bits(val: u8) -> PselTracedata1Pin {
-                Self(val & 0x1f)
+                unsafe { core::mem::transmute(val & 0x1f) }
             }
+            #[inline(always)]
             pub const fn to_bits(self) -> u8 {
-                self.0
-            }
-        }
-        impl core::fmt::Debug for PselTracedata1Pin {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                match self.0 {
-                    0x17 => f.write_str("TRACEDATA1"),
-                    other => core::write!(f, "0x{:02X}", other),
-                }
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for PselTracedata1Pin {
-            fn format(&self, f: defmt::Formatter) {
-                match self.0 {
-                    0x17 => defmt::write!(f, "TRACEDATA1"),
-                    other => defmt::write!(f, "0x{:02X}", other),
-                }
+                unsafe { core::mem::transmute(self) }
             }
         }
         impl From<u8> for PselTracedata1Pin {
@@ -17002,36 +15755,52 @@ pub mod tad {
                 PselTracedata1Pin::to_bits(val)
             }
         }
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct PselTracedata2Pin(pub u8);
-        impl PselTracedata2Pin {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+        #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+        pub enum PselTracedata2Pin {
+            _RESERVED_0 = 0x0,
+            _RESERVED_1 = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+            _RESERVED_10 = 0x10,
+            _RESERVED_11 = 0x11,
+            _RESERVED_12 = 0x12,
+            _RESERVED_13 = 0x13,
+            _RESERVED_14 = 0x14,
+            _RESERVED_15 = 0x15,
+            _RESERVED_16 = 0x16,
+            _RESERVED_17 = 0x17,
             #[doc = "TRACEDATA2 pin"]
-            pub const TRACEDATA2: Self = Self(0x18);
+            TRACEDATA2 = 0x18,
+            _RESERVED_19 = 0x19,
+            _RESERVED_1a = 0x1a,
+            _RESERVED_1b = 0x1b,
+            _RESERVED_1c = 0x1c,
+            _RESERVED_1d = 0x1d,
+            _RESERVED_1e = 0x1e,
+            _RESERVED_1f = 0x1f,
         }
         impl PselTracedata2Pin {
+            #[inline(always)]
             pub const fn from_bits(val: u8) -> PselTracedata2Pin {
-                Self(val & 0x1f)
+                unsafe { core::mem::transmute(val & 0x1f) }
             }
+            #[inline(always)]
             pub const fn to_bits(self) -> u8 {
-                self.0
-            }
-        }
-        impl core::fmt::Debug for PselTracedata2Pin {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                match self.0 {
-                    0x18 => f.write_str("TRACEDATA2"),
-                    other => core::write!(f, "0x{:02X}", other),
-                }
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for PselTracedata2Pin {
-            fn format(&self, f: defmt::Formatter) {
-                match self.0 {
-                    0x18 => defmt::write!(f, "TRACEDATA2"),
-                    other => defmt::write!(f, "0x{:02X}", other),
-                }
+                unsafe { core::mem::transmute(self) }
             }
         }
         impl From<u8> for PselTracedata2Pin {
@@ -17046,36 +15815,52 @@ pub mod tad {
                 PselTracedata2Pin::to_bits(val)
             }
         }
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct PselTracedata3Pin(pub u8);
-        impl PselTracedata3Pin {
+        #[repr(u8)]
+        #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+        #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+        pub enum PselTracedata3Pin {
+            _RESERVED_0 = 0x0,
+            _RESERVED_1 = 0x01,
+            _RESERVED_2 = 0x02,
+            _RESERVED_3 = 0x03,
+            _RESERVED_4 = 0x04,
+            _RESERVED_5 = 0x05,
+            _RESERVED_6 = 0x06,
+            _RESERVED_7 = 0x07,
+            _RESERVED_8 = 0x08,
+            _RESERVED_9 = 0x09,
+            _RESERVED_a = 0x0a,
+            _RESERVED_b = 0x0b,
+            _RESERVED_c = 0x0c,
+            _RESERVED_d = 0x0d,
+            _RESERVED_e = 0x0e,
+            _RESERVED_f = 0x0f,
+            _RESERVED_10 = 0x10,
+            _RESERVED_11 = 0x11,
+            _RESERVED_12 = 0x12,
+            _RESERVED_13 = 0x13,
+            _RESERVED_14 = 0x14,
+            _RESERVED_15 = 0x15,
+            _RESERVED_16 = 0x16,
+            _RESERVED_17 = 0x17,
+            _RESERVED_18 = 0x18,
             #[doc = "TRACEDATA3 pin"]
-            pub const TRACEDATA3: Self = Self(0x19);
+            TRACEDATA3 = 0x19,
+            _RESERVED_1a = 0x1a,
+            _RESERVED_1b = 0x1b,
+            _RESERVED_1c = 0x1c,
+            _RESERVED_1d = 0x1d,
+            _RESERVED_1e = 0x1e,
+            _RESERVED_1f = 0x1f,
         }
         impl PselTracedata3Pin {
+            #[inline(always)]
             pub const fn from_bits(val: u8) -> PselTracedata3Pin {
-                Self(val & 0x1f)
+                unsafe { core::mem::transmute(val & 0x1f) }
             }
+            #[inline(always)]
             pub const fn to_bits(self) -> u8 {
-                self.0
-            }
-        }
-        impl core::fmt::Debug for PselTracedata3Pin {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                match self.0 {
-                    0x19 => f.write_str("TRACEDATA3"),
-                    other => core::write!(f, "0x{:02X}", other),
-                }
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for PselTracedata3Pin {
-            fn format(&self, f: defmt::Formatter) {
-                match self.0 {
-                    0x19 => defmt::write!(f, "TRACEDATA3"),
-                    other => defmt::write!(f, "0x{:02X}", other),
-                }
+                unsafe { core::mem::transmute(self) }
             }
         }
         impl From<u8> for PselTracedata3Pin {
@@ -17287,6 +16072,7 @@ pub mod timer {
         pub struct Bitmode(pub u32);
         impl Bitmode {
             #[doc = "Timer bit width"]
+            #[must_use]
             #[inline(always)]
             pub const fn bitmode(&self) -> super::vals::Bitmode {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -17294,7 +16080,7 @@ pub mod timer {
             }
             #[doc = "Timer bit width"]
             #[inline(always)]
-            pub fn set_bitmode(&mut self, val: super::vals::Bitmode) {
+            pub const fn set_bitmode(&mut self, val: super::vals::Bitmode) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -17314,14 +16100,7 @@ pub mod timer {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Bitmode {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Bitmode {
-                    bitmode: super::vals::Bitmode,
-                }
-                let proxy = Bitmode {
-                    bitmode: self.bitmode(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Bitmode {{ bitmode: {:?} }}", self.bitmode())
             }
         }
         #[doc = "Disable interrupt"]
@@ -17330,6 +16109,7 @@ pub mod timer {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn compare(&self, n: usize) -> bool {
                 assert!(n < 6usize);
@@ -17339,7 +16119,7 @@ pub mod timer {
             }
             #[doc = "Write '1' to disable interrupt for event COMPARE\\[0\\]"]
             #[inline(always)]
-            pub fn set_compare(&mut self, n: usize, val: bool) {
+            pub const fn set_compare(&mut self, n: usize, val: bool) {
                 assert!(n < 6usize);
                 let offs = 16usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -17354,38 +16134,19 @@ pub mod timer {
         impl core::fmt::Debug for Int {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Int")
-                    .field(
-                        "compare",
-                        &[
-                            self.compare(0usize),
-                            self.compare(1usize),
-                            self.compare(2usize),
-                            self.compare(3usize),
-                            self.compare(4usize),
-                            self.compare(5usize),
-                        ],
-                    )
+                    .field("compare[0]", &self.compare(0usize))
+                    .field("compare[1]", &self.compare(1usize))
+                    .field("compare[2]", &self.compare(2usize))
+                    .field("compare[3]", &self.compare(3usize))
+                    .field("compare[4]", &self.compare(4usize))
+                    .field("compare[5]", &self.compare(5usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    compare: [bool; 6usize],
-                }
-                let proxy = Int {
-                    compare: [
-                        self.compare(0usize),
-                        self.compare(1usize),
-                        self.compare(2usize),
-                        self.compare(3usize),
-                        self.compare(4usize),
-                        self.compare(5usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ compare[0]: {=bool:?}, compare[1]: {=bool:?}, compare[2]: {=bool:?}, compare[3]: {=bool:?}, compare[4]: {=bool:?}, compare[5]: {=bool:?} }}" , self . compare (0usize) , self . compare (1usize) , self . compare (2usize) , self . compare (3usize) , self . compare (4usize) , self . compare (5usize))
             }
         }
         #[doc = "Timer mode selection"]
@@ -17394,6 +16155,7 @@ pub mod timer {
         pub struct Mode(pub u32);
         impl Mode {
             #[doc = "Timer mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -17401,7 +16163,7 @@ pub mod timer {
             }
             #[doc = "Timer mode"]
             #[inline(always)]
-            pub fn set_mode(&mut self, val: super::vals::Mode) {
+            pub const fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -17419,12 +16181,7 @@ pub mod timer {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Mode {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Mode {
-                    mode: super::vals::Mode,
-                }
-                let proxy = Mode { mode: self.mode() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Mode {{ mode: {:?} }}", self.mode())
             }
         }
         #[doc = "Description collection: Enable one-shot operation for Capture/Compare channel n"]
@@ -17433,6 +16190,7 @@ pub mod timer {
         pub struct Oneshoten(pub u32);
         impl Oneshoten {
             #[doc = "Enable one-shot operation"]
+            #[must_use]
             #[inline(always)]
             pub const fn oneshoten(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -17440,7 +16198,7 @@ pub mod timer {
             }
             #[doc = "Enable one-shot operation"]
             #[inline(always)]
-            pub fn set_oneshoten(&mut self, val: bool) {
+            pub const fn set_oneshoten(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -17460,14 +16218,7 @@ pub mod timer {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Oneshoten {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Oneshoten {
-                    oneshoten: bool,
-                }
-                let proxy = Oneshoten {
-                    oneshoten: self.oneshoten(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Oneshoten {{ oneshoten: {=bool:?} }}", self.oneshoten())
             }
         }
         #[doc = "Timer prescaler register"]
@@ -17476,6 +16227,7 @@ pub mod timer {
         pub struct Prescaler(pub u32);
         impl Prescaler {
             #[doc = "Prescaler value"]
+            #[must_use]
             #[inline(always)]
             pub const fn prescaler(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -17483,7 +16235,7 @@ pub mod timer {
             }
             #[doc = "Prescaler value"]
             #[inline(always)]
-            pub fn set_prescaler(&mut self, val: u8) {
+            pub const fn set_prescaler(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
             }
         }
@@ -17503,14 +16255,7 @@ pub mod timer {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Prescaler {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Prescaler {
-                    prescaler: u8,
-                }
-                let proxy = Prescaler {
-                    prescaler: self.prescaler(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Prescaler {{ prescaler: {=u8:?} }}", self.prescaler())
             }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -17519,6 +16264,7 @@ pub mod timer {
         pub struct Shorts(pub u32);
         impl Shorts {
             #[doc = "Shortcut between event COMPARE\\[0\\] and task CLEAR"]
+            #[must_use]
             #[inline(always)]
             pub const fn compare_clear(&self, n: usize) -> bool {
                 assert!(n < 6usize);
@@ -17528,12 +16274,13 @@ pub mod timer {
             }
             #[doc = "Shortcut between event COMPARE\\[0\\] and task CLEAR"]
             #[inline(always)]
-            pub fn set_compare_clear(&mut self, n: usize, val: bool) {
+            pub const fn set_compare_clear(&mut self, n: usize, val: bool) {
                 assert!(n < 6usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
             #[doc = "Shortcut between event COMPARE\\[0\\] and task STOP"]
+            #[must_use]
             #[inline(always)]
             pub const fn compare_stop(&self, n: usize) -> bool {
                 assert!(n < 6usize);
@@ -17543,7 +16290,7 @@ pub mod timer {
             }
             #[doc = "Shortcut between event COMPARE\\[0\\] and task STOP"]
             #[inline(always)]
-            pub fn set_compare_stop(&mut self, n: usize, val: bool) {
+            pub const fn set_compare_stop(&mut self, n: usize, val: bool) {
                 assert!(n < 6usize);
                 let offs = 8usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -17558,58 +16305,25 @@ pub mod timer {
         impl core::fmt::Debug for Shorts {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Shorts")
-                    .field(
-                        "compare_clear",
-                        &[
-                            self.compare_clear(0usize),
-                            self.compare_clear(1usize),
-                            self.compare_clear(2usize),
-                            self.compare_clear(3usize),
-                            self.compare_clear(4usize),
-                            self.compare_clear(5usize),
-                        ],
-                    )
-                    .field(
-                        "compare_stop",
-                        &[
-                            self.compare_stop(0usize),
-                            self.compare_stop(1usize),
-                            self.compare_stop(2usize),
-                            self.compare_stop(3usize),
-                            self.compare_stop(4usize),
-                            self.compare_stop(5usize),
-                        ],
-                    )
+                    .field("compare_clear[0]", &self.compare_clear(0usize))
+                    .field("compare_clear[1]", &self.compare_clear(1usize))
+                    .field("compare_clear[2]", &self.compare_clear(2usize))
+                    .field("compare_clear[3]", &self.compare_clear(3usize))
+                    .field("compare_clear[4]", &self.compare_clear(4usize))
+                    .field("compare_clear[5]", &self.compare_clear(5usize))
+                    .field("compare_stop[0]", &self.compare_stop(0usize))
+                    .field("compare_stop[1]", &self.compare_stop(1usize))
+                    .field("compare_stop[2]", &self.compare_stop(2usize))
+                    .field("compare_stop[3]", &self.compare_stop(3usize))
+                    .field("compare_stop[4]", &self.compare_stop(4usize))
+                    .field("compare_stop[5]", &self.compare_stop(5usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Shorts {
-                    compare_clear: [bool; 6usize],
-                    compare_stop: [bool; 6usize],
-                }
-                let proxy = Shorts {
-                    compare_clear: [
-                        self.compare_clear(0usize),
-                        self.compare_clear(1usize),
-                        self.compare_clear(2usize),
-                        self.compare_clear(3usize),
-                        self.compare_clear(4usize),
-                        self.compare_clear(5usize),
-                    ],
-                    compare_stop: [
-                        self.compare_stop(0usize),
-                        self.compare_stop(1usize),
-                        self.compare_stop(2usize),
-                        self.compare_stop(3usize),
-                        self.compare_stop(4usize),
-                        self.compare_stop(5usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Shorts {{ compare_clear[0]: {=bool:?}, compare_clear[1]: {=bool:?}, compare_clear[2]: {=bool:?}, compare_clear[3]: {=bool:?}, compare_clear[4]: {=bool:?}, compare_clear[5]: {=bool:?}, compare_stop[0]: {=bool:?}, compare_stop[1]: {=bool:?}, compare_stop[2]: {=bool:?}, compare_stop[3]: {=bool:?}, compare_stop[4]: {=bool:?}, compare_stop[5]: {=bool:?} }}" , self . compare_clear (0usize) , self . compare_clear (1usize) , self . compare_clear (2usize) , self . compare_clear (3usize) , self . compare_clear (4usize) , self . compare_clear (5usize) , self . compare_stop (0usize) , self . compare_stop (1usize) , self . compare_stop (2usize) , self . compare_stop (3usize) , self . compare_stop (4usize) , self . compare_stop (5usize))
             }
         }
     }
@@ -18010,6 +16724,7 @@ pub mod twim {
         pub struct Address(pub u32);
         impl Address {
             #[doc = "Address used in the TWI transfer"]
+            #[must_use]
             #[inline(always)]
             pub const fn address(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x7f;
@@ -18017,7 +16732,7 @@ pub mod twim {
             }
             #[doc = "Address used in the TWI transfer"]
             #[inline(always)]
-            pub fn set_address(&mut self, val: u8) {
+            pub const fn set_address(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
             }
         }
@@ -18037,14 +16752,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Address {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Address {
-                    address: u8,
-                }
-                let proxy = Address {
-                    address: self.address(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Address {{ address: {=u8:?} }}", self.address())
             }
         }
         #[doc = "Enable TWIM"]
@@ -18053,6 +16761,7 @@ pub mod twim {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable TWIM"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> super::vals::Enable {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -18060,7 +16769,7 @@ pub mod twim {
             }
             #[doc = "Enable or disable TWIM"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: super::vals::Enable) {
+            pub const fn set_enable(&mut self, val: super::vals::Enable) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
         }
@@ -18080,14 +16789,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: super::vals::Enable,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {:?} }}", self.enable())
             }
         }
         #[doc = "Error source"]
@@ -18096,6 +16798,7 @@ pub mod twim {
         pub struct Errorsrc(pub u32);
         impl Errorsrc {
             #[doc = "Overrun error"]
+            #[must_use]
             #[inline(always)]
             pub const fn overrun(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -18103,10 +16806,11 @@ pub mod twim {
             }
             #[doc = "Overrun error"]
             #[inline(always)]
-            pub fn set_overrun(&mut self, val: bool) {
+            pub const fn set_overrun(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "NACK received after sending the address (write '1' to clear)"]
+            #[must_use]
             #[inline(always)]
             pub const fn anack(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -18114,10 +16818,11 @@ pub mod twim {
             }
             #[doc = "NACK received after sending the address (write '1' to clear)"]
             #[inline(always)]
-            pub fn set_anack(&mut self, val: bool) {
+            pub const fn set_anack(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "NACK received after sending a data byte (write '1' to clear)"]
+            #[must_use]
             #[inline(always)]
             pub const fn dnack(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -18125,7 +16830,7 @@ pub mod twim {
             }
             #[doc = "NACK received after sending a data byte (write '1' to clear)"]
             #[inline(always)]
-            pub fn set_dnack(&mut self, val: bool) {
+            pub const fn set_dnack(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
         }
@@ -18147,18 +16852,13 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Errorsrc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Errorsrc {
-                    overrun: bool,
-                    anack: bool,
-                    dnack: bool,
-                }
-                let proxy = Errorsrc {
-                    overrun: self.overrun(),
-                    anack: self.anack(),
-                    dnack: self.dnack(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Errorsrc {{ overrun: {=bool:?}, anack: {=bool:?}, dnack: {=bool:?} }}",
+                    self.overrun(),
+                    self.anack(),
+                    self.dnack()
+                )
             }
         }
         #[doc = "TWI frequency. Accuracy depends on the HFCLK source selected."]
@@ -18167,6 +16867,7 @@ pub mod twim {
         pub struct Frequency(pub u32);
         impl Frequency {
             #[doc = "TWI master clock frequency"]
+            #[must_use]
             #[inline(always)]
             pub const fn frequency(&self) -> super::vals::Frequency {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -18174,7 +16875,7 @@ pub mod twim {
             }
             #[doc = "TWI master clock frequency"]
             #[inline(always)]
-            pub fn set_frequency(&mut self, val: super::vals::Frequency) {
+            pub const fn set_frequency(&mut self, val: super::vals::Frequency) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -18195,14 +16896,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Frequency {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Frequency {
-                    frequency: super::vals::Frequency,
-                }
-                let proxy = Frequency {
-                    frequency: self.frequency(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Frequency {{ frequency: {:?} }}", self.frequency())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -18211,6 +16905,7 @@ pub mod twim {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event STOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -18218,10 +16913,11 @@ pub mod twim {
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
-            pub fn set_stopped(&mut self, val: bool) {
+            pub const fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event ERROR"]
+            #[must_use]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
@@ -18229,10 +16925,11 @@ pub mod twim {
             }
             #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
-            pub fn set_error(&mut self, val: bool) {
+            pub const fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
             #[doc = "Enable or disable interrupt for event SUSPENDED"]
+            #[must_use]
             #[inline(always)]
             pub const fn suspended(&self) -> bool {
                 let val = (self.0 >> 18usize) & 0x01;
@@ -18240,10 +16937,11 @@ pub mod twim {
             }
             #[doc = "Enable or disable interrupt for event SUSPENDED"]
             #[inline(always)]
-            pub fn set_suspended(&mut self, val: bool) {
+            pub const fn set_suspended(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
             }
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn rxstarted(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
@@ -18251,10 +16949,11 @@ pub mod twim {
             }
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
-            pub fn set_rxstarted(&mut self, val: bool) {
+            pub const fn set_rxstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn txstarted(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
@@ -18262,10 +16961,11 @@ pub mod twim {
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
-            pub fn set_txstarted(&mut self, val: bool) {
+            pub const fn set_txstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
             #[doc = "Enable or disable interrupt for event LASTRX"]
+            #[must_use]
             #[inline(always)]
             pub const fn lastrx(&self) -> bool {
                 let val = (self.0 >> 23usize) & 0x01;
@@ -18273,10 +16973,11 @@ pub mod twim {
             }
             #[doc = "Enable or disable interrupt for event LASTRX"]
             #[inline(always)]
-            pub fn set_lastrx(&mut self, val: bool) {
+            pub const fn set_lastrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
             }
             #[doc = "Enable or disable interrupt for event LASTTX"]
+            #[must_use]
             #[inline(always)]
             pub const fn lasttx(&self) -> bool {
                 let val = (self.0 >> 24usize) & 0x01;
@@ -18284,7 +16985,7 @@ pub mod twim {
             }
             #[doc = "Enable or disable interrupt for event LASTTX"]
             #[inline(always)]
-            pub fn set_lasttx(&mut self, val: bool) {
+            pub const fn set_lasttx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
             }
         }
@@ -18310,26 +17011,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    stopped: bool,
-                    error: bool,
-                    suspended: bool,
-                    rxstarted: bool,
-                    txstarted: bool,
-                    lastrx: bool,
-                    lasttx: bool,
-                }
-                let proxy = Int {
-                    stopped: self.stopped(),
-                    error: self.error(),
-                    suspended: self.suspended(),
-                    rxstarted: self.rxstarted(),
-                    txstarted: self.txstarted(),
-                    lastrx: self.lastrx(),
-                    lasttx: self.lasttx(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ stopped: {=bool:?}, error: {=bool:?}, suspended: {=bool:?}, rxstarted: {=bool:?}, txstarted: {=bool:?}, lastrx: {=bool:?}, lasttx: {=bool:?} }}" , self . stopped () , self . error () , self . suspended () , self . rxstarted () , self . txstarted () , self . lastrx () , self . lasttx ())
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
@@ -18338,6 +17020,7 @@ pub mod twim {
         pub struct RxdAmount(pub u32);
         impl RxdAmount {
             #[doc = "Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte."]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -18345,7 +17028,7 @@ pub mod twim {
             }
             #[doc = "Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte."]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -18365,14 +17048,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdAmount {
-                    amount: u16,
-                }
-                let proxy = RxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -18381,6 +17057,7 @@ pub mod twim {
         pub struct RxdList(pub u32);
         impl RxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::RxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -18388,7 +17065,7 @@ pub mod twim {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -18408,12 +17085,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdList {
-                    list: super::vals::RxdListList,
-                }
-                let proxy = RxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
@@ -18422,6 +17094,7 @@ pub mod twim {
         pub struct RxdMaxcnt(pub u32);
         impl RxdMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -18429,7 +17102,7 @@ pub mod twim {
             }
             #[doc = "Maximum number of bytes in receive buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -18449,14 +17122,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = RxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -18465,6 +17131,7 @@ pub mod twim {
         pub struct Shorts(pub u32);
         impl Shorts {
             #[doc = "Shortcut between event LASTTX and task STARTRX"]
+            #[must_use]
             #[inline(always)]
             pub const fn lasttx_startrx(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -18472,10 +17139,11 @@ pub mod twim {
             }
             #[doc = "Shortcut between event LASTTX and task STARTRX"]
             #[inline(always)]
-            pub fn set_lasttx_startrx(&mut self, val: bool) {
+            pub const fn set_lasttx_startrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
             #[doc = "Shortcut between event LASTTX and task SUSPEND"]
+            #[must_use]
             #[inline(always)]
             pub const fn lasttx_suspend(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -18483,10 +17151,11 @@ pub mod twim {
             }
             #[doc = "Shortcut between event LASTTX and task SUSPEND"]
             #[inline(always)]
-            pub fn set_lasttx_suspend(&mut self, val: bool) {
+            pub const fn set_lasttx_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
             #[doc = "Shortcut between event LASTTX and task STOP"]
+            #[must_use]
             #[inline(always)]
             pub const fn lasttx_stop(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
@@ -18494,10 +17163,11 @@ pub mod twim {
             }
             #[doc = "Shortcut between event LASTTX and task STOP"]
             #[inline(always)]
-            pub fn set_lasttx_stop(&mut self, val: bool) {
+            pub const fn set_lasttx_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
             #[doc = "Shortcut between event LASTRX and task STARTTX"]
+            #[must_use]
             #[inline(always)]
             pub const fn lastrx_starttx(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
@@ -18505,10 +17175,11 @@ pub mod twim {
             }
             #[doc = "Shortcut between event LASTRX and task STARTTX"]
             #[inline(always)]
-            pub fn set_lastrx_starttx(&mut self, val: bool) {
+            pub const fn set_lastrx_starttx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
             #[doc = "Shortcut between event LASTRX and task SUSPEND"]
+            #[must_use]
             #[inline(always)]
             pub const fn lastrx_suspend(&self) -> bool {
                 let val = (self.0 >> 11usize) & 0x01;
@@ -18516,10 +17187,11 @@ pub mod twim {
             }
             #[doc = "Shortcut between event LASTRX and task SUSPEND"]
             #[inline(always)]
-            pub fn set_lastrx_suspend(&mut self, val: bool) {
+            pub const fn set_lastrx_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
             }
             #[doc = "Shortcut between event LASTRX and task STOP"]
+            #[must_use]
             #[inline(always)]
             pub const fn lastrx_stop(&self) -> bool {
                 let val = (self.0 >> 12usize) & 0x01;
@@ -18527,7 +17199,7 @@ pub mod twim {
             }
             #[doc = "Shortcut between event LASTRX and task STOP"]
             #[inline(always)]
-            pub fn set_lastrx_stop(&mut self, val: bool) {
+            pub const fn set_lastrx_stop(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
             }
         }
@@ -18552,24 +17224,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Shorts {
-                    lasttx_startrx: bool,
-                    lasttx_suspend: bool,
-                    lasttx_stop: bool,
-                    lastrx_starttx: bool,
-                    lastrx_suspend: bool,
-                    lastrx_stop: bool,
-                }
-                let proxy = Shorts {
-                    lasttx_startrx: self.lasttx_startrx(),
-                    lasttx_suspend: self.lasttx_suspend(),
-                    lasttx_stop: self.lasttx_stop(),
-                    lastrx_starttx: self.lastrx_starttx(),
-                    lastrx_suspend: self.lastrx_suspend(),
-                    lastrx_stop: self.lastrx_stop(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Shorts {{ lasttx_startrx: {=bool:?}, lasttx_suspend: {=bool:?}, lasttx_stop: {=bool:?}, lastrx_starttx: {=bool:?}, lastrx_suspend: {=bool:?}, lastrx_stop: {=bool:?} }}" , self . lasttx_startrx () , self . lasttx_suspend () , self . lasttx_stop () , self . lastrx_starttx () , self . lastrx_suspend () , self . lastrx_stop ())
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
@@ -18578,6 +17233,7 @@ pub mod twim {
         pub struct TxdAmount(pub u32);
         impl TxdAmount {
             #[doc = "Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte."]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -18585,7 +17241,7 @@ pub mod twim {
             }
             #[doc = "Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte."]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -18605,14 +17261,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdAmount {
-                    amount: u16,
-                }
-                let proxy = TxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -18621,6 +17270,7 @@ pub mod twim {
         pub struct TxdList(pub u32);
         impl TxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::TxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -18628,7 +17278,7 @@ pub mod twim {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -18648,12 +17298,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdList {
-                    list: super::vals::TxdListList,
-                }
-                let proxy = TxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
@@ -18662,6 +17307,7 @@ pub mod twim {
         pub struct TxdMaxcnt(pub u32);
         impl TxdMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -18669,7 +17315,7 @@ pub mod twim {
             }
             #[doc = "Maximum number of bytes in transmit buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -18689,14 +17335,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = TxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -18748,7 +17387,7 @@ pub mod twim {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Frequency(pub u32);
+        pub struct Frequency(u32);
         impl Frequency {
             #[doc = "100 kbps"]
             pub const K100: Self = Self(0x0198_0000);
@@ -19193,6 +17832,7 @@ pub mod twis {
         pub struct Address(pub u32);
         impl Address {
             #[doc = "TWI slave address"]
+            #[must_use]
             #[inline(always)]
             pub const fn address(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x7f;
@@ -19200,7 +17840,7 @@ pub mod twis {
             }
             #[doc = "TWI slave address"]
             #[inline(always)]
-            pub fn set_address(&mut self, val: u8) {
+            pub const fn set_address(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
             }
         }
@@ -19220,14 +17860,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Address {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Address {
-                    address: u8,
-                }
-                let proxy = Address {
-                    address: self.address(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Address {{ address: {=u8:?} }}", self.address())
             }
         }
         #[doc = "Configuration register for the address match mechanism"]
@@ -19236,6 +17869,7 @@ pub mod twis {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Enable or disable address matching on ADDRESS\\[0\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn address0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -19243,10 +17877,11 @@ pub mod twis {
             }
             #[doc = "Enable or disable address matching on ADDRESS\\[0\\]"]
             #[inline(always)]
-            pub fn set_address0(&mut self, val: bool) {
+            pub const fn set_address0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable address matching on ADDRESS\\[1\\]"]
+            #[must_use]
             #[inline(always)]
             pub const fn address1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -19254,7 +17889,7 @@ pub mod twis {
             }
             #[doc = "Enable or disable address matching on ADDRESS\\[1\\]"]
             #[inline(always)]
-            pub fn set_address1(&mut self, val: bool) {
+            pub const fn set_address1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
         }
@@ -19275,16 +17910,12 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    address0: bool,
-                    address1: bool,
-                }
-                let proxy = Config {
-                    address0: self.address0(),
-                    address1: self.address1(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Config {{ address0: {=bool:?}, address1: {=bool:?} }}",
+                    self.address0(),
+                    self.address1()
+                )
             }
         }
         #[doc = "Enable TWIS"]
@@ -19293,6 +17924,7 @@ pub mod twis {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable TWIS"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> super::vals::Enable {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -19300,7 +17932,7 @@ pub mod twis {
             }
             #[doc = "Enable or disable TWIS"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: super::vals::Enable) {
+            pub const fn set_enable(&mut self, val: super::vals::Enable) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
         }
@@ -19320,14 +17952,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: super::vals::Enable,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {:?} }}", self.enable())
             }
         }
         #[doc = "Error source"]
@@ -19336,6 +17961,7 @@ pub mod twis {
         pub struct Errorsrc(pub u32);
         impl Errorsrc {
             #[doc = "RX buffer overflow detected, and prevented"]
+            #[must_use]
             #[inline(always)]
             pub const fn overflow(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -19343,10 +17969,11 @@ pub mod twis {
             }
             #[doc = "RX buffer overflow detected, and prevented"]
             #[inline(always)]
-            pub fn set_overflow(&mut self, val: bool) {
+            pub const fn set_overflow(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "NACK sent after receiving a data byte"]
+            #[must_use]
             #[inline(always)]
             pub const fn dnack(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -19354,10 +17981,11 @@ pub mod twis {
             }
             #[doc = "NACK sent after receiving a data byte"]
             #[inline(always)]
-            pub fn set_dnack(&mut self, val: bool) {
+            pub const fn set_dnack(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "TX buffer over-read detected, and prevented"]
+            #[must_use]
             #[inline(always)]
             pub const fn overread(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -19365,7 +17993,7 @@ pub mod twis {
             }
             #[doc = "TX buffer over-read detected, and prevented"]
             #[inline(always)]
-            pub fn set_overread(&mut self, val: bool) {
+            pub const fn set_overread(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
         }
@@ -19387,18 +18015,13 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Errorsrc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Errorsrc {
-                    overflow: bool,
-                    dnack: bool,
-                    overread: bool,
-                }
-                let proxy = Errorsrc {
-                    overflow: self.overflow(),
-                    dnack: self.dnack(),
-                    overread: self.overread(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Errorsrc {{ overflow: {=bool:?}, dnack: {=bool:?}, overread: {=bool:?} }}",
+                    self.overflow(),
+                    self.dnack(),
+                    self.overread()
+                )
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -19407,6 +18030,7 @@ pub mod twis {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event STOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn stopped(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -19414,10 +18038,11 @@ pub mod twis {
             }
             #[doc = "Enable or disable interrupt for event STOPPED"]
             #[inline(always)]
-            pub fn set_stopped(&mut self, val: bool) {
+            pub const fn set_stopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event ERROR"]
+            #[must_use]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
@@ -19425,10 +18050,11 @@ pub mod twis {
             }
             #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
-            pub fn set_error(&mut self, val: bool) {
+            pub const fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn rxstarted(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
@@ -19436,10 +18062,11 @@ pub mod twis {
             }
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
-            pub fn set_rxstarted(&mut self, val: bool) {
+            pub const fn set_rxstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn txstarted(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
@@ -19447,10 +18074,11 @@ pub mod twis {
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
-            pub fn set_txstarted(&mut self, val: bool) {
+            pub const fn set_txstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
             #[doc = "Enable or disable interrupt for event WRITE"]
+            #[must_use]
             #[inline(always)]
             pub const fn write(&self) -> bool {
                 let val = (self.0 >> 25usize) & 0x01;
@@ -19458,10 +18086,11 @@ pub mod twis {
             }
             #[doc = "Enable or disable interrupt for event WRITE"]
             #[inline(always)]
-            pub fn set_write(&mut self, val: bool) {
+            pub const fn set_write(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
             }
             #[doc = "Enable or disable interrupt for event READ"]
+            #[must_use]
             #[inline(always)]
             pub const fn read(&self) -> bool {
                 let val = (self.0 >> 26usize) & 0x01;
@@ -19469,7 +18098,7 @@ pub mod twis {
             }
             #[doc = "Enable or disable interrupt for event READ"]
             #[inline(always)]
-            pub fn set_read(&mut self, val: bool) {
+            pub const fn set_read(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
             }
         }
@@ -19494,24 +18123,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    stopped: bool,
-                    error: bool,
-                    rxstarted: bool,
-                    txstarted: bool,
-                    write: bool,
-                    read: bool,
-                }
-                let proxy = Int {
-                    stopped: self.stopped(),
-                    error: self.error(),
-                    rxstarted: self.rxstarted(),
-                    txstarted: self.txstarted(),
-                    write: self.write(),
-                    read: self.read(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ stopped: {=bool:?}, error: {=bool:?}, rxstarted: {=bool:?}, txstarted: {=bool:?}, write: {=bool:?}, read: {=bool:?} }}" , self . stopped () , self . error () , self . rxstarted () , self . txstarted () , self . write () , self . read ())
             }
         }
         #[doc = "Status register indicating which address had a match"]
@@ -19520,6 +18132,7 @@ pub mod twis {
         pub struct Match(pub u32);
         impl Match {
             #[doc = "Indication of which address in {ADDRESS} that matched the incoming address"]
+            #[must_use]
             #[inline(always)]
             pub const fn match_(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -19527,7 +18140,7 @@ pub mod twis {
             }
             #[doc = "Indication of which address in {ADDRESS} that matched the incoming address"]
             #[inline(always)]
-            pub fn set_match_(&mut self, val: bool) {
+            pub const fn set_match_(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -19547,14 +18160,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Match {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Match {
-                    match_: bool,
-                }
-                let proxy = Match {
-                    match_: self.match_(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Match {{ match_: {=bool:?} }}", self.match_())
             }
         }
         #[doc = "Over-read character. Character sent out in case of an over-read of the transmit buffer."]
@@ -19563,6 +18169,7 @@ pub mod twis {
         pub struct Orc(pub u32);
         impl Orc {
             #[doc = "Over-read character. Character sent out in case of an over-read of the transmit buffer."]
+            #[must_use]
             #[inline(always)]
             pub const fn orc(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -19570,7 +18177,7 @@ pub mod twis {
             }
             #[doc = "Over-read character. Character sent out in case of an over-read of the transmit buffer."]
             #[inline(always)]
-            pub fn set_orc(&mut self, val: u8) {
+            pub const fn set_orc(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
             }
         }
@@ -19588,12 +18195,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Orc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Orc {
-                    orc: u8,
-                }
-                let proxy = Orc { orc: self.orc() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Orc {{ orc: {=u8:?} }}", self.orc())
             }
         }
         #[doc = "Number of bytes transferred in the last RXD transaction"]
@@ -19602,6 +18204,7 @@ pub mod twis {
         pub struct RxdAmount(pub u32);
         impl RxdAmount {
             #[doc = "Number of bytes transferred in the last RXD transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -19609,7 +18212,7 @@ pub mod twis {
             }
             #[doc = "Number of bytes transferred in the last RXD transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -19629,14 +18232,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdAmount {
-                    amount: u16,
-                }
-                let proxy = RxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -19645,6 +18241,7 @@ pub mod twis {
         pub struct RxdList(pub u32);
         impl RxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::RxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -19652,7 +18249,7 @@ pub mod twis {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -19672,12 +18269,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdList {
-                    list: super::vals::RxdListList,
-                }
-                let proxy = RxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in RXD buffer"]
@@ -19686,6 +18278,7 @@ pub mod twis {
         pub struct RxdMaxcnt(pub u32);
         impl RxdMaxcnt {
             #[doc = "Maximum number of bytes in RXD buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -19693,7 +18286,7 @@ pub mod twis {
             }
             #[doc = "Maximum number of bytes in RXD buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -19713,14 +18306,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = RxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -19729,6 +18315,7 @@ pub mod twis {
         pub struct Shorts(pub u32);
         impl Shorts {
             #[doc = "Shortcut between event WRITE and task SUSPEND"]
+            #[must_use]
             #[inline(always)]
             pub const fn write_suspend(&self) -> bool {
                 let val = (self.0 >> 13usize) & 0x01;
@@ -19736,10 +18323,11 @@ pub mod twis {
             }
             #[doc = "Shortcut between event WRITE and task SUSPEND"]
             #[inline(always)]
-            pub fn set_write_suspend(&mut self, val: bool) {
+            pub const fn set_write_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
             }
             #[doc = "Shortcut between event READ and task SUSPEND"]
+            #[must_use]
             #[inline(always)]
             pub const fn read_suspend(&self) -> bool {
                 let val = (self.0 >> 14usize) & 0x01;
@@ -19747,7 +18335,7 @@ pub mod twis {
             }
             #[doc = "Shortcut between event READ and task SUSPEND"]
             #[inline(always)]
-            pub fn set_read_suspend(&mut self, val: bool) {
+            pub const fn set_read_suspend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
             }
         }
@@ -19768,16 +18356,12 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Shorts {
-                    write_suspend: bool,
-                    read_suspend: bool,
-                }
-                let proxy = Shorts {
-                    write_suspend: self.write_suspend(),
-                    read_suspend: self.read_suspend(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Shorts {{ write_suspend: {=bool:?}, read_suspend: {=bool:?} }}",
+                    self.write_suspend(),
+                    self.read_suspend()
+                )
             }
         }
         #[doc = "Number of bytes transferred in the last TXD transaction"]
@@ -19786,6 +18370,7 @@ pub mod twis {
         pub struct TxdAmount(pub u32);
         impl TxdAmount {
             #[doc = "Number of bytes transferred in the last TXD transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -19793,7 +18378,7 @@ pub mod twis {
             }
             #[doc = "Number of bytes transferred in the last TXD transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -19813,14 +18398,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdAmount {
-                    amount: u16,
-                }
-                let proxy = TxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type"]
@@ -19829,6 +18407,7 @@ pub mod twis {
         pub struct TxdList(pub u32);
         impl TxdList {
             #[doc = "List type"]
+            #[must_use]
             #[inline(always)]
             pub const fn list(&self) -> super::vals::TxdListList {
                 let val = (self.0 >> 0usize) & 0x03;
@@ -19836,7 +18415,7 @@ pub mod twis {
             }
             #[doc = "List type"]
             #[inline(always)]
-            pub fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
@@ -19856,12 +18435,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdList {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdList {
-                    list: super::vals::TxdListList,
-                }
-                let proxy = TxdList { list: self.list() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
             }
         }
         #[doc = "Maximum number of bytes in TXD buffer"]
@@ -19870,6 +18444,7 @@ pub mod twis {
         pub struct TxdMaxcnt(pub u32);
         impl TxdMaxcnt {
             #[doc = "Maximum number of bytes in TXD buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -19877,7 +18452,7 @@ pub mod twis {
             }
             #[doc = "Maximum number of bytes in TXD buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -19897,14 +18472,7 @@ pub mod twis {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = TxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -20395,6 +18963,7 @@ pub mod uarte {
         pub struct Baudrate(pub u32);
         impl Baudrate {
             #[doc = "Baud rate"]
+            #[must_use]
             #[inline(always)]
             pub const fn baudrate(&self) -> super::vals::Baudrate {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -20402,7 +18971,7 @@ pub mod uarte {
             }
             #[doc = "Baud rate"]
             #[inline(always)]
-            pub fn set_baudrate(&mut self, val: super::vals::Baudrate) {
+            pub const fn set_baudrate(&mut self, val: super::vals::Baudrate) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -20423,14 +18992,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Baudrate {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Baudrate {
-                    baudrate: super::vals::Baudrate,
-                }
-                let proxy = Baudrate {
-                    baudrate: self.baudrate(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Baudrate {{ baudrate: {:?} }}", self.baudrate())
             }
         }
         #[doc = "Configuration of parity and hardware flow control"]
@@ -20439,6 +19001,7 @@ pub mod uarte {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Hardware flow control"]
+            #[must_use]
             #[inline(always)]
             pub const fn hwfc(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -20446,10 +19009,11 @@ pub mod uarte {
             }
             #[doc = "Hardware flow control"]
             #[inline(always)]
-            pub fn set_hwfc(&mut self, val: bool) {
+            pub const fn set_hwfc(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Parity"]
+            #[must_use]
             #[inline(always)]
             pub const fn parity(&self) -> super::vals::ConfigParity {
                 let val = (self.0 >> 1usize) & 0x07;
@@ -20457,10 +19021,11 @@ pub mod uarte {
             }
             #[doc = "Parity"]
             #[inline(always)]
-            pub fn set_parity(&mut self, val: super::vals::ConfigParity) {
+            pub const fn set_parity(&mut self, val: super::vals::ConfigParity) {
                 self.0 = (self.0 & !(0x07 << 1usize)) | (((val.to_bits() as u32) & 0x07) << 1usize);
             }
             #[doc = "Stop bits"]
+            #[must_use]
             #[inline(always)]
             pub const fn stop(&self) -> super::vals::Stop {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -20468,7 +19033,7 @@ pub mod uarte {
             }
             #[doc = "Stop bits"]
             #[inline(always)]
-            pub fn set_stop(&mut self, val: super::vals::Stop) {
+            pub const fn set_stop(&mut self, val: super::vals::Stop) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
             }
         }
@@ -20490,18 +19055,13 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    hwfc: bool,
-                    parity: super::vals::ConfigParity,
-                    stop: super::vals::Stop,
-                }
-                let proxy = Config {
-                    hwfc: self.hwfc(),
-                    parity: self.parity(),
-                    stop: self.stop(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Config {{ hwfc: {=bool:?}, parity: {:?}, stop: {:?} }}",
+                    self.hwfc(),
+                    self.parity(),
+                    self.stop()
+                )
             }
         }
         #[doc = "Enable UART"]
@@ -20510,6 +19070,7 @@ pub mod uarte {
         pub struct Enable(pub u32);
         impl Enable {
             #[doc = "Enable or disable UARTE"]
+            #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> super::vals::Enable {
                 let val = (self.0 >> 0usize) & 0x0f;
@@ -20517,7 +19078,7 @@ pub mod uarte {
             }
             #[doc = "Enable or disable UARTE"]
             #[inline(always)]
-            pub fn set_enable(&mut self, val: super::vals::Enable) {
+            pub const fn set_enable(&mut self, val: super::vals::Enable) {
                 self.0 = (self.0 & !(0x0f << 0usize)) | (((val.to_bits() as u32) & 0x0f) << 0usize);
             }
         }
@@ -20537,14 +19098,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Enable {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Enable {
-                    enable: super::vals::Enable,
-                }
-                let proxy = Enable {
-                    enable: self.enable(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Enable {{ enable: {:?} }}", self.enable())
             }
         }
         #[doc = "Error source This register is read/write one to clear."]
@@ -20553,6 +19107,7 @@ pub mod uarte {
         pub struct Errorsrc(pub u32);
         impl Errorsrc {
             #[doc = "Overrun error"]
+            #[must_use]
             #[inline(always)]
             pub const fn overrun(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -20560,10 +19115,11 @@ pub mod uarte {
             }
             #[doc = "Overrun error"]
             #[inline(always)]
-            pub fn set_overrun(&mut self, val: bool) {
+            pub const fn set_overrun(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Parity error"]
+            #[must_use]
             #[inline(always)]
             pub const fn parity(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -20571,10 +19127,11 @@ pub mod uarte {
             }
             #[doc = "Parity error"]
             #[inline(always)]
-            pub fn set_parity(&mut self, val: bool) {
+            pub const fn set_parity(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Framing error occurred"]
+            #[must_use]
             #[inline(always)]
             pub const fn framing(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -20582,10 +19139,11 @@ pub mod uarte {
             }
             #[doc = "Framing error occurred"]
             #[inline(always)]
-            pub fn set_framing(&mut self, val: bool) {
+            pub const fn set_framing(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Break condition"]
+            #[must_use]
             #[inline(always)]
             pub const fn break_(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -20593,7 +19151,7 @@ pub mod uarte {
             }
             #[doc = "Break condition"]
             #[inline(always)]
-            pub fn set_break_(&mut self, val: bool) {
+            pub const fn set_break_(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
         }
@@ -20616,20 +19174,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Errorsrc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Errorsrc {
-                    overrun: bool,
-                    parity: bool,
-                    framing: bool,
-                    break_: bool,
-                }
-                let proxy = Errorsrc {
-                    overrun: self.overrun(),
-                    parity: self.parity(),
-                    framing: self.framing(),
-                    break_: self.break_(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Errorsrc {{ overrun: {=bool:?}, parity: {=bool:?}, framing: {=bool:?}, break_: {=bool:?} }}" , self . overrun () , self . parity () , self . framing () , self . break_ ())
             }
         }
         #[doc = "Enable or disable interrupt"]
@@ -20638,6 +19183,7 @@ pub mod uarte {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Enable or disable interrupt for event CTS"]
+            #[must_use]
             #[inline(always)]
             pub const fn cts(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -20645,10 +19191,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event CTS"]
             #[inline(always)]
-            pub fn set_cts(&mut self, val: bool) {
+            pub const fn set_cts(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Enable or disable interrupt for event NCTS"]
+            #[must_use]
             #[inline(always)]
             pub const fn ncts(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -20656,10 +19203,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event NCTS"]
             #[inline(always)]
-            pub fn set_ncts(&mut self, val: bool) {
+            pub const fn set_ncts(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Enable or disable interrupt for event RXDRDY"]
+            #[must_use]
             #[inline(always)]
             pub const fn rxdrdy(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -20667,10 +19215,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event RXDRDY"]
             #[inline(always)]
-            pub fn set_rxdrdy(&mut self, val: bool) {
+            pub const fn set_rxdrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Enable or disable interrupt for event ENDRX"]
+            #[must_use]
             #[inline(always)]
             pub const fn endrx(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
@@ -20678,10 +19227,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event ENDRX"]
             #[inline(always)]
-            pub fn set_endrx(&mut self, val: bool) {
+            pub const fn set_endrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Enable or disable interrupt for event TXDRDY"]
+            #[must_use]
             #[inline(always)]
             pub const fn txdrdy(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
@@ -20689,10 +19239,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event TXDRDY"]
             #[inline(always)]
-            pub fn set_txdrdy(&mut self, val: bool) {
+            pub const fn set_txdrdy(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
             #[doc = "Enable or disable interrupt for event ENDTX"]
+            #[must_use]
             #[inline(always)]
             pub const fn endtx(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
@@ -20700,10 +19251,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event ENDTX"]
             #[inline(always)]
-            pub fn set_endtx(&mut self, val: bool) {
+            pub const fn set_endtx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
             #[doc = "Enable or disable interrupt for event ERROR"]
+            #[must_use]
             #[inline(always)]
             pub const fn error(&self) -> bool {
                 let val = (self.0 >> 9usize) & 0x01;
@@ -20711,10 +19263,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event ERROR"]
             #[inline(always)]
-            pub fn set_error(&mut self, val: bool) {
+            pub const fn set_error(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
             }
             #[doc = "Enable or disable interrupt for event RXTO"]
+            #[must_use]
             #[inline(always)]
             pub const fn rxto(&self) -> bool {
                 let val = (self.0 >> 17usize) & 0x01;
@@ -20722,10 +19275,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event RXTO"]
             #[inline(always)]
-            pub fn set_rxto(&mut self, val: bool) {
+            pub const fn set_rxto(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
             }
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn rxstarted(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
@@ -20733,10 +19287,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
-            pub fn set_rxstarted(&mut self, val: bool) {
+            pub const fn set_rxstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
+            #[must_use]
             #[inline(always)]
             pub const fn txstarted(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
@@ -20744,10 +19299,11 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
-            pub fn set_txstarted(&mut self, val: bool) {
+            pub const fn set_txstarted(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
             #[doc = "Enable or disable interrupt for event TXSTOPPED"]
+            #[must_use]
             #[inline(always)]
             pub const fn txstopped(&self) -> bool {
                 let val = (self.0 >> 22usize) & 0x01;
@@ -20755,7 +19311,7 @@ pub mod uarte {
             }
             #[doc = "Enable or disable interrupt for event TXSTOPPED"]
             #[inline(always)]
-            pub fn set_txstopped(&mut self, val: bool) {
+            pub const fn set_txstopped(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
             }
         }
@@ -20785,34 +19341,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    cts: bool,
-                    ncts: bool,
-                    rxdrdy: bool,
-                    endrx: bool,
-                    txdrdy: bool,
-                    endtx: bool,
-                    error: bool,
-                    rxto: bool,
-                    rxstarted: bool,
-                    txstarted: bool,
-                    txstopped: bool,
-                }
-                let proxy = Int {
-                    cts: self.cts(),
-                    ncts: self.ncts(),
-                    rxdrdy: self.rxdrdy(),
-                    endrx: self.endrx(),
-                    txdrdy: self.txdrdy(),
-                    endtx: self.endtx(),
-                    error: self.error(),
-                    rxto: self.rxto(),
-                    rxstarted: self.rxstarted(),
-                    txstarted: self.txstarted(),
-                    txstopped: self.txstopped(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Int {{ cts: {=bool:?}, ncts: {=bool:?}, rxdrdy: {=bool:?}, endrx: {=bool:?}, txdrdy: {=bool:?}, endtx: {=bool:?}, error: {=bool:?}, rxto: {=bool:?}, rxstarted: {=bool:?}, txstarted: {=bool:?}, txstopped: {=bool:?} }}" , self . cts () , self . ncts () , self . rxdrdy () , self . endrx () , self . txdrdy () , self . endtx () , self . error () , self . rxto () , self . rxstarted () , self . txstarted () , self . txstopped ())
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
@@ -20821,6 +19350,7 @@ pub mod uarte {
         pub struct RxdAmount(pub u32);
         impl RxdAmount {
             #[doc = "Number of bytes transferred in the last transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -20828,7 +19358,7 @@ pub mod uarte {
             }
             #[doc = "Number of bytes transferred in the last transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -20848,14 +19378,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdAmount {
-                    amount: u16,
-                }
-                let proxy = RxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
@@ -20864,6 +19387,7 @@ pub mod uarte {
         pub struct RxdMaxcnt(pub u32);
         impl RxdMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -20871,7 +19395,7 @@ pub mod uarte {
             }
             #[doc = "Maximum number of bytes in receive buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -20891,14 +19415,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for RxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct RxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = RxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks"]
@@ -20907,6 +19424,7 @@ pub mod uarte {
         pub struct Shorts(pub u32);
         impl Shorts {
             #[doc = "Shortcut between event ENDRX and task STARTRX"]
+            #[must_use]
             #[inline(always)]
             pub const fn endrx_startrx(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
@@ -20914,10 +19432,11 @@ pub mod uarte {
             }
             #[doc = "Shortcut between event ENDRX and task STARTRX"]
             #[inline(always)]
-            pub fn set_endrx_startrx(&mut self, val: bool) {
+            pub const fn set_endrx_startrx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
             #[doc = "Shortcut between event ENDRX and task STOPRX"]
+            #[must_use]
             #[inline(always)]
             pub const fn endrx_stoprx(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
@@ -20925,7 +19444,7 @@ pub mod uarte {
             }
             #[doc = "Shortcut between event ENDRX and task STOPRX"]
             #[inline(always)]
-            pub fn set_endrx_stoprx(&mut self, val: bool) {
+            pub const fn set_endrx_stoprx(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
         }
@@ -20946,16 +19465,12 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Shorts {
-                    endrx_startrx: bool,
-                    endrx_stoprx: bool,
-                }
-                let proxy = Shorts {
-                    endrx_startrx: self.endrx_startrx(),
-                    endrx_stoprx: self.endrx_stoprx(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Shorts {{ endrx_startrx: {=bool:?}, endrx_stoprx: {=bool:?} }}",
+                    self.endrx_startrx(),
+                    self.endrx_stoprx()
+                )
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
@@ -20964,6 +19479,7 @@ pub mod uarte {
         pub struct TxdAmount(pub u32);
         impl TxdAmount {
             #[doc = "Number of bytes transferred in the last transaction"]
+            #[must_use]
             #[inline(always)]
             pub const fn amount(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -20971,7 +19487,7 @@ pub mod uarte {
             }
             #[doc = "Number of bytes transferred in the last transaction"]
             #[inline(always)]
-            pub fn set_amount(&mut self, val: u16) {
+            pub const fn set_amount(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -20991,14 +19507,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdAmount {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdAmount {
-                    amount: u16,
-                }
-                let proxy = TxdAmount {
-                    amount: self.amount(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
@@ -21007,6 +19516,7 @@ pub mod uarte {
         pub struct TxdMaxcnt(pub u32);
         impl TxdMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer"]
+            #[must_use]
             #[inline(always)]
             pub const fn maxcnt(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0x1fff;
@@ -21014,7 +19524,7 @@ pub mod uarte {
             }
             #[doc = "Maximum number of bytes in transmit buffer"]
             #[inline(always)]
-            pub fn set_maxcnt(&mut self, val: u16) {
+            pub const fn set_maxcnt(&mut self, val: u16) {
                 self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
             }
         }
@@ -21034,21 +19544,14 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for TxdMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct TxdMaxcnt {
-                    maxcnt: u16,
-                }
-                let proxy = TxdMaxcnt {
-                    maxcnt: self.maxcnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
     pub mod vals {
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Baudrate(pub u32);
+        pub struct Baudrate(u32);
         impl Baudrate {
             #[doc = "1200 baud (actual rate: 1205)"]
             pub const BAUD1200: Self = Self(0x0004_f000);
@@ -21429,6 +19932,7 @@ pub mod uicr {
         pub struct Appnvmcpofguard(pub u32);
         impl Appnvmcpofguard {
             #[doc = "Enable blocking NVM WRITE and aborting NVM ERASE in POFWARN condition"]
+            #[must_use]
             #[inline(always)]
             pub const fn nvmcpofguarden(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -21436,7 +19940,7 @@ pub mod uicr {
             }
             #[doc = "Enable blocking NVM WRITE and aborting NVM ERASE in POFWARN condition"]
             #[inline(always)]
-            pub fn set_nvmcpofguarden(&mut self, val: bool) {
+            pub const fn set_nvmcpofguarden(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -21456,14 +19960,11 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Appnvmcpofguard {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Appnvmcpofguard {
-                    nvmcpofguarden: bool,
-                }
-                let proxy = Appnvmcpofguard {
-                    nvmcpofguarden: self.nvmcpofguarden(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Appnvmcpofguard {{ nvmcpofguarden: {=bool:?} }}",
+                    self.nvmcpofguarden()
+                )
             }
         }
         #[doc = "Access port protection"]
@@ -21472,6 +19973,7 @@ pub mod uicr {
         pub struct Approtect(pub u32);
         impl Approtect {
             #[doc = "Blocks debugger read/write access to all CPU registers and memory mapped addresses"]
+            #[must_use]
             #[inline(always)]
             pub const fn pall(&self) -> super::vals::ApprotectPall {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -21479,7 +19981,7 @@ pub mod uicr {
             }
             #[doc = "Blocks debugger read/write access to all CPU registers and memory mapped addresses"]
             #[inline(always)]
-            pub fn set_pall(&mut self, val: super::vals::ApprotectPall) {
+            pub const fn set_pall(&mut self, val: super::vals::ApprotectPall) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -21500,12 +20002,7 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Approtect {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Approtect {
-                    pall: super::vals::ApprotectPall,
-                }
-                let proxy = Approtect { pall: self.pall() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Approtect {{ pall: {:?} }}", self.pall())
             }
         }
         #[doc = "Erase protection"]
@@ -21514,6 +20011,7 @@ pub mod uicr {
         pub struct Eraseprotect(pub u32);
         impl Eraseprotect {
             #[doc = "Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality"]
+            #[must_use]
             #[inline(always)]
             pub const fn pall(&self) -> super::vals::EraseprotectPall {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -21521,7 +20019,7 @@ pub mod uicr {
             }
             #[doc = "Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality"]
             #[inline(always)]
-            pub fn set_pall(&mut self, val: super::vals::EraseprotectPall) {
+            pub const fn set_pall(&mut self, val: super::vals::EraseprotectPall) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -21542,12 +20040,7 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Eraseprotect {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Eraseprotect {
-                    pall: super::vals::EraseprotectPall,
-                }
-                let proxy = Eraseprotect { pall: self.pall() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Eraseprotect {{ pall: {:?} }}", self.pall())
             }
         }
         #[doc = "HFXO startup counter"]
@@ -21556,6 +20049,7 @@ pub mod uicr {
         pub struct Hfxocnt(pub u32);
         impl Hfxocnt {
             #[doc = "HFXO startup counter. Total debounce time = HFXOCNT*64 us + 0.5 us"]
+            #[must_use]
             #[inline(always)]
             pub const fn hfxocnt(&self) -> super::vals::Hfxocnt {
                 let val = (self.0 >> 0usize) & 0xff;
@@ -21563,7 +20057,7 @@ pub mod uicr {
             }
             #[doc = "HFXO startup counter. Total debounce time = HFXOCNT*64 us + 0.5 us"]
             #[inline(always)]
-            pub fn set_hfxocnt(&mut self, val: super::vals::Hfxocnt) {
+            pub const fn set_hfxocnt(&mut self, val: super::vals::Hfxocnt) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
             }
         }
@@ -21583,14 +20077,7 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Hfxocnt {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Hfxocnt {
-                    hfxocnt: super::vals::Hfxocnt,
-                }
-                let proxy = Hfxocnt {
-                    hfxocnt: self.hfxocnt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Hfxocnt {{ hfxocnt: {:?} }}", self.hfxocnt())
             }
         }
         #[doc = "HFXO clock source selection"]
@@ -21599,6 +20086,7 @@ pub mod uicr {
         pub struct Hfxosrc(pub u32);
         impl Hfxosrc {
             #[doc = "HFXO clock source selection"]
+            #[must_use]
             #[inline(always)]
             pub const fn hfxosrc(&self) -> super::vals::Hfxosrc {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -21606,7 +20094,7 @@ pub mod uicr {
             }
             #[doc = "HFXO clock source selection"]
             #[inline(always)]
-            pub fn set_hfxosrc(&mut self, val: super::vals::Hfxosrc) {
+            pub const fn set_hfxosrc(&mut self, val: super::vals::Hfxosrc) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
         }
@@ -21626,14 +20114,7 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Hfxosrc {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Hfxosrc {
-                    hfxosrc: super::vals::Hfxosrc,
-                }
-                let proxy = Hfxosrc {
-                    hfxosrc: self.hfxosrc(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Hfxosrc {{ hfxosrc: {:?} }}", self.hfxosrc())
             }
         }
         #[doc = "Description collection: One time programmable memory"]
@@ -21642,6 +20123,7 @@ pub mod uicr {
         pub struct Otp(pub u32);
         impl Otp {
             #[doc = "Lower half word"]
+            #[must_use]
             #[inline(always)]
             pub const fn lower(&self) -> u16 {
                 let val = (self.0 >> 0usize) & 0xffff;
@@ -21649,10 +20131,11 @@ pub mod uicr {
             }
             #[doc = "Lower half word"]
             #[inline(always)]
-            pub fn set_lower(&mut self, val: u16) {
+            pub const fn set_lower(&mut self, val: u16) {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
             #[doc = "Upper half word"]
+            #[must_use]
             #[inline(always)]
             pub const fn upper(&self) -> u16 {
                 let val = (self.0 >> 16usize) & 0xffff;
@@ -21660,7 +20143,7 @@ pub mod uicr {
             }
             #[doc = "Upper half word"]
             #[inline(always)]
-            pub fn set_upper(&mut self, val: u16) {
+            pub const fn set_upper(&mut self, val: u16) {
                 self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
             }
         }
@@ -21681,16 +20164,12 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Otp {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Otp {
-                    lower: u16,
-                    upper: u16,
-                }
-                let proxy = Otp {
-                    lower: self.lower(),
-                    upper: self.upper(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Otp {{ lower: {=u16:?}, upper: {=u16:?} }}",
+                    self.lower(),
+                    self.upper()
+                )
             }
         }
         #[doc = "Description cluster: Define permissions for the key slot. Bits 0-15 and 16-31 can only be written when equal to 0xFFFF."]
@@ -21699,6 +20178,7 @@ pub mod uicr {
         pub struct Perm(pub u32);
         impl Perm {
             #[doc = "Write permission for key slot"]
+            #[must_use]
             #[inline(always)]
             pub const fn write(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -21706,10 +20186,11 @@ pub mod uicr {
             }
             #[doc = "Write permission for key slot"]
             #[inline(always)]
-            pub fn set_write(&mut self, val: bool) {
+            pub const fn set_write(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
             #[doc = "Read permission for key slot"]
+            #[must_use]
             #[inline(always)]
             pub const fn read(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
@@ -21717,10 +20198,11 @@ pub mod uicr {
             }
             #[doc = "Read permission for key slot"]
             #[inline(always)]
-            pub fn set_read(&mut self, val: bool) {
+            pub const fn set_read(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
             #[doc = "Push permission for key slot"]
+            #[must_use]
             #[inline(always)]
             pub const fn push(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
@@ -21728,10 +20210,11 @@ pub mod uicr {
             }
             #[doc = "Push permission for key slot"]
             #[inline(always)]
-            pub fn set_push(&mut self, val: bool) {
+            pub const fn set_push(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Revocation state for the key slot"]
+            #[must_use]
             #[inline(always)]
             pub const fn state(&self) -> super::vals::State {
                 let val = (self.0 >> 16usize) & 0x01;
@@ -21739,7 +20222,7 @@ pub mod uicr {
             }
             #[doc = "Revocation state for the key slot"]
             #[inline(always)]
-            pub fn set_state(&mut self, val: super::vals::State) {
+            pub const fn set_state(&mut self, val: super::vals::State) {
                 self.0 =
                     (self.0 & !(0x01 << 16usize)) | (((val.to_bits() as u32) & 0x01) << 16usize);
             }
@@ -21763,20 +20246,14 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Perm {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Perm {
-                    write: bool,
-                    read: bool,
-                    push: bool,
-                    state: super::vals::State,
-                }
-                let proxy = Perm {
-                    write: self.write(),
-                    read: self.read(),
-                    push: self.push(),
-                    state: self.state(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Perm {{ write: {=bool:?}, read: {=bool:?}, push: {=bool:?}, state: {:?} }}",
+                    self.write(),
+                    self.read(),
+                    self.push(),
+                    self.state()
+                )
             }
         }
         #[doc = "Secure access port protection"]
@@ -21785,6 +20262,7 @@ pub mod uicr {
         pub struct Secureapprotect(pub u32);
         impl Secureapprotect {
             #[doc = "Blocks debugger read/write access to all secure CPU registers and secure memory mapped addresses"]
+            #[must_use]
             #[inline(always)]
             pub const fn pall(&self) -> super::vals::SecureapprotectPall {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -21792,7 +20270,7 @@ pub mod uicr {
             }
             #[doc = "Blocks debugger read/write access to all secure CPU registers and secure memory mapped addresses"]
             #[inline(always)]
-            pub fn set_pall(&mut self, val: super::vals::SecureapprotectPall) {
+            pub const fn set_pall(&mut self, val: super::vals::SecureapprotectPall) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -21813,12 +20291,7 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Secureapprotect {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Secureapprotect {
-                    pall: super::vals::SecureapprotectPall,
-                }
-                let proxy = Secureapprotect { pall: self.pall() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Secureapprotect {{ pall: {:?} }}", self.pall())
             }
         }
         #[doc = "Oscillator control"]
@@ -21827,6 +20300,7 @@ pub mod uicr {
         pub struct Xosc32m(pub u32);
         impl Xosc32m {
             #[doc = "Pierce current DAC control signals"]
+            #[must_use]
             #[inline(always)]
             pub const fn ctrl(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x3f;
@@ -21834,7 +20308,7 @@ pub mod uicr {
             }
             #[doc = "Pierce current DAC control signals"]
             #[inline(always)]
-            pub fn set_ctrl(&mut self, val: u8) {
+            pub const fn set_ctrl(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
             }
         }
@@ -21854,19 +20328,14 @@ pub mod uicr {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Xosc32m {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Xosc32m {
-                    ctrl: u8,
-                }
-                let proxy = Xosc32m { ctrl: self.ctrl() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Xosc32m {{ ctrl: {=u8:?} }}", self.ctrl())
             }
         }
     }
     pub mod vals {
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct ApprotectPall(pub u32);
+        pub struct ApprotectPall(u32);
         impl ApprotectPall {
             #[doc = "Protected"]
             pub const PROTECTED: Self = Self(0x0);
@@ -21914,7 +20383,7 @@ pub mod uicr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct EraseprotectPall(pub u32);
+        pub struct EraseprotectPall(u32);
         impl EraseprotectPall {
             #[doc = "Protected"]
             pub const PROTECTED: Self = Self(0x0);
@@ -21962,7 +20431,7 @@ pub mod uicr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Hfxocnt(pub u8);
+        pub struct Hfxocnt(u8);
         impl Hfxocnt {
             #[doc = "Min debounce time = (0*64 us + 0.5 us)"]
             pub const MIN_DEBOUNCE_TIME: Self = Self(0x0);
@@ -22041,7 +20510,7 @@ pub mod uicr {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct SecureapprotectPall(pub u32);
+        pub struct SecureapprotectPall(u32);
         impl SecureapprotectPall {
             #[doc = "Protected"]
             pub const PROTECTED: Self = Self(0x0);
@@ -22183,6 +20652,7 @@ pub mod vmc {
         pub struct Power(pub u32);
         impl Power {
             #[doc = "Keep RAM section S0 of RAM n on or off in System ON mode"]
+            #[must_use]
             #[inline(always)]
             pub const fn spower(&self, n: usize) -> bool {
                 assert!(n < 4usize);
@@ -22192,12 +20662,13 @@ pub mod vmc {
             }
             #[doc = "Keep RAM section S0 of RAM n on or off in System ON mode"]
             #[inline(always)]
-            pub fn set_spower(&mut self, n: usize, val: bool) {
+            pub const fn set_spower(&mut self, n: usize, val: bool) {
                 assert!(n < 4usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
             }
             #[doc = "Keep retention on RAM section S0 of RAM n when RAM section is switched off"]
+            #[must_use]
             #[inline(always)]
             pub const fn sretention(&self, n: usize) -> bool {
                 assert!(n < 4usize);
@@ -22207,7 +20678,7 @@ pub mod vmc {
             }
             #[doc = "Keep retention on RAM section S0 of RAM n when RAM section is switched off"]
             #[inline(always)]
-            pub fn set_sretention(&mut self, n: usize, val: bool) {
+            pub const fn set_sretention(&mut self, n: usize, val: bool) {
                 assert!(n < 4usize);
                 let offs = 16usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -22222,50 +20693,21 @@ pub mod vmc {
         impl core::fmt::Debug for Power {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Power")
-                    .field(
-                        "spower",
-                        &[
-                            self.spower(0usize),
-                            self.spower(1usize),
-                            self.spower(2usize),
-                            self.spower(3usize),
-                        ],
-                    )
-                    .field(
-                        "sretention",
-                        &[
-                            self.sretention(0usize),
-                            self.sretention(1usize),
-                            self.sretention(2usize),
-                            self.sretention(3usize),
-                        ],
-                    )
+                    .field("spower[0]", &self.spower(0usize))
+                    .field("spower[1]", &self.spower(1usize))
+                    .field("spower[2]", &self.spower(2usize))
+                    .field("spower[3]", &self.spower(3usize))
+                    .field("sretention[0]", &self.sretention(0usize))
+                    .field("sretention[1]", &self.sretention(1usize))
+                    .field("sretention[2]", &self.sretention(2usize))
+                    .field("sretention[3]", &self.sretention(3usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Power {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Power {
-                    spower: [bool; 4usize],
-                    sretention: [bool; 4usize],
-                }
-                let proxy = Power {
-                    spower: [
-                        self.spower(0usize),
-                        self.spower(1usize),
-                        self.spower(2usize),
-                        self.spower(3usize),
-                    ],
-                    sretention: [
-                        self.sretention(0usize),
-                        self.sretention(1usize),
-                        self.sretention(2usize),
-                        self.sretention(3usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Power {{ spower[0]: {=bool:?}, spower[1]: {=bool:?}, spower[2]: {=bool:?}, spower[3]: {=bool:?}, sretention[0]: {=bool:?}, sretention[1]: {=bool:?}, sretention[2]: {=bool:?}, sretention[3]: {=bool:?} }}" , self . spower (0usize) , self . spower (1usize) , self . spower (2usize) , self . spower (3usize) , self . sretention (0usize) , self . sretention (1usize) , self . sretention (2usize) , self . sretention (3usize))
             }
         }
     }
@@ -22360,6 +20802,7 @@ pub mod wdt {
         pub struct Config(pub u32);
         impl Config {
             #[doc = "Configure the watchdog to either be paused, or kept running, while the CPU is sleeping"]
+            #[must_use]
             #[inline(always)]
             pub const fn sleep(&self) -> super::vals::Sleep {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -22367,10 +20810,11 @@ pub mod wdt {
             }
             #[doc = "Configure the watchdog to either be paused, or kept running, while the CPU is sleeping"]
             #[inline(always)]
-            pub fn set_sleep(&mut self, val: super::vals::Sleep) {
+            pub const fn set_sleep(&mut self, val: super::vals::Sleep) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
             }
             #[doc = "Configure the watchdog to either be paused, or kept running, while the CPU is halted by the debugger"]
+            #[must_use]
             #[inline(always)]
             pub const fn halt(&self) -> super::vals::Halt {
                 let val = (self.0 >> 3usize) & 0x01;
@@ -22378,7 +20822,7 @@ pub mod wdt {
             }
             #[doc = "Configure the watchdog to either be paused, or kept running, while the CPU is halted by the debugger"]
             #[inline(always)]
-            pub fn set_halt(&mut self, val: super::vals::Halt) {
+            pub const fn set_halt(&mut self, val: super::vals::Halt) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val.to_bits() as u32) & 0x01) << 3usize);
             }
         }
@@ -22399,16 +20843,12 @@ pub mod wdt {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Config {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Config {
-                    sleep: super::vals::Sleep,
-                    halt: super::vals::Halt,
-                }
-                let proxy = Config {
-                    sleep: self.sleep(),
-                    halt: self.halt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Config {{ sleep: {:?}, halt: {:?} }}",
+                    self.sleep(),
+                    self.halt()
+                )
             }
         }
         #[doc = "Disable interrupt"]
@@ -22417,6 +20857,7 @@ pub mod wdt {
         pub struct Int(pub u32);
         impl Int {
             #[doc = "Write '1' to disable interrupt for event TIMEOUT"]
+            #[must_use]
             #[inline(always)]
             pub const fn timeout(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -22424,7 +20865,7 @@ pub mod wdt {
             }
             #[doc = "Write '1' to disable interrupt for event TIMEOUT"]
             #[inline(always)]
-            pub fn set_timeout(&mut self, val: bool) {
+            pub const fn set_timeout(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -22444,14 +20885,7 @@ pub mod wdt {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Int {
-                    timeout: bool,
-                }
-                let proxy = Int {
-                    timeout: self.timeout(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Int {{ timeout: {=bool:?} }}", self.timeout())
             }
         }
         #[doc = "Request status"]
@@ -22460,6 +20894,7 @@ pub mod wdt {
         pub struct Reqstatus(pub u32);
         impl Reqstatus {
             #[doc = "Request status for RR\\[0\\] register"]
+            #[must_use]
             #[inline(always)]
             pub const fn rr(&self, n: usize) -> bool {
                 assert!(n < 8usize);
@@ -22469,7 +20904,7 @@ pub mod wdt {
             }
             #[doc = "Request status for RR\\[0\\] register"]
             #[inline(always)]
-            pub fn set_rr(&mut self, n: usize, val: bool) {
+            pub const fn set_rr(&mut self, n: usize, val: bool) {
                 assert!(n < 8usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -22484,42 +20919,21 @@ pub mod wdt {
         impl core::fmt::Debug for Reqstatus {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Reqstatus")
-                    .field(
-                        "rr",
-                        &[
-                            self.rr(0usize),
-                            self.rr(1usize),
-                            self.rr(2usize),
-                            self.rr(3usize),
-                            self.rr(4usize),
-                            self.rr(5usize),
-                            self.rr(6usize),
-                            self.rr(7usize),
-                        ],
-                    )
+                    .field("rr[0]", &self.rr(0usize))
+                    .field("rr[1]", &self.rr(1usize))
+                    .field("rr[2]", &self.rr(2usize))
+                    .field("rr[3]", &self.rr(3usize))
+                    .field("rr[4]", &self.rr(4usize))
+                    .field("rr[5]", &self.rr(5usize))
+                    .field("rr[6]", &self.rr(6usize))
+                    .field("rr[7]", &self.rr(7usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Reqstatus {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Reqstatus {
-                    rr: [bool; 8usize],
-                }
-                let proxy = Reqstatus {
-                    rr: [
-                        self.rr(0usize),
-                        self.rr(1usize),
-                        self.rr(2usize),
-                        self.rr(3usize),
-                        self.rr(4usize),
-                        self.rr(5usize),
-                        self.rr(6usize),
-                        self.rr(7usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Reqstatus {{ rr[0]: {=bool:?}, rr[1]: {=bool:?}, rr[2]: {=bool:?}, rr[3]: {=bool:?}, rr[4]: {=bool:?}, rr[5]: {=bool:?}, rr[6]: {=bool:?}, rr[7]: {=bool:?} }}" , self . rr (0usize) , self . rr (1usize) , self . rr (2usize) , self . rr (3usize) , self . rr (4usize) , self . rr (5usize) , self . rr (6usize) , self . rr (7usize))
             }
         }
         #[doc = "Description collection: Reload request n"]
@@ -22528,6 +20942,7 @@ pub mod wdt {
         pub struct Rr(pub u32);
         impl Rr {
             #[doc = "Reload request register"]
+            #[must_use]
             #[inline(always)]
             pub const fn rr(&self) -> super::vals::Rr {
                 let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -22535,7 +20950,7 @@ pub mod wdt {
             }
             #[doc = "Reload request register"]
             #[inline(always)]
-            pub fn set_rr(&mut self, val: super::vals::Rr) {
+            pub const fn set_rr(&mut self, val: super::vals::Rr) {
                 self.0 = (self.0 & !(0xffff_ffff << 0usize))
                     | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
             }
@@ -22554,12 +20969,7 @@ pub mod wdt {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Rr {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Rr {
-                    rr: super::vals::Rr,
-                }
-                let proxy = Rr { rr: self.rr() };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(f, "Rr {{ rr: {:?} }}", self.rr())
             }
         }
         #[doc = "Enable register for reload request registers"]
@@ -22568,6 +20978,7 @@ pub mod wdt {
         pub struct Rren(pub u32);
         impl Rren {
             #[doc = "Enable or disable RR\\[0\\] register"]
+            #[must_use]
             #[inline(always)]
             pub const fn rr(&self, n: usize) -> bool {
                 assert!(n < 8usize);
@@ -22577,7 +20988,7 @@ pub mod wdt {
             }
             #[doc = "Enable or disable RR\\[0\\] register"]
             #[inline(always)]
-            pub fn set_rr(&mut self, n: usize, val: bool) {
+            pub const fn set_rr(&mut self, n: usize, val: bool) {
                 assert!(n < 8usize);
                 let offs = 0usize + n * 1usize;
                 self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -22592,42 +21003,21 @@ pub mod wdt {
         impl core::fmt::Debug for Rren {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Rren")
-                    .field(
-                        "rr",
-                        &[
-                            self.rr(0usize),
-                            self.rr(1usize),
-                            self.rr(2usize),
-                            self.rr(3usize),
-                            self.rr(4usize),
-                            self.rr(5usize),
-                            self.rr(6usize),
-                            self.rr(7usize),
-                        ],
-                    )
+                    .field("rr[0]", &self.rr(0usize))
+                    .field("rr[1]", &self.rr(1usize))
+                    .field("rr[2]", &self.rr(2usize))
+                    .field("rr[3]", &self.rr(3usize))
+                    .field("rr[4]", &self.rr(4usize))
+                    .field("rr[5]", &self.rr(5usize))
+                    .field("rr[6]", &self.rr(6usize))
+                    .field("rr[7]", &self.rr(7usize))
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Rren {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Rren {
-                    rr: [bool; 8usize],
-                }
-                let proxy = Rren {
-                    rr: [
-                        self.rr(0usize),
-                        self.rr(1usize),
-                        self.rr(2usize),
-                        self.rr(3usize),
-                        self.rr(4usize),
-                        self.rr(5usize),
-                        self.rr(6usize),
-                        self.rr(7usize),
-                    ],
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt :: write ! (f , "Rren {{ rr[0]: {=bool:?}, rr[1]: {=bool:?}, rr[2]: {=bool:?}, rr[3]: {=bool:?}, rr[4]: {=bool:?}, rr[5]: {=bool:?}, rr[6]: {=bool:?}, rr[7]: {=bool:?} }}" , self . rr (0usize) , self . rr (1usize) , self . rr (2usize) , self . rr (3usize) , self . rr (4usize) , self . rr (5usize) , self . rr (6usize) , self . rr (7usize))
             }
         }
         #[doc = "Run status"]
@@ -22636,6 +21026,7 @@ pub mod wdt {
         pub struct Runstatus(pub u32);
         impl Runstatus {
             #[doc = "Indicates whether or not the watchdog is running"]
+            #[must_use]
             #[inline(always)]
             pub const fn runstatuswdt(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
@@ -22643,7 +21034,7 @@ pub mod wdt {
             }
             #[doc = "Indicates whether or not the watchdog is running"]
             #[inline(always)]
-            pub fn set_runstatuswdt(&mut self, val: bool) {
+            pub const fn set_runstatuswdt(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
         }
@@ -22663,14 +21054,11 @@ pub mod wdt {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Runstatus {
             fn format(&self, f: defmt::Formatter) {
-                #[derive(defmt :: Format)]
-                struct Runstatus {
-                    runstatuswdt: bool,
-                }
-                let proxy = Runstatus {
-                    runstatuswdt: self.runstatuswdt(),
-                };
-                defmt::write!(f, "{}", proxy)
+                defmt::write!(
+                    f,
+                    "Runstatus {{ runstatuswdt: {=bool:?} }}",
+                    self.runstatuswdt()
+                )
             }
         }
     }
@@ -22708,7 +21096,7 @@ pub mod wdt {
         }
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct Rr(pub u32);
+        pub struct Rr(u32);
         impl Rr {
             #[doc = "Value to request a reload of the watchdog timer"]
             pub const RELOAD: Self = Self(0x6e52_4635);
