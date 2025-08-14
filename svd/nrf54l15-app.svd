@@ -50457,11 +50457,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <description>-20 dBm</description>
                   <value>0x002</value>
                 </enumeratedValue>
-                <enumeratedValue>
-                  <name>Neg22dBm</name>
-                  <description>-22 dBm</description>
-                  <value>0x002</value>
-                </enumeratedValue>
+                <!-- FIXME - This conflicts with Neg20dBm. Two distinct settings should not have thet same register value 0x002. Leaving this results in match errors in the generated Rust code. The issue has been raised with Nordic and should hopefully be addressed with an updated SVD file. -->
+                <!-- <enumeratedValue> -->
+                <!--   <name>Neg22dBm</name> -->
+                <!--   <description>-22 dBm</description> -->
+                <!--   <value>0x002</value> -->
+                <!-- </enumeratedValue> -->
                 <enumeratedValue>
                   <name>Neg28dBm</name>
                   <description>-28 dBm</description>

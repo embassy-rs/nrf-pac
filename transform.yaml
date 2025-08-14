@@ -39,6 +39,7 @@ transforms:
   - !Rename
       from: (.*)::vals::EnableEnable
       to: $1::vals::Enable
+      type: Enum
 
 # ======= Fix inconsistent interrupt naming
   - !RenameInterrupts
@@ -288,6 +289,7 @@ transforms:
   - !Rename
       from: nvmc::vals::ConfigWen
       to: nvmc::vals::Wen
+      type: Enum
 
 # ======= QSPI
   - !DeleteEnums
