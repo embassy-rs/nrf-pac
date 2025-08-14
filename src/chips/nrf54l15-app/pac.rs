@@ -38544,8 +38544,6 @@ pub mod radio {
             pub const NEG28_DBM: Self = Self(0x01);
             #[doc = "-20 dBm"]
             pub const NEG20_DBM: Self = Self(0x02);
-            #[doc = "-22 dBm"]
-            pub const NEG22_DBM: Self = Self(0x02);
             #[doc = "-18 dBm"]
             pub const NEG18_DBM: Self = Self(0x03);
             #[doc = "-16 dBm"]
@@ -38610,7 +38608,6 @@ pub mod radio {
                 match self.0 {
                     0x01 => f.write_str("NEG28_DBM"),
                     0x02 => f.write_str("NEG20_DBM"),
-                    0x02 => f.write_str("NEG22_DBM"),
                     0x03 => f.write_str("NEG18_DBM"),
                     0x04 => f.write_str("NEG16_DBM"),
                     0x05 => f.write_str("NEG14_DBM"),
@@ -38646,7 +38643,6 @@ pub mod radio {
                 match self.0 {
                     0x01 => defmt::write!(f, "NEG28_DBM"),
                     0x02 => defmt::write!(f, "NEG20_DBM"),
-                    0x02 => defmt::write!(f, "NEG22_DBM"),
                     0x03 => defmt::write!(f, "NEG18_DBM"),
                     0x04 => defmt::write!(f, "NEG16_DBM"),
                     0x05 => defmt::write!(f, "NEG14_DBM"),
