@@ -175,12 +175,16 @@ pub enum Interrupt {
     #[doc = "270 - CLOCK_POWER"]
     CLOCK_POWER = 270,
 }
+
+/*
 unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
     #[inline(always)]
     fn number(self) -> u16 {
         self as u16
     }
 }
+*/
+
 #[cfg(feature = "rt")]
 mod _vectors {
     unsafe extern "C" {
@@ -986,8 +990,8 @@ pub const CRACENCORE_S: cracencore::Cracencore =
     unsafe { cracencore::Cracencore::from_ptr(0x5180_0000usize as _) };
 #[doc = "VPR CLIC registers"]
 pub const VPRCLIC_NS: clic::Clic = unsafe { clic::Clic::from_ptr(0xf000_0000usize as _) };
-#[cfg(feature = "rt")]
-pub use cortex_m_rt::interrupt;
+//#[cfg(feature = "rt")]
+//pub use cortex_m_rt::interrupt;
 #[cfg(feature = "rt")]
 pub use Interrupt as interrupt;
 pub mod aar {

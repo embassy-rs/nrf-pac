@@ -9,12 +9,18 @@ repository = "https://github.com/embassy-rs/nrf-pac"
 documentation = "https://docs.embassy.dev/nrf-pac"
 
 [dependencies]
-cortex-m = "0.7.1"
-cortex-m-rt = { version = ">=0.6.15,<0.8", optional = true }
 defmt = { version = "0.3.10", optional = true }
 
+[target.'cfg(target_arch = "arm")'.dependencies]
+cortex-m = "0.7.1"
+cortex-m-rt = { version = ">=0.6.15,<0.8", optional = true }
+
+[target.'cfg(target_arch = "riscv32")'.dependencies]
+riscv = "0.12.1"
+riscv-rt = { version = "0.13.0", optional = true }
+
 [features]
-rt = ["cortex-m-rt/device"]
+rt = ["cortex-m-rt/device", "riscv-rt"]
 defmt = ["dep:defmt"]
 
 nrf51 = []
