@@ -5,7 +5,7 @@ This is a [Peripheral Access Crate](https://rust-embedded.github.io/book/start/r
 This crate has been automatically generated from the SVD files in [nrfx](https://github.com/NordicSemiconductor/nrfx), using [chiptool](https://github.com/embassy-rs/chiptool/). Fixes are added to the SVD file to make the
 crate more amenable to writing HALs with, such as converting sets of identical registers/fields to arrays, merging identical registers and enums, etc.
 
-This crate is used for the [`embassy-nrf`](github.com/embassy-rs/embassy/) Rust Hardware Abstraction Layer (HAL) for the nRF microcontrollers.
+This crate is used for the [`embassy-nrf`](https://github.com/embassy-rs/embassy/tree/main/embassy-nrf) Rust Hardware Abstraction Layer (HAL) for the nRF microcontrollers.
 
 ## Supported chips
 
