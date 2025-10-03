@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (26983da 2025-01-02))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (828b7b8 2025-09-01))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -545,56 +545,56 @@ pub mod cache {
         #[inline(always)]
         pub const fn profiling(self, n: usize) -> Profiling {
             assert!(n < 2usize);
-            unsafe { Profiling::from_ptr(self.ptr.add(0x0400usize + n * 32usize) as _) }
+            unsafe { Profiling::from_ptr(self.ptr.wrapping_add(0x0400usize + n * 32usize) as _) }
         }
         #[doc = "Enable cache."]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Invalidate the cache."]
         #[inline(always)]
         pub const fn invalidate(self) -> crate::common::Reg<regs::Invalidate, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Erase the cache."]
         #[inline(always)]
         pub const fn erase(self) -> crate::common::Reg<regs::Erase, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Enable the profiling counters."]
         #[inline(always)]
         pub const fn profilingenable(
             self,
         ) -> crate::common::Reg<regs::Profilingenable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Clear the profiling counters."]
         #[inline(always)]
         pub const fn profilingclear(
             self,
         ) -> crate::common::Reg<regs::Profilingclear, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Cache mode. Switching from Cache to Ram mode causes the RAM to be cleared. Switching from RAM to Cache mode causes the cache to be invalidated."]
         #[inline(always)]
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0514usize) as _) }
         }
         #[doc = "Lock debug mode."]
         #[inline(always)]
         pub const fn debuglock(self) -> crate::common::Reg<regs::Debuglock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0518usize) as _) }
         }
         #[doc = "Cache erase status."]
         #[inline(always)]
         pub const fn erasestatus(self) -> crate::common::Reg<regs::Erasestatus, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x051cusize) as _) }
         }
         #[doc = "Lock cache updates. Prevents updating of cache content on cache misses, but will continue to lookup instruction/data fetches in content already present in the cache. Ignored in RAM mode."]
         #[inline(always)]
         pub const fn writelock(self) -> crate::common::Reg<regs::Writelock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0520usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -616,22 +616,22 @@ pub mod cache {
         #[doc = "Description cluster: Instruction fetch cache hit counter for cache region n, where n=0 means Flash and n=1 means XIP."]
         #[inline(always)]
         pub const fn ihit(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Instruction fetch cache miss counter for cache region n, where n=0 means Flash and n=1 means XIP."]
         #[inline(always)]
         pub const fn imiss(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: Data fetch cache hit counter for cache region n, where n=0 means Flash and n=1 means XIP."]
         #[inline(always)]
         pub const fn dhit(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Description cluster: Data fetch cache miss counter for cache region n, where n=0 means Flash and n=1 means XIP."]
         #[inline(always)]
         pub const fn dmiss(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -1057,7 +1057,7 @@ pub mod cachedata {
         #[inline(always)]
         pub const fn set(self, n: usize) -> Set {
             assert!(n < 256usize);
-            unsafe { Set::from_ptr(self.ptr.add(0x0usize + n * 32usize) as _) }
+            unsafe { Set::from_ptr(self.ptr.wrapping_add(0x0usize + n * 32usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -1080,7 +1080,7 @@ pub mod cachedata {
         #[inline(always)]
         pub const fn way(self, n: usize) -> Way {
             assert!(n < 2usize);
-            unsafe { Way::from_ptr(self.ptr.add(0x0usize + n * 16usize) as _) }
+            unsafe { Way::from_ptr(self.ptr.wrapping_add(0x0usize + n * 16usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -1102,22 +1102,22 @@ pub mod cachedata {
         #[doc = "Description cluster: Cache data bits \\[31:0\\] of SET\\[n\\], WAY\\[o\\]."]
         #[inline(always)]
         pub const fn data0(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Cache data bits \\[63:32\\] of SET\\[n\\], WAY\\[o\\]."]
         #[inline(always)]
         pub const fn data1(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: Cache data bits \\[95:64\\] of SET\\[n\\], WAY\\[o\\]."]
         #[inline(always)]
         pub const fn data2(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Description cluster: Cache data bits \\[127:96\\] of SET\\[n\\], WAY\\[o\\]."]
         #[inline(always)]
         pub const fn data3(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
 }
@@ -1142,7 +1142,7 @@ pub mod cacheinfo {
         #[inline(always)]
         pub const fn set(self, n: usize) -> Set {
             assert!(n < 256usize);
-            unsafe { Set::from_ptr(self.ptr.add(0x0usize + n * 8usize) as _) }
+            unsafe { Set::from_ptr(self.ptr.wrapping_add(0x0usize + n * 8usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -1165,7 +1165,9 @@ pub mod cacheinfo {
         #[inline(always)]
         pub const fn way(self, n: usize) -> crate::common::Reg<regs::Way, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -1295,307 +1297,307 @@ pub mod clock {
         #[doc = "Start HFCLK128M/HFCLK64M source as selected in HFCLKSRC"]
         #[inline(always)]
         pub const fn tasks_hfclkstart(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop HFCLK128M/HFCLK64M source"]
         #[inline(always)]
         pub const fn tasks_hfclkstop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Start LFCLK source as selected in LFCLKSRC"]
         #[inline(always)]
         pub const fn tasks_lfclkstart(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Stop LFCLK source"]
         #[inline(always)]
         pub const fn tasks_lfclkstop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Start calibration of LFRC oscillator"]
         #[inline(always)]
         pub const fn tasks_cal(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Start HFCLKAUDIO source"]
         #[inline(always)]
         pub const fn tasks_hfclkaudiostart(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "Stop HFCLKAUDIO source"]
         #[inline(always)]
         pub const fn tasks_hfclkaudiostop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Start HFCLK192M source as selected in HFCLK192MSRC"]
         #[inline(always)]
         pub const fn tasks_hfclk192mstart(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "Stop HFCLK192M source"]
         #[inline(always)]
         pub const fn tasks_hfclk192mstop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Subscribe configuration for task HFCLKSTART"]
         #[inline(always)]
         pub const fn subscribe_hfclkstart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task HFCLKSTOP"]
         #[inline(always)]
         pub const fn subscribe_hfclkstop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task LFCLKSTART"]
         #[inline(always)]
         pub const fn subscribe_lfclkstart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task LFCLKSTOP"]
         #[inline(always)]
         pub const fn subscribe_lfclkstop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "Subscribe configuration for task CAL"]
         #[inline(always)]
         pub const fn subscribe_cal(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x90usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x90usize) as _) }
         }
         #[doc = "Subscribe configuration for task HFCLKAUDIOSTART"]
         #[inline(always)]
         pub const fn subscribe_hfclkaudiostart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x98usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x98usize) as _) }
         }
         #[doc = "Subscribe configuration for task HFCLKAUDIOSTOP"]
         #[inline(always)]
         pub const fn subscribe_hfclkaudiostop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x9cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x9cusize) as _) }
         }
         #[doc = "Subscribe configuration for task HFCLK192MSTART"]
         #[inline(always)]
         pub const fn subscribe_hfclk192mstart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa0usize) as _) }
         }
         #[doc = "Subscribe configuration for task HFCLK192MSTOP"]
         #[inline(always)]
         pub const fn subscribe_hfclk192mstop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa4usize) as _) }
         }
         #[doc = "HFCLK128M/HFCLK64M source started"]
         #[inline(always)]
         pub const fn events_hfclkstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "LFCLK source started"]
         #[inline(always)]
         pub const fn events_lfclkstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Calibration of LFRC oscillator complete event"]
         #[inline(always)]
         pub const fn events_done(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x011cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x011cusize) as _) }
         }
         #[doc = "HFCLKAUDIO source started"]
         #[inline(always)]
         pub const fn events_hfclkaudiostarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0120usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0120usize) as _) }
         }
         #[doc = "HFCLK192M source started"]
         #[inline(always)]
         pub const fn events_hfclk192mstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0124usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0124usize) as _) }
         }
         #[doc = "Publish configuration for event HFCLKSTARTED"]
         #[inline(always)]
         pub const fn publish_hfclkstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event LFCLKSTARTED"]
         #[inline(always)]
         pub const fn publish_lfclkstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event DONE"]
         #[inline(always)]
         pub const fn publish_done(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x019cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x019cusize) as _) }
         }
         #[doc = "Publish configuration for event HFCLKAUDIOSTARTED"]
         #[inline(always)]
         pub const fn publish_hfclkaudiostarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a0usize) as _) }
         }
         #[doc = "Publish configuration for event HFCLK192MSTARTED"]
         #[inline(always)]
         pub const fn publish_hfclk192mstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a4usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Pending interrupts"]
         #[inline(always)]
         pub const fn intpend(self) -> crate::common::Reg<regs::Int, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x030cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x030cusize) as _) }
         }
         #[doc = "Status indicating that HFCLKSTART task has been triggered"]
         #[inline(always)]
         pub const fn hfclkrun(self) -> crate::common::Reg<regs::Hfclkrun, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0408usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0408usize) as _) }
         }
         #[doc = "Status indicating which HFCLK128M/HFCLK64M source is running This register value in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance."]
         #[inline(always)]
         pub const fn hfclkstat(self) -> crate::common::Reg<regs::Hfclkstat, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x040cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x040cusize) as _) }
         }
         #[doc = "Status indicating that LFCLKSTART task has been triggered"]
         #[inline(always)]
         pub const fn lfclkrun(self) -> crate::common::Reg<regs::Lfclkrun, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0414usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0414usize) as _) }
         }
         #[doc = "Status indicating which LFCLK source is running This register value in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance."]
         #[inline(always)]
         pub const fn lfclkstat(self) -> crate::common::Reg<regs::Lfclkstat, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0418usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0418usize) as _) }
         }
         #[doc = "Copy of LFCLKSRC register, set when LFCLKSTART task was triggered"]
         #[inline(always)]
         pub const fn lfclksrccopy(
             self,
         ) -> crate::common::Reg<regs::Lfclksrccopy, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x041cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x041cusize) as _) }
         }
         #[doc = "Status indicating that HFCLKAUDIOSTART task has been triggered"]
         #[inline(always)]
         pub const fn hfclkaudiorun(
             self,
         ) -> crate::common::Reg<regs::Hfclkaudiorun, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0450usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0450usize) as _) }
         }
         #[doc = "Status indicating which HFCLKAUDIO source is running"]
         #[inline(always)]
         pub const fn hfclkaudiostat(
             self,
         ) -> crate::common::Reg<regs::Hfclkaudiostat, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0454usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0454usize) as _) }
         }
         #[doc = "Status indicating that HFCLK192MSTART task has been triggered"]
         #[inline(always)]
         pub const fn hfclk192mrun(
             self,
         ) -> crate::common::Reg<regs::Hfclk192mrun, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0458usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0458usize) as _) }
         }
         #[doc = "Status indicating which HFCLK192M source is running"]
         #[inline(always)]
         pub const fn hfclk192mstat(
             self,
         ) -> crate::common::Reg<regs::Hfclk192mstat, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x045cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x045cusize) as _) }
         }
         #[doc = "Clock source for HFCLK128M/HFCLK64M"]
         #[inline(always)]
         pub const fn hfclksrc(self) -> crate::common::Reg<regs::Hfclksrc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0514usize) as _) }
         }
         #[doc = "Clock source for LFCLK"]
         #[inline(always)]
         pub const fn lfclksrc(self) -> crate::common::Reg<regs::Lfclksrc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0518usize) as _) }
         }
         #[doc = "HFCLK128M frequency configuration"]
         #[inline(always)]
         pub const fn hfclkctrl(self) -> crate::common::Reg<regs::Hfclkctrl, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0558usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0558usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn hfclkaudio(self) -> Hfclkaudio {
-            unsafe { Hfclkaudio::from_ptr(self.ptr.add(0x055cusize) as _) }
+            unsafe { Hfclkaudio::from_ptr(self.ptr.wrapping_add(0x055cusize) as _) }
         }
         #[doc = "Automatic or manual control of HFCLK128M/HFCLK64M"]
         #[inline(always)]
         pub const fn hfclkalwaysrun(
             self,
         ) -> crate::common::Reg<regs::Hfclkalwaysrun, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0570usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0570usize) as _) }
         }
         #[doc = "Automatic or manual control of LFCLK"]
         #[inline(always)]
         pub const fn lfclkalwaysrun(
             self,
         ) -> crate::common::Reg<regs::Lfclkalwaysrun, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0574usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0574usize) as _) }
         }
         #[doc = "Automatic or manual control of HFCLKAUDIO"]
         #[inline(always)]
         pub const fn hfclkaudioalwaysrun(
             self,
         ) -> crate::common::Reg<regs::Hfclkaudioalwaysrun, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x057cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x057cusize) as _) }
         }
         #[doc = "Clock source for HFCLK192M"]
         #[inline(always)]
         pub const fn hfclk192msrc(
             self,
         ) -> crate::common::Reg<regs::Hfclk192msrc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0580usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0580usize) as _) }
         }
         #[doc = "Automatic or manual control of HFCLK192M"]
         #[inline(always)]
         pub const fn hfclk192malwaysrun(
             self,
         ) -> crate::common::Reg<regs::Hfclk192malwaysrun, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0584usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0584usize) as _) }
         }
         #[doc = "HFCLK192M frequency configuration"]
         #[inline(always)]
         pub const fn hfclk192mctrl(
             self,
         ) -> crate::common::Reg<regs::Hfclk192mctrl, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05b8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05b8usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -1617,7 +1619,7 @@ pub mod clock {
         #[doc = "Audio PLL frequency in 11.176 MHz - 11.402 MHz or 12.165 MHz - 12.411 MHz frequency bands"]
         #[inline(always)]
         pub const fn frequency(self) -> crate::common::Reg<regs::Frequency, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     pub mod regs {
@@ -2983,151 +2985,151 @@ pub mod comp {
         #[doc = "Start comparator"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop comparator"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Sample comparator value"]
         #[inline(always)]
         pub const fn tasks_sample(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task SAMPLE"]
         #[inline(always)]
         pub const fn subscribe_sample(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "COMP is ready and output is valid"]
         #[inline(always)]
         pub const fn events_ready(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Downward crossing"]
         #[inline(always)]
         pub const fn events_down(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Upward crossing"]
         #[inline(always)]
         pub const fn events_up(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Downward or upward crossing"]
         #[inline(always)]
         pub const fn events_cross(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x010cusize) as _) }
         }
         #[doc = "Publish configuration for event READY"]
         #[inline(always)]
         pub const fn publish_ready(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event DOWN"]
         #[inline(always)]
         pub const fn publish_down(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event UP"]
         #[inline(always)]
         pub const fn publish_up(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event CROSS"]
         #[inline(always)]
         pub const fn publish_cross(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x018cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x018cusize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Compare result"]
         #[inline(always)]
         pub const fn result(self) -> crate::common::Reg<regs::Result, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "COMP enable"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Pin select"]
         #[inline(always)]
         pub const fn psel(self) -> crate::common::Reg<regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Reference source select for single-ended mode"]
         #[inline(always)]
         pub const fn refsel(self) -> crate::common::Reg<regs::Refsel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "External reference select"]
         #[inline(always)]
         pub const fn extrefsel(self) -> crate::common::Reg<regs::Extrefsel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Threshold configuration for hysteresis unit"]
         #[inline(always)]
         pub const fn th(self) -> crate::common::Reg<regs::Th, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0530usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0530usize) as _) }
         }
         #[doc = "Mode configuration"]
         #[inline(always)]
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0534usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "Comparator hysteresis enable"]
         #[inline(always)]
         pub const fn hyst(self) -> crate::common::Reg<regs::Hyst, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0538usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0538usize) as _) }
         }
         #[doc = "Current source select on analog input"]
         #[inline(always)]
         pub const fn isource(self) -> crate::common::Reg<regs::Isource, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x053cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x053cusize) as _) }
         }
     }
     pub mod regs {
@@ -4008,7 +4010,7 @@ pub mod cryptocell {
         #[doc = "Enable CRYPTOCELL subsystem."]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
     }
     pub mod regs {
@@ -4071,27 +4073,27 @@ pub mod cti {
         #[doc = "CTI Control register"]
         #[inline(always)]
         pub const fn cticontrol(self) -> crate::common::Reg<regs::Cticontrol, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "CTI Interrupt Acknowledge register"]
         #[inline(always)]
         pub const fn ctiintack(self) -> crate::common::Reg<regs::Ctiintack, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "CTI Application Trigger Set register"]
         #[inline(always)]
         pub const fn ctiappset(self) -> crate::common::Reg<regs::Ctiappset, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "CTI Application Trigger Clear register"]
         #[inline(always)]
         pub const fn ctiappclear(self) -> crate::common::Reg<regs::Ctiappclear, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "CTI Application Pulse register"]
         #[inline(always)]
         pub const fn ctiapppulse(self) -> crate::common::Reg<regs::Ctiapppulse, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Description collection: CTI Trigger input"]
         #[inline(always)]
@@ -4100,7 +4102,9 @@ pub mod cti {
             n: usize,
         ) -> crate::common::Reg<regs::Ctiinen, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: CTI Trigger output"]
         #[inline(always)]
@@ -4109,108 +4113,110 @@ pub mod cti {
             n: usize,
         ) -> crate::common::Reg<regs::Ctiouten, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa0usize + n * 4usize) as _)
+            }
         }
         #[doc = "CTI Trigger In Status register"]
         #[inline(always)]
         pub const fn ctitriginstatus(
             self,
         ) -> crate::common::Reg<regs::Ctitriginstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0130usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0130usize) as _) }
         }
         #[doc = "CTI Trigger Out Status register"]
         #[inline(always)]
         pub const fn ctitrigoutstatus(
             self,
         ) -> crate::common::Reg<regs::Ctitrigoutstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0134usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0134usize) as _) }
         }
         #[doc = "CTI Channel In Status register"]
         #[inline(always)]
         pub const fn ctichinstatus(
             self,
         ) -> crate::common::Reg<regs::Ctichinstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0138usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0138usize) as _) }
         }
         #[doc = "Enable CTI Channel Gate register"]
         #[inline(always)]
         pub const fn ctigate(self) -> crate::common::Reg<regs::Ctigate, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0140usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0140usize) as _) }
         }
         #[doc = "Device Architecture register"]
         #[inline(always)]
         pub const fn devarch(self) -> crate::common::Reg<regs::Devarch, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fbcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fbcusize) as _) }
         }
         #[doc = "Device Configuration register"]
         #[inline(always)]
         pub const fn devid(self) -> crate::common::Reg<regs::Devid, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fc8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fc8usize) as _) }
         }
         #[doc = "Device Type Identifier register"]
         #[inline(always)]
         pub const fn devtype(self) -> crate::common::Reg<regs::Devtype, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fccusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fccusize) as _) }
         }
         #[doc = "Peripheral ID4 Register"]
         #[inline(always)]
         pub const fn pidr4(self) -> crate::common::Reg<regs::Pidr4, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fd0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fd0usize) as _) }
         }
         #[doc = "Peripheral ID5 register"]
         #[inline(always)]
         pub const fn pidr5(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fd4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fd4usize) as _) }
         }
         #[doc = "Peripheral ID6 register"]
         #[inline(always)]
         pub const fn pidr6(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fd8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fd8usize) as _) }
         }
         #[doc = "Peripheral ID7 register"]
         #[inline(always)]
         pub const fn pidr7(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fdcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fdcusize) as _) }
         }
         #[doc = "Peripheral ID0 Register"]
         #[inline(always)]
         pub const fn pidr0(self) -> crate::common::Reg<regs::Pidr0, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fe0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fe0usize) as _) }
         }
         #[doc = "Peripheral ID1 Register"]
         #[inline(always)]
         pub const fn pidr1(self) -> crate::common::Reg<regs::Pidr1, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fe4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fe4usize) as _) }
         }
         #[doc = "Peripheral ID2 Register"]
         #[inline(always)]
         pub const fn pidr2(self) -> crate::common::Reg<regs::Pidr2, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fe8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fe8usize) as _) }
         }
         #[doc = "Peripheral ID3 Register"]
         #[inline(always)]
         pub const fn pidr3(self) -> crate::common::Reg<regs::Pidr3, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0fecusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0fecusize) as _) }
         }
         #[doc = "Component ID0 Register"]
         #[inline(always)]
         pub const fn cidr0(self) -> crate::common::Reg<regs::Cidr0, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0ff0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0ff0usize) as _) }
         }
         #[doc = "Component ID1 Register"]
         #[inline(always)]
         pub const fn cidr1(self) -> crate::common::Reg<regs::Cidr1, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0ff4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0ff4usize) as _) }
         }
         #[doc = "Component ID2 Register"]
         #[inline(always)]
         pub const fn cidr2(self) -> crate::common::Reg<regs::Cidr2, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0ff8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0ff8usize) as _) }
         }
         #[doc = "Component ID3 Register"]
         #[inline(always)]
         pub const fn cidr3(self) -> crate::common::Reg<regs::Cidr3, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0ffcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0ffcusize) as _) }
         }
     }
     pub mod regs {
@@ -6569,12 +6575,12 @@ pub mod ctrlapperi {
         #[doc = "This register locks the APPROTECT.DISABLE register from being written to until next reset."]
         #[inline(always)]
         pub const fn lock(self) -> crate::common::Reg<regs::ApprotectLock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "This register disables the APPROTECT register and enables debug access to non-secure mode."]
         #[inline(always)]
         pub const fn disable(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Control access port 0"]
@@ -6596,27 +6602,27 @@ pub mod ctrlapperi {
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn mailbox(self) -> Mailbox {
-            unsafe { Mailbox::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { Mailbox::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn eraseprotect(self) -> Eraseprotect {
-            unsafe { Eraseprotect::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { Eraseprotect::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn approtect(self) -> Approtect {
-            unsafe { Approtect::from_ptr(self.ptr.add(0x0540usize) as _) }
+            unsafe { Approtect::from_ptr(self.ptr.wrapping_add(0x0540usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn secureapprotect(self) -> Secureapprotect {
-            unsafe { Secureapprotect::from_ptr(self.ptr.add(0x0548usize) as _) }
+            unsafe { Secureapprotect::from_ptr(self.ptr.wrapping_add(0x0548usize) as _) }
         }
         #[doc = "Status bits for CTRL-AP peripheral."]
         #[inline(always)]
         pub const fn status(self) -> crate::common::Reg<regs::Status, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0600usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0600usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -6638,12 +6644,12 @@ pub mod ctrlapperi {
         #[doc = "This register locks the ERASEPROTECT.DISABLE register from being written until next reset."]
         #[inline(always)]
         pub const fn lock(self) -> crate::common::Reg<regs::EraseprotectLock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "This register disables the ERASEPROTECT register and performs an ERASEALL operation."]
         #[inline(always)]
         pub const fn disable(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -6665,22 +6671,22 @@ pub mod ctrlapperi {
         #[doc = "Data sent from the debugger to the CPU."]
         #[inline(always)]
         pub const fn rxdata(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "This register shows a status that indicates if data sent from the debugger to the CPU has been read."]
         #[inline(always)]
         pub const fn rxstatus(self) -> crate::common::Reg<regs::Rxstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Data sent from the CPU to the debugger."]
         #[inline(always)]
         pub const fn txdata(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "This register shows a status that indicates if the data sent from the CPU to the debugger has been read."]
         #[inline(always)]
         pub const fn txstatus(self) -> crate::common::Reg<regs::Txstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -6704,12 +6710,12 @@ pub mod ctrlapperi {
         pub const fn lock(
             self,
         ) -> crate::common::Reg<regs::SecureapprotectLock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "This register disables the SECUREAPPROTECT register and enables debug access to secure mode."]
         #[inline(always)]
         pub const fn disable(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     pub mod regs {
@@ -7047,25 +7053,25 @@ pub mod dcnf {
         #[doc = "CPU ID of this subsystem"]
         #[inline(always)]
         pub const fn cpuid(self) -> crate::common::Reg<regs::Cpuid, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0420usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0420usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn extperi(self, n: usize) -> Extperi {
             assert!(n < 1usize);
-            unsafe { Extperi::from_ptr(self.ptr.add(0x0440usize + n * 4usize) as _) }
+            unsafe { Extperi::from_ptr(self.ptr.wrapping_add(0x0440usize + n * 4usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn extram(self, n: usize) -> Extram {
             assert!(n < 1usize);
-            unsafe { Extram::from_ptr(self.ptr.add(0x0460usize + n * 4usize) as _) }
+            unsafe { Extram::from_ptr(self.ptr.wrapping_add(0x0460usize + n * 4usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn extcode(self, n: usize) -> Extcode {
             assert!(n < 1usize);
-            unsafe { Extcode::from_ptr(self.ptr.add(0x0480usize + n * 4usize) as _) }
+            unsafe { Extcode::from_ptr(self.ptr.wrapping_add(0x0480usize + n * 4usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -7087,7 +7093,7 @@ pub mod dcnf {
         #[doc = "Description cluster: Control access from master connected to AMLI master port EXTCODE\\[n\\]"]
         #[inline(always)]
         pub const fn protect(self) -> crate::common::Reg<regs::ExtcodeProtect, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -7109,7 +7115,7 @@ pub mod dcnf {
         #[doc = "Description cluster: Control access for master connected to AMLI master port EXTPERI\\[n\\]"]
         #[inline(always)]
         pub const fn protect(self) -> crate::common::Reg<regs::ExtperiProtect, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -7131,7 +7137,7 @@ pub mod dcnf {
         #[doc = "Description cluster: Control access from master connected to AMLI master port EXTRAM\\[n\\]"]
         #[inline(always)]
         pub const fn protect(self) -> crate::common::Reg<regs::ExtramProtect, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     pub mod regs {
@@ -7709,34 +7715,36 @@ pub mod dppic {
         #[inline(always)]
         pub const fn tasks_chg(self, n: usize) -> TasksChg {
             assert!(n < 6usize);
-            unsafe { TasksChg::from_ptr(self.ptr.add(0x0usize + n * 8usize) as _) }
+            unsafe { TasksChg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 8usize) as _) }
         }
         #[doc = "Subscribe configuration for tasks"]
         #[inline(always)]
         pub const fn subscribe_chg(self, n: usize) -> SubscribeChg {
             assert!(n < 6usize);
-            unsafe { SubscribeChg::from_ptr(self.ptr.add(0x80usize + n * 8usize) as _) }
+            unsafe { SubscribeChg::from_ptr(self.ptr.wrapping_add(0x80usize + n * 8usize) as _) }
         }
         #[doc = "Channel enable register"]
         #[inline(always)]
         pub const fn chen(self) -> crate::common::Reg<regs::Chen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Channel enable set register"]
         #[inline(always)]
         pub const fn chenset(self) -> crate::common::Reg<regs::Chen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Channel enable clear register"]
         #[inline(always)]
         pub const fn chenclr(self) -> crate::common::Reg<regs::Chen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Description collection: Channel group n Note: Writes to this register are ignored if either SUBSCRIBE_CHG\\[n\\].EN or SUBSCRIBE_CHG\\[n\\].DIS is enabled"]
         #[inline(always)]
         pub const fn chg(self, n: usize) -> crate::common::Reg<regs::Chg, crate::common::RW> {
             assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0800usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0800usize + n * 4usize) as _)
+            }
         }
     }
     #[doc = "Subscribe configuration for tasks"]
@@ -7760,14 +7768,14 @@ pub mod dppic {
         pub const fn en(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Subscribe configuration for task CHG\\[n\\].DIS"]
         #[inline(always)]
         pub const fn dis(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Channel group tasks"]
@@ -7789,12 +7797,12 @@ pub mod dppic {
         #[doc = "Description cluster: Enable channel group n"]
         #[inline(always)]
         pub const fn en(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Disable channel group n"]
         #[inline(always)]
         pub const fn dis(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     pub mod regs {
@@ -7965,7 +7973,9 @@ pub mod egu {
         #[inline(always)]
         pub const fn tasks_trigger(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Subscribe configuration for task TRIGGER\\[n\\]"]
         #[inline(always)]
@@ -7974,7 +7984,9 @@ pub mod egu {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Event number n generated by triggering the corresponding TRIGGER\\[n\\] task"]
         #[inline(always)]
@@ -7983,7 +7995,9 @@ pub mod egu {
             n: usize,
         ) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Publish configuration for event TRIGGERED\\[n\\]"]
         #[inline(always)]
@@ -7992,22 +8006,24 @@ pub mod egu {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize + n * 4usize) as _)
+            }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
     }
     pub mod regs {
@@ -8089,28 +8105,28 @@ pub mod ficr {
         #[doc = "Device info"]
         #[inline(always)]
         pub const fn info(self) -> Info {
-            unsafe { Info::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { Info::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn trimcnf(self, n: usize) -> Trimcnf {
             assert!(n < 32usize);
-            unsafe { Trimcnf::from_ptr(self.ptr.add(0x0300usize + n * 8usize) as _) }
+            unsafe { Trimcnf::from_ptr(self.ptr.wrapping_add(0x0300usize + n * 8usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn nfc(self) -> Nfc {
-            unsafe { Nfc::from_ptr(self.ptr.add(0x0450usize) as _) }
+            unsafe { Nfc::from_ptr(self.ptr.wrapping_add(0x0450usize) as _) }
         }
         #[doc = "NIST800-90B RNG calibration data"]
         #[inline(always)]
         pub const fn trng90b(self) -> Trng90b {
-            unsafe { Trng90b::from_ptr(self.ptr.add(0x0c00usize) as _) }
+            unsafe { Trng90b::from_ptr(self.ptr.wrapping_add(0x0c00usize) as _) }
         }
         #[doc = "XOSC32M capacitor selection trim values"]
         #[inline(always)]
         pub const fn xosc32mtrim(self) -> crate::common::Reg<regs::Xosc32mtrim, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0c20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0c20usize) as _) }
         }
     }
     #[doc = "Device info"]
@@ -8132,55 +8148,57 @@ pub mod ficr {
         #[doc = "Configuration identifier"]
         #[inline(always)]
         pub const fn configid(self) -> crate::common::Reg<regs::Configid, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description collection: Device identifier"]
         #[inline(always)]
         pub const fn deviceid(self, n: usize) -> crate::common::Reg<u32, crate::common::R> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize + n * 4usize) as _)
+            }
         }
         #[doc = "Part code"]
         #[inline(always)]
         pub const fn part(self) -> crate::common::Reg<regs::Part, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Part Variant, Hardware version and Production configuration"]
         #[inline(always)]
         pub const fn variant(self) -> crate::common::Reg<regs::Variant, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Package option"]
         #[inline(always)]
         pub const fn package(self) -> crate::common::Reg<regs::Package, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "RAM variant"]
         #[inline(always)]
         pub const fn ram(self) -> crate::common::Reg<regs::Ram, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "Flash variant"]
         #[inline(always)]
         pub const fn flash(self) -> crate::common::Reg<regs::Flash, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Code memory page size in bytes"]
         #[inline(always)]
         pub const fn codepagesize(
             self,
         ) -> crate::common::Reg<regs::Codepagesize, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "Code memory size"]
         #[inline(always)]
         pub const fn codesize(self) -> crate::common::Reg<regs::Codesize, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Device type"]
         #[inline(always)]
         pub const fn devicetype(self) -> crate::common::Reg<regs::Devicetype, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x28usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -8202,22 +8220,22 @@ pub mod ficr {
         #[doc = "Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader0(self) -> crate::common::Reg<regs::Tagheader0, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader1(self) -> crate::common::Reg<regs::Tagheader1, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader2(self) -> crate::common::Reg<regs::Tagheader2, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST."]
         #[inline(always)]
         pub const fn tagheader3(self) -> crate::common::Reg<regs::Tagheader3, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -8239,12 +8257,12 @@ pub mod ficr {
         #[doc = "Description cluster: Address of the PAR register which will be written"]
         #[inline(always)]
         pub const fn addr(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Data"]
         #[inline(always)]
         pub const fn data(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "NIST800-90B RNG calibration data"]
@@ -8266,42 +8284,42 @@ pub mod ficr {
         #[doc = "Amount of bytes for the required entropy bits"]
         #[inline(always)]
         pub const fn bytes(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Repetition counter cutoff"]
         #[inline(always)]
         pub const fn rccutoff(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Adaptive proportion cutoff"]
         #[inline(always)]
         pub const fn apcutoff(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Amount of bytes for the startup tests"]
         #[inline(always)]
         pub const fn startup(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Sample count for ring oscillator 1"]
         #[inline(always)]
         pub const fn rosc1(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Sample count for ring oscillator 2"]
         #[inline(always)]
         pub const fn rosc2(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Sample count for ring oscillator 3"]
         #[inline(always)]
         pub const fn rosc3(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "Sample count for ring oscillator 4"]
         #[inline(always)]
         pub const fn rosc4(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
     }
     pub mod regs {
@@ -9477,47 +9495,47 @@ pub mod fpu {
         #[doc = "An FPUIOC exception triggered by an invalid operation has occurred in the FPU"]
         #[inline(always)]
         pub const fn events_invalidoperation(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "An FPUDZC exception triggered by a floating-point divide-by-zero operation has occurred in the FPU"]
         #[inline(always)]
         pub const fn events_dividebyzero(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "An FPUOFC exception triggered by a floating-point overflow has occurred in the FPU"]
         #[inline(always)]
         pub const fn events_overflow(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "An FPUUFC exception triggered by a floating-point underflow has occurred in the FPU"]
         #[inline(always)]
         pub const fn events_underflow(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x010cusize) as _) }
         }
         #[doc = "An FPUIXC exception triggered by an inexact floating-point operation has occurred in the FPU"]
         #[inline(always)]
         pub const fn events_inexact(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "An FPUIDC exception triggered by a denormal floating-point input has occurred in the FPU"]
         #[inline(always)]
         pub const fn events_denormalinput(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0114usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0114usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
     }
     pub mod regs {
@@ -9645,54 +9663,54 @@ pub mod gpio {
         #[doc = "Write GPIO port"]
         #[inline(always)]
         pub const fn out(self) -> crate::common::Reg<regs::Out, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Set individual bits in GPIO port"]
         #[inline(always)]
         pub const fn outset(self) -> crate::common::Reg<regs::Outset, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Clear individual bits in GPIO port"]
         #[inline(always)]
         pub const fn outclr(self) -> crate::common::Reg<regs::Outclr, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Read GPIO port"]
         #[inline(always)]
         pub const fn in_(self) -> crate::common::Reg<regs::In, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Direction of GPIO pins"]
         #[inline(always)]
         pub const fn dir(self) -> crate::common::Reg<regs::Dir, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "DIR set register"]
         #[inline(always)]
         pub const fn dirset(self) -> crate::common::Reg<regs::Dirset, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "DIR clear register"]
         #[inline(always)]
         pub const fn dirclr(self) -> crate::common::Reg<regs::Dirclr, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Latch register indicating what GPIO pins that have met the criteria set in the PIN_CNF\\[n\\].SENSE registers"]
         #[inline(always)]
         pub const fn latch(self) -> crate::common::Reg<regs::Latch, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "Select between default DETECT signal behavior and LDETECT mode (For non-secure pin only)"]
         #[inline(always)]
         pub const fn detectmode(self) -> crate::common::Reg<regs::Detectmode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Select between default DETECT signal behavior and LDETECT mode (For secure pin only)"]
         #[inline(always)]
         pub const fn detectmode_sec(
             self,
         ) -> crate::common::Reg<regs::DetectmodeSec, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x28usize) as _) }
         }
         #[doc = "Description collection: Configuration of GPIO pins"]
         #[inline(always)]
@@ -9701,7 +9719,9 @@ pub mod gpio {
             n: usize,
         ) -> crate::common::Reg<regs::PinCnf, crate::common::RW> {
             assert!(n < 32usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -10736,19 +10756,25 @@ pub mod gpiote {
         #[inline(always)]
         pub const fn tasks_out(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is to set it high."]
         #[inline(always)]
         pub const fn tasks_set(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x30usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x30usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Task for writing to pin specified in CONFIG\\[n\\].PSEL. Action on pin is to set it low."]
         #[inline(always)]
         pub const fn tasks_clr(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x60usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x60usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Subscribe configuration for task OUT\\[n\\]"]
         #[inline(always)]
@@ -10757,7 +10783,9 @@ pub mod gpiote {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Subscribe configuration for task SET\\[n\\]"]
         #[inline(always)]
@@ -10766,7 +10794,9 @@ pub mod gpiote {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xb0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xb0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Subscribe configuration for task CLR\\[n\\]"]
         #[inline(always)]
@@ -10775,18 +10805,22 @@ pub mod gpiote {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xe0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xe0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Event generated from pin specified in CONFIG\\[n\\].PSEL"]
         #[inline(always)]
         pub const fn events_in(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize + n * 4usize) as _)
+            }
         }
         #[doc = "Event generated from multiple input GPIO pins with SENSE mechanism enabled"]
         #[inline(always)]
         pub const fn events_port(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x017cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x017cusize) as _) }
         }
         #[doc = "Description collection: Publish configuration for event IN\\[n\\]"]
         #[inline(always)]
@@ -10795,35 +10829,39 @@ pub mod gpiote {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize + n * 4usize) as _)
+            }
         }
         #[doc = "Publish configuration for event PORT"]
         #[inline(always)]
         pub const fn publish_port(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01fcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01fcusize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Latency selection for Event mode (MODE=Event) with rising or falling edge detection on the pin."]
         #[inline(always)]
         pub const fn latency(self) -> crate::common::Reg<regs::Latency, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Description collection: Configuration for OUT\\[n\\], SET\\[n\\], and CLR\\[n\\] tasks and IN\\[n\\] event"]
         #[inline(always)]
         pub const fn config(self, n: usize) -> crate::common::Reg<regs::Config, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -11171,57 +11209,57 @@ pub mod i2s {
         #[doc = "I2S mode"]
         #[inline(always)]
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Reception (RX) enable"]
         #[inline(always)]
         pub const fn rxen(self) -> crate::common::Reg<regs::Rxen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Transmission (TX) enable"]
         #[inline(always)]
         pub const fn txen(self) -> crate::common::Reg<regs::Txen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Master clock generator enable"]
         #[inline(always)]
         pub const fn mcken(self) -> crate::common::Reg<regs::Mcken, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "I2S clock generator control"]
         #[inline(always)]
         pub const fn mckfreq(self) -> crate::common::Reg<regs::Mckfreq, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "MCK / LRCK ratio"]
         #[inline(always)]
         pub const fn ratio(self) -> crate::common::Reg<regs::Ratio, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Sample width"]
         #[inline(always)]
         pub const fn swidth(self) -> crate::common::Reg<regs::Swidth, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "Alignment of sample within a frame"]
         #[inline(always)]
         pub const fn align(self) -> crate::common::Reg<regs::Align, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Frame format"]
         #[inline(always)]
         pub const fn format(self) -> crate::common::Reg<regs::Format, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "Enable channels"]
         #[inline(always)]
         pub const fn channels(self) -> crate::common::Reg<regs::Channels, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Clock source selection for the I2S module"]
         #[inline(always)]
         pub const fn clkconfig(self) -> crate::common::Reg<regs::Clkconfig, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x28usize) as _) }
         }
     }
     #[doc = "Inter-IC Sound 0"]
@@ -11243,119 +11281,119 @@ pub mod i2s {
         #[doc = "Starts continuous I2S transfer. Also starts MCK generator when this is enabled"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stops I2S transfer and MCK generator. Triggering this task will cause the event STOPPED to be generated."]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "The RXD.PTR register has been copied to internal double-buffers. When the I2S module is started and RX is enabled, this event will be generated for every RXTXD.MAXCNT words received on the SDIN pin."]
         #[inline(always)]
         pub const fn events_rxptrupd(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "I2S transfer stopped."]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "The TDX.PTR register has been copied to internal double-buffers. When the I2S module is started and TX is enabled, this event will be generated for every RXTXD.MAXCNT words that are sent on the SDOUT pin."]
         #[inline(always)]
         pub const fn events_txptrupd(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0114usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0114usize) as _) }
         }
         #[doc = "Frame start event, generated on the active edge of LRCK"]
         #[inline(always)]
         pub const fn events_framestart(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x011cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x011cusize) as _) }
         }
         #[doc = "Publish configuration for event RXPTRUPD"]
         #[inline(always)]
         pub const fn publish_rxptrupd(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event TXPTRUPD"]
         #[inline(always)]
         pub const fn publish_txptrupd(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0194usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0194usize) as _) }
         }
         #[doc = "Publish configuration for event FRAMESTART"]
         #[inline(always)]
         pub const fn publish_framestart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x019cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x019cusize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Enable I2S module"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn config(self) -> Config {
-            unsafe { Config::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { Config::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.add(0x0538usize) as _) }
+            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0538usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.add(0x0540usize) as _) }
+            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0540usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn rxtxd(self) -> Rxtxd {
-            unsafe { Rxtxd::from_ptr(self.ptr.add(0x0550usize) as _) }
+            unsafe { Rxtxd::from_ptr(self.ptr.wrapping_add(0x0550usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0560usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0560usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -11377,33 +11415,33 @@ pub mod i2s {
         #[doc = "Pin select for MCK signal"]
         #[inline(always)]
         pub const fn mck(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for SCK signal"]
         #[inline(always)]
         pub const fn sck(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Pin select for LRCK signal"]
         #[inline(always)]
         pub const fn lrck(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Pin select for SDIN signal"]
         #[inline(always)]
         pub const fn sdin(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Pin select for SDOUT signal"]
         #[inline(always)]
         pub const fn sdout(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -11425,7 +11463,7 @@ pub mod i2s {
         #[doc = "Receive buffer RAM start address."]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -11447,7 +11485,7 @@ pub mod i2s {
         #[doc = "Size of RXD and TXD buffers"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::Maxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -11469,7 +11507,7 @@ pub mod i2s {
         #[doc = "Transmit buffer RAM start address"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     pub mod regs {
@@ -12433,7 +12471,9 @@ pub mod ipc {
         #[inline(always)]
         pub const fn tasks_send(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Subscribe configuration for task SEND\\[n\\]"]
         #[inline(always)]
@@ -12442,13 +12482,17 @@ pub mod ipc {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Event received on one or more of the enabled IPC channels in RECEIVE_CNF\\[n\\]"]
         #[inline(always)]
         pub const fn events_receive(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Publish configuration for event RECEIVE\\[n\\]"]
         #[inline(always)]
@@ -12457,27 +12501,29 @@ pub mod ipc {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize + n * 4usize) as _)
+            }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Pending interrupts"]
         #[inline(always)]
         pub const fn intpend(self) -> crate::common::Reg<regs::Int, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x030cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x030cusize) as _) }
         }
         #[doc = "Description collection: Send event configuration for TASKS_SEND\\[n\\]"]
         #[inline(always)]
@@ -12486,7 +12532,9 @@ pub mod ipc {
             n: usize,
         ) -> crate::common::Reg<regs::SendCnf, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Receive event configuration for EVENTS_RECEIVE\\[n\\]"]
         #[inline(always)]
@@ -12495,13 +12543,17 @@ pub mod ipc {
             n: usize,
         ) -> crate::common::Reg<regs::ReceiveCnf, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0590usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0590usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: General purpose memory"]
         #[inline(always)]
         pub const fn gpmem(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0610usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0610usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -13223,54 +13275,54 @@ pub mod kmu {
         #[doc = "Push a key slot over secure APB"]
         #[inline(always)]
         pub const fn tasks_push_keyslot(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Key slot successfully pushed over secure APB"]
         #[inline(always)]
         pub const fn events_keyslot_pushed(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Key slot has been revoked and cannot be tasked for selection"]
         #[inline(always)]
         pub const fn events_keyslot_revoked(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "No key slot selected, no destination address defined, or error during push operation"]
         #[inline(always)]
         pub const fn events_keyslot_error(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Pending interrupts"]
         #[inline(always)]
         pub const fn intpend(self) -> crate::common::Reg<regs::Int, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x030cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x030cusize) as _) }
         }
         #[doc = "Status bits for KMU operation"]
         #[inline(always)]
         pub const fn status(self) -> crate::common::Reg<regs::Status, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x040cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x040cusize) as _) }
         }
         #[doc = "Select key slot to be read over AHB or pushed over secure APB when TASKS_PUSH_KEYSLOT is started"]
         #[inline(always)]
         pub const fn selectkeyslot(
             self,
         ) -> crate::common::Reg<regs::Selectkeyslot, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
     }
     pub mod regs {
@@ -13451,136 +13503,136 @@ pub mod lpcomp {
         #[doc = "Start comparator"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop comparator"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Sample comparator value"]
         #[inline(always)]
         pub const fn tasks_sample(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task SAMPLE"]
         #[inline(always)]
         pub const fn subscribe_sample(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "LPCOMP is ready and output is valid"]
         #[inline(always)]
         pub const fn events_ready(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Downward crossing"]
         #[inline(always)]
         pub const fn events_down(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Upward crossing"]
         #[inline(always)]
         pub const fn events_up(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Downward or upward crossing"]
         #[inline(always)]
         pub const fn events_cross(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x010cusize) as _) }
         }
         #[doc = "Publish configuration for event READY"]
         #[inline(always)]
         pub const fn publish_ready(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event DOWN"]
         #[inline(always)]
         pub const fn publish_down(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event UP"]
         #[inline(always)]
         pub const fn publish_up(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event CROSS"]
         #[inline(always)]
         pub const fn publish_cross(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x018cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x018cusize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Compare result"]
         #[inline(always)]
         pub const fn result(self) -> crate::common::Reg<regs::Result, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Enable LPCOMP"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Input pin select"]
         #[inline(always)]
         pub const fn psel(self) -> crate::common::Reg<regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Reference select"]
         #[inline(always)]
         pub const fn refsel(self) -> crate::common::Reg<regs::Refsel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "External reference select"]
         #[inline(always)]
         pub const fn extrefsel(self) -> crate::common::Reg<regs::Extrefsel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Analog detect configuration"]
         #[inline(always)]
         pub const fn anadetect(self) -> crate::common::Reg<regs::Anadetect, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0520usize) as _) }
         }
         #[doc = "Comparator hysteresis enable"]
         #[inline(always)]
         pub const fn hyst(self) -> crate::common::Reg<regs::Hyst, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0538usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0538usize) as _) }
         }
     }
     pub mod regs {
@@ -14267,7 +14319,9 @@ pub mod mutex {
         #[inline(always)]
         pub const fn mutex(self, n: usize) -> crate::common::Reg<regs::Mutex, crate::common::RW> {
             assert!(n < 16usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -14330,7 +14384,7 @@ pub mod nfct {
         #[doc = "Result of last incoming frame"]
         #[inline(always)]
         pub const fn rx(self) -> crate::common::Reg<regs::Rx, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "NFC-A compatible radio 0"]
@@ -14352,404 +14406,404 @@ pub mod nfct {
         #[doc = "Activate NFCT peripheral for incoming and outgoing frames, change state to activated"]
         #[inline(always)]
         pub const fn tasks_activate(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Disable NFCT peripheral"]
         #[inline(always)]
         pub const fn tasks_disable(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Enable NFC sense field mode, change state to sense mode"]
         #[inline(always)]
         pub const fn tasks_sense(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Start transmission of an outgoing frame, change state to transmit"]
         #[inline(always)]
         pub const fn tasks_starttx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Initializes the EasyDMA for receive."]
         #[inline(always)]
         pub const fn tasks_enablerxdata(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Force state machine to IDLE state"]
         #[inline(always)]
         pub const fn tasks_goidle(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Force state machine to SLEEP_A state"]
         #[inline(always)]
         pub const fn tasks_gosleep(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x28usize) as _) }
         }
         #[doc = "Subscribe configuration for task ACTIVATE"]
         #[inline(always)]
         pub const fn subscribe_activate(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task DISABLE"]
         #[inline(always)]
         pub const fn subscribe_disable(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task SENSE"]
         #[inline(always)]
         pub const fn subscribe_sense(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task STARTTX"]
         #[inline(always)]
         pub const fn subscribe_starttx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "Subscribe configuration for task ENABLERXDATA"]
         #[inline(always)]
         pub const fn subscribe_enablerxdata(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x9cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x9cusize) as _) }
         }
         #[doc = "Subscribe configuration for task GOIDLE"]
         #[inline(always)]
         pub const fn subscribe_goidle(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa4usize) as _) }
         }
         #[doc = "Subscribe configuration for task GOSLEEP"]
         #[inline(always)]
         pub const fn subscribe_gosleep(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa8usize) as _) }
         }
         #[doc = "The NFCT peripheral is ready to receive and send frames"]
         #[inline(always)]
         pub const fn events_ready(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Remote NFC field detected"]
         #[inline(always)]
         pub const fn events_fielddetected(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Remote NFC field lost"]
         #[inline(always)]
         pub const fn events_fieldlost(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Marks the start of the first symbol of a transmitted frame"]
         #[inline(always)]
         pub const fn events_txframestart(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x010cusize) as _) }
         }
         #[doc = "Marks the end of the last transmitted on-air symbol of a frame"]
         #[inline(always)]
         pub const fn events_txframeend(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "Marks the end of the first symbol of a received frame"]
         #[inline(always)]
         pub const fn events_rxframestart(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0114usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0114usize) as _) }
         }
         #[doc = "Received data has been checked (CRC, parity) and transferred to RAM, and EasyDMA has ended accessing the RX buffer"]
         #[inline(always)]
         pub const fn events_rxframeend(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0118usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0118usize) as _) }
         }
         #[doc = "NFC error reported. The ERRORSTATUS register contains details on the source of the error."]
         #[inline(always)]
         pub const fn events_error(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x011cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x011cusize) as _) }
         }
         #[doc = "NFC RX frame error reported. The FRAMESTATUS.RX register contains details on the source of the error."]
         #[inline(always)]
         pub const fn events_rxerror(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0128usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0128usize) as _) }
         }
         #[doc = "RX buffer (as defined by PACKETPTR and MAXLEN) in Data RAM full."]
         #[inline(always)]
         pub const fn events_endrx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x012cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x012cusize) as _) }
         }
         #[doc = "Transmission of data in RAM has ended, and EasyDMA has ended accessing the TX buffer"]
         #[inline(always)]
         pub const fn events_endtx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0130usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0130usize) as _) }
         }
         #[doc = "Auto collision resolution process has started"]
         #[inline(always)]
         pub const fn events_autocolresstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0138usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0138usize) as _) }
         }
         #[doc = "NFC auto collision resolution error reported."]
         #[inline(always)]
         pub const fn events_collision(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0148usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0148usize) as _) }
         }
         #[doc = "NFC auto collision resolution successfully completed"]
         #[inline(always)]
         pub const fn events_selected(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x014cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x014cusize) as _) }
         }
         #[doc = "EasyDMA is ready to receive or send frames."]
         #[inline(always)]
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0150usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0150usize) as _) }
         }
         #[doc = "Publish configuration for event READY"]
         #[inline(always)]
         pub const fn publish_ready(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event FIELDDETECTED"]
         #[inline(always)]
         pub const fn publish_fielddetected(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event FIELDLOST"]
         #[inline(always)]
         pub const fn publish_fieldlost(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event TXFRAMESTART"]
         #[inline(always)]
         pub const fn publish_txframestart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x018cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x018cusize) as _) }
         }
         #[doc = "Publish configuration for event TXFRAMEEND"]
         #[inline(always)]
         pub const fn publish_txframeend(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0190usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0190usize) as _) }
         }
         #[doc = "Publish configuration for event RXFRAMESTART"]
         #[inline(always)]
         pub const fn publish_rxframestart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0194usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0194usize) as _) }
         }
         #[doc = "Publish configuration for event RXFRAMEEND"]
         #[inline(always)]
         pub const fn publish_rxframeend(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0198usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0198usize) as _) }
         }
         #[doc = "Publish configuration for event ERROR"]
         #[inline(always)]
         pub const fn publish_error(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x019cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x019cusize) as _) }
         }
         #[doc = "Publish configuration for event RXERROR"]
         #[inline(always)]
         pub const fn publish_rxerror(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a8usize) as _) }
         }
         #[doc = "Publish configuration for event ENDRX"]
         #[inline(always)]
         pub const fn publish_endrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01acusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01acusize) as _) }
         }
         #[doc = "Publish configuration for event ENDTX"]
         #[inline(always)]
         pub const fn publish_endtx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01b0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01b0usize) as _) }
         }
         #[doc = "Publish configuration for event AUTOCOLRESSTARTED"]
         #[inline(always)]
         pub const fn publish_autocolresstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01b8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01b8usize) as _) }
         }
         #[doc = "Publish configuration for event COLLISION"]
         #[inline(always)]
         pub const fn publish_collision(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01c8usize) as _) }
         }
         #[doc = "Publish configuration for event SELECTED"]
         #[inline(always)]
         pub const fn publish_selected(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01ccusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01ccusize) as _) }
         }
         #[doc = "Publish configuration for event STARTED"]
         #[inline(always)]
         pub const fn publish_started(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d0usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "NFC Error Status register"]
         #[inline(always)]
         pub const fn errorstatus(self) -> crate::common::Reg<regs::Errorstatus, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0404usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0404usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn framestatus(self) -> Framestatus {
-            unsafe { Framestatus::from_ptr(self.ptr.add(0x040cusize) as _) }
+            unsafe { Framestatus::from_ptr(self.ptr.wrapping_add(0x040cusize) as _) }
         }
         #[doc = "Current operating state of NFC tag"]
         #[inline(always)]
         pub const fn nfctagstate(self) -> crate::common::Reg<regs::Nfctagstate, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0410usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0410usize) as _) }
         }
         #[doc = "Sleep state during automatic collision resolution"]
         #[inline(always)]
         pub const fn sleepstate(self) -> crate::common::Reg<regs::Sleepstate, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0420usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0420usize) as _) }
         }
         #[doc = "Indicates the presence or not of a valid field"]
         #[inline(always)]
         pub const fn fieldpresent(
             self,
         ) -> crate::common::Reg<regs::Fieldpresent, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x043cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x043cusize) as _) }
         }
         #[doc = "Minimum frame delay"]
         #[inline(always)]
         pub const fn framedelaymin(
             self,
         ) -> crate::common::Reg<regs::Framedelaymin, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Maximum frame delay"]
         #[inline(always)]
         pub const fn framedelaymax(
             self,
         ) -> crate::common::Reg<regs::Framedelaymax, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Configuration register for the Frame Delay Timer"]
         #[inline(always)]
         pub const fn framedelaymode(
             self,
         ) -> crate::common::Reg<regs::Framedelaymode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Packet pointer for TXD and RXD data storage in Data RAM"]
         #[inline(always)]
         pub const fn packetptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Size of the RAM buffer allocated to TXD and RXD data storage each"]
         #[inline(always)]
         pub const fn maxlen(self) -> crate::common::Reg<regs::Maxlen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0514usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.add(0x0518usize) as _) }
+            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0518usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.add(0x0520usize) as _) }
+            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0520usize) as _) }
         }
         #[doc = "Enables the modulation output to a GPIO pin which can be connected to a second external antenna."]
         #[inline(always)]
         pub const fn modulationctrl(
             self,
         ) -> crate::common::Reg<regs::Modulationctrl, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x052cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x052cusize) as _) }
         }
         #[doc = "Pin select for Modulation control"]
         #[inline(always)]
         pub const fn modulationpsel(
             self,
         ) -> crate::common::Reg<regs::Modulationpsel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0538usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0538usize) as _) }
         }
         #[doc = "Last NFCID1 part (4, 7 or 10 bytes ID)"]
         #[inline(always)]
         pub const fn nfcid1_last(self) -> crate::common::Reg<regs::Nfcid1Last, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0590usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0590usize) as _) }
         }
         #[doc = "Second last NFCID1 part (7 or 10 bytes ID)"]
         #[inline(always)]
         pub const fn nfcid1_2nd_last(
             self,
         ) -> crate::common::Reg<regs::Nfcid12ndLast, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0594usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0594usize) as _) }
         }
         #[doc = "Third last NFCID1 part (10 bytes ID)"]
         #[inline(always)]
         pub const fn nfcid1_3rd_last(
             self,
         ) -> crate::common::Reg<regs::Nfcid13rdLast, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0598usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0598usize) as _) }
         }
         #[doc = "Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is activated."]
         #[inline(always)]
         pub const fn autocolresconfig(
             self,
         ) -> crate::common::Reg<regs::Autocolresconfig, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x059cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x059cusize) as _) }
         }
         #[doc = "NFC-A SENS_RES auto-response settings"]
         #[inline(always)]
         pub const fn sensres(self) -> crate::common::Reg<regs::Sensres, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05a0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05a0usize) as _) }
         }
         #[doc = "NFC-A SEL_RES auto-response settings"]
         #[inline(always)]
         pub const fn selres(self) -> crate::common::Reg<regs::Selres, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05a4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05a4usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -14773,12 +14827,12 @@ pub mod nfct {
         pub const fn frameconfig(
             self,
         ) -> crate::common::Reg<regs::RxdFrameconfig, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Size of last incoming frame"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -14802,12 +14856,12 @@ pub mod nfct {
         pub const fn frameconfig(
             self,
         ) -> crate::common::Reg<regs::TxdFrameconfig, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Size of outgoing frame"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     pub mod regs {
@@ -16615,39 +16669,39 @@ pub mod nvmc {
         #[doc = "Ready flag"]
         #[inline(always)]
         pub const fn ready(self) -> crate::common::Reg<regs::Ready, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Ready flag"]
         #[inline(always)]
         pub const fn readynext(self) -> crate::common::Reg<regs::Readynext, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0408usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0408usize) as _) }
         }
         #[doc = "Configuration register"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Register for erasing all non-volatile user memory"]
         #[inline(always)]
         pub const fn eraseall(self) -> crate::common::Reg<regs::Eraseall, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Register for partial erase configuration"]
         #[inline(always)]
         pub const fn erasepagepartialcfg(
             self,
         ) -> crate::common::Reg<regs::Erasepagepartialcfg, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x051cusize) as _) }
         }
         #[doc = "Non-secure configuration register"]
         #[inline(always)]
         pub const fn configns(self) -> crate::common::Reg<regs::Configns, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0584usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0584usize) as _) }
         }
         #[doc = "Non-secure APPROTECT enable register"]
         #[inline(always)]
         pub const fn writeuicrns(self) -> crate::common::Reg<regs::Writeuicrns, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0588usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0588usize) as _) }
         }
     }
     pub mod regs {
@@ -17072,12 +17126,12 @@ pub mod oscillators {
         #[doc = "Programmable capacitance of XC1 and XC2"]
         #[inline(always)]
         pub const fn xosc32mcaps(self) -> crate::common::Reg<regs::Xosc32mcaps, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05c4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05c4usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn xosc32ki(self) -> Xosc32ki {
-            unsafe { Xosc32ki::from_ptr(self.ptr.add(0x06c0usize) as _) }
+            unsafe { Xosc32ki::from_ptr(self.ptr.wrapping_add(0x06c0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -17099,12 +17153,12 @@ pub mod oscillators {
         #[doc = "Enable or disable bypass of LFCLK crystal oscillator with external clock source"]
         #[inline(always)]
         pub const fn bypass(self) -> crate::common::Reg<regs::Bypass, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Control usage of internal load capacitors"]
         #[inline(always)]
         pub const fn intcap(self) -> crate::common::Reg<regs::Intcap, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
     }
     pub mod regs {
@@ -17296,122 +17350,122 @@ pub mod pdm {
         #[doc = "Starts continuous PDM transfer"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stops PDM transfer"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "PDM transfer has started"]
         #[inline(always)]
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "PDM transfer has finished"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "The PDM has written the last sample specified by SAMPLE.MAXCNT (or the last sample after a STOP task has been received) to Data RAM"]
         #[inline(always)]
         pub const fn events_end(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Publish configuration for event STARTED"]
         #[inline(always)]
         pub const fn publish_started(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event END"]
         #[inline(always)]
         pub const fn publish_end(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "PDM module enable register"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "PDM clock generator control"]
         #[inline(always)]
         pub const fn pdmclkctrl(self) -> crate::common::Reg<regs::Pdmclkctrl, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Defines the routing of the connected PDM microphones' signals"]
         #[inline(always)]
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Left output gain adjustment"]
         #[inline(always)]
         pub const fn gainl(self) -> crate::common::Reg<regs::Gainl, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0518usize) as _) }
         }
         #[doc = "Right output gain adjustment"]
         #[inline(always)]
         pub const fn gainr(self) -> crate::common::Reg<regs::Gainr, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x051cusize) as _) }
         }
         #[doc = "Selects the ratio between PDM_CLK and output sample rate. Change PDMCLKCTRL accordingly."]
         #[inline(always)]
         pub const fn ratio(self) -> crate::common::Reg<regs::Ratio, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0520usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0540usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0540usize) as _) }
         }
         #[doc = "Master clock generator configuration"]
         #[inline(always)]
         pub const fn mclkconfig(self) -> crate::common::Reg<regs::Mclkconfig, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x054cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x054cusize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn sample(self) -> Sample {
-            unsafe { Sample::from_ptr(self.ptr.add(0x0560usize) as _) }
+            unsafe { Sample::from_ptr(self.ptr.wrapping_add(0x0560usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -17433,12 +17487,12 @@ pub mod pdm {
         #[doc = "Pin number configuration for PDM CLK signal"]
         #[inline(always)]
         pub const fn clk(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin number configuration for PDM DIN signal"]
         #[inline(always)]
         pub const fn din(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -17460,12 +17514,12 @@ pub mod pdm {
         #[doc = "RAM address pointer to write samples to with EasyDMA"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Number of samples to allocate memory for in EasyDMA mode"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::Maxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     pub mod regs {
@@ -18117,77 +18171,77 @@ pub mod power {
         #[doc = "Enable Constant Latency mode"]
         #[inline(always)]
         pub const fn tasks_constlat(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x78usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x78usize) as _) }
         }
         #[doc = "Enable Low-Power mode (variable latency)"]
         #[inline(always)]
         pub const fn tasks_lowpwr(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x7cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x7cusize) as _) }
         }
         #[doc = "Subscribe configuration for task CONSTLAT"]
         #[inline(always)]
         pub const fn subscribe_constlat(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xf8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xf8usize) as _) }
         }
         #[doc = "Subscribe configuration for task LOWPWR"]
         #[inline(always)]
         pub const fn subscribe_lowpwr(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xfcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xfcusize) as _) }
         }
         #[doc = "Power failure warning"]
         #[inline(always)]
         pub const fn events_pofwarn(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "CPU entered WFI/WFE sleep"]
         #[inline(always)]
         pub const fn events_sleepenter(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0114usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0114usize) as _) }
         }
         #[doc = "CPU exited WFI/WFE sleep"]
         #[inline(always)]
         pub const fn events_sleepexit(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0118usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0118usize) as _) }
         }
         #[doc = "Publish configuration for event POFWARN"]
         #[inline(always)]
         pub const fn publish_pofwarn(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event SLEEPENTER"]
         #[inline(always)]
         pub const fn publish_sleepenter(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0194usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0194usize) as _) }
         }
         #[doc = "Publish configuration for event SLEEPEXIT"]
         #[inline(always)]
         pub const fn publish_sleepexit(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0198usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0198usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Description collection: General purpose retention register"]
         #[inline(always)]
@@ -18196,7 +18250,9 @@ pub mod power {
             n: usize,
         ) -> crate::common::Reg<regs::Gpregret, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x051cusize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -18332,7 +18388,9 @@ pub mod pwm {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
             assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
     }
     #[doc = "Pulse width modulation unit 0"]
@@ -18354,25 +18412,27 @@ pub mod pwm {
         #[doc = "Stops PWM pulse generation on all channels at the end of current PWM period, and stops sequence playback"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description collection: Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence at the rate defined in SEQ\\[n\\]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running."]
         #[inline(always)]
         pub const fn tasks_seqstart(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize + n * 4usize) as _)
+            }
         }
         #[doc = "Steps by one value in the current sequence on all enabled channels if DECODER.MODE=NextStep. Does not cause PWM generation to start if not running."]
         #[inline(always)]
         pub const fn tasks_nextstep(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Description collection: Subscribe configuration for task SEQSTART\\[n\\]"]
         #[inline(always)]
@@ -18381,19 +18441,21 @@ pub mod pwm {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize + n * 4usize) as _)
+            }
         }
         #[doc = "Subscribe configuration for task NEXTSTEP"]
         #[inline(always)]
         pub const fn subscribe_nextstep(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x90usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x90usize) as _) }
         }
         #[doc = "Response to STOP task, emitted when PWM pulses are no longer generated"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Description collection: First PWM period started on sequence n"]
         #[inline(always)]
@@ -18402,30 +18464,34 @@ pub mod pwm {
             n: usize,
         ) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Emitted at end of every sequence n, when last value from RAM has been applied to wave counter"]
         #[inline(always)]
         pub const fn events_seqend(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize + n * 4usize) as _)
+            }
         }
         #[doc = "Emitted at the end of each PWM period"]
         #[inline(always)]
         pub const fn events_pwmperiodend(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0118usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0118usize) as _) }
         }
         #[doc = "Concatenated sequences have been played the amount of times defined in LOOP.CNT"]
         #[inline(always)]
         pub const fn events_loopsdone(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x011cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x011cusize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Description collection: Publish configuration for event SEQSTARTED\\[n\\]"]
         #[inline(always)]
@@ -18434,7 +18500,9 @@ pub mod pwm {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Publish configuration for event SEQEND\\[n\\]"]
         #[inline(always)]
@@ -18443,82 +18511,84 @@ pub mod pwm {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0190usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0190usize + n * 4usize) as _)
+            }
         }
         #[doc = "Publish configuration for event PWMPERIODEND"]
         #[inline(always)]
         pub const fn publish_pwmperiodend(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0198usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0198usize) as _) }
         }
         #[doc = "Publish configuration for event LOOPSDONE"]
         #[inline(always)]
         pub const fn publish_loopsdone(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x019cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x019cusize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "PWM module enable register"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Selects operating mode of the wave counter"]
         #[inline(always)]
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Value up to which the pulse generator counter counts"]
         #[inline(always)]
         pub const fn countertop(self) -> crate::common::Reg<regs::Countertop, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Configuration for PWM_CLK"]
         #[inline(always)]
         pub const fn prescaler(self) -> crate::common::Reg<regs::Prescaler, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Configuration of the decoder"]
         #[inline(always)]
         pub const fn decoder(self) -> crate::common::Reg<regs::Decoder, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Number of playbacks of a loop"]
         #[inline(always)]
         pub const fn loop_(self) -> crate::common::Reg<regs::Loop, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0514usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn seq(self, n: usize) -> Seq {
             assert!(n < 2usize);
-            unsafe { Seq::from_ptr(self.ptr.add(0x0520usize + n * 32usize) as _) }
+            unsafe { Seq::from_ptr(self.ptr.wrapping_add(0x0520usize + n * 32usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0560usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0560usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -18540,22 +18610,22 @@ pub mod pwm {
         #[doc = "Description cluster: Beginning address in RAM of this sequence"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Number of values (duty cycles) in this sequence"]
         #[inline(always)]
         pub const fn cnt(self) -> crate::common::Reg<regs::Cnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: Number of additional PWM periods between samples loaded into compare register"]
         #[inline(always)]
         pub const fn refresh(self) -> crate::common::Reg<regs::Refresh, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Description cluster: Time added after the sequence"]
         #[inline(always)]
         pub const fn enddelay(self) -> crate::common::Reg<regs::Enddelay, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -19412,17 +19482,17 @@ pub mod qdec {
         #[doc = "Pin select for LED signal"]
         #[inline(always)]
         pub const fn led(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for A signal"]
         #[inline(always)]
         pub const fn a(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Pin select for B signal"]
         #[inline(always)]
         pub const fn b(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Quadrature Decoder 0"]
@@ -19444,197 +19514,197 @@ pub mod qdec {
         #[doc = "Task starting the quadrature decoder"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Task stopping the quadrature decoder"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Read and clear ACC and ACCDBL"]
         #[inline(always)]
         pub const fn tasks_readclracc(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Read and clear ACC"]
         #[inline(always)]
         pub const fn tasks_rdclracc(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Read and clear ACCDBL"]
         #[inline(always)]
         pub const fn tasks_rdclrdbl(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task READCLRACC"]
         #[inline(always)]
         pub const fn subscribe_readclracc(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task RDCLRACC"]
         #[inline(always)]
         pub const fn subscribe_rdclracc(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "Subscribe configuration for task RDCLRDBL"]
         #[inline(always)]
         pub const fn subscribe_rdclrdbl(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x90usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x90usize) as _) }
         }
         #[doc = "Event being generated for every new sample value written to the SAMPLE register"]
         #[inline(always)]
         pub const fn events_samplerdy(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Non-null report ready"]
         #[inline(always)]
         pub const fn events_reportrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "ACC or ACCDBL register overflow"]
         #[inline(always)]
         pub const fn events_accof(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Double displacement(s) detected"]
         #[inline(always)]
         pub const fn events_dblrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x010cusize) as _) }
         }
         #[doc = "QDEC has been stopped"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "Publish configuration for event SAMPLERDY"]
         #[inline(always)]
         pub const fn publish_samplerdy(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event REPORTRDY"]
         #[inline(always)]
         pub const fn publish_reportrdy(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event ACCOF"]
         #[inline(always)]
         pub const fn publish_accof(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event DBLRDY"]
         #[inline(always)]
         pub const fn publish_dblrdy(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x018cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x018cusize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0190usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0190usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Enable the quadrature decoder"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "LED output pin polarity"]
         #[inline(always)]
         pub const fn ledpol(self) -> crate::common::Reg<regs::Ledpol, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Sample period"]
         #[inline(always)]
         pub const fn sampleper(self) -> crate::common::Reg<regs::Sampleper, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Motion sample value"]
         #[inline(always)]
         pub const fn sample(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Number of samples to be taken before REPORTRDY and DBLRDY events can be generated"]
         #[inline(always)]
         pub const fn reportper(self) -> crate::common::Reg<regs::Reportper, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Register accumulating the valid transitions"]
         #[inline(always)]
         pub const fn acc(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0514usize) as _) }
         }
         #[doc = "Snapshot of the ACC register, updated by the READCLRACC or RDCLRACC task"]
         #[inline(always)]
         pub const fn accread(self) -> crate::common::Reg<u32, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0518usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x051cusize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x051cusize) as _) }
         }
         #[doc = "Enable input debounce filters"]
         #[inline(always)]
         pub const fn dbfen(self) -> crate::common::Reg<regs::Dbfen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0528usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0528usize) as _) }
         }
         #[doc = "Time period the LED is switched ON prior to sampling"]
         #[inline(always)]
         pub const fn ledpre(self) -> crate::common::Reg<regs::Ledpre, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0540usize) as _) }
         }
         #[doc = "Register accumulating the number of detected double transitions"]
         #[inline(always)]
         pub const fn accdbl(self) -> crate::common::Reg<regs::Accdbl, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0544usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
         }
         #[doc = "Snapshot of the ACCDBL, updated by the READCLRACC or RDCLRDBL task"]
         #[inline(always)]
         pub const fn accdblread(self) -> crate::common::Reg<regs::Accdblread, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0548usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0548usize) as _) }
         }
     }
     pub mod regs {
@@ -20299,42 +20369,42 @@ pub mod qspi {
         #[doc = "Bits 31:0 of DMA AES KEY"]
         #[inline(always)]
         pub const fn key0(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Bits 63:32 of DMA AES KEY"]
         #[inline(always)]
         pub const fn key1(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Bits 95:64 of DMA AES KEY"]
         #[inline(always)]
         pub const fn key2(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Bits 127:96 of DMA AES KEY"]
         #[inline(always)]
         pub const fn key3(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Bits 31:0 of DMA NONCE"]
         #[inline(always)]
         pub const fn nonce0(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Bits 63:32 of DMA NONCE"]
         #[inline(always)]
         pub const fn nonce1(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Bits 95:64 of DMA NONCE"]
         #[inline(always)]
         pub const fn nonce2(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "Enable stream cipher for EasyDMA"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::DmaEncEnable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -20356,12 +20426,12 @@ pub mod qspi {
         #[doc = "Start address of flash block to be erased"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Size of block to be erased."]
         #[inline(always)]
         pub const fn len(self) -> crate::common::Reg<regs::Len, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -20383,32 +20453,32 @@ pub mod qspi {
         #[doc = "Pin select for serial clock SCK"]
         #[inline(always)]
         pub const fn sck(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for chip select signal CSN."]
         #[inline(always)]
         pub const fn csn(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Pin select for serial data MOSI/IO0."]
         #[inline(always)]
         pub const fn io0(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Pin select for serial data MISO/IO1."]
         #[inline(always)]
         pub const fn io1(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Pin select for serial data WP/IO2."]
         #[inline(always)]
         pub const fn io2(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Pin select for serial data HOLD/IO3."]
         #[inline(always)]
         pub const fn io3(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
     }
     #[doc = "External flash interface 0"]
@@ -20430,179 +20500,179 @@ pub mod qspi {
         #[doc = "Activate QSPI interface"]
         #[inline(always)]
         pub const fn tasks_activate(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Start transfer from external flash memory to internal RAM"]
         #[inline(always)]
         pub const fn tasks_readstart(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Start transfer from internal RAM to external flash memory"]
         #[inline(always)]
         pub const fn tasks_writestart(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Start external flash memory erase operation"]
         #[inline(always)]
         pub const fn tasks_erasestart(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Deactivate QSPI interface"]
         #[inline(always)]
         pub const fn tasks_deactivate(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Subscribe configuration for task ACTIVATE"]
         #[inline(always)]
         pub const fn subscribe_activate(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task READSTART"]
         #[inline(always)]
         pub const fn subscribe_readstart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task WRITESTART"]
         #[inline(always)]
         pub const fn subscribe_writestart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task ERASESTART"]
         #[inline(always)]
         pub const fn subscribe_erasestart(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "Subscribe configuration for task DEACTIVATE"]
         #[inline(always)]
         pub const fn subscribe_deactivate(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x90usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x90usize) as _) }
         }
         #[doc = "QSPI peripheral is ready. This event will be generated as a response to all QSPI tasks except DEACTIVATE."]
         #[inline(always)]
         pub const fn events_ready(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Publish configuration for event READY"]
         #[inline(always)]
         pub const fn publish_ready(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Enable QSPI peripheral and acquire the pins selected in PSELn registers"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::QspiEnable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn read(self) -> Read {
-            unsafe { Read::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { Read::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn write(self) -> Write {
-            unsafe { Write::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { Write::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn erase(self) -> Erase {
-            unsafe { Erase::from_ptr(self.ptr.add(0x051cusize) as _) }
+            unsafe { Erase::from_ptr(self.ptr.wrapping_add(0x051cusize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0524usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
         }
         #[doc = "Address offset into the external memory for Execute in Place operation."]
         #[inline(always)]
         pub const fn xipoffset(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0540usize) as _) }
         }
         #[doc = "Interface configuration."]
         #[inline(always)]
         pub const fn ifconfig0(self) -> crate::common::Reg<regs::Ifconfig0, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0544usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
         }
         #[doc = "Enable Execute in Place operation."]
         #[inline(always)]
         pub const fn xipen(self) -> crate::common::Reg<regs::Xipen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x054cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x054cusize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn xip_enc(self) -> XipEnc {
-            unsafe { XipEnc::from_ptr(self.ptr.add(0x0560usize) as _) }
+            unsafe { XipEnc::from_ptr(self.ptr.wrapping_add(0x0560usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn dma_enc(self) -> DmaEnc {
-            unsafe { DmaEnc::from_ptr(self.ptr.add(0x0580usize) as _) }
+            unsafe { DmaEnc::from_ptr(self.ptr.wrapping_add(0x0580usize) as _) }
         }
         #[doc = "Interface configuration."]
         #[inline(always)]
         pub const fn ifconfig1(self) -> crate::common::Reg<regs::Ifconfig1, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0600usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0600usize) as _) }
         }
         #[doc = "Status register."]
         #[inline(always)]
         pub const fn status(self) -> crate::common::Reg<regs::Status, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0604usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0604usize) as _) }
         }
         #[doc = "Set the duration required to enter/exit deep power-down mode (DPM)."]
         #[inline(always)]
         pub const fn dpmdur(self) -> crate::common::Reg<regs::Dpmdur, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0614usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0614usize) as _) }
         }
         #[doc = "Extended address configuration."]
         #[inline(always)]
         pub const fn addrconf(self) -> crate::common::Reg<regs::Addrconf, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0624usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0624usize) as _) }
         }
         #[doc = "Custom instruction configuration register."]
         #[inline(always)]
         pub const fn cinstrconf(self) -> crate::common::Reg<regs::Cinstrconf, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0634usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0634usize) as _) }
         }
         #[doc = "Custom instruction data register 0."]
         #[inline(always)]
         pub const fn cinstrdat0(self) -> crate::common::Reg<regs::Cinstrdat0, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0638usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0638usize) as _) }
         }
         #[doc = "Custom instruction data register 1."]
         #[inline(always)]
         pub const fn cinstrdat1(self) -> crate::common::Reg<regs::Cinstrdat1, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x063cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x063cusize) as _) }
         }
         #[doc = "SPI interface timing."]
         #[inline(always)]
         pub const fn iftiming(self) -> crate::common::Reg<regs::Iftiming, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0640usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0640usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -20624,17 +20694,17 @@ pub mod qspi {
         #[doc = "Flash memory source address"]
         #[inline(always)]
         pub const fn src(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "RAM destination address"]
         #[inline(always)]
         pub const fn dst(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Read transfer length"]
         #[inline(always)]
         pub const fn cnt(self) -> crate::common::Reg<regs::ReadCnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -20656,17 +20726,17 @@ pub mod qspi {
         #[doc = "Flash destination address"]
         #[inline(always)]
         pub const fn dst(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "RAM source address"]
         #[inline(always)]
         pub const fn src(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Write transfer length"]
         #[inline(always)]
         pub const fn cnt(self) -> crate::common::Reg<regs::WriteCnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -20688,42 +20758,42 @@ pub mod qspi {
         #[doc = "Bits 31:0 of XIP AES KEY"]
         #[inline(always)]
         pub const fn key0(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Bits 63:32 of XIP AES KEY"]
         #[inline(always)]
         pub const fn key1(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Bits 95:64 of XIP AES KEY"]
         #[inline(always)]
         pub const fn key2(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Bits 127:96 of XIP AES KEY"]
         #[inline(always)]
         pub const fn key3(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Bits 31:0 of XIP NONCE"]
         #[inline(always)]
         pub const fn nonce0(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Bits 63:32 of XIP NONCE"]
         #[inline(always)]
         pub const fn nonce1(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Bits 95:64 of XIP NONCE"]
         #[inline(always)]
         pub const fn nonce2(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
         }
         #[doc = "Enable stream cipher for XIP"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::XipEncEnable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
     }
     pub mod regs {
@@ -22049,32 +22119,32 @@ pub mod regulators {
         pub const fn mainregstatus(
             self,
         ) -> crate::common::Reg<regs::Mainregstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0428usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0428usize) as _) }
         }
         #[doc = "System OFF register"]
         #[inline(always)]
         pub const fn systemoff(self) -> crate::common::Reg<regs::Systemoff, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Power-fail comparator configuration"]
         #[inline(always)]
         pub const fn pofcon(self) -> crate::common::Reg<regs::Pofcon, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn vregmain(self) -> Vregmain {
-            unsafe { Vregmain::from_ptr(self.ptr.add(0x0704usize) as _) }
+            unsafe { Vregmain::from_ptr(self.ptr.wrapping_add(0x0704usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn vregradio(self) -> Vregradio {
-            unsafe { Vregradio::from_ptr(self.ptr.add(0x0900usize) as _) }
+            unsafe { Vregradio::from_ptr(self.ptr.wrapping_add(0x0900usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn vregh(self) -> Vregh {
-            unsafe { Vregh::from_ptr(self.ptr.add(0x0b00usize) as _) }
+            unsafe { Vregh::from_ptr(self.ptr.wrapping_add(0x0b00usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -22096,7 +22166,7 @@ pub mod regulators {
         #[doc = "DC/DC enable register for VREGH"]
         #[inline(always)]
         pub const fn dcdcen(self) -> crate::common::Reg<regs::VreghDcdcen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -22118,7 +22188,7 @@ pub mod regulators {
         #[doc = "DC/DC enable register for VREGMAIN"]
         #[inline(always)]
         pub const fn dcdcen(self) -> crate::common::Reg<regs::VregmainDcdcen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -22140,7 +22210,7 @@ pub mod regulators {
         #[doc = "DC/DC enable register for VREGRADIO"]
         #[inline(always)]
         pub const fn dcdcen(self) -> crate::common::Reg<regs::VregradioDcdcen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     pub mod regs {
@@ -22534,7 +22604,7 @@ pub mod reset {
         #[doc = "Force network core off"]
         #[inline(always)]
         pub const fn forceoff(self) -> crate::common::Reg<regs::Forceoff, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Reset control 0"]
@@ -22556,12 +22626,12 @@ pub mod reset {
         #[doc = "Reset reason"]
         #[inline(always)]
         pub const fn resetreas(self) -> crate::common::Reg<regs::Resetreas, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "ULP network core control"]
         #[inline(always)]
         pub const fn network(self) -> Network {
-            unsafe { Network::from_ptr(self.ptr.add(0x0610usize) as _) }
+            unsafe { Network::from_ptr(self.ptr.wrapping_add(0x0610usize) as _) }
         }
     }
     pub mod regs {
@@ -22824,56 +22894,58 @@ pub mod rtc {
         #[doc = "Start RTC counter"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop RTC counter"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Clear RTC counter"]
         #[inline(always)]
         pub const fn tasks_clear(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Set counter to 0xFFFFF0"]
         #[inline(always)]
         pub const fn tasks_trigovrflw(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Description collection: Capture RTC counter to CC\\[n\\] register"]
         #[inline(always)]
         pub const fn tasks_capture(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x40usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x40usize + n * 4usize) as _)
+            }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task CLEAR"]
         #[inline(always)]
         pub const fn subscribe_clear(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task TRIGOVRFLW"]
         #[inline(always)]
         pub const fn subscribe_trigovrflw(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "Description collection: Subscribe configuration for task CAPTURE\\[n\\]"]
         #[inline(always)]
@@ -22882,37 +22954,41 @@ pub mod rtc {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xc0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xc0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Event on counter increment"]
         #[inline(always)]
         pub const fn events_tick(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Event on counter overflow"]
         #[inline(always)]
         pub const fn events_ovrflw(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Description collection: Compare event on CC\\[n\\] match"]
         #[inline(always)]
         pub const fn events_compare(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0140usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0140usize + n * 4usize) as _)
+            }
         }
         #[doc = "Publish configuration for event TICK"]
         #[inline(always)]
         pub const fn publish_tick(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event OVRFLW"]
         #[inline(always)]
         pub const fn publish_ovrflw(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Description collection: Publish configuration for event COMPARE\\[n\\]"]
         #[inline(always)]
@@ -22921,53 +22997,57 @@ pub mod rtc {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01c0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Enable or disable event routing"]
         #[inline(always)]
         pub const fn evten(self) -> crate::common::Reg<regs::Evt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0340usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0340usize) as _) }
         }
         #[doc = "Enable event routing"]
         #[inline(always)]
         pub const fn evtenset(self) -> crate::common::Reg<regs::Evt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0344usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0344usize) as _) }
         }
         #[doc = "Disable event routing"]
         #[inline(always)]
         pub const fn evtenclr(self) -> crate::common::Reg<regs::Evt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0348usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0348usize) as _) }
         }
         #[doc = "Current counter value"]
         #[inline(always)]
         pub const fn counter(self) -> crate::common::Reg<regs::Counter, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "12-bit prescaler for counter frequency (32768 / (PRESCALER + 1)). Must be written when RTC is stopped."]
         #[inline(always)]
         pub const fn prescaler(self) -> crate::common::Reg<regs::Prescaler, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Description collection: Compare register n"]
         #[inline(always)]
         pub const fn cc(self, n: usize) -> crate::common::Reg<regs::Cc, crate::common::RW> {
             assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0540usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -23290,22 +23370,22 @@ pub mod saadc {
         #[doc = "Description cluster: Input positive pin selection for CH\\[n\\]"]
         #[inline(always)]
         pub const fn pselp(self) -> crate::common::Reg<regs::Pselp, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Input negative pin selection for CH\\[n\\]"]
         #[inline(always)]
         pub const fn pseln(self) -> crate::common::Reg<regs::Pseln, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: Input configuration for CH\\[n\\]"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Description cluster: High/low limits for event monitoring a channel"]
         #[inline(always)]
         pub const fn limit(self) -> crate::common::Reg<regs::Limit, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "Peripheral events."]
@@ -23327,12 +23407,12 @@ pub mod saadc {
         #[doc = "Description cluster: Last results is equal or above CH\\[n\\].LIMIT.HIGH"]
         #[inline(always)]
         pub const fn limith(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Last results is equal or below CH\\[n\\].LIMIT.LOW"]
         #[inline(always)]
         pub const fn limitl(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Publish configuration for events"]
@@ -23356,14 +23436,14 @@ pub mod saadc {
         pub const fn limith(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Publish configuration for event CH\\[n\\].LIMITL"]
         #[inline(always)]
         pub const fn limitl(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "RESULT EasyDMA channel"]
@@ -23385,17 +23465,17 @@ pub mod saadc {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of buffer words to transfer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::Maxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of buffer words transferred since last START"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::Amount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Analog to Digital Converter 0"]
@@ -23417,185 +23497,185 @@ pub mod saadc {
         #[doc = "Start the ADC and prepare the result buffer in RAM"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Take one ADC sample, if scan is enabled all channels are sampled"]
         #[inline(always)]
         pub const fn tasks_sample(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Stop the ADC and terminate any ongoing conversion"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Starts offset auto-calibration"]
         #[inline(always)]
         pub const fn tasks_calibrateoffset(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task SAMPLE"]
         #[inline(always)]
         pub const fn subscribe_sample(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task CALIBRATEOFFSET"]
         #[inline(always)]
         pub const fn subscribe_calibrateoffset(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "The ADC has started"]
         #[inline(always)]
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "The ADC has filled up the Result buffer"]
         #[inline(always)]
         pub const fn events_end(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "A conversion task has been completed. Depending on the mode, multiple conversions might be needed for a result to be transferred to RAM."]
         #[inline(always)]
         pub const fn events_done(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "A result is ready to get transferred to RAM"]
         #[inline(always)]
         pub const fn events_resultdone(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x010cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x010cusize) as _) }
         }
         #[doc = "Calibration is complete"]
         #[inline(always)]
         pub const fn events_calibratedone(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "The ADC has stopped"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0114usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0114usize) as _) }
         }
         #[doc = "Peripheral events."]
         #[inline(always)]
         pub const fn events_ch(self, n: usize) -> EventsCh {
             assert!(n < 8usize);
-            unsafe { EventsCh::from_ptr(self.ptr.add(0x0118usize + n * 8usize) as _) }
+            unsafe { EventsCh::from_ptr(self.ptr.wrapping_add(0x0118usize + n * 8usize) as _) }
         }
         #[doc = "Publish configuration for event STARTED"]
         #[inline(always)]
         pub const fn publish_started(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event END"]
         #[inline(always)]
         pub const fn publish_end(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event DONE"]
         #[inline(always)]
         pub const fn publish_done(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event RESULTDONE"]
         #[inline(always)]
         pub const fn publish_resultdone(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x018cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x018cusize) as _) }
         }
         #[doc = "Publish configuration for event CALIBRATEDONE"]
         #[inline(always)]
         pub const fn publish_calibratedone(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0190usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0190usize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0194usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0194usize) as _) }
         }
         #[doc = "Publish configuration for events"]
         #[inline(always)]
         pub const fn publish_ch(self, n: usize) -> PublishCh {
             assert!(n < 8usize);
-            unsafe { PublishCh::from_ptr(self.ptr.add(0x0198usize + n * 8usize) as _) }
+            unsafe { PublishCh::from_ptr(self.ptr.wrapping_add(0x0198usize + n * 8usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Status"]
         #[inline(always)]
         pub const fn status(self) -> crate::common::Reg<regs::Status, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Enable or disable ADC"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn ch(self, n: usize) -> Ch {
             assert!(n < 8usize);
-            unsafe { Ch::from_ptr(self.ptr.add(0x0510usize + n * 16usize) as _) }
+            unsafe { Ch::from_ptr(self.ptr.wrapping_add(0x0510usize + n * 16usize) as _) }
         }
         #[doc = "Resolution configuration"]
         #[inline(always)]
         pub const fn resolution(self) -> crate::common::Reg<regs::Resolution, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05f0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05f0usize) as _) }
         }
         #[doc = "Oversampling configuration. OVERSAMPLE should not be combined with SCAN. The RESOLUTION is applied before averaging, thus for high OVERSAMPLE a higher RESOLUTION should be used."]
         #[inline(always)]
         pub const fn oversample(self) -> crate::common::Reg<regs::Oversample, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05f4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05f4usize) as _) }
         }
         #[doc = "Controls normal or continuous sample rate"]
         #[inline(always)]
         pub const fn samplerate(self) -> crate::common::Reg<regs::Samplerate, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05f8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05f8usize) as _) }
         }
         #[doc = "RESULT EasyDMA channel"]
         #[inline(always)]
         pub const fn result(self) -> Result {
-            unsafe { Result::from_ptr(self.ptr.add(0x062cusize) as _) }
+            unsafe { Result::from_ptr(self.ptr.wrapping_add(0x062cusize) as _) }
         }
     }
     pub mod regs {
@@ -24950,12 +25030,12 @@ pub mod spim {
         #[doc = "Sample delay for input serial data on MISO"]
         #[inline(always)]
         pub const fn rxdelay(self) -> crate::common::Reg<regs::Rxdelay, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Minimum duration between edge of CSN and edge of SCK. When SHORTS.END_START is used, this is also the minimum duration CSN must stay high between transactions."]
         #[inline(always)]
         pub const fn csndur(self) -> crate::common::Reg<regs::Csndur, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -24977,26 +25057,26 @@ pub mod spim {
         #[doc = "Pin select for SCK"]
         #[inline(always)]
         pub const fn sck(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for MOSI signal"]
         #[inline(always)]
         pub const fn mosi(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Pin select for MISO signal"]
         #[inline(always)]
         pub const fn miso(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Pin select for CSN"]
         #[inline(always)]
         pub const fn csn(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "RXD EasyDMA channel"]
@@ -25018,22 +25098,22 @@ pub mod spim {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "Serial Peripheral Interface Master with EasyDMA 0"]
@@ -25055,187 +25135,187 @@ pub mod spim {
         #[doc = "Start SPI transaction"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Stop SPI transaction"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Suspend SPI transaction"]
         #[inline(always)]
         pub const fn tasks_suspend(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Resume SPI transaction"]
         #[inline(always)]
         pub const fn tasks_resume(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x90usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x90usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x94usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x94usize) as _) }
         }
         #[doc = "Subscribe configuration for task SUSPEND"]
         #[inline(always)]
         pub const fn subscribe_suspend(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x9cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x9cusize) as _) }
         }
         #[doc = "Subscribe configuration for task RESUME"]
         #[inline(always)]
         pub const fn subscribe_resume(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa0usize) as _) }
         }
         #[doc = "SPI transaction has stopped"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "End of RXD buffer reached"]
         #[inline(always)]
         pub const fn events_endrx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "End of RXD buffer and TXD buffer reached"]
         #[inline(always)]
         pub const fn events_end(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0118usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0118usize) as _) }
         }
         #[doc = "End of TXD buffer reached"]
         #[inline(always)]
         pub const fn events_endtx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0120usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0120usize) as _) }
         }
         #[doc = "Transaction started"]
         #[inline(always)]
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x014cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x014cusize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event ENDRX"]
         #[inline(always)]
         pub const fn publish_endrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0190usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0190usize) as _) }
         }
         #[doc = "Publish configuration for event END"]
         #[inline(always)]
         pub const fn publish_end(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0198usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0198usize) as _) }
         }
         #[doc = "Publish configuration for event ENDTX"]
         #[inline(always)]
         pub const fn publish_endtx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a0usize) as _) }
         }
         #[doc = "Publish configuration for event STARTED"]
         #[inline(always)]
         pub const fn publish_started(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01ccusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01ccusize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register are set to STALL by hardware whenever a stall occurres and can be cleared (set to NOSTALL) by the CPU."]
         #[inline(always)]
         pub const fn stallstat(self) -> crate::common::Reg<regs::Stallstat, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Enable SPIM"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "SPI frequency. Accuracy depends on the HFCLK source selected."]
         #[inline(always)]
         pub const fn frequency(self) -> crate::common::Reg<regs::Frequency, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
         }
         #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
         pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.add(0x0534usize) as _) }
+            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "TXD EasyDMA channel"]
         #[inline(always)]
         pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.add(0x0544usize) as _) }
+            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
         }
         #[doc = "Configuration register"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0554usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0554usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn iftiming(self) -> Iftiming {
-            unsafe { Iftiming::from_ptr(self.ptr.add(0x0560usize) as _) }
+            unsafe { Iftiming::from_ptr(self.ptr.wrapping_add(0x0560usize) as _) }
         }
         #[doc = "Polarity of CSN output"]
         #[inline(always)]
         pub const fn csnpol(self) -> crate::common::Reg<regs::Csnpol, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0568usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0568usize) as _) }
         }
         #[doc = "Pin select for DCX signal"]
         #[inline(always)]
         pub const fn pseldcx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x056cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x056cusize) as _) }
         }
         #[doc = "DCX configuration"]
         #[inline(always)]
         pub const fn dcxcnt(self) -> crate::common::Reg<regs::Dcxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0570usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0570usize) as _) }
         }
         #[doc = "Byte transmitted after TXD.MAXCNT bytes have been transmitted in the case when RXD.MAXCNT is greater than TXD.MAXCNT"]
         #[inline(always)]
         pub const fn orc(self) -> crate::common::Reg<regs::Orc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05c0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05c0usize) as _) }
         }
     }
     #[doc = "TXD EasyDMA channel"]
@@ -25257,22 +25337,22 @@ pub mod spim {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Number of bytes in transmit buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -26341,26 +26421,26 @@ pub mod spis {
         #[doc = "Pin select for SCK"]
         #[inline(always)]
         pub const fn sck(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for MISO signal"]
         #[inline(always)]
         pub const fn miso(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Pin select for MOSI signal"]
         #[inline(always)]
         pub const fn mosi(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Pin select for CSN signal"]
         #[inline(always)]
         pub const fn csn(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -26382,22 +26462,22 @@ pub mod spis {
         #[doc = "RXD data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes received in last granted transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "SPI Slave 0"]
@@ -26419,122 +26499,122 @@ pub mod spis {
         #[doc = "Acquire SPI semaphore"]
         #[inline(always)]
         pub const fn tasks_acquire(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Release SPI semaphore, enabling the SPI slave to acquire it"]
         #[inline(always)]
         pub const fn tasks_release(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x28usize) as _) }
         }
         #[doc = "Subscribe configuration for task ACQUIRE"]
         #[inline(always)]
         pub const fn subscribe_acquire(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa4usize) as _) }
         }
         #[doc = "Subscribe configuration for task RELEASE"]
         #[inline(always)]
         pub const fn subscribe_release(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa8usize) as _) }
         }
         #[doc = "Granted transaction completed"]
         #[inline(always)]
         pub const fn events_end(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "End of RXD buffer reached"]
         #[inline(always)]
         pub const fn events_endrx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "Semaphore acquired"]
         #[inline(always)]
         pub const fn events_acquired(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0128usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0128usize) as _) }
         }
         #[doc = "Publish configuration for event END"]
         #[inline(always)]
         pub const fn publish_end(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event ENDRX"]
         #[inline(always)]
         pub const fn publish_endrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0190usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0190usize) as _) }
         }
         #[doc = "Publish configuration for event ACQUIRED"]
         #[inline(always)]
         pub const fn publish_acquired(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a8usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Semaphore status register"]
         #[inline(always)]
         pub const fn semstat(self) -> crate::common::Reg<regs::Semstat, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Status from last transaction"]
         #[inline(always)]
         pub const fn status(self) -> crate::common::Reg<regs::Status, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0440usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0440usize) as _) }
         }
         #[doc = "Enable SPI slave"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.add(0x0534usize) as _) }
+            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.add(0x0544usize) as _) }
+            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
         }
         #[doc = "Configuration register"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0554usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0554usize) as _) }
         }
         #[doc = "Default character. Character clocked out in case of an ignored transaction."]
         #[inline(always)]
         pub const fn def(self) -> crate::common::Reg<regs::Def, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x055cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x055cusize) as _) }
         }
         #[doc = "Over-read character"]
         #[inline(always)]
         pub const fn orc(self) -> crate::common::Reg<regs::Orc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05c0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05c0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -26556,22 +26636,22 @@ pub mod spis {
         #[doc = "TXD data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transmitted in last granted transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -27434,12 +27514,12 @@ pub mod spu {
         #[doc = "Description cluster: Select between secure and non-secure attribute for the DPPI channels"]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::DppiPerm, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Prevent further modification of the corresponding PERM register"]
         #[inline(always)]
         pub const fn lock(self) -> crate::common::Reg<regs::DppiLock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -27461,7 +27541,7 @@ pub mod spu {
         #[doc = "Description cluster: Access for bus access generated from the external domain n List capabilities of the external domain n"]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::ExtdomainPerm, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -27483,12 +27563,12 @@ pub mod spu {
         #[doc = "Description cluster: Define which flash region can contain the non-secure callable (NSC) region n"]
         #[inline(always)]
         pub const fn region(self) -> crate::common::Reg<regs::FlashnscRegion, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Define the size of the non-secure callable (NSC) region n"]
         #[inline(always)]
         pub const fn size(self) -> crate::common::Reg<regs::FlashnscSize, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -27510,7 +27590,7 @@ pub mod spu {
         #[doc = "Description cluster: Access permissions for flash region n"]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::FlashregionPerm, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -27532,12 +27612,12 @@ pub mod spu {
         #[doc = "Description cluster: Select between secure and non-secure attribute for pins 0 to 31 of port n"]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::GpioportPerm, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Prevent further modification of the corresponding PERM register"]
         #[inline(always)]
         pub const fn lock(self) -> crate::common::Reg<regs::GpioportLock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -27559,7 +27639,7 @@ pub mod spu {
         #[doc = "Description cluster: List capabilities and access permissions for the peripheral with ID n"]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::PeriphidPerm, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -27581,12 +27661,12 @@ pub mod spu {
         #[doc = "Description cluster: Define which RAM region can contain the non-secure callable (NSC) region n"]
         #[inline(always)]
         pub const fn region(self) -> crate::common::Reg<regs::RamnscRegion, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Define the size of the non-secure callable (NSC) region n"]
         #[inline(always)]
         pub const fn size(self) -> crate::common::Reg<regs::RamnscSize, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -27608,7 +27688,7 @@ pub mod spu {
         #[doc = "Description cluster: Access permissions for RAM region n"]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::RamregionPerm, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
     #[doc = "System protection unit"]
@@ -27630,111 +27710,111 @@ pub mod spu {
         #[doc = "A security violation has been detected for the RAM memory space"]
         #[inline(always)]
         pub const fn events_ramaccerr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "A security violation has been detected for the flash memory space"]
         #[inline(always)]
         pub const fn events_flashaccerr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "A security violation has been detected on one or several peripherals"]
         #[inline(always)]
         pub const fn events_periphaccerr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Publish configuration for event RAMACCERR"]
         #[inline(always)]
         pub const fn publish_ramaccerr(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event FLASHACCERR"]
         #[inline(always)]
         pub const fn publish_flashaccerr(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event PERIPHACCERR"]
         #[inline(always)]
         pub const fn publish_periphaccerr(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Show implemented features for the current device"]
         #[inline(always)]
         pub const fn cap(self) -> crate::common::Reg<regs::Cap, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Configure bits to lock down CPU features at runtime"]
         #[inline(always)]
         pub const fn cpulock(self) -> crate::common::Reg<regs::Cpulock, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0404usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0404usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn extdomain(self, n: usize) -> Extdomain {
             assert!(n < 1usize);
-            unsafe { Extdomain::from_ptr(self.ptr.add(0x0440usize + n * 4usize) as _) }
+            unsafe { Extdomain::from_ptr(self.ptr.wrapping_add(0x0440usize + n * 4usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn dppi(self, n: usize) -> Dppi {
             assert!(n < 1usize);
-            unsafe { Dppi::from_ptr(self.ptr.add(0x0480usize + n * 8usize) as _) }
+            unsafe { Dppi::from_ptr(self.ptr.wrapping_add(0x0480usize + n * 8usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn gpioport(self, n: usize) -> Gpioport {
             assert!(n < 2usize);
-            unsafe { Gpioport::from_ptr(self.ptr.add(0x04c0usize + n * 8usize) as _) }
+            unsafe { Gpioport::from_ptr(self.ptr.wrapping_add(0x04c0usize + n * 8usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn flashnsc(self, n: usize) -> Flashnsc {
             assert!(n < 2usize);
-            unsafe { Flashnsc::from_ptr(self.ptr.add(0x0500usize + n * 8usize) as _) }
+            unsafe { Flashnsc::from_ptr(self.ptr.wrapping_add(0x0500usize + n * 8usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn ramnsc(self, n: usize) -> Ramnsc {
             assert!(n < 2usize);
-            unsafe { Ramnsc::from_ptr(self.ptr.add(0x0540usize + n * 8usize) as _) }
+            unsafe { Ramnsc::from_ptr(self.ptr.wrapping_add(0x0540usize + n * 8usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn flashregion(self, n: usize) -> Flashregion {
             assert!(n < 64usize);
-            unsafe { Flashregion::from_ptr(self.ptr.add(0x0600usize + n * 4usize) as _) }
+            unsafe { Flashregion::from_ptr(self.ptr.wrapping_add(0x0600usize + n * 4usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn ramregion(self, n: usize) -> Ramregion {
             assert!(n < 64usize);
-            unsafe { Ramregion::from_ptr(self.ptr.add(0x0700usize + n * 4usize) as _) }
+            unsafe { Ramregion::from_ptr(self.ptr.wrapping_add(0x0700usize + n * 4usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn periphid(self, n: usize) -> Periphid {
             assert!(n < 256usize);
-            unsafe { Periphid::from_ptr(self.ptr.add(0x0800usize + n * 4usize) as _) }
+            unsafe { Periphid::from_ptr(self.ptr.wrapping_add(0x0800usize + n * 4usize) as _) }
         }
     }
     pub mod regs {
@@ -29727,35 +29807,35 @@ pub mod tad {
         pub const fn traceclk(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin configuration for TRACEDATA\\[0\\]"]
         #[inline(always)]
         pub const fn tracedata0(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Pin configuration for TRACEDATA\\[1\\]"]
         #[inline(always)]
         pub const fn tracedata1(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Pin configuration for TRACEDATA\\[2\\]"]
         #[inline(always)]
         pub const fn tracedata2(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Pin configuration for TRACEDATA\\[3\\]"]
         #[inline(always)]
         pub const fn tracedata3(
             self,
         ) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
     }
     #[doc = "Trace and debug control"]
@@ -29777,29 +29857,29 @@ pub mod tad {
         #[doc = "Start all trace and debug clocks."]
         #[inline(always)]
         pub const fn clockstart(self) -> crate::common::Reg<regs::Clockstart, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Stop all trace and debug clocks."]
         #[inline(always)]
         pub const fn clockstop(self) -> crate::common::Reg<regs::Clockstop, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Enable debug domain and aquire selected GPIOs"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Clocking options for the Trace Port debug interface Reset behavior is the same as debug components"]
         #[inline(always)]
         pub const fn traceportspeed(
             self,
         ) -> crate::common::Reg<regs::Traceportspeed, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0518usize) as _) }
         }
     }
     pub mod regs {
@@ -30308,68 +30388,70 @@ pub mod timer {
         #[doc = "Start Timer"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop Timer"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Increment Timer (Counter mode only)"]
         #[inline(always)]
         pub const fn tasks_count(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Clear time"]
         #[inline(always)]
         pub const fn tasks_clear(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Deprecated register - Shut down timer"]
         #[inline(always)]
         pub const fn tasks_shutdown(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "Description collection: Capture Timer value to CC\\[n\\] register"]
         #[inline(always)]
         pub const fn tasks_capture(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x40usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x40usize + n * 4usize) as _)
+            }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task COUNT"]
         #[inline(always)]
         pub const fn subscribe_count(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task CLEAR"]
         #[inline(always)]
         pub const fn subscribe_clear(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "Deprecated register - Subscribe configuration for task SHUTDOWN"]
         #[inline(always)]
         pub const fn subscribe_shutdown(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x90usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x90usize) as _) }
         }
         #[doc = "Description collection: Subscribe configuration for task CAPTURE\\[n\\]"]
         #[inline(always)]
@@ -30378,13 +30460,17 @@ pub mod timer {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xc0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xc0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Compare event on CC\\[n\\] match"]
         #[inline(always)]
         pub const fn events_compare(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0140usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0140usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Publish configuration for event COMPARE\\[n\\]"]
         #[inline(always)]
@@ -30393,48 +30479,52 @@ pub mod timer {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01c0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Timer mode selection"]
         #[inline(always)]
         pub const fn mode(self) -> crate::common::Reg<regs::Mode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Configure the number of bits used by the TIMER"]
         #[inline(always)]
         pub const fn bitmode(self) -> crate::common::Reg<regs::Bitmode, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Timer prescaler register"]
         #[inline(always)]
         pub const fn prescaler(self) -> crate::common::Reg<regs::Prescaler, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Description collection: Capture/Compare register n"]
         #[inline(always)]
         pub const fn cc(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0540usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0540usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: Enable one-shot operation for Capture/Compare channel n"]
         #[inline(always)]
@@ -30443,7 +30533,9 @@ pub mod timer {
             n: usize,
         ) -> crate::common::Reg<regs::Oneshoten, crate::common::RW> {
             assert!(n < 6usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0580usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0580usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
@@ -30800,12 +30892,12 @@ pub mod twim {
         #[doc = "Pin select for SCL signal"]
         #[inline(always)]
         pub const fn scl(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for SDA signal"]
         #[inline(always)]
         pub const fn sda(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "RXD EasyDMA channel"]
@@ -30827,22 +30919,22 @@ pub mod twim {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "I2C compatible Two-Wire Master Interface with EasyDMA 0"]
@@ -30864,201 +30956,201 @@ pub mod twim {
         #[doc = "Start TWI receive sequence"]
         #[inline(always)]
         pub const fn tasks_startrx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Start TWI transmit sequence"]
         #[inline(always)]
         pub const fn tasks_starttx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Stop TWI transaction. Must be issued while the TWI master is not suspended."]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Suspend TWI transaction"]
         #[inline(always)]
         pub const fn tasks_suspend(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Resume TWI transaction"]
         #[inline(always)]
         pub const fn tasks_resume(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "Subscribe configuration for task STARTRX"]
         #[inline(always)]
         pub const fn subscribe_startrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STARTTX"]
         #[inline(always)]
         pub const fn subscribe_starttx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x94usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x94usize) as _) }
         }
         #[doc = "Subscribe configuration for task SUSPEND"]
         #[inline(always)]
         pub const fn subscribe_suspend(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x9cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x9cusize) as _) }
         }
         #[doc = "Subscribe configuration for task RESUME"]
         #[inline(always)]
         pub const fn subscribe_resume(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa0usize) as _) }
         }
         #[doc = "TWI stopped"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "TWI error"]
         #[inline(always)]
         pub const fn events_error(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0124usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0124usize) as _) }
         }
         #[doc = "SUSPEND task has been issued, TWI traffic is now suspended."]
         #[inline(always)]
         pub const fn events_suspended(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0148usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0148usize) as _) }
         }
         #[doc = "Receive sequence started"]
         #[inline(always)]
         pub const fn events_rxstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x014cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x014cusize) as _) }
         }
         #[doc = "Transmit sequence started"]
         #[inline(always)]
         pub const fn events_txstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0150usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0150usize) as _) }
         }
         #[doc = "Byte boundary, starting to receive the last byte"]
         #[inline(always)]
         pub const fn events_lastrx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x015cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x015cusize) as _) }
         }
         #[doc = "Byte boundary, starting to transmit the last byte"]
         #[inline(always)]
         pub const fn events_lasttx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0160usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0160usize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event ERROR"]
         #[inline(always)]
         pub const fn publish_error(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a4usize) as _) }
         }
         #[doc = "Publish configuration for event SUSPENDED"]
         #[inline(always)]
         pub const fn publish_suspended(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01c8usize) as _) }
         }
         #[doc = "Publish configuration for event RXSTARTED"]
         #[inline(always)]
         pub const fn publish_rxstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01ccusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01ccusize) as _) }
         }
         #[doc = "Publish configuration for event TXSTARTED"]
         #[inline(always)]
         pub const fn publish_txstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d0usize) as _) }
         }
         #[doc = "Publish configuration for event LASTRX"]
         #[inline(always)]
         pub const fn publish_lastrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01dcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01dcusize) as _) }
         }
         #[doc = "Publish configuration for event LASTTX"]
         #[inline(always)]
         pub const fn publish_lasttx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01e0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01e0usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Error source"]
         #[inline(always)]
         pub const fn errorsrc(self) -> crate::common::Reg<regs::Errorsrc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04c4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04c4usize) as _) }
         }
         #[doc = "Enable TWIM"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "TWI frequency. Accuracy depends on the HFCLK source selected."]
         #[inline(always)]
         pub const fn frequency(self) -> crate::common::Reg<regs::Frequency, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
         }
         #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
         pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.add(0x0534usize) as _) }
+            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "TXD EasyDMA channel"]
         #[inline(always)]
         pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.add(0x0544usize) as _) }
+            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
         }
         #[doc = "Address used in the TWI transfer"]
         #[inline(always)]
         pub const fn address(self) -> crate::common::Reg<regs::Address, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0588usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0588usize) as _) }
         }
     }
     #[doc = "TXD EasyDMA channel"]
@@ -31080,22 +31172,22 @@ pub mod twim {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -31905,12 +31997,12 @@ pub mod twis {
         #[doc = "Pin select for SCL signal"]
         #[inline(always)]
         pub const fn scl(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for SDA signal"]
         #[inline(always)]
         pub const fn sda(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "RXD EasyDMA channel"]
@@ -31932,22 +32024,22 @@ pub mod twis {
         #[doc = "RXD Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in RXD buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last RXD transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "I2C compatible Two-Wire Slave Interface with EasyDMA 0"]
@@ -31969,184 +32061,184 @@ pub mod twis {
         #[doc = "Stop TWI transaction"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Suspend TWI transaction"]
         #[inline(always)]
         pub const fn tasks_suspend(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Resume TWI transaction"]
         #[inline(always)]
         pub const fn tasks_resume(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "Prepare the TWI slave to respond to a write command"]
         #[inline(always)]
         pub const fn tasks_preparerx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x30usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x30usize) as _) }
         }
         #[doc = "Prepare the TWI slave to respond to a read command"]
         #[inline(always)]
         pub const fn tasks_preparetx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x34usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x34usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x94usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x94usize) as _) }
         }
         #[doc = "Subscribe configuration for task SUSPEND"]
         #[inline(always)]
         pub const fn subscribe_suspend(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x9cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x9cusize) as _) }
         }
         #[doc = "Subscribe configuration for task RESUME"]
         #[inline(always)]
         pub const fn subscribe_resume(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa0usize) as _) }
         }
         #[doc = "Subscribe configuration for task PREPARERX"]
         #[inline(always)]
         pub const fn subscribe_preparerx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xb0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xb0usize) as _) }
         }
         #[doc = "Subscribe configuration for task PREPARETX"]
         #[inline(always)]
         pub const fn subscribe_preparetx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xb4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xb4usize) as _) }
         }
         #[doc = "TWI stopped"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "TWI error"]
         #[inline(always)]
         pub const fn events_error(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0124usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0124usize) as _) }
         }
         #[doc = "Receive sequence started"]
         #[inline(always)]
         pub const fn events_rxstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x014cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x014cusize) as _) }
         }
         #[doc = "Transmit sequence started"]
         #[inline(always)]
         pub const fn events_txstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0150usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0150usize) as _) }
         }
         #[doc = "Write command received"]
         #[inline(always)]
         pub const fn events_write(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0164usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0164usize) as _) }
         }
         #[doc = "Read command received"]
         #[inline(always)]
         pub const fn events_read(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0168usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0168usize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event ERROR"]
         #[inline(always)]
         pub const fn publish_error(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a4usize) as _) }
         }
         #[doc = "Publish configuration for event RXSTARTED"]
         #[inline(always)]
         pub const fn publish_rxstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01ccusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01ccusize) as _) }
         }
         #[doc = "Publish configuration for event TXSTARTED"]
         #[inline(always)]
         pub const fn publish_txstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d0usize) as _) }
         }
         #[doc = "Publish configuration for event WRITE"]
         #[inline(always)]
         pub const fn publish_write(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01e4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01e4usize) as _) }
         }
         #[doc = "Publish configuration for event READ"]
         #[inline(always)]
         pub const fn publish_read(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01e8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01e8usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Error source"]
         #[inline(always)]
         pub const fn errorsrc(self) -> crate::common::Reg<regs::Errorsrc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04d0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04d0usize) as _) }
         }
         #[doc = "Status register indicating which address had a match"]
         #[inline(always)]
         pub const fn match_(self) -> crate::common::Reg<regs::Match, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04d4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04d4usize) as _) }
         }
         #[doc = "Enable TWIS"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
         pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.add(0x0534usize) as _) }
+            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "TXD EasyDMA channel"]
         #[inline(always)]
         pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.add(0x0544usize) as _) }
+            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
         }
         #[doc = "Description collection: TWI slave address n"]
         #[inline(always)]
@@ -32155,17 +32247,19 @@ pub mod twis {
             n: usize,
         ) -> crate::common::Reg<regs::Address, crate::common::RW> {
             assert!(n < 2usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0588usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0588usize + n * 4usize) as _)
+            }
         }
         #[doc = "Configuration register for the address match mechanism"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0594usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0594usize) as _) }
         }
         #[doc = "Over-read character. Character sent out in case of an over-read of the transmit buffer."]
         #[inline(always)]
         pub const fn orc(self) -> crate::common::Reg<regs::Orc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x05c0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05c0usize) as _) }
         }
     }
     #[doc = "TXD EasyDMA channel"]
@@ -32187,22 +32281,22 @@ pub mod twis {
         #[doc = "TXD Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in TXD buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last TXD transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type"]
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -32990,22 +33084,22 @@ pub mod uarte {
         #[doc = "Pin select for RTS signal"]
         #[inline(always)]
         pub const fn rts(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Pin select for TXD signal"]
         #[inline(always)]
         pub const fn txd(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Pin select for CTS signal"]
         #[inline(always)]
         pub const fn cts(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Pin select for RXD signal"]
         #[inline(always)]
         pub const fn rxd(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     #[doc = "RXD EasyDMA channel"]
@@ -33027,17 +33121,17 @@ pub mod uarte {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in receive buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "TXD EasyDMA channel"]
@@ -33059,17 +33153,17 @@ pub mod uarte {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes in transmit buffer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "UART with EasyDMA 0"]
@@ -33091,249 +33185,249 @@ pub mod uarte {
         #[doc = "Start UART receiver"]
         #[inline(always)]
         pub const fn tasks_startrx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop UART receiver"]
         #[inline(always)]
         pub const fn tasks_stoprx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Start UART transmitter"]
         #[inline(always)]
         pub const fn tasks_starttx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Stop UART transmitter"]
         #[inline(always)]
         pub const fn tasks_stoptx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
         #[doc = "Flush RX FIFO into RX buffer"]
         #[inline(always)]
         pub const fn tasks_flushrx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x2cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x2cusize) as _) }
         }
         #[doc = "Subscribe configuration for task STARTRX"]
         #[inline(always)]
         pub const fn subscribe_startrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOPRX"]
         #[inline(always)]
         pub const fn subscribe_stoprx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Subscribe configuration for task STARTTX"]
         #[inline(always)]
         pub const fn subscribe_starttx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x88usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOPTX"]
         #[inline(always)]
         pub const fn subscribe_stoptx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x8cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x8cusize) as _) }
         }
         #[doc = "Subscribe configuration for task FLUSHRX"]
         #[inline(always)]
         pub const fn subscribe_flushrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xacusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xacusize) as _) }
         }
         #[doc = "CTS is activated (set low). Clear To Send."]
         #[inline(always)]
         pub const fn events_cts(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "CTS is deactivated (set high). Not Clear To Send."]
         #[inline(always)]
         pub const fn events_ncts(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Data received in RXD (but potentially not yet transferred to Data RAM)"]
         #[inline(always)]
         pub const fn events_rxdrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Receive buffer is filled up"]
         #[inline(always)]
         pub const fn events_endrx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0110usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "Data sent from TXD"]
         #[inline(always)]
         pub const fn events_txdrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x011cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x011cusize) as _) }
         }
         #[doc = "Last TX byte transmitted"]
         #[inline(always)]
         pub const fn events_endtx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0120usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0120usize) as _) }
         }
         #[doc = "Error detected"]
         #[inline(always)]
         pub const fn events_error(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0124usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0124usize) as _) }
         }
         #[doc = "Receiver timeout"]
         #[inline(always)]
         pub const fn events_rxto(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0144usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0144usize) as _) }
         }
         #[doc = "UART receiver has started"]
         #[inline(always)]
         pub const fn events_rxstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x014cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x014cusize) as _) }
         }
         #[doc = "UART transmitter has started"]
         #[inline(always)]
         pub const fn events_txstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0150usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0150usize) as _) }
         }
         #[doc = "Transmitter stopped"]
         #[inline(always)]
         pub const fn events_txstopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0158usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0158usize) as _) }
         }
         #[doc = "Publish configuration for event CTS"]
         #[inline(always)]
         pub const fn publish_cts(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event NCTS"]
         #[inline(always)]
         pub const fn publish_ncts(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event RXDRDY"]
         #[inline(always)]
         pub const fn publish_rxdrdy(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Publish configuration for event ENDRX"]
         #[inline(always)]
         pub const fn publish_endrx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0190usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0190usize) as _) }
         }
         #[doc = "Publish configuration for event TXDRDY"]
         #[inline(always)]
         pub const fn publish_txdrdy(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x019cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x019cusize) as _) }
         }
         #[doc = "Publish configuration for event ENDTX"]
         #[inline(always)]
         pub const fn publish_endtx(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a0usize) as _) }
         }
         #[doc = "Publish configuration for event ERROR"]
         #[inline(always)]
         pub const fn publish_error(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a4usize) as _) }
         }
         #[doc = "Publish configuration for event RXTO"]
         #[inline(always)]
         pub const fn publish_rxto(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01c4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01c4usize) as _) }
         }
         #[doc = "Publish configuration for event RXSTARTED"]
         #[inline(always)]
         pub const fn publish_rxstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01ccusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01ccusize) as _) }
         }
         #[doc = "Publish configuration for event TXSTARTED"]
         #[inline(always)]
         pub const fn publish_txstarted(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d0usize) as _) }
         }
         #[doc = "Publish configuration for event TXSTOPPED"]
         #[inline(always)]
         pub const fn publish_txstopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d8usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Error source"]
         #[inline(always)]
         pub const fn errorsrc(self) -> crate::common::Reg<regs::Errorsrc, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0480usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0480usize) as _) }
         }
         #[doc = "Enable UART"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn psel(self) -> Psel {
-            unsafe { Psel::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Baud rate. Accuracy depends on the HFCLK source selected."]
         #[inline(always)]
         pub const fn baudrate(self) -> crate::common::Reg<regs::Baudrate, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0524usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
         }
         #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
         pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.add(0x0534usize) as _) }
+            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "TXD EasyDMA channel"]
         #[inline(always)]
         pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.add(0x0544usize) as _) }
+            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
         }
         #[doc = "Configuration of parity and hardware flow control"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x056cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x056cusize) as _) }
         }
     }
     pub mod regs {
@@ -34221,12 +34315,12 @@ pub mod uicr {
         #[doc = "Description cluster: Destination address where content of the key value registers (KEYSLOT.KEYn.VALUE\\[0-3\\]) will be pushed by KMU. Note that this address must match that of a peripherals APB mapped write-only key registers, else the KMU can push this key value into an address range which the CPU can potentially read."]
         #[inline(always)]
         pub const fn dest(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Define permissions for the key slot. Bits 0-15 and 16-31 can only be written when equal to 0xFFFF."]
         #[inline(always)]
         pub const fn perm(self) -> crate::common::Reg<regs::Perm, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -34249,7 +34343,9 @@ pub mod uicr {
         #[inline(always)]
         pub const fn value(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 4usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
     }
     #[doc = "Unspecified"]
@@ -34272,13 +34368,13 @@ pub mod uicr {
         #[inline(always)]
         pub const fn config(self, n: usize) -> Config {
             assert!(n < 128usize);
-            unsafe { Config::from_ptr(self.ptr.add(0x0usize + n * 8usize) as _) }
+            unsafe { Config::from_ptr(self.ptr.wrapping_add(0x0usize + n * 8usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn key(self, n: usize) -> Key {
             assert!(n < 128usize);
-            unsafe { Key::from_ptr(self.ptr.add(0x0400usize + n * 16usize) as _) }
+            unsafe { Key::from_ptr(self.ptr.wrapping_add(0x0400usize + n * 16usize) as _) }
         }
     }
     #[doc = "User Information Configuration Registers User information configuration registers"]
@@ -34300,52 +34396,54 @@ pub mod uicr {
         #[doc = "Access port protection"]
         #[inline(always)]
         pub const fn approtect(self) -> crate::common::Reg<regs::Approtect, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Output voltage from the high voltage (VREGH) regulator stage. The maximum output voltage from this stage is given as VDDH - VREGHDROP."]
         #[inline(always)]
         pub const fn vreghvout(self) -> crate::common::Reg<regs::Vreghvout, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
         #[doc = "HFXO startup counter"]
         #[inline(always)]
         pub const fn hfxocnt(self) -> crate::common::Reg<regs::Hfxocnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
         }
         #[doc = "Secure access port protection"]
         #[inline(always)]
         pub const fn secureapprotect(
             self,
         ) -> crate::common::Reg<regs::Secureapprotect, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
         #[doc = "Erase protection"]
         #[inline(always)]
         pub const fn eraseprotect(
             self,
         ) -> crate::common::Reg<regs::Eraseprotect, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
         #[doc = "SW-DP Target instance"]
         #[inline(always)]
         pub const fn tinstance(self) -> crate::common::Reg<regs::Tinstance, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Setting of pins dedicated to NFC functionality: NFC antenna or GPIO"]
         #[inline(always)]
         pub const fn nfcpins(self) -> crate::common::Reg<regs::Nfcpins, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x28usize) as _) }
         }
         #[doc = "Description collection: One time programmable memory"]
         #[inline(always)]
         pub const fn otp(self, n: usize) -> crate::common::Reg<regs::Otp, crate::common::RW> {
             assert!(n < 192usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize + n * 4usize) as _)
+            }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn keyslot(self) -> Keyslot {
-            unsafe { Keyslot::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { Keyslot::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
     }
     pub mod regs {
@@ -35074,17 +35172,17 @@ pub mod usbd {
         #[doc = "Description cluster: Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Maximum number of bytes to transfer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::EpinMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::EpinAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -35106,17 +35204,17 @@ pub mod usbd {
         #[doc = "Description cluster: Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: Maximum number of bytes to transfer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::EpoutMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::EpoutAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -35139,7 +35237,9 @@ pub mod usbd {
         #[inline(always)]
         pub const fn epin(self, n: usize) -> crate::common::Reg<regs::Epin, crate::common::R> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Description collection: OUT endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint."]
         #[inline(always)]
@@ -35148,7 +35248,9 @@ pub mod usbd {
             n: usize,
         ) -> crate::common::Reg<regs::HaltedEpout, crate::common::R> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize + n * 4usize) as _)
+            }
         }
     }
     #[doc = "Unspecified"]
@@ -35170,17 +35272,17 @@ pub mod usbd {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes to transfer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::IsoinMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::IsoinAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -35202,17 +35304,17 @@ pub mod usbd {
         #[doc = "Data pointer"]
         #[inline(always)]
         pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Maximum number of bytes to transfer"]
         #[inline(always)]
         pub const fn maxcnt(self) -> crate::common::Reg<regs::IsooutMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
         #[inline(always)]
         pub const fn amount(self) -> crate::common::Reg<regs::IsooutAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Unspecified"]
@@ -35238,12 +35340,14 @@ pub mod usbd {
             n: usize,
         ) -> crate::common::Reg<regs::SizeEpout, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Number of bytes received last on this ISO OUT data endpoint"]
         #[inline(always)]
         pub const fn isoout(self) -> crate::common::Reg<regs::Isoout, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
     }
     #[doc = "Universal serial bus device 0"]
@@ -35266,48 +35370,52 @@ pub mod usbd {
         #[inline(always)]
         pub const fn tasks_startepin(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize + n * 4usize) as _)
+            }
         }
         #[doc = "Captures the ISOIN.PTR and ISOIN.MAXCNT registers values, and enables sending data on ISO endpoint"]
         #[inline(always)]
         pub const fn tasks_startisoin(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x24usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
         #[doc = "Description collection: Captures the EPOUT\\[n\\].PTR and EPOUT\\[n\\].MAXCNT registers values, and enables endpoint n to respond to traffic from host"]
         #[inline(always)]
         pub const fn tasks_startepout(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x28usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x28usize + n * 4usize) as _)
+            }
         }
         #[doc = "Captures the ISOOUT.PTR and ISOOUT.MAXCNT registers values, and enables receiving of data on ISO endpoint"]
         #[inline(always)]
         pub const fn tasks_startisoout(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x48usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x48usize) as _) }
         }
         #[doc = "Allows OUT data stage on control endpoint 0"]
         #[inline(always)]
         pub const fn tasks_ep0rcvout(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x4cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x4cusize) as _) }
         }
         #[doc = "Allows status stage on control endpoint 0"]
         #[inline(always)]
         pub const fn tasks_ep0status(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x50usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x50usize) as _) }
         }
         #[doc = "Stalls data and status stage on control endpoint 0"]
         #[inline(always)]
         pub const fn tasks_ep0stall(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x54usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x54usize) as _) }
         }
         #[doc = "Forces D+ and D- lines into the state defined in the DPDMVALUE register"]
         #[inline(always)]
         pub const fn tasks_dpdmdrive(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x58usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x58usize) as _) }
         }
         #[doc = "Stops forcing D+ and D- lines into any state (USB engine takes control)"]
         #[inline(always)]
         pub const fn tasks_dpdmnodrive(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x5cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x5cusize) as _) }
         }
         #[doc = "Description collection: Subscribe configuration for task STARTEPIN\\[n\\]"]
         #[inline(always)]
@@ -35316,14 +35424,16 @@ pub mod usbd {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize + n * 4usize) as _)
+            }
         }
         #[doc = "Subscribe configuration for task STARTISOIN"]
         #[inline(always)]
         pub const fn subscribe_startisoin(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa4usize) as _) }
         }
         #[doc = "Description collection: Subscribe configuration for task STARTEPOUT\\[n\\]"]
         #[inline(always)]
@@ -35332,120 +35442,126 @@ pub mod usbd {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xa8usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xa8usize + n * 4usize) as _)
+            }
         }
         #[doc = "Subscribe configuration for task STARTISOOUT"]
         #[inline(always)]
         pub const fn subscribe_startisoout(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xc8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xc8usize) as _) }
         }
         #[doc = "Subscribe configuration for task EP0RCVOUT"]
         #[inline(always)]
         pub const fn subscribe_ep0rcvout(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xccusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xccusize) as _) }
         }
         #[doc = "Subscribe configuration for task EP0STATUS"]
         #[inline(always)]
         pub const fn subscribe_ep0status(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xd0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xd0usize) as _) }
         }
         #[doc = "Subscribe configuration for task EP0STALL"]
         #[inline(always)]
         pub const fn subscribe_ep0stall(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xd4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xd4usize) as _) }
         }
         #[doc = "Subscribe configuration for task DPDMDRIVE"]
         #[inline(always)]
         pub const fn subscribe_dpdmdrive(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xd8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xd8usize) as _) }
         }
         #[doc = "Subscribe configuration for task DPDMNODRIVE"]
         #[inline(always)]
         pub const fn subscribe_dpdmnodrive(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0xdcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0xdcusize) as _) }
         }
         #[doc = "Signals that a USB reset condition has been detected on USB lines"]
         #[inline(always)]
         pub const fn events_usbreset(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Confirms that the EPIN\\[n\\].PTR and EPIN\\[n\\].MAXCNT, or EPOUT\\[n\\].PTR and EPOUT\\[n\\].MAXCNT registers have been captured on all endpoints reported in the EPSTATUS register"]
         #[inline(always)]
         pub const fn events_started(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Description collection: The whole EPIN\\[n\\] buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endepin(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize + n * 4usize) as _)
+            }
         }
         #[doc = "An acknowledged data transfer has taken place on the control endpoint"]
         #[inline(always)]
         pub const fn events_ep0datadone(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0128usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0128usize) as _) }
         }
         #[doc = "The whole ISOIN buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endisoin(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x012cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x012cusize) as _) }
         }
         #[doc = "Description collection: The whole EPOUT\\[n\\] buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endepout(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0130usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0130usize + n * 4usize) as _)
+            }
         }
         #[doc = "The whole ISOOUT buffer has been consumed. The buffer can be accessed safely by software."]
         #[inline(always)]
         pub const fn events_endisoout(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0150usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0150usize) as _) }
         }
         #[doc = "Signals that a SOF (start of frame) condition has been detected on USB lines"]
         #[inline(always)]
         pub const fn events_sof(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0154usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0154usize) as _) }
         }
         #[doc = "An event or an error not covered by specific events has occurred. Check EVENTCAUSE register to find the cause."]
         #[inline(always)]
         pub const fn events_usbevent(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0158usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0158usize) as _) }
         }
         #[doc = "A valid SETUP token has been received (and acknowledged) on the control endpoint"]
         #[inline(always)]
         pub const fn events_ep0setup(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x015cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x015cusize) as _) }
         }
         #[doc = "A data transfer has occurred on a data endpoint, indicated by the EPDATASTATUS register"]
         #[inline(always)]
         pub const fn events_epdata(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0160usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0160usize) as _) }
         }
         #[doc = "Publish configuration for event USBRESET"]
         #[inline(always)]
         pub const fn publish_usbreset(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event STARTED"]
         #[inline(always)]
         pub const fn publish_started(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Description collection: Publish configuration for event ENDEPIN\\[n\\]"]
         #[inline(always)]
@@ -35454,21 +35570,23 @@ pub mod usbd {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize + n * 4usize) as _)
+            }
         }
         #[doc = "Publish configuration for event EP0DATADONE"]
         #[inline(always)]
         pub const fn publish_ep0datadone(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01a8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01a8usize) as _) }
         }
         #[doc = "Publish configuration for event ENDISOIN"]
         #[inline(always)]
         pub const fn publish_endisoin(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01acusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01acusize) as _) }
         }
         #[doc = "Description collection: Publish configuration for event ENDEPOUT\\[n\\]"]
         #[inline(always)]
@@ -35477,213 +35595,215 @@ pub mod usbd {
             n: usize,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01b0usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01b0usize + n * 4usize) as _)
+            }
         }
         #[doc = "Publish configuration for event ENDISOOUT"]
         #[inline(always)]
         pub const fn publish_endisoout(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d0usize) as _) }
         }
         #[doc = "Publish configuration for event SOF"]
         #[inline(always)]
         pub const fn publish_sof(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d4usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d4usize) as _) }
         }
         #[doc = "Publish configuration for event USBEVENT"]
         #[inline(always)]
         pub const fn publish_usbevent(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01d8usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01d8usize) as _) }
         }
         #[doc = "Publish configuration for event EP0SETUP"]
         #[inline(always)]
         pub const fn publish_ep0setup(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01dcusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01dcusize) as _) }
         }
         #[doc = "Publish configuration for event EPDATA"]
         #[inline(always)]
         pub const fn publish_epdata(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x01e0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x01e0usize) as _) }
         }
         #[doc = "Shortcuts between local events and tasks"]
         #[inline(always)]
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0200usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Details on what caused the USBEVENT event"]
         #[inline(always)]
         pub const fn eventcause(self) -> crate::common::Reg<regs::Eventcause, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn halted(self) -> Halted {
-            unsafe { Halted::from_ptr(self.ptr.add(0x0420usize) as _) }
+            unsafe { Halted::from_ptr(self.ptr.wrapping_add(0x0420usize) as _) }
         }
         #[doc = "Provides information on which endpoint's EasyDMA registers have been captured"]
         #[inline(always)]
         pub const fn epstatus(self) -> crate::common::Reg<regs::Epstatus, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0468usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0468usize) as _) }
         }
         #[doc = "Provides information on which endpoint(s) an acknowledged data transfer has occurred (EPDATA event)"]
         #[inline(always)]
         pub const fn epdatastatus(
             self,
         ) -> crate::common::Reg<regs::Epdatastatus, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x046cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x046cusize) as _) }
         }
         #[doc = "Device USB address"]
         #[inline(always)]
         pub const fn usbaddr(self) -> crate::common::Reg<regs::Usbaddr, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0470usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0470usize) as _) }
         }
         #[doc = "SETUP data, byte 0, bmRequestType"]
         #[inline(always)]
         pub const fn bmrequesttype(
             self,
         ) -> crate::common::Reg<regs::Bmrequesttype, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0480usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0480usize) as _) }
         }
         #[doc = "SETUP data, byte 1, bRequest"]
         #[inline(always)]
         pub const fn brequest(self) -> crate::common::Reg<regs::Brequest, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0484usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0484usize) as _) }
         }
         #[doc = "SETUP data, byte 2, LSB of wValue"]
         #[inline(always)]
         pub const fn wvaluel(self) -> crate::common::Reg<regs::Wvaluel, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0488usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0488usize) as _) }
         }
         #[doc = "SETUP data, byte 3, MSB of wValue"]
         #[inline(always)]
         pub const fn wvalueh(self) -> crate::common::Reg<regs::Wvalueh, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x048cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x048cusize) as _) }
         }
         #[doc = "SETUP data, byte 4, LSB of wIndex"]
         #[inline(always)]
         pub const fn windexl(self) -> crate::common::Reg<regs::Windexl, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0490usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0490usize) as _) }
         }
         #[doc = "SETUP data, byte 5, MSB of wIndex"]
         #[inline(always)]
         pub const fn windexh(self) -> crate::common::Reg<regs::Windexh, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0494usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0494usize) as _) }
         }
         #[doc = "SETUP data, byte 6, LSB of wLength"]
         #[inline(always)]
         pub const fn wlengthl(self) -> crate::common::Reg<regs::Wlengthl, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0498usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0498usize) as _) }
         }
         #[doc = "SETUP data, byte 7, MSB of wLength"]
         #[inline(always)]
         pub const fn wlengthh(self) -> crate::common::Reg<regs::Wlengthh, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x049cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x049cusize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn size(self) -> Size {
-            unsafe { Size::from_ptr(self.ptr.add(0x04a0usize) as _) }
+            unsafe { Size::from_ptr(self.ptr.wrapping_add(0x04a0usize) as _) }
         }
         #[doc = "Enable USB"]
         #[inline(always)]
         pub const fn enable(self) -> crate::common::Reg<regs::Enable, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0500usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0500usize) as _) }
         }
         #[doc = "Control of the USB pull-up"]
         #[inline(always)]
         pub const fn usbpullup(self) -> crate::common::Reg<regs::Usbpullup, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "State D+ and D- lines will be forced into by the DPDMDRIVE task. The DPDMNODRIVE task reverts the control of the lines to MAC IP (no forcing)."]
         #[inline(always)]
         pub const fn dpdmvalue(self) -> crate::common::Reg<regs::Dpdmvalue, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Data toggle control and status"]
         #[inline(always)]
         pub const fn dtoggle(self) -> crate::common::Reg<regs::Dtoggle, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Endpoint IN enable"]
         #[inline(always)]
         pub const fn epinen(self) -> crate::common::Reg<regs::Epinen, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0510usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0510usize) as _) }
         }
         #[doc = "Endpoint OUT enable"]
         #[inline(always)]
         pub const fn epouten(self) -> crate::common::Reg<regs::Epouten, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0514usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0514usize) as _) }
         }
         #[doc = "STALL endpoints"]
         #[inline(always)]
         pub const fn epstall(self) -> crate::common::Reg<regs::Epstall, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0518usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0518usize) as _) }
         }
         #[doc = "Controls the split of ISO buffers"]
         #[inline(always)]
         pub const fn isosplit(self) -> crate::common::Reg<regs::Isosplit, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x051cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x051cusize) as _) }
         }
         #[doc = "Returns the current value of the start of frame counter"]
         #[inline(always)]
         pub const fn framecntr(self) -> crate::common::Reg<regs::Framecntr, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0520usize) as _) }
         }
         #[doc = "Controls USBD peripheral low power mode during USB suspend"]
         #[inline(always)]
         pub const fn lowpower(self) -> crate::common::Reg<regs::Lowpower, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x052cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x052cusize) as _) }
         }
         #[doc = "Controls the response of the ISO IN endpoint to an IN token when no data is ready to be sent"]
         #[inline(always)]
         pub const fn isoinconfig(self) -> crate::common::Reg<regs::Isoinconfig, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0530usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0530usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn epin(self, n: usize) -> Epin {
             assert!(n < 8usize);
-            unsafe { Epin::from_ptr(self.ptr.add(0x0600usize + n * 20usize) as _) }
+            unsafe { Epin::from_ptr(self.ptr.wrapping_add(0x0600usize + n * 20usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn isoin(self) -> Isoin {
-            unsafe { Isoin::from_ptr(self.ptr.add(0x06a0usize) as _) }
+            unsafe { Isoin::from_ptr(self.ptr.wrapping_add(0x06a0usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn epout(self, n: usize) -> Epout {
             assert!(n < 8usize);
-            unsafe { Epout::from_ptr(self.ptr.add(0x0700usize + n * 20usize) as _) }
+            unsafe { Epout::from_ptr(self.ptr.wrapping_add(0x0700usize + n * 20usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
         pub const fn isoout(self) -> Isoout {
-            unsafe { Isoout::from_ptr(self.ptr.add(0x07a0usize) as _) }
+            unsafe { Isoout::from_ptr(self.ptr.wrapping_add(0x07a0usize) as _) }
         }
     }
     pub mod regs {
@@ -38069,60 +38189,60 @@ pub mod usbreg {
         #[doc = "Voltage supply detected on VBUS"]
         #[inline(always)]
         pub const fn events_usbdetected(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Voltage supply removed from VBUS"]
         #[inline(always)]
         pub const fn events_usbremoved(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "USB 3.3 V supply ready"]
         #[inline(always)]
         pub const fn events_usbpwrrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0108usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
         #[doc = "Publish configuration for event USBDETECTED"]
         #[inline(always)]
         pub const fn publish_usbdetected(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event USBREMOVED"]
         #[inline(always)]
         pub const fn publish_usbremoved(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Publish configuration for event USBPWRRDY"]
         #[inline(always)]
         pub const fn publish_usbpwrrdy(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0188usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0188usize) as _) }
         }
         #[doc = "Enable or disable interrupt"]
         #[inline(always)]
         pub const fn inten(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0300usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0300usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "USB supply status"]
         #[inline(always)]
         pub const fn usbregstatus(
             self,
         ) -> crate::common::Reg<regs::Usbregstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
     }
     pub mod regs {
@@ -38272,17 +38392,17 @@ pub mod vmc {
         #[doc = "Description cluster: RAM\\[n\\] power control register"]
         #[inline(always)]
         pub const fn power(self) -> crate::common::Reg<regs::Power, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Description cluster: RAM\\[n\\] power control set register"]
         #[inline(always)]
         pub const fn powerset(self) -> crate::common::Reg<regs::Power, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: RAM\\[n\\] power control clear register"]
         #[inline(always)]
         pub const fn powerclr(self) -> crate::common::Reg<regs::Power, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
     #[doc = "Volatile Memory controller 0"]
@@ -38305,7 +38425,7 @@ pub mod vmc {
         #[inline(always)]
         pub const fn ram(self, n: usize) -> Ram {
             assert!(n < 8usize);
-            unsafe { Ram::from_ptr(self.ptr.add(0x0600usize + n * 16usize) as _) }
+            unsafe { Ram::from_ptr(self.ptr.wrapping_add(0x0600usize + n * 16usize) as _) }
         }
     }
     pub mod regs {
@@ -38419,106 +38539,108 @@ pub mod wdt {
         #[doc = "Start WDT"]
         #[inline(always)]
         pub const fn tasks_start(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop WDT"]
         #[inline(always)]
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Subscribe configuration for task START"]
         #[inline(always)]
         pub const fn subscribe_start(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x80usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x80usize) as _) }
         }
         #[doc = "Subscribe configuration for task STOP"]
         #[inline(always)]
         pub const fn subscribe_stop(
             self,
         ) -> crate::common::Reg<super::shared::regs::Subscribe, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x84usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x84usize) as _) }
         }
         #[doc = "Watchdog timeout"]
         #[inline(always)]
         pub const fn events_timeout(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0100usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize) as _) }
         }
         #[doc = "Watchdog stopped"]
         #[inline(always)]
         pub const fn events_stopped(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0104usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
         #[doc = "Publish configuration for event TIMEOUT"]
         #[inline(always)]
         pub const fn publish_timeout(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0180usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0180usize) as _) }
         }
         #[doc = "Publish configuration for event STOPPED"]
         #[inline(always)]
         pub const fn publish_stopped(
             self,
         ) -> crate::common::Reg<super::shared::regs::Publish, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0184usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0184usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0304usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0308usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
         pub const fn nmienset(self) -> crate::common::Reg<regs::Nmi, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0324usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0324usize) as _) }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
         pub const fn nmienclr(self) -> crate::common::Reg<regs::Nmi, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0328usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0328usize) as _) }
         }
         #[doc = "Run status"]
         #[inline(always)]
         pub const fn runstatus(self) -> crate::common::Reg<regs::Runstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0400usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0400usize) as _) }
         }
         #[doc = "Request status"]
         #[inline(always)]
         pub const fn reqstatus(self) -> crate::common::Reg<regs::Reqstatus, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0404usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0404usize) as _) }
         }
         #[doc = "Counter reload value"]
         #[inline(always)]
         pub const fn crv(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0504usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0504usize) as _) }
         }
         #[doc = "Enable register for reload request registers"]
         #[inline(always)]
         pub const fn rren(self) -> crate::common::Reg<regs::Rren, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0508usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
         #[doc = "Configuration register"]
         #[inline(always)]
         pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x050cusize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x050cusize) as _) }
         }
         #[doc = "Task stop enable"]
         #[inline(always)]
         pub const fn tsen(self) -> crate::common::Reg<regs::Tsen, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0520usize) as _) }
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0520usize) as _) }
         }
         #[doc = "Description collection: Reload request n"]
         #[inline(always)]
         pub const fn rr(self, n: usize) -> crate::common::Reg<regs::Rr, crate::common::W> {
             assert!(n < 8usize);
-            unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0600usize + n * 4usize) as _) }
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0600usize + n * 4usize) as _)
+            }
         }
     }
     pub mod regs {
