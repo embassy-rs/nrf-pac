@@ -315,6 +315,103 @@ transforms:
       from: (oneshot|enable)\d+
       to: $1
 
+# ======= Make DMA clusters for SPIM/SPIS (nRF52/53 only, nRF54 already has them)
+#  - !MakeCluster
+#      block:
+#        include: spi[ms]::.*
+#      clusters:
+#        - name: events_dma
+#          subclusters:
+#            - name: rx
+#              registers:
+#                - name: end
+#                  from: events_endrx
+#            - name: tx
+#              registers:
+#                - name: end
+#                  from: events_endtx
+#
+## ======= Make DMA clusters for UARTE
+#  - !MakeCluster
+#      block:
+#        include: uarte::.*
+#      clusters:
+#        - name: events_dma
+#          subclusters:
+#            - name: rx
+#              registers:
+#                - name: end
+#                  from: events_endrx
+#                - name: ready
+#                  from: events_rxstarted
+#            - name: tx
+#              registers:
+#                - name: end
+#                  from: events_endtx
+#                - name: ready
+#                  from: events_txstarted
+#        - name: tasks_dma
+#          subclusters:
+#            - name: rx
+#              registers:
+#                - name: start
+#                  from: tasks_startrx
+#                - name: stop
+#                  from: tasks_stoprx
+#            - name: tx
+#              registers:
+#                - name: start
+#                  from: tasks_starttx
+#                - name: stop
+#                  from: tasks_stoptx
+#
+## ======= Make DMA clusters for TWIM
+#
+#  - !MakeCluster
+#      block:
+#        include: twim::.*
+#      clusters:
+#        - name: events_dma
+#          subclusters:
+#            - name: rx
+#              registers:
+#                - name: error
+#                  from: events_error
+#                - name: stopped
+#                  from: events_stopped
+#                - name: suspended
+#                  from: events_suspended
+#        - name: tasks_dma
+#          subclusters:
+#            - name: rx
+#              registers:
+#                - name: start
+#                  from: tasks_startrx
+#            - name: tx
+#              registers:
+#                - name: start
+#                  from: tasks_starttx
+#
+## ======= Make DMA clusters for TWIS
+#  - !MakeCluster
+#      block:
+#        include: twis::.*
+#      clusters:
+#        - name: events_dma
+#          subclusters:
+#            - name: rx
+#              registers:
+#                - name: write
+#                  from: events_write
+#                - name: error
+#                  from: events_error
+#                - name: stopped
+#                  from: events_stopped
+#            - name: tx
+#              registers:
+#                - name: read
+#                  from: events_read
+
 # ======= SPIS
   - !DeleteEnums
       from: spis::vals::(Overflow|Overread)
@@ -463,4 +560,3 @@ transforms:
       fieldsets: pwm::regs::Int
       from: comparematch\d+
       to: comparematch
-

@@ -3832,18 +3832,27 @@ pub mod gpiote {
         }
         #[doc = "Event generated from multiple pins."]
         #[inline(always)]
-        pub const fn events_port(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x017cusize) as _) }
+        pub const fn events_port(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 1usize);
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x017cusize + n * 0usize) as _)
+            }
         }
         #[doc = "Interrupt enable set register."]
         #[inline(always)]
-        pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
+        pub const fn intenset(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
+            assert!(n < 1usize);
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize + n * 0usize) as _)
+            }
         }
         #[doc = "Interrupt enable clear register."]
         #[inline(always)]
-        pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
+        pub const fn intenclr(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
+            assert!(n < 1usize);
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize + n * 0usize) as _)
+            }
         }
         #[doc = "Channel configuration registers."]
         #[inline(always)]
