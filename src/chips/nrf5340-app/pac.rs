@@ -10819,8 +10819,11 @@ pub mod gpiote {
         }
         #[doc = "Event generated from multiple input GPIO pins with SENSE mechanism enabled"]
         #[inline(always)]
-        pub const fn events_port(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x017cusize) as _) }
+        pub const fn events_port(self, n: usize) -> crate::common::Reg<u32, crate::common::RW> {
+            assert!(n < 1usize);
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x017cusize + n * 0usize) as _)
+            }
         }
         #[doc = "Description collection: Publish configuration for event IN\\[n\\]"]
         #[inline(always)]
@@ -10842,13 +10845,19 @@ pub mod gpiote {
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
-        pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
+        pub const fn intenset(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
+            assert!(n < 1usize);
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize + n * 0usize) as _)
+            }
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
-        pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
+        pub const fn intenclr(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
+            assert!(n < 1usize);
+            unsafe {
+                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize + n * 0usize) as _)
+            }
         }
         #[doc = "Latency selection for Event mode (MODE=Event) with rising or falling edge detection on the pin."]
         #[inline(always)]
@@ -18365,6 +18374,65 @@ pub mod power {
     }
 }
 pub mod pwm {
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Dma {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Dma {}
+    unsafe impl Sync for Dma {}
+    impl Dma {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Unspecified"]
+        #[inline(always)]
+        pub const fn seq(self, n: usize) -> DmaSeq {
+            assert!(n < 2usize);
+            unsafe { DmaSeq::from_ptr(self.ptr.wrapping_add(0x0usize + n * 32usize) as _) }
+        }
+    }
+    #[doc = "Unspecified"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaSeq {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaSeq {}
+    unsafe impl Sync for DmaSeq {}
+    impl DmaSeq {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Description cluster: Beginning address in RAM of this sequence"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Description cluster: Number of values (duty cycles) in this sequence"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::Cnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Description cluster: Number of additional PWM periods between samples loaded into compare register"]
+        #[inline(always)]
+        pub const fn refresh(self) -> crate::common::Reg<regs::Refresh, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+        #[doc = "Description cluster: Time added after the sequence"]
+        #[inline(always)]
+        pub const fn enddelay(self) -> crate::common::Reg<regs::Enddelay, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
     #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Psel {
@@ -18414,13 +18482,9 @@ pub mod pwm {
         pub const fn tasks_stop(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
-        #[doc = "Description collection: Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence at the rate defined in SEQ\\[n\\]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running."]
         #[inline(always)]
-        pub const fn tasks_seqstart(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
-            assert!(n < 2usize);
-            unsafe {
-                crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize + n * 4usize) as _)
-            }
+        pub const fn tasks_dma(self) -> TasksDma {
+            unsafe { TasksDma::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "Steps by one value in the current sequence on all enabled channels if DECODER.MODE=NextStep. Does not cause PWM generation to start if not running."]
         #[inline(always)]
@@ -18579,11 +18643,9 @@ pub mod pwm {
         pub const fn loop_(self) -> crate::common::Reg<regs::Loop, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0514usize) as _) }
         }
-        #[doc = "Unspecified"]
         #[inline(always)]
-        pub const fn seq(self, n: usize) -> Seq {
-            assert!(n < 2usize);
-            unsafe { Seq::from_ptr(self.ptr.wrapping_add(0x0520usize + n * 32usize) as _) }
+        pub const fn dma(self) -> Dma {
+            unsafe { Dma::from_ptr(self.ptr.wrapping_add(0x0520usize) as _) }
         }
         #[doc = "Unspecified"]
         #[inline(always)]
@@ -18591,14 +18653,13 @@ pub mod pwm {
             unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0560usize) as _) }
         }
     }
-    #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Seq {
+    pub struct TasksDma {
         ptr: *mut u8,
     }
-    unsafe impl Send for Seq {}
-    unsafe impl Sync for Seq {}
-    impl Seq {
+    unsafe impl Send for TasksDma {}
+    unsafe impl Sync for TasksDma {}
+    impl TasksDma {
         #[inline(always)]
         pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
             Self { ptr: ptr as _ }
@@ -18607,25 +18668,31 @@ pub mod pwm {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Description cluster: Beginning address in RAM of this sequence"]
         #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+        pub const fn seq(self, n: usize) -> TasksDmaSeq {
+            assert!(n < 2usize);
+            unsafe { TasksDmaSeq::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct TasksDmaSeq {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for TasksDmaSeq {}
+    unsafe impl Sync for TasksDmaSeq {}
+    impl TasksDmaSeq {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Description collection: Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence at the rate defined in SEQ\\[n\\]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running."]
+        #[inline(always)]
+        pub const fn start(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Description cluster: Number of values (duty cycles) in this sequence"]
-        #[inline(always)]
-        pub const fn cnt(self) -> crate::common::Reg<regs::Cnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Description cluster: Number of additional PWM periods between samples loaded into compare register"]
-        #[inline(always)]
-        pub const fn refresh(self) -> crate::common::Reg<regs::Refresh, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "Description cluster: Time added after the sequence"]
-        #[inline(always)]
-        pub const fn enddelay(self) -> crate::common::Reg<regs::Enddelay, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -19129,13 +19196,13 @@ pub mod pwm {
             #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[0\\]"]
             #[must_use]
             #[inline(always)]
-            pub const fn loopsdone_seqstart0(&self) -> bool {
+            pub const fn loopsdone_dma_seq0_start(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
             #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[0\\]"]
             #[inline(always)]
-            pub const fn set_loopsdone_seqstart0(&mut self, val: bool) {
+            pub const fn set_loopsdone_dma_seq0_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
             #[doc = "Shortcut between event LOOPSDONE and task SEQSTART\\[1\\]"]
@@ -19174,7 +19241,7 @@ pub mod pwm {
                 f.debug_struct("Shorts")
                     .field("seqend0_stop", &self.seqend0_stop())
                     .field("seqend1_stop", &self.seqend1_stop())
-                    .field("loopsdone_seqstart0", &self.loopsdone_seqstart0())
+                    .field("loopsdone_dma_seq0_start", &self.loopsdone_dma_seq0_start())
                     .field("loopsdone_seqstart1", &self.loopsdone_seqstart1())
                     .field("loopsdone_stop", &self.loopsdone_stop())
                     .finish()
@@ -19183,7 +19250,7 @@ pub mod pwm {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Shorts {{ seqend0_stop: {=bool:?}, seqend1_stop: {=bool:?}, loopsdone_seqstart0: {=bool:?}, loopsdone_seqstart1: {=bool:?}, loopsdone_stop: {=bool:?} }}" , self . seqend0_stop () , self . seqend1_stop () , self . loopsdone_seqstart0 () , self . loopsdone_seqstart1 () , self . loopsdone_stop ())
+                defmt :: write ! (f , "Shorts {{ seqend0_stop: {=bool:?}, seqend1_stop: {=bool:?}, loopsdone_dma_seq0_start: {=bool:?}, loopsdone_seqstart1: {=bool:?}, loopsdone_stop: {=bool:?} }}" , self . seqend0_stop () , self . seqend1_stop () , self . loopsdone_dma_seq0_start () , self . loopsdone_seqstart1 () , self . loopsdone_stop ())
             }
         }
     }
@@ -25011,6 +25078,106 @@ pub mod shared {
     }
 }
 pub mod spim {
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Dma {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Dma {}
+    unsafe impl Sync for Dma {}
+    impl Dma {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "RXD EasyDMA channel"]
+        #[inline(always)]
+        pub const fn rx(self) -> DmaRx {
+            unsafe { DmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "TXD EasyDMA channel"]
+        #[inline(always)]
+        pub const fn tx(self) -> DmaTx {
+            unsafe { DmaTx::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
+        }
+    }
+    #[doc = "RXD EasyDMA channel"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaRx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaRx {}
+    unsafe impl Sync for DmaRx {}
+    impl DmaRx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Maximum number of bytes in receive buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes transferred in the last transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
+    #[doc = "TXD EasyDMA channel"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaTx {}
+    unsafe impl Sync for DmaTx {}
+    impl DmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Number of bytes in transmit buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes transferred in the last transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
     #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Iftiming {
@@ -25076,43 +25243,6 @@ pub mod spim {
         #[doc = "Pin select for CSN"]
         #[inline(always)]
         pub const fn csn(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
-        }
-    }
-    #[doc = "RXD EasyDMA channel"]
-    #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Rxd {
-        ptr: *mut u8,
-    }
-    unsafe impl Send for Rxd {}
-    unsafe impl Sync for Rxd {}
-    impl Rxd {
-        #[inline(always)]
-        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
-            Self { ptr: ptr as _ }
-        }
-        #[inline(always)]
-        pub const fn as_ptr(&self) -> *mut () {
-            self.ptr as _
-        }
-        #[doc = "Data pointer"]
-        #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Maximum number of bytes in receive buffer"]
-        #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Number of bytes transferred in the last transaction"]
-        #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "EasyDMA list type"]
-        #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -25275,15 +25405,9 @@ pub mod spim {
         pub const fn frequency(self) -> crate::common::Reg<regs::Frequency, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
         }
-        #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
-        }
-        #[doc = "TXD EasyDMA channel"]
-        #[inline(always)]
-        pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
+        pub const fn dma(self) -> Dma {
+            unsafe { Dma::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "Configuration register"]
         #[inline(always)]
@@ -25316,43 +25440,6 @@ pub mod spim {
         #[inline(always)]
         pub const fn orc(self) -> crate::common::Reg<regs::Orc, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05c0usize) as _) }
-        }
-    }
-    #[doc = "TXD EasyDMA channel"]
-    #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Txd {
-        ptr: *mut u8,
-    }
-    unsafe impl Send for Txd {}
-    unsafe impl Sync for Txd {}
-    impl Txd {
-        #[inline(always)]
-        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
-            Self { ptr: ptr as _ }
-        }
-        #[inline(always)]
-        pub const fn as_ptr(&self) -> *mut () {
-            self.ptr as _
-        }
-        #[doc = "Data pointer"]
-        #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Number of bytes in transmit buffer"]
-        #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Number of bytes transferred in the last transaction"]
-        #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "EasyDMA list type"]
-        #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -26402,6 +26489,106 @@ pub mod spim {
     }
 }
 pub mod spis {
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Dma {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Dma {}
+    unsafe impl Sync for Dma {}
+    impl Dma {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Unspecified"]
+        #[inline(always)]
+        pub const fn rx(self) -> DmaRx {
+            unsafe { DmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Unspecified"]
+        #[inline(always)]
+        pub const fn tx(self) -> DmaTx {
+            unsafe { DmaTx::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
+        }
+    }
+    #[doc = "Unspecified"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaRx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaRx {}
+    unsafe impl Sync for DmaRx {}
+    impl DmaRx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "RXD data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Maximum number of bytes in receive buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes received in last granted transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
+    #[doc = "Unspecified"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaTx {}
+    unsafe impl Sync for DmaTx {}
+    impl DmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "TXD data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Maximum number of bytes in transmit buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes transmitted in last granted transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
     #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Psel {
@@ -26440,43 +26627,6 @@ pub mod spis {
         #[doc = "Pin select for CSN signal"]
         #[inline(always)]
         pub const fn csn(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
-        }
-    }
-    #[doc = "Unspecified"]
-    #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Rxd {
-        ptr: *mut u8,
-    }
-    unsafe impl Send for Rxd {}
-    unsafe impl Sync for Rxd {}
-    impl Rxd {
-        #[inline(always)]
-        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
-            Self { ptr: ptr as _ }
-        }
-        #[inline(always)]
-        pub const fn as_ptr(&self) -> *mut () {
-            self.ptr as _
-        }
-        #[doc = "RXD data pointer"]
-        #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Maximum number of bytes in receive buffer"]
-        #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Number of bytes received in last granted transaction"]
-        #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "EasyDMA list type"]
-        #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -26591,15 +26741,9 @@ pub mod spis {
         pub const fn psel(self) -> Psel {
             unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
-        #[doc = "Unspecified"]
         #[inline(always)]
-        pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
-        }
-        #[doc = "Unspecified"]
-        #[inline(always)]
-        pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
+        pub const fn dma(self) -> Dma {
+            unsafe { Dma::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "Configuration register"]
         #[inline(always)]
@@ -26615,43 +26759,6 @@ pub mod spis {
         #[inline(always)]
         pub const fn orc(self) -> crate::common::Reg<regs::Orc, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05c0usize) as _) }
-        }
-    }
-    #[doc = "Unspecified"]
-    #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Txd {
-        ptr: *mut u8,
-    }
-    unsafe impl Send for Txd {}
-    unsafe impl Sync for Txd {}
-    impl Txd {
-        #[inline(always)]
-        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
-            Self { ptr: ptr as _ }
-        }
-        #[inline(always)]
-        pub const fn as_ptr(&self) -> *mut () {
-            self.ptr as _
-        }
-        #[doc = "TXD data pointer"]
-        #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Maximum number of bytes in transmit buffer"]
-        #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Number of bytes transmitted in last granted transaction"]
-        #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "EasyDMA list type"]
-        #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -30873,14 +30980,13 @@ pub mod timer {
     }
 }
 pub mod twim {
-    #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Psel {
+    pub struct Dma {
         ptr: *mut u8,
     }
-    unsafe impl Send for Psel {}
-    unsafe impl Sync for Psel {}
-    impl Psel {
+    unsafe impl Send for Dma {}
+    unsafe impl Sync for Dma {}
+    impl Dma {
         #[inline(always)]
         pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
             Self { ptr: ptr as _ }
@@ -30889,25 +30995,25 @@ pub mod twim {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Pin select for SCL signal"]
+        #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn scl(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        pub const fn rx(self) -> DmaRx {
+            unsafe { DmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
-        #[doc = "Pin select for SDA signal"]
+        #[doc = "TXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn sda(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        pub const fn tx(self) -> DmaTx {
+            unsafe { DmaTx::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
     }
     #[doc = "RXD EasyDMA channel"]
     #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Rxd {
+    pub struct DmaRx {
         ptr: *mut u8,
     }
-    unsafe impl Send for Rxd {}
-    unsafe impl Sync for Rxd {}
-    impl Rxd {
+    unsafe impl Send for DmaRx {}
+    unsafe impl Sync for DmaRx {}
+    impl DmaRx {
         #[inline(always)]
         pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
             Self { ptr: ptr as _ }
@@ -30937,6 +31043,136 @@ pub mod twim {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
+    #[doc = "TXD EasyDMA channel"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaTx {}
+    unsafe impl Sync for DmaTx {}
+    impl DmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Maximum number of bytes in transmit buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes transferred in the last transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
+    #[doc = "Unspecified"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Psel {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Psel {}
+    unsafe impl Sync for Psel {}
+    impl Psel {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Pin select for SCL signal"]
+        #[inline(always)]
+        pub const fn scl(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Pin select for SDA signal"]
+        #[inline(always)]
+        pub const fn sda(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct TasksDma {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for TasksDma {}
+    unsafe impl Sync for TasksDma {}
+    impl TasksDma {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[inline(always)]
+        pub const fn rx(self) -> TasksDmaRx {
+            unsafe { TasksDmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[inline(always)]
+        pub const fn tx(self) -> TasksDmaTx {
+            unsafe { TasksDmaTx::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct TasksDmaRx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for TasksDmaRx {}
+    unsafe impl Sync for TasksDmaRx {}
+    impl TasksDmaRx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Start TWI receive sequence"]
+        #[inline(always)]
+        pub const fn start(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct TasksDmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for TasksDmaTx {}
+    unsafe impl Sync for TasksDmaTx {}
+    impl TasksDmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Start TWI transmit sequence"]
+        #[inline(always)]
+        pub const fn start(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+    }
     #[doc = "I2C compatible Two-Wire Master Interface with EasyDMA 0"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Twim {
@@ -30953,15 +31189,9 @@ pub mod twim {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Start TWI receive sequence"]
         #[inline(always)]
-        pub const fn tasks_startrx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Start TWI transmit sequence"]
-        #[inline(always)]
-        pub const fn tasks_starttx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        pub const fn tasks_dma(self) -> TasksDma {
+            unsafe { TasksDma::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Stop TWI transaction. Must be issued while the TWI master is not suspended."]
         #[inline(always)]
@@ -31137,57 +31367,14 @@ pub mod twim {
         pub const fn frequency(self) -> crate::common::Reg<regs::Frequency, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
         }
-        #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
-        }
-        #[doc = "TXD EasyDMA channel"]
-        #[inline(always)]
-        pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
+        pub const fn dma(self) -> Dma {
+            unsafe { Dma::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "Address used in the TWI transfer"]
         #[inline(always)]
         pub const fn address(self) -> crate::common::Reg<regs::Address, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0588usize) as _) }
-        }
-    }
-    #[doc = "TXD EasyDMA channel"]
-    #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Txd {
-        ptr: *mut u8,
-    }
-    unsafe impl Send for Txd {}
-    unsafe impl Sync for Txd {}
-    impl Txd {
-        #[inline(always)]
-        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
-            Self { ptr: ptr as _ }
-        }
-        #[inline(always)]
-        pub const fn as_ptr(&self) -> *mut () {
-            self.ptr as _
-        }
-        #[doc = "Data pointer"]
-        #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Maximum number of bytes in transmit buffer"]
-        #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Number of bytes transferred in the last transaction"]
-        #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "EasyDMA list type"]
-        #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -31606,13 +31793,13 @@ pub mod twim {
             #[doc = "Shortcut between event LASTTX and task STARTRX"]
             #[must_use]
             #[inline(always)]
-            pub const fn lasttx_startrx(&self) -> bool {
+            pub const fn lasttx_dma_rx_start(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
             #[doc = "Shortcut between event LASTTX and task STARTRX"]
             #[inline(always)]
-            pub const fn set_lasttx_startrx(&mut self, val: bool) {
+            pub const fn set_lasttx_dma_rx_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
             #[doc = "Shortcut between event LASTTX and task SUSPEND"]
@@ -31642,13 +31829,13 @@ pub mod twim {
             #[doc = "Shortcut between event LASTRX and task STARTTX"]
             #[must_use]
             #[inline(always)]
-            pub const fn lastrx_starttx(&self) -> bool {
+            pub const fn lastrx_dma_tx_start(&self) -> bool {
                 let val = (self.0 >> 10usize) & 0x01;
                 val != 0
             }
             #[doc = "Shortcut between event LASTRX and task STARTTX"]
             #[inline(always)]
-            pub const fn set_lastrx_starttx(&mut self, val: bool) {
+            pub const fn set_lastrx_dma_tx_start(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
             }
             #[doc = "Shortcut between event LASTRX and task STOP"]
@@ -31673,10 +31860,10 @@ pub mod twim {
         impl core::fmt::Debug for Shorts {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Shorts")
-                    .field("lasttx_startrx", &self.lasttx_startrx())
+                    .field("lasttx_dma_rx_start", &self.lasttx_dma_rx_start())
                     .field("lasttx_suspend", &self.lasttx_suspend())
                     .field("lasttx_stop", &self.lasttx_stop())
-                    .field("lastrx_starttx", &self.lastrx_starttx())
+                    .field("lastrx_dma_tx_start", &self.lastrx_dma_tx_start())
                     .field("lastrx_stop", &self.lastrx_stop())
                     .finish()
             }
@@ -31684,7 +31871,7 @@ pub mod twim {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Shorts {{ lasttx_startrx: {=bool:?}, lasttx_suspend: {=bool:?}, lasttx_stop: {=bool:?}, lastrx_starttx: {=bool:?}, lastrx_stop: {=bool:?} }}" , self . lasttx_startrx () , self . lasttx_suspend () , self . lasttx_stop () , self . lastrx_starttx () , self . lastrx_stop ())
+                defmt :: write ! (f , "Shorts {{ lasttx_dma_rx_start: {=bool:?}, lasttx_suspend: {=bool:?}, lasttx_stop: {=bool:?}, lastrx_dma_tx_start: {=bool:?}, lastrx_stop: {=bool:?} }}" , self . lasttx_dma_rx_start () , self . lasttx_suspend () , self . lasttx_stop () , self . lastrx_dma_tx_start () , self . lastrx_stop ())
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
@@ -31978,14 +32165,13 @@ pub mod twim {
     }
 }
 pub mod twis {
-    #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Psel {
+    pub struct Dma {
         ptr: *mut u8,
     }
-    unsafe impl Send for Psel {}
-    unsafe impl Sync for Psel {}
-    impl Psel {
+    unsafe impl Send for Dma {}
+    unsafe impl Sync for Dma {}
+    impl Dma {
         #[inline(always)]
         pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
             Self { ptr: ptr as _ }
@@ -31994,25 +32180,25 @@ pub mod twis {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Pin select for SCL signal"]
+        #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn scl(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        pub const fn rx(self) -> DmaRx {
+            unsafe { DmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
-        #[doc = "Pin select for SDA signal"]
+        #[doc = "TXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn sda(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        pub const fn tx(self) -> DmaTx {
+            unsafe { DmaTx::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
         }
     }
     #[doc = "RXD EasyDMA channel"]
     #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Rxd {
+    pub struct DmaRx {
         ptr: *mut u8,
     }
-    unsafe impl Send for Rxd {}
-    unsafe impl Sync for Rxd {}
-    impl Rxd {
+    unsafe impl Send for DmaRx {}
+    unsafe impl Sync for DmaRx {}
+    impl DmaRx {
         #[inline(always)]
         pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
             Self { ptr: ptr as _ }
@@ -32040,6 +32226,70 @@ pub mod twis {
         #[inline(always)]
         pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
+    #[doc = "TXD EasyDMA channel"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaTx {}
+    unsafe impl Sync for DmaTx {}
+    impl DmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "TXD Data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Maximum number of bytes in TXD buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes transferred in the last TXD transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+        #[doc = "EasyDMA list type"]
+        #[inline(always)]
+        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+        }
+    }
+    #[doc = "Unspecified"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Psel {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Psel {}
+    unsafe impl Sync for Psel {}
+    impl Psel {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Pin select for SCL signal"]
+        #[inline(always)]
+        pub const fn scl(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Pin select for SDA signal"]
+        #[inline(always)]
+        pub const fn sda(self) -> crate::common::Reg<super::shared::regs::Psel, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "I2C compatible Two-Wire Slave Interface with EasyDMA 0"]
@@ -32230,15 +32480,9 @@ pub mod twis {
         pub const fn psel(self) -> Psel {
             unsafe { Psel::from_ptr(self.ptr.wrapping_add(0x0508usize) as _) }
         }
-        #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
-        }
-        #[doc = "TXD EasyDMA channel"]
-        #[inline(always)]
-        pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
+        pub const fn dma(self) -> Dma {
+            unsafe { Dma::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "Description collection: TWI slave address n"]
         #[inline(always)]
@@ -32260,43 +32504,6 @@ pub mod twis {
         #[inline(always)]
         pub const fn orc(self) -> crate::common::Reg<regs::Orc, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x05c0usize) as _) }
-        }
-    }
-    #[doc = "TXD EasyDMA channel"]
-    #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Txd {
-        ptr: *mut u8,
-    }
-    unsafe impl Send for Txd {}
-    unsafe impl Sync for Txd {}
-    impl Txd {
-        #[inline(always)]
-        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
-            Self { ptr: ptr as _ }
-        }
-        #[inline(always)]
-        pub const fn as_ptr(&self) -> *mut () {
-            self.ptr as _
-        }
-        #[doc = "TXD Data pointer"]
-        #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Maximum number of bytes in TXD buffer"]
-        #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Number of bytes transferred in the last TXD transaction"]
-        #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "EasyDMA list type"]
-        #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
     pub mod regs {
@@ -33065,6 +33272,172 @@ pub mod twis {
     }
 }
 pub mod uarte {
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Dma {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Dma {}
+    unsafe impl Sync for Dma {}
+    impl Dma {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "RXD EasyDMA channel"]
+        #[inline(always)]
+        pub const fn rx(self) -> DmaRx {
+            unsafe { DmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "TXD EasyDMA channel"]
+        #[inline(always)]
+        pub const fn tx(self) -> DmaTx {
+            unsafe { DmaTx::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
+        }
+    }
+    #[doc = "RXD EasyDMA channel"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaRx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaRx {}
+    unsafe impl Sync for DmaRx {}
+    impl DmaRx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Maximum number of bytes in receive buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes transferred in the last transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+    }
+    #[doc = "TXD EasyDMA channel"]
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct DmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for DmaTx {}
+    unsafe impl Sync for DmaTx {}
+    impl DmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Data pointer"]
+        #[inline(always)]
+        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Maximum number of bytes in transmit buffer"]
+        #[inline(always)]
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Number of bytes transferred in the last transaction"]
+        #[inline(always)]
+        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct EventsDma {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for EventsDma {}
+    unsafe impl Sync for EventsDma {}
+    impl EventsDma {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[inline(always)]
+        pub const fn rx(self) -> EventsDmaRx {
+            unsafe { EventsDmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[inline(always)]
+        pub const fn tx(self) -> EventsDmaTx {
+            unsafe { EventsDmaTx::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct EventsDmaRx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for EventsDmaRx {}
+    unsafe impl Sync for EventsDmaRx {}
+    impl EventsDmaRx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Receive buffer is filled up"]
+        #[inline(always)]
+        pub const fn end(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "UART receiver has started"]
+        #[inline(always)]
+        pub const fn ready(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x3cusize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct EventsDmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for EventsDmaTx {}
+    unsafe impl Sync for EventsDmaTx {}
+    impl EventsDmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Last TX byte transmitted"]
+        #[inline(always)]
+        pub const fn end(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "UART transmitter has started"]
+        #[inline(always)]
+        pub const fn ready(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x30usize) as _) }
+        }
+    }
     #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Psel {
@@ -33102,14 +33475,13 @@ pub mod uarte {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
-    #[doc = "RXD EasyDMA channel"]
     #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Rxd {
+    pub struct TasksDma {
         ptr: *mut u8,
     }
-    unsafe impl Send for Rxd {}
-    unsafe impl Sync for Rxd {}
-    impl Rxd {
+    unsafe impl Send for TasksDma {}
+    unsafe impl Sync for TasksDma {}
+    impl TasksDma {
         #[inline(always)]
         pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
             Self { ptr: ptr as _ }
@@ -33118,30 +33490,22 @@ pub mod uarte {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Data pointer"]
         #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        pub const fn rx(self) -> TasksDmaRx {
+            unsafe { TasksDmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
-        #[doc = "Maximum number of bytes in receive buffer"]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Number of bytes transferred in the last transaction"]
-        #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        pub const fn tx(self) -> TasksDmaTx {
+            unsafe { TasksDmaTx::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
-    #[doc = "TXD EasyDMA channel"]
     #[derive(Copy, Clone, Eq, PartialEq)]
-    pub struct Txd {
+    pub struct TasksDmaRx {
         ptr: *mut u8,
     }
-    unsafe impl Send for Txd {}
-    unsafe impl Sync for Txd {}
-    impl Txd {
+    unsafe impl Send for TasksDmaRx {}
+    unsafe impl Sync for TasksDmaRx {}
+    impl TasksDmaRx {
         #[inline(always)]
         pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
             Self { ptr: ptr as _ }
@@ -33150,20 +33514,46 @@ pub mod uarte {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Data pointer"]
+        #[doc = "Start UART receiver"]
         #[inline(always)]
-        pub const fn ptr(self) -> crate::common::Reg<u32, crate::common::RW> {
+        pub const fn start(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
-        #[doc = "Maximum number of bytes in transmit buffer"]
+        #[doc = "Stop UART receiver"]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+        pub const fn stop(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
-        #[doc = "Number of bytes transferred in the last transaction"]
+        #[doc = "Flush RX FIFO into RX buffer"]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        pub const fn flush(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x2cusize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct TasksDmaTx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for TasksDmaTx {}
+    unsafe impl Sync for TasksDmaTx {}
+    impl TasksDmaTx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Start UART transmitter"]
+        #[inline(always)]
+        pub const fn start(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Stop UART transmitter"]
+        #[inline(always)]
+        pub const fn stop(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
     }
     #[doc = "UART with EasyDMA 0"]
@@ -33182,30 +33572,9 @@ pub mod uarte {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "Start UART receiver"]
         #[inline(always)]
-        pub const fn tasks_startrx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
-        }
-        #[doc = "Stop UART receiver"]
-        #[inline(always)]
-        pub const fn tasks_stoprx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
-        }
-        #[doc = "Start UART transmitter"]
-        #[inline(always)]
-        pub const fn tasks_starttx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
-        }
-        #[doc = "Stop UART transmitter"]
-        #[inline(always)]
-        pub const fn tasks_stoptx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
-        }
-        #[doc = "Flush RX FIFO into RX buffer"]
-        #[inline(always)]
-        pub const fn tasks_flushrx(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x2cusize) as _) }
+        pub const fn tasks_dma(self) -> TasksDma {
+            unsafe { TasksDma::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
         #[doc = "Subscribe configuration for task STARTRX"]
         #[inline(always)]
@@ -33257,20 +33626,14 @@ pub mod uarte {
         pub const fn events_rxdrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0108usize) as _) }
         }
-        #[doc = "Receive buffer is filled up"]
         #[inline(always)]
-        pub const fn events_endrx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
+        pub const fn events_dma(self) -> EventsDma {
+            unsafe { EventsDma::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "Data sent from TXD"]
         #[inline(always)]
         pub const fn events_txdrdy(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x011cusize) as _) }
-        }
-        #[doc = "Last TX byte transmitted"]
-        #[inline(always)]
-        pub const fn events_endtx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0120usize) as _) }
         }
         #[doc = "Error detected"]
         #[inline(always)]
@@ -33281,16 +33644,6 @@ pub mod uarte {
         #[inline(always)]
         pub const fn events_rxto(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0144usize) as _) }
-        }
-        #[doc = "UART receiver has started"]
-        #[inline(always)]
-        pub const fn events_rxstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x014cusize) as _) }
-        }
-        #[doc = "UART transmitter has started"]
-        #[inline(always)]
-        pub const fn events_txstarted(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0150usize) as _) }
         }
         #[doc = "Transmitter stopped"]
         #[inline(always)]
@@ -33414,15 +33767,9 @@ pub mod uarte {
         pub const fn baudrate(self) -> crate::common::Reg<regs::Baudrate, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
         }
-        #[doc = "RXD EasyDMA channel"]
         #[inline(always)]
-        pub const fn rxd(self) -> Rxd {
-            unsafe { Rxd::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
-        }
-        #[doc = "TXD EasyDMA channel"]
-        #[inline(always)]
-        pub const fn txd(self) -> Txd {
-            unsafe { Txd::from_ptr(self.ptr.wrapping_add(0x0544usize) as _) }
+        pub const fn dma(self) -> Dma {
+            unsafe { Dma::from_ptr(self.ptr.wrapping_add(0x0534usize) as _) }
         }
         #[doc = "Configuration of parity and hardware flow control"]
         #[inline(always)]
@@ -33709,13 +34056,13 @@ pub mod uarte {
             #[doc = "Enable or disable interrupt for event ENDRX"]
             #[must_use]
             #[inline(always)]
-            pub const fn endrx(&self) -> bool {
+            pub const fn dmarxend(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
             #[doc = "Enable or disable interrupt for event ENDRX"]
             #[inline(always)]
-            pub const fn set_endrx(&mut self, val: bool) {
+            pub const fn set_dmarxend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
             #[doc = "Enable or disable interrupt for event TXDRDY"]
@@ -33733,13 +34080,13 @@ pub mod uarte {
             #[doc = "Enable or disable interrupt for event ENDTX"]
             #[must_use]
             #[inline(always)]
-            pub const fn endtx(&self) -> bool {
+            pub const fn dmatxend(&self) -> bool {
                 let val = (self.0 >> 8usize) & 0x01;
                 val != 0
             }
             #[doc = "Enable or disable interrupt for event ENDTX"]
             #[inline(always)]
-            pub const fn set_endtx(&mut self, val: bool) {
+            pub const fn set_dmatxend(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
             }
             #[doc = "Enable or disable interrupt for event ERROR"]
@@ -33769,25 +34116,25 @@ pub mod uarte {
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[must_use]
             #[inline(always)]
-            pub const fn rxstarted(&self) -> bool {
+            pub const fn dmarxready(&self) -> bool {
                 let val = (self.0 >> 19usize) & 0x01;
                 val != 0
             }
             #[doc = "Enable or disable interrupt for event RXSTARTED"]
             #[inline(always)]
-            pub const fn set_rxstarted(&mut self, val: bool) {
+            pub const fn set_dmarxready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[must_use]
             #[inline(always)]
-            pub const fn txstarted(&self) -> bool {
+            pub const fn dmatxready(&self) -> bool {
                 let val = (self.0 >> 20usize) & 0x01;
                 val != 0
             }
             #[doc = "Enable or disable interrupt for event TXSTARTED"]
             #[inline(always)]
-            pub const fn set_txstarted(&mut self, val: bool) {
+            pub const fn set_dmatxready(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
             }
             #[doc = "Enable or disable interrupt for event TXSTOPPED"]
@@ -33815,13 +34162,13 @@ pub mod uarte {
                     .field("cts", &self.cts())
                     .field("ncts", &self.ncts())
                     .field("rxdrdy", &self.rxdrdy())
-                    .field("endrx", &self.endrx())
+                    .field("dmarxend", &self.dmarxend())
                     .field("txdrdy", &self.txdrdy())
-                    .field("endtx", &self.endtx())
+                    .field("dmatxend", &self.dmatxend())
                     .field("error", &self.error())
                     .field("rxto", &self.rxto())
-                    .field("rxstarted", &self.rxstarted())
-                    .field("txstarted", &self.txstarted())
+                    .field("dmarxready", &self.dmarxready())
+                    .field("dmatxready", &self.dmatxready())
                     .field("txstopped", &self.txstopped())
                     .finish()
             }
@@ -33829,7 +34176,7 @@ pub mod uarte {
         #[cfg(feature = "defmt")]
         impl defmt::Format for Int {
             fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Int {{ cts: {=bool:?}, ncts: {=bool:?}, rxdrdy: {=bool:?}, endrx: {=bool:?}, txdrdy: {=bool:?}, endtx: {=bool:?}, error: {=bool:?}, rxto: {=bool:?}, rxstarted: {=bool:?}, txstarted: {=bool:?}, txstopped: {=bool:?} }}" , self . cts () , self . ncts () , self . rxdrdy () , self . endrx () , self . txdrdy () , self . endtx () , self . error () , self . rxto () , self . rxstarted () , self . txstarted () , self . txstopped ())
+                defmt :: write ! (f , "Int {{ cts: {=bool:?}, ncts: {=bool:?}, rxdrdy: {=bool:?}, dmarxend: {=bool:?}, txdrdy: {=bool:?}, dmatxend: {=bool:?}, error: {=bool:?}, rxto: {=bool:?}, dmarxready: {=bool:?}, dmatxready: {=bool:?}, txstopped: {=bool:?} }}" , self . cts () , self . ncts () , self . rxdrdy () , self . dmarxend () , self . txdrdy () , self . dmatxend () , self . error () , self . rxto () , self . dmarxready () , self . dmatxready () , self . txstopped ())
             }
         }
         #[doc = "Number of bytes transferred in the last transaction"]
