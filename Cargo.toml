@@ -29,6 +29,8 @@ nrf5340-app = []
 nrf5340-net = []
 nrf54l15-app = []
 nrf54l15-flpr = []
+nrf54lm20a-app = []
+nrf54lm20a-flpr = []
 nrf9120 = []
 nrf9160 = []
 

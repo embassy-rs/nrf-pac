@@ -147,13 +147,13 @@ transforms:
       from: int(en|enset|enclr|pend)
       to: int
   - !MergeFieldsets
-      from: (.*)::regs::Int(en|enset|enclr|pend)\d*
-      to: $1::regs::Int
+      from: (.*)::regs::Int(en|enset|enclr|pend)\d?(\d?)
+      to: $1::regs::Int$3
       main: (.*)::regs::Inten
   - !MakeRegisterArray
       blocks: .*
-      from: (int(en|enset|enclr|pend))\d+
-      to: $1
+      from: (int(en|enset|enclr|pend))\d(\d?)
+      to: $1$3
 
   - !DeleteEnums
       from: .*::vals::Nmi(en|enset|enclr|pend).*
