@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (828b7b8 2025-09-01))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (067cd41 2025-10-27))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -33408,7 +33408,10 @@ pub mod radio {
         }
         #[doc = "Enable interrupt"]
         #[inline(always)]
-        pub const fn intenset(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
+        pub const fn intenset0(
+            self,
+            n: usize,
+        ) -> crate::common::Reg<regs::Int0, crate::common::RW> {
             assert!(n < 2usize);
             unsafe {
                 crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0488usize + n * 32usize) as _)
@@ -33416,7 +33419,10 @@ pub mod radio {
         }
         #[doc = "Disable interrupt"]
         #[inline(always)]
-        pub const fn intenclr(self, n: usize) -> crate::common::Reg<regs::Int, crate::common::RW> {
+        pub const fn intenclr0(
+            self,
+            n: usize,
+        ) -> crate::common::Reg<regs::Int0, crate::common::RW> {
             assert!(n < 2usize);
             unsafe {
                 crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0490usize + n * 32usize) as _)
@@ -35595,8 +35601,8 @@ pub mod radio {
         #[doc = "Disable interrupt"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Int(pub u32);
-        impl Int {
+        pub struct Int0(pub u32);
+        impl Int0 {
             #[doc = "Write '1' to disable interrupt for event READY"]
             #[must_use]
             #[inline(always)]
@@ -35874,15 +35880,15 @@ pub mod radio {
                 self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
             }
         }
-        impl Default for Int {
+        impl Default for Int0 {
             #[inline(always)]
-            fn default() -> Int {
-                Int(0)
+            fn default() -> Int0 {
+                Int0(0)
             }
         }
-        impl core::fmt::Debug for Int {
+        impl core::fmt::Debug for Int0 {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Int")
+                f.debug_struct("Int0")
                     .field("ready", &self.ready())
                     .field("txready", &self.txready())
                     .field("rxready", &self.rxready())
@@ -35910,9 +35916,9 @@ pub mod radio {
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for Int {
+        impl defmt::Format for Int0 {
             fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Int {{ ready: {=bool:?}, txready: {=bool:?}, rxready: {=bool:?}, address: {=bool:?}, framestart: {=bool:?}, payload: {=bool:?}, end: {=bool:?}, phyend: {=bool:?}, disabled: {=bool:?}, devmatch: {=bool:?}, devmiss: {=bool:?}, crcok: {=bool:?}, crcerror: {=bool:?}, bcmatch: {=bool:?}, edend: {=bool:?}, edstopped: {=bool:?}, ccaidle: {=bool:?}, ccabusy: {=bool:?}, ccastopped: {=bool:?}, rateboost: {=bool:?}, mhrmatch: {=bool:?}, sync: {=bool:?}, ctepresent: {=bool:?} }}" , self . ready () , self . txready () , self . rxready () , self . address () , self . framestart () , self . payload () , self . end () , self . phyend () , self . disabled () , self . devmatch () , self . devmiss () , self . crcok () , self . crcerror () , self . bcmatch () , self . edend () , self . edstopped () , self . ccaidle () , self . ccabusy () , self . ccastopped () , self . rateboost () , self . mhrmatch () , self . sync () , self . ctepresent ())
+                defmt :: write ! (f , "Int0 {{ ready: {=bool:?}, txready: {=bool:?}, rxready: {=bool:?}, address: {=bool:?}, framestart: {=bool:?}, payload: {=bool:?}, end: {=bool:?}, phyend: {=bool:?}, disabled: {=bool:?}, devmatch: {=bool:?}, devmiss: {=bool:?}, crcok: {=bool:?}, crcerror: {=bool:?}, bcmatch: {=bool:?}, edend: {=bool:?}, edstopped: {=bool:?}, ccaidle: {=bool:?}, ccabusy: {=bool:?}, ccastopped: {=bool:?}, rateboost: {=bool:?}, mhrmatch: {=bool:?}, sync: {=bool:?}, ctepresent: {=bool:?} }}" , self . ready () , self . txready () , self . rxready () , self . address () , self . framestart () , self . payload () , self . end () , self . phyend () , self . disabled () , self . devmatch () , self . devmiss () , self . crcok () , self . crcerror () , self . bcmatch () , self . edend () , self . edstopped () , self . ccaidle () , self . ccabusy () , self . ccastopped () , self . rateboost () , self . mhrmatch () , self . sync () , self . ctepresent ())
             }
         }
         #[doc = "Mean of IQ values"]
