@@ -3,7 +3,7 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
-  <name>nrf54l15_flpr</name>
+  <name>nrf54l05_flpr</name>
   <series>nrf54l</series>
   <version>1</version>
   <description>System-on-chip with a 32-bit Arm Cortex-M33 microcontroller</description>
@@ -44,7 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
   <resetValue>0x00000000</resetValue>
   <resetMask>0xFFFFFFFF</resetMask>
   <headerDefinitionsPrefix>NRF_</headerDefinitionsPrefix>
-  <headerSystemFilename>system_nrf54l15_flpr</headerSystemFilename>
+  <headerSystemFilename>system_nrf54l05_flpr</headerSystemFilename>
   <vendorExtensions>
     <MaxInterrupts>480</MaxInterrupts>
   </vendorExtensions>
