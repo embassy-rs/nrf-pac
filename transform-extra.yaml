@@ -85,6 +85,24 @@
       to_outer: rx
       to_inner: $1
       to_block: spis::TasksDmaRx
+  - !MakeBlock
+      blocks: spis::Spis
+      from: events_(.+)(tx|rx)
+      to_outer: events_dma
+      to_inner: $1$2
+      to_block: spis::EventsDma
+  - !MakeBlock
+      blocks: spis::EventsDma
+      from: (.+)tx
+      to_outer: tx
+      to_inner: $1
+      to_block: spis::EventsDmaTx
+  - !MakeBlock
+      blocks: spis::EventsDma
+      from: (.+)rx
+      to_outer: rx
+      to_inner: $1
+      to_block: spis::EventsDmaRx
 # ======= Aligning nrf52/nrf53 with nrf54 twim
   - !MakeBlock
       blocks: twim::Twim

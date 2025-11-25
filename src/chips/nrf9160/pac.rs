@@ -12577,6 +12577,47 @@ pub mod spis {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct EventsDma {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for EventsDma {}
+    unsafe impl Sync for EventsDma {}
+    impl EventsDma {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[inline(always)]
+        pub const fn rx(self) -> EventsDmaRx {
+            unsafe { EventsDmaRx::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+    }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct EventsDmaRx {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for EventsDmaRx {}
+    unsafe impl Sync for EventsDmaRx {}
+    impl EventsDmaRx {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "End of RXD buffer reached"]
+        #[inline(always)]
+        pub const fn end(self) -> crate::common::Reg<u32, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+    }
     #[doc = "Unspecified"]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Psel {
@@ -12663,10 +12704,9 @@ pub mod spis {
         pub const fn events_end(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0104usize) as _) }
         }
-        #[doc = "End of RXD buffer reached"]
         #[inline(always)]
-        pub const fn events_endrx(self) -> crate::common::Reg<u32, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
+        pub const fn events_dma(self) -> EventsDma {
+            unsafe { EventsDma::from_ptr(self.ptr.wrapping_add(0x0110usize) as _) }
         }
         #[doc = "Semaphore acquired"]
         #[inline(always)]
