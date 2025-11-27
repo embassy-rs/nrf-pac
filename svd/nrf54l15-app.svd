@@ -86767,6 +86767,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
       <groupName>CLOCK</groupName>
       <size>0x20</size>
       <registers>
@@ -88406,6 +88410,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
       <groupName>POWER</groupName>
       <size>0x20</size>
       <registers>
@@ -89257,6 +89265,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <baseAddress>0x5010E000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_POWER_NS">
       <name>GLOBAL_POWER_S</name>
@@ -89265,6 +89277,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <alternatePeripheral>GLOBAL_CLOCK_S</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+        <name>CLOCK_POWER</name>
+        <value>270</value>
+      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_RESET_NS">
       <name>GLOBAL_RESET_S</name>

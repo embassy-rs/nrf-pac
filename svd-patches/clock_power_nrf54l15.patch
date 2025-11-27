@@ -1,0 +1,48 @@
+diff --git a/svd/nrf54l15-app.svd b/svd/nrf54l15-app.svd
+index f5b8667..e77db29 100644
+--- a/svd/nrf54l15-app.svd
++++ b/svd/nrf54l15-app.svd
+@@ -89531,10 +86767,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
+         <size>0x1000</size>
+         <usage>registers</usage>
+       </addressBlock>
+-      <interrupt>
+-        <name>CLOCK_POWER</name>
+-        <value>270</value>
+-      </interrupt>
+       <groupName>CLOCK</groupName>
+       <size>0x20</size>
+       <registers>
+@@ -91465,10 +88406,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
+         <size>0x1000</size>
+         <usage>registers</usage>
+       </addressBlock>
+-      <interrupt>
+-        <name>CLOCK_POWER</name>
+-        <value>270</value>
+-      </interrupt>
+       <groupName>POWER</groupName>
+       <size>0x20</size>
+       <registers>
+@@ -92347,10 +89257,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
+       <baseAddress>0x5010E000</baseAddress>
+       <!--Security dma=NA-->
+       <!--Security securemapping=US-->
+-      <interrupt>
+-        <name>CLOCK_POWER</name>
+-        <value>270</value>
+-      </interrupt>
+     </peripheral>
+     <peripheral derivedFrom="GLOBAL_POWER_NS">
+       <name>GLOBAL_POWER_S</name>
+@@ -92359,10 +89265,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
+       <alternatePeripheral>GLOBAL_CLOCK_S</alternatePeripheral>
+       <!--Security dma=NA-->
+       <!--Security securemapping=US-->
+-      <interrupt>
+-        <name>CLOCK_POWER</name>
+-        <value>270</value>
+-      </interrupt>
+     </peripheral>
+     <peripheral derivedFrom="GLOBAL_RESET_NS">
+       <name>GLOBAL_RESET_S</name>

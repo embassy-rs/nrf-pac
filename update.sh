@@ -24,6 +24,10 @@ export RUST_LOG=info
 cat transform.yaml > transform-compat.yaml
 cat transform-extra.yaml >> transform-compat.yaml
 
+#for patch in $(ls svd-patches); do
+#	patch -R -p1 < svd-patches/$patch
+#done
+
 #for chip in nrf52840.svd; do
 #for chip in nrf52840.svd nrf54l15-app.svd; do
 for chip in $(ls svd); do
