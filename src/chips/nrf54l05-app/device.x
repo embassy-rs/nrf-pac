@@ -52,3 +52,4 @@ PROVIDE(WDT30 = DefaultHandler);
 PROVIDE(WDT31 = DefaultHandler);
 PROVIDE(GPIOTE30_0 = DefaultHandler);
 PROVIDE(GPIOTE30_1 = DefaultHandler);
+PROVIDE(CLOCK_POWER = DefaultHandler);

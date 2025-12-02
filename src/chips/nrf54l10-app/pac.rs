@@ -112,6 +112,8 @@ pub enum Interrupt {
     GPIOTE30_0 = 268,
     #[doc = "269 - GPIOTE30_1"]
     GPIOTE30_1 = 269,
+    #[doc = "270 - CLOCK_POWER"]
+    CLOCK_POWER = 270,
 }
 unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
     #[inline(always)]
@@ -176,6 +178,7 @@ mod _vectors {
         fn WDT31();
         fn GPIOTE30_0();
         fn GPIOTE30_1();
+        fn CLOCK_POWER();
     }
     pub union Vector {
         _handler: unsafe extern "C" fn(),
@@ -183,7 +186,7 @@ mod _vectors {
     }
     #[unsafe(link_section = ".vector_table.interrupts")]
     #[unsafe(no_mangle)]
-    pub static __INTERRUPTS: [Vector; 270] = [
+    pub static __INTERRUPTS: [Vector; 271] = [
         Vector { _reserved: 0 },
         Vector { _reserved: 0 },
         Vector { _reserved: 0 },
@@ -465,6 +468,9 @@ mod _vectors {
         },
         Vector {
             _handler: GPIOTE30_1,
+        },
+        Vector {
+            _handler: CLOCK_POWER,
         },
     ];
 }

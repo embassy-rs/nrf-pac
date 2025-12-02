@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!-- File naming: <vendor>_<part/series name>_svd.xml -->
-<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
+<device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
   <name>nrf54l05_application</name>
@@ -88392,6 +88392,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
         </cluster>
       </registers>
+      <interrupt>
+  <name>CLOCK_POWER</name>
+  <value>270</value>
+</interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_POWER_NS</name>
@@ -88970,6 +88974,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
       </registers>
+      <interrupt>
+  <name>CLOCK_POWER</name>
+  <value>270</value>
+</interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_RESET_NS</name>
@@ -89257,6 +89265,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <baseAddress>0x5010E000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+  <name>CLOCK_POWER</name>
+  <value>270</value>
+</interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_POWER_NS">
       <name>GLOBAL_POWER_S</name>
@@ -89265,6 +89277,10 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <alternatePeripheral>GLOBAL_CLOCK_S</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+      <interrupt>
+  <name>CLOCK_POWER</name>
+  <value>270</value>
+</interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_RESET_NS">
       <name>GLOBAL_RESET_S</name>
