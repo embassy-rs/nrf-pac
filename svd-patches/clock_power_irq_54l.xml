@@ -1,0 +1,4 @@
+<interrupt>
+  <name>CLOCK_POWER</name>
+  <value>261</value>
+</interrupt>

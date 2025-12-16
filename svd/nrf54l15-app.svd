@@ -86767,10 +86767,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
       <groupName>CLOCK</groupName>
       <size>0x20</size>
       <registers>
@@ -88398,7 +88394,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       </registers>
       <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral>
@@ -88414,10 +88410,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
       <groupName>POWER</groupName>
       <size>0x20</size>
       <registers>
@@ -88984,7 +88976,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       </registers>
       <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral>
@@ -89274,12 +89266,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
-      <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_POWER_NS">
@@ -89290,12 +89278,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>CLOCK_POWER</name>
-        <value>270</value>
-      </interrupt>
-      <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_RESET_NS">

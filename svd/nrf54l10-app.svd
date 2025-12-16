@@ -88394,7 +88394,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       </registers>
       <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral>
@@ -88976,7 +88976,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       </registers>
       <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral>
@@ -89267,7 +89267,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <!--Security securemapping=US-->
       <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_POWER_NS">
@@ -89279,7 +89279,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <!--Security securemapping=US-->
       <interrupt>
   <name>CLOCK_POWER</name>
-  <value>270</value>
+  <value>261</value>
 </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_RESET_NS">
