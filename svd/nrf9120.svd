@@ -28047,7 +28047,7 @@ A write outputs the value to atbytesm.</description>
                     <value>0x08</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>VDD_GPIO</name>
+                    <name>VDDGPIO</name>
                     <description>VDD_GPIO</description>
                     <value>0x09</value>
                   </enumeratedValue>

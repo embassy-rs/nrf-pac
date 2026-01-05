@@ -484,6 +484,10 @@ transforms:
       to: pdm::vals::Gain
 
 # ======= SAADC
+  - !RenameEnumVariants
+    enum: saadc::vals::Pselp
+    from: VDDGPIO
+    to: VDD_GPIO
   - !MergeEnums
       from: saadc::vals::Psel[pn]
       to: saadc::vals::Psel

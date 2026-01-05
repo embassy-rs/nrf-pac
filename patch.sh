@@ -14,9 +14,3 @@ for svd in nrf54lm20a-app.svd; do
 	    --xpath ".//peripheral[name='GLOBAL_CLOCK_NS' or name='GLOBAL_POWER_NS' or name='GLOBAL_CLOCK_S' or name='GLOBAL_POWER_S']" \
 	    --snippet-file svd-patches/clock_power_irq_54lm.xml 
 done
-
-# Rename VDDGPIO into VDD_GPIO that is used everywhere else
-
-for svd in nrf9120.svd nrf9160.svd; do
-	sed -i 's/VDDGPIO/VDD_GPIO/' svd/$svd
-done
