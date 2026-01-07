@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (f379958 2025-11-16))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (0b476f2 2026-01-01))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -2471,7 +2471,7 @@ pub mod cti {
         pub const fn ctiapppulse(self) -> crate::common::Reg<regs::Ctiapppulse, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
         }
-        #[doc = "Description collection: CTI Trigger input"]
+        #[doc = "Description collection: CTI Trigger to Channel Enable register"]
         #[inline(always)]
         pub const fn ctiinen(
             self,
@@ -2482,7 +2482,7 @@ pub mod cti {
                 crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize + n * 4usize) as _)
             }
         }
-        #[doc = "Description collection: CTI Trigger output"]
+        #[doc = "Description collection: CTI Channel to Trigger Enable register"]
         #[inline(always)]
         pub const fn ctiouten(
             self,
@@ -3179,7 +3179,7 @@ pub mod cti {
                 defmt :: write ! (f , "Ctigate {{ ctigateen_0: {=bool:?}, ctigateen_1: {=bool:?}, ctigateen_2: {=bool:?}, ctigateen_3: {=bool:?} }}" , self . ctigateen_0 () , self . ctigateen_1 () , self . ctigateen_2 () , self . ctigateen_3 ())
             }
         }
-        #[doc = "Description collection: CTI Trigger input"]
+        #[doc = "Description collection: CTI Trigger to Channel Enable register"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Ctiinen(pub u32);
@@ -3260,100 +3260,100 @@ pub mod cti {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Ctiintack(pub u32);
         impl Ctiintack {
-            #[doc = "Processor debug request"]
+            #[doc = "Acknowledges the ctitrigout 0 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn debugreq(&self) -> bool {
+            pub const fn intack_0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Processor debug request"]
+            #[doc = "Acknowledges the ctitrigout 0 output."]
             #[inline(always)]
-            pub const fn set_debugreq(&mut self, val: bool) {
+            pub const fn set_intack_0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Processor Restart"]
+            #[doc = "Acknowledges the ctitrigout 1 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn cpurestart(&self) -> bool {
+            pub const fn intack_1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Processor Restart"]
+            #[doc = "Acknowledges the ctitrigout 1 output."]
             #[inline(always)]
-            pub const fn set_cpurestart(&mut self, val: bool) {
+            pub const fn set_intack_1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 2 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused0(&self) -> bool {
+            pub const fn intack_2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 2 output."]
             #[inline(always)]
-            pub const fn set_unused0(&mut self, val: bool) {
+            pub const fn set_intack_2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 3 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused1(&self) -> bool {
+            pub const fn intack_3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 3 output."]
             #[inline(always)]
-            pub const fn set_unused1(&mut self, val: bool) {
+            pub const fn set_intack_3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 4 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused2(&self) -> bool {
+            pub const fn intack_4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 4 output."]
             #[inline(always)]
-            pub const fn set_unused2(&mut self, val: bool) {
+            pub const fn set_intack_4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 5 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused3(&self) -> bool {
+            pub const fn intack_5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 5 output."]
             #[inline(always)]
-            pub const fn set_unused3(&mut self, val: bool) {
+            pub const fn set_intack_5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 6 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused4(&self) -> bool {
+            pub const fn intack_6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 6 output."]
             #[inline(always)]
-            pub const fn set_unused4(&mut self, val: bool) {
+            pub const fn set_intack_6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 7 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused5(&self) -> bool {
+            pub const fn intack_7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Acknowledges the ctitrigout 7 output."]
             #[inline(always)]
-            pub const fn set_unused5(&mut self, val: bool) {
+            pub const fn set_intack_7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
         }
@@ -3366,24 +3366,24 @@ pub mod cti {
         impl core::fmt::Debug for Ctiintack {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Ctiintack")
-                    .field("debugreq", &self.debugreq())
-                    .field("cpurestart", &self.cpurestart())
-                    .field("unused0", &self.unused0())
-                    .field("unused1", &self.unused1())
-                    .field("unused2", &self.unused2())
-                    .field("unused3", &self.unused3())
-                    .field("unused4", &self.unused4())
-                    .field("unused5", &self.unused5())
+                    .field("intack_0", &self.intack_0())
+                    .field("intack_1", &self.intack_1())
+                    .field("intack_2", &self.intack_2())
+                    .field("intack_3", &self.intack_3())
+                    .field("intack_4", &self.intack_4())
+                    .field("intack_5", &self.intack_5())
+                    .field("intack_6", &self.intack_6())
+                    .field("intack_7", &self.intack_7())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Ctiintack {
             fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Ctiintack {{ debugreq: {=bool:?}, cpurestart: {=bool:?}, unused0: {=bool:?}, unused1: {=bool:?}, unused2: {=bool:?}, unused3: {=bool:?}, unused4: {=bool:?}, unused5: {=bool:?} }}" , self . debugreq () , self . cpurestart () , self . unused0 () , self . unused1 () , self . unused2 () , self . unused3 () , self . unused4 () , self . unused5 ())
+                defmt :: write ! (f , "Ctiintack {{ intack_0: {=bool:?}, intack_1: {=bool:?}, intack_2: {=bool:?}, intack_3: {=bool:?}, intack_4: {=bool:?}, intack_5: {=bool:?}, intack_6: {=bool:?}, intack_7: {=bool:?} }}" , self . intack_0 () , self . intack_1 () , self . intack_2 () , self . intack_3 () , self . intack_4 () , self . intack_5 () , self . intack_6 () , self . intack_7 ())
             }
         }
-        #[doc = "Description collection: CTI Trigger output"]
+        #[doc = "Description collection: CTI Channel to Trigger Enable register"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Ctiouten(pub u32);
@@ -3464,100 +3464,100 @@ pub mod cti {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Ctitriginstatus(pub u32);
         impl Ctitriginstatus {
-            #[doc = "Processor Halted"]
+            #[doc = "Shows the status of ctitrigin0 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn cpuhalted(&self) -> bool {
+            pub const fn triginstatus_0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Processor Halted"]
+            #[doc = "Shows the status of ctitrigin0 input."]
             #[inline(always)]
-            pub const fn set_cpuhalted(&mut self, val: bool) {
+            pub const fn set_triginstatus_0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "DWT Comparator Output 0"]
+            #[doc = "Shows the status of ctitrigin1 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn dwtcompout0(&self) -> bool {
+            pub const fn triginstatus_1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "DWT Comparator Output 0"]
+            #[doc = "Shows the status of ctitrigin1 input."]
             #[inline(always)]
-            pub const fn set_dwtcompout0(&mut self, val: bool) {
+            pub const fn set_triginstatus_1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "DWT Comparator Output 1"]
+            #[doc = "Shows the status of ctitrigin2 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn dwtcompout1(&self) -> bool {
+            pub const fn triginstatus_2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "DWT Comparator Output 1"]
+            #[doc = "Shows the status of ctitrigin2 input."]
             #[inline(always)]
-            pub const fn set_dwtcompout1(&mut self, val: bool) {
+            pub const fn set_triginstatus_2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "DWT Comparator Output 2"]
+            #[doc = "Shows the status of ctitrigin3 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn dwtcompout2(&self) -> bool {
+            pub const fn triginstatus_3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "DWT Comparator Output 2"]
+            #[doc = "Shows the status of ctitrigin3 input."]
             #[inline(always)]
-            pub const fn set_dwtcompout2(&mut self, val: bool) {
+            pub const fn set_triginstatus_3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin4 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused0(&self) -> bool {
+            pub const fn triginstatus_4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin4 input."]
             #[inline(always)]
-            pub const fn set_unused0(&mut self, val: bool) {
+            pub const fn set_triginstatus_4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin5 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused1(&self) -> bool {
+            pub const fn triginstatus_5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin5 input."]
             #[inline(always)]
-            pub const fn set_unused1(&mut self, val: bool) {
+            pub const fn set_triginstatus_5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin6 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused2(&self) -> bool {
+            pub const fn triginstatus_6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin6 input."]
             #[inline(always)]
-            pub const fn set_unused2(&mut self, val: bool) {
+            pub const fn set_triginstatus_6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin7 input."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused3(&self) -> bool {
+            pub const fn triginstatus_7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigin7 input."]
             #[inline(always)]
-            pub const fn set_unused3(&mut self, val: bool) {
+            pub const fn set_triginstatus_7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
         }
@@ -3570,21 +3570,21 @@ pub mod cti {
         impl core::fmt::Debug for Ctitriginstatus {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Ctitriginstatus")
-                    .field("cpuhalted", &self.cpuhalted())
-                    .field("dwtcompout0", &self.dwtcompout0())
-                    .field("dwtcompout1", &self.dwtcompout1())
-                    .field("dwtcompout2", &self.dwtcompout2())
-                    .field("unused0", &self.unused0())
-                    .field("unused1", &self.unused1())
-                    .field("unused2", &self.unused2())
-                    .field("unused3", &self.unused3())
+                    .field("triginstatus_0", &self.triginstatus_0())
+                    .field("triginstatus_1", &self.triginstatus_1())
+                    .field("triginstatus_2", &self.triginstatus_2())
+                    .field("triginstatus_3", &self.triginstatus_3())
+                    .field("triginstatus_4", &self.triginstatus_4())
+                    .field("triginstatus_5", &self.triginstatus_5())
+                    .field("triginstatus_6", &self.triginstatus_6())
+                    .field("triginstatus_7", &self.triginstatus_7())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Ctitriginstatus {
             fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Ctitriginstatus {{ cpuhalted: {=bool:?}, dwtcompout0: {=bool:?}, dwtcompout1: {=bool:?}, dwtcompout2: {=bool:?}, unused0: {=bool:?}, unused1: {=bool:?}, unused2: {=bool:?}, unused3: {=bool:?} }}" , self . cpuhalted () , self . dwtcompout0 () , self . dwtcompout1 () , self . dwtcompout2 () , self . unused0 () , self . unused1 () , self . unused2 () , self . unused3 ())
+                defmt :: write ! (f , "Ctitriginstatus {{ triginstatus_0: {=bool:?}, triginstatus_1: {=bool:?}, triginstatus_2: {=bool:?}, triginstatus_3: {=bool:?}, triginstatus_4: {=bool:?}, triginstatus_5: {=bool:?}, triginstatus_6: {=bool:?}, triginstatus_7: {=bool:?} }}" , self . triginstatus_0 () , self . triginstatus_1 () , self . triginstatus_2 () , self . triginstatus_3 () , self . triginstatus_4 () , self . triginstatus_5 () , self . triginstatus_6 () , self . triginstatus_7 ())
             }
         }
         #[doc = "CTI Trigger Out Status register"]
@@ -3592,100 +3592,100 @@ pub mod cti {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Ctitrigoutstatus(pub u32);
         impl Ctitrigoutstatus {
-            #[doc = "Processor debug request"]
+            #[doc = "Shows the status of ctitrigout0 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn debugreq(&self) -> bool {
+            pub const fn trigoutstatus_0(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Processor debug request"]
+            #[doc = "Shows the status of ctitrigout0 output."]
             #[inline(always)]
-            pub const fn set_debugreq(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_0(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
             }
-            #[doc = "Processor Restart"]
+            #[doc = "Shows the status of ctitrigout1 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn cpurestart(&self) -> bool {
+            pub const fn trigoutstatus_1(&self) -> bool {
                 let val = (self.0 >> 1usize) & 0x01;
                 val != 0
             }
-            #[doc = "Processor Restart"]
+            #[doc = "Shows the status of ctitrigout1 output."]
             #[inline(always)]
-            pub const fn set_cpurestart(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_1(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout2 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused0(&self) -> bool {
+            pub const fn trigoutstatus_2(&self) -> bool {
                 let val = (self.0 >> 2usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout2 output."]
             #[inline(always)]
-            pub const fn set_unused0(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_2(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout3 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused1(&self) -> bool {
+            pub const fn trigoutstatus_3(&self) -> bool {
                 let val = (self.0 >> 3usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout3 output."]
             #[inline(always)]
-            pub const fn set_unused1(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_3(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout4 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused2(&self) -> bool {
+            pub const fn trigoutstatus_4(&self) -> bool {
                 let val = (self.0 >> 4usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout4 output."]
             #[inline(always)]
-            pub const fn set_unused2(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_4(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout5 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused3(&self) -> bool {
+            pub const fn trigoutstatus_5(&self) -> bool {
                 let val = (self.0 >> 5usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout5 output."]
             #[inline(always)]
-            pub const fn set_unused3(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_5(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout6 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused4(&self) -> bool {
+            pub const fn trigoutstatus_6(&self) -> bool {
                 let val = (self.0 >> 6usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout6 output."]
             #[inline(always)]
-            pub const fn set_unused4(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_6(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout7 output."]
             #[must_use]
             #[inline(always)]
-            pub const fn unused5(&self) -> bool {
+            pub const fn trigoutstatus_7(&self) -> bool {
                 let val = (self.0 >> 7usize) & 0x01;
                 val != 0
             }
-            #[doc = "N/A"]
+            #[doc = "Shows the status of ctitrigout7 output."]
             #[inline(always)]
-            pub const fn set_unused5(&mut self, val: bool) {
+            pub const fn set_trigoutstatus_7(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
             }
         }
@@ -3698,21 +3698,21 @@ pub mod cti {
         impl core::fmt::Debug for Ctitrigoutstatus {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 f.debug_struct("Ctitrigoutstatus")
-                    .field("debugreq", &self.debugreq())
-                    .field("cpurestart", &self.cpurestart())
-                    .field("unused0", &self.unused0())
-                    .field("unused1", &self.unused1())
-                    .field("unused2", &self.unused2())
-                    .field("unused3", &self.unused3())
-                    .field("unused4", &self.unused4())
-                    .field("unused5", &self.unused5())
+                    .field("trigoutstatus_0", &self.trigoutstatus_0())
+                    .field("trigoutstatus_1", &self.trigoutstatus_1())
+                    .field("trigoutstatus_2", &self.trigoutstatus_2())
+                    .field("trigoutstatus_3", &self.trigoutstatus_3())
+                    .field("trigoutstatus_4", &self.trigoutstatus_4())
+                    .field("trigoutstatus_5", &self.trigoutstatus_5())
+                    .field("trigoutstatus_6", &self.trigoutstatus_6())
+                    .field("trigoutstatus_7", &self.trigoutstatus_7())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
         impl defmt::Format for Ctitrigoutstatus {
             fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Ctitrigoutstatus {{ debugreq: {=bool:?}, cpurestart: {=bool:?}, unused0: {=bool:?}, unused1: {=bool:?}, unused2: {=bool:?}, unused3: {=bool:?}, unused4: {=bool:?}, unused5: {=bool:?} }}" , self . debugreq () , self . cpurestart () , self . unused0 () , self . unused1 () , self . unused2 () , self . unused3 () , self . unused4 () , self . unused5 ())
+                defmt :: write ! (f , "Ctitrigoutstatus {{ trigoutstatus_0: {=bool:?}, trigoutstatus_1: {=bool:?}, trigoutstatus_2: {=bool:?}, trigoutstatus_3: {=bool:?}, trigoutstatus_4: {=bool:?}, trigoutstatus_5: {=bool:?}, trigoutstatus_6: {=bool:?}, trigoutstatus_7: {=bool:?} }}" , self . trigoutstatus_0 () , self . trigoutstatus_1 () , self . trigoutstatus_2 () , self . trigoutstatus_3 () , self . trigoutstatus_4 () , self . trigoutstatus_5 () , self . trigoutstatus_6 () , self . trigoutstatus_7 ())
             }
         }
         #[doc = "Device Architecture register"]
@@ -6946,12 +6946,12 @@ pub mod gpio {
         pub const fn latch(self) -> crate::common::Reg<regs::Latch, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
         }
-        #[doc = "Select between default DETECT signal behavior and LDETECT mode (For non-secure pin only)"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[inline(always)]
         pub const fn detectmode(self) -> crate::common::Reg<regs::Detectmode, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x24usize) as _) }
         }
-        #[doc = "Select between default DETECT signal behavior and LDETECT mode (For secure pin only)"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[inline(always)]
         pub const fn detectmode_sec(
             self,
@@ -6971,7 +6971,7 @@ pub mod gpio {
         }
     }
     pub mod regs {
-        #[doc = "Select between default DETECT signal behavior and LDETECT mode (For non-secure pin only)"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Detectmode(pub u32);
@@ -7008,7 +7008,7 @@ pub mod gpio {
                 defmt::write!(f, "Detectmode {{ detectmode: {:?} }}", self.detectmode())
             }
         }
-        #[doc = "Select between default DETECT signal behavior and LDETECT mode (For secure pin only)"]
+        #[doc = "Select between default DETECT signal behavior and LDETECT mode"]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct DetectmodeSec(pub u32);
@@ -8315,9 +8315,9 @@ pub mod gpiote {
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Latency {
-            #[doc = "Low power setting, for signals with minimum hold time tGPIOTE,HOLD,LP; refer to Electrical specification section"]
+            #[doc = "Low power setting"]
             LOW_POWER = 0x0,
-            #[doc = "Low latency setting, for signals with minimum hold time tGPIOTE,HOLD,LL; refer to Electrical specification section"]
+            #[doc = "Low latency setting"]
             LOW_LATENCY = 0x01,
         }
         impl Latency {
@@ -14217,7 +14217,7 @@ pub mod radio {
         pub enum Ru {
             #[doc = "Default ramp-up time (tRXEN and tTXEN), compatible with firmware written for nRF51"]
             DEFAULT = 0x0,
-            #[doc = "Fast ramp-up (tRXEN,FAST and tTXEN,FAST), see electrical specifications for more information"]
+            #[doc = "Fast ramp-up (tRXEN,FAST and tTXEN,FAST), see RADIO timings for more information"]
             FAST = 0x01,
         }
         impl Ru {
@@ -15721,14 +15721,14 @@ pub mod shared {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Publish(pub u32);
         impl Publish {
-            #[doc = "DPPI channel that event END will publish to."]
+            #[doc = "DPPI channel that event END will publish to"]
             #[must_use]
             #[inline(always)]
             pub const fn chidx(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "DPPI channel that event END will publish to."]
+            #[doc = "DPPI channel that event END will publish to"]
             #[inline(always)]
             pub const fn set_chidx(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -20921,14 +20921,14 @@ pub mod twis {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Match(pub u32);
         impl Match {
-            #[doc = "Indication of which address in {ADDRESS} that matched the incoming address"]
+            #[doc = "Indication of which address in ADDRESS that matched the incoming address"]
             #[must_use]
             #[inline(always)]
             pub const fn match_(&self) -> bool {
                 let val = (self.0 >> 0usize) & 0x01;
                 val != 0
             }
-            #[doc = "Indication of which address in {ADDRESS} that matched the incoming address"]
+            #[doc = "Indication of which address in ADDRESS that matched the incoming address"]
             #[inline(always)]
             pub const fn set_match_(&mut self, val: bool) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
