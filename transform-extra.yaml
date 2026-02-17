@@ -216,7 +216,7 @@
       to: uarte::DmaRx
   - !MakeBlock
       blocks: uarte::Uarte
-      from: tasks_(.+)(tx|rx)
+      from: tasks_(start|stop)(tx|rx)
       to_outer: tasks_dma
       to_inner: $1$2
       to_block: uarte::TasksDma
