@@ -21212,11 +21212,6 @@ pub mod uarte {
         pub const fn stop(self) -> crate::common::Reg<u32, crate::common::W> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
-        #[doc = "Flush RX FIFO into RX buffer"]
-        #[inline(always)]
-        pub const fn flush(self) -> crate::common::Reg<u32, crate::common::W> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x2cusize) as _) }
-        }
     }
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct TasksDmaTx {
@@ -21263,6 +21258,11 @@ pub mod uarte {
         #[inline(always)]
         pub const fn tasks_dma(self) -> TasksDma {
             unsafe { TasksDma::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Flush RX FIFO into RX buffer"]
+        #[inline(always)]
+        pub const fn tasks_flushrx(self) -> crate::common::Reg<u32, crate::common::W> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x2cusize) as _) }
         }
         #[doc = "CTS is activated (set low). Clear To Send."]
         #[inline(always)]
