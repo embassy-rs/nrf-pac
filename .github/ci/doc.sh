@@ -15,7 +15,7 @@ export BUILDER_COMPRESS=true
 # which makes rustup very sad
 rustc --version > /dev/null
 
-docserver-builder -i . -o webroot/crates/nrf-pac/git.zup
+docserver build -i . -o webroot/crates/nrf-pac/git.zup
 
 export KUBECONFIG=/ci/secrets/kubeconfig.yml
 POD=$(kubectl -n embassy get po -l app=docserver -o jsonpath={.items[0].metadata.name})
