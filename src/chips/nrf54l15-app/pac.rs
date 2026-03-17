@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (f379958 2025-11-16))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (6a8c2aa 2026-01-27))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -60750,7 +60750,7 @@ pub mod vpr {
         #[doc = "Description collection: VPR task \\[n\\] register"]
         #[inline(always)]
         pub const fn tasks_trigger(self, n: usize) -> crate::common::Reg<u32, crate::common::W> {
-            assert!(n < 7usize);
+            assert!(n < 23usize);
             unsafe {
                 crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize + n * 4usize) as _)
             }
@@ -60772,7 +60772,7 @@ pub mod vpr {
             self,
             n: usize,
         ) -> crate::common::Reg<u32, crate::common::RW> {
-            assert!(n < 7usize);
+            assert!(n < 23usize);
             unsafe {
                 crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0100usize + n * 4usize) as _)
             }

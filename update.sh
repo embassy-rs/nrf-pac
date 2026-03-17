@@ -36,7 +36,7 @@ for chip in $(ls svd); do
     fi
 
     rustfmt lib.rs
-    sed -i '/#!\[no_std]/d' lib.rs
+    sed -i '' '/#!\[no_std]/d' lib.rs
 
     mkdir -p src/chips/$chip
     mv lib.rs src/chips/$chip/pac.rs
