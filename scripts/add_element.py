@@ -67,6 +67,20 @@ def add_element_to_matches(xml_file: str, xpath: str, snippet: str) -> int:
     modified_count = 0
     
     for match in matches:
+        # Check if an equivalent element already exists (idempotency).
+        # Compare by tag and text content of immediate children.
+        snippet_tag = snippet_element.tag
+        snippet_id = snippet_element.findtext('name') or snippet_element.text
+        already_exists = False
+        for existing in match.iterchildren(snippet_tag):
+            existing_id = existing.findtext('name') or existing.text
+            if existing_id == snippet_id:
+                already_exists = True
+                break
+        if already_exists:
+            print(f"  Already present in: {get_element_identifier(match)}, skipping")
+            continue
+
         # Deep copy the snippet for each insertion
         new_element = deepcopy(snippet_element)
         match.append(new_element)

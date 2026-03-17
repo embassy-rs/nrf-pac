@@ -27718,7 +27718,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <size>0x20</size>
       <registers>
         <register>
-          <dim>0x7</dim>
+          <dim>0x17</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>TASKS_TRIGGER[%s]</name>
           <description>Description collection: VPR task [n] register</description>
@@ -27773,7 +27773,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
-          <dim>0x7</dim>
+          <dim>0x17</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>EVENTS_TRIGGERED[%s]</name>
           <description>Description collection: VPR event [n] register</description>
@@ -88393,9 +88393,9 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </cluster>
       </registers>
       <interrupt>
-  <name>CLOCK_POWER</name>
-  <value>261</value>
-</interrupt>
+        <name>CLOCK_POWER</name>
+        <value>261</value>
+      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_POWER_NS</name>
@@ -88975,9 +88975,9 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
       </registers>
       <interrupt>
-  <name>CLOCK_POWER</name>
-  <value>261</value>
-</interrupt>
+        <name>CLOCK_POWER</name>
+        <value>261</value>
+      </interrupt>
     </peripheral>
     <peripheral>
       <name>GLOBAL_RESET_NS</name>
@@ -89266,9 +89266,9 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
-  <name>CLOCK_POWER</name>
-  <value>261</value>
-</interrupt>
+        <name>CLOCK_POWER</name>
+        <value>261</value>
+      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_POWER_NS">
       <name>GLOBAL_POWER_S</name>
@@ -89278,9 +89278,9 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
-  <name>CLOCK_POWER</name>
-  <value>261</value>
-</interrupt>
+        <name>CLOCK_POWER</name>
+        <value>261</value>
+      </interrupt>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_RESET_NS">
       <name>GLOBAL_RESET_S</name>
