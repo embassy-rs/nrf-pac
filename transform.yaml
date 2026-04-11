@@ -1,5 +1,6 @@
 transforms:
-# ======= Misc renames.
+  - !Sanitize
+  # ======= Misc renames.
   - !RenamePeripherals
       from: GLOBAL_(.*)
       to: $1
@@ -486,8 +487,8 @@ transforms:
 # ======= SAADC
   - !RenameEnumVariants
     enum: saadc::vals::Pselp
-    from: VDDGPIO
-    to: VDD_GPIO
+    from: Vddgpio
+    to: VddGpio
   - !MergeEnums
       from: saadc::vals::Psel[pn]
       to: saadc::vals::Psel

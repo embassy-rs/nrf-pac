@@ -1,6 +1,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (6a8c2aa 2026-01-27))"]
+#![allow(non_upper_case_globals)]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (694bb9d 2026-04-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -507,11 +508,11 @@ pub mod aar {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "Disabled AAR."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             _RESERVED_1 = 0x01,
             _RESERVED_2 = 0x02,
             #[doc = "Enable AAR."]
-            ENABLED = 0x03,
+            Enabled = 0x03,
         }
         impl Enable {
             #[inline(always)]
@@ -884,9 +885,9 @@ pub mod adc {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Busy {
             #[doc = "No ongoing ADC conversion is taking place. ADC is ready."]
-            READY = 0x0,
+            Ready = 0x0,
             #[doc = "An ADC conversion is taking place. ADC is busy."]
-            BUSY = 0x01,
+            Busy = 0x01,
         }
         impl Busy {
             #[inline(always)]
@@ -915,9 +916,9 @@ pub mod adc {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "ADC is disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "ADC is enabled. If an analog input pin is selected as source of the conversion, the selected pin is configured as an analog input."]
-            ENABLED = 0x01,
+            Enabled = 0x01,
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
@@ -948,11 +949,11 @@ pub mod adc {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Extrefsel {
             #[doc = "Analog external reference inputs disabled."]
-            NONE = 0x0,
+            None = 0x0,
             #[doc = "Use analog reference 0 as reference."]
-            ANALOG_REFERENCE0 = 0x01,
+            AnalogReference0 = 0x01,
             #[doc = "Use analog reference 1 as reference."]
-            ANALOG_REFERENCE1 = 0x02,
+            AnalogReference1 = 0x02,
             _RESERVED_3 = 0x03,
         }
         impl Extrefsel {
@@ -982,17 +983,17 @@ pub mod adc {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Inpsel {
             #[doc = "Analog input specified by PSEL with no prescaling used as input for the conversion."]
-            ANALOG_INPUT_NO_PRESCALING = 0x0,
+            AnalogInputNoPrescaling = 0x0,
             #[doc = "Analog input specified by PSEL with 2/3 prescaling used as input for the conversion."]
-            ANALOG_INPUT_TWO_THIRDS_PRESCALING = 0x01,
+            AnalogInputTwoThirdsPrescaling = 0x01,
             #[doc = "Analog input specified by PSEL with 1/3 prescaling used as input for the conversion."]
-            ANALOG_INPUT_ONE_THIRD_PRESCALING = 0x02,
+            AnalogInputOneThirdPrescaling = 0x02,
             _RESERVED_3 = 0x03,
             _RESERVED_4 = 0x04,
             #[doc = "Supply voltage with 2/3 prescaling used as input for the conversion."]
-            SUPPLY_TWO_THIRDS_PRESCALING = 0x05,
+            SupplyTwoThirdsPrescaling = 0x05,
             #[doc = "Supply voltage with 1/3 prescaling used as input for the conversion."]
-            SUPPLY_ONE_THIRD_PRESCALING = 0x06,
+            SupplyOneThirdPrescaling = 0x06,
             _RESERVED_7 = 0x07,
         }
         impl Inpsel {
@@ -1022,23 +1023,23 @@ pub mod adc {
         pub struct Psel(u8);
         impl Psel {
             #[doc = "Analog input pins disabled."]
-            pub const DISABLED: Self = Self(0x0);
+            pub const Disabled: Self = Self(0x0);
             #[doc = "Use analog input 0 as analog input."]
-            pub const ANALOG_INPUT0: Self = Self(0x01);
+            pub const AnalogInput0: Self = Self(0x01);
             #[doc = "Use analog input 1 as analog input."]
-            pub const ANALOG_INPUT1: Self = Self(0x02);
+            pub const AnalogInput1: Self = Self(0x02);
             #[doc = "Use analog input 2 as analog input."]
-            pub const ANALOG_INPUT2: Self = Self(0x04);
+            pub const AnalogInput2: Self = Self(0x04);
             #[doc = "Use analog input 3 as analog input."]
-            pub const ANALOG_INPUT3: Self = Self(0x08);
+            pub const AnalogInput3: Self = Self(0x08);
             #[doc = "Use analog input 4 as analog input."]
-            pub const ANALOG_INPUT4: Self = Self(0x10);
+            pub const AnalogInput4: Self = Self(0x10);
             #[doc = "Use analog input 5 as analog input."]
-            pub const ANALOG_INPUT5: Self = Self(0x20);
+            pub const AnalogInput5: Self = Self(0x20);
             #[doc = "Use analog input 6 as analog input."]
-            pub const ANALOG_INPUT6: Self = Self(0x40);
+            pub const AnalogInput6: Self = Self(0x40);
             #[doc = "Use analog input 7 as analog input."]
-            pub const ANALOG_INPUT7: Self = Self(0x80);
+            pub const AnalogInput7: Self = Self(0x80);
         }
         impl Psel {
             pub const fn from_bits(val: u8) -> Psel {
@@ -1051,15 +1052,15 @@ pub mod adc {
         impl core::fmt::Debug for Psel {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0 => f.write_str("DISABLED"),
-                    0x01 => f.write_str("ANALOG_INPUT0"),
-                    0x02 => f.write_str("ANALOG_INPUT1"),
-                    0x04 => f.write_str("ANALOG_INPUT2"),
-                    0x08 => f.write_str("ANALOG_INPUT3"),
-                    0x10 => f.write_str("ANALOG_INPUT4"),
-                    0x20 => f.write_str("ANALOG_INPUT5"),
-                    0x40 => f.write_str("ANALOG_INPUT6"),
-                    0x80 => f.write_str("ANALOG_INPUT7"),
+                    0x0 => f.write_str("Disabled"),
+                    0x01 => f.write_str("AnalogInput0"),
+                    0x02 => f.write_str("AnalogInput1"),
+                    0x04 => f.write_str("AnalogInput2"),
+                    0x08 => f.write_str("AnalogInput3"),
+                    0x10 => f.write_str("AnalogInput4"),
+                    0x20 => f.write_str("AnalogInput5"),
+                    0x40 => f.write_str("AnalogInput6"),
+                    0x80 => f.write_str("AnalogInput7"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -1068,15 +1069,15 @@ pub mod adc {
         impl defmt::Format for Psel {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0 => defmt::write!(f, "DISABLED"),
-                    0x01 => defmt::write!(f, "ANALOG_INPUT0"),
-                    0x02 => defmt::write!(f, "ANALOG_INPUT1"),
-                    0x04 => defmt::write!(f, "ANALOG_INPUT2"),
-                    0x08 => defmt::write!(f, "ANALOG_INPUT3"),
-                    0x10 => defmt::write!(f, "ANALOG_INPUT4"),
-                    0x20 => defmt::write!(f, "ANALOG_INPUT5"),
-                    0x40 => defmt::write!(f, "ANALOG_INPUT6"),
-                    0x80 => defmt::write!(f, "ANALOG_INPUT7"),
+                    0x0 => defmt::write!(f, "Disabled"),
+                    0x01 => defmt::write!(f, "AnalogInput0"),
+                    0x02 => defmt::write!(f, "AnalogInput1"),
+                    0x04 => defmt::write!(f, "AnalogInput2"),
+                    0x08 => defmt::write!(f, "AnalogInput3"),
+                    0x10 => defmt::write!(f, "AnalogInput4"),
+                    0x20 => defmt::write!(f, "AnalogInput5"),
+                    0x40 => defmt::write!(f, "AnalogInput6"),
+                    0x80 => defmt::write!(f, "AnalogInput7"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -1098,13 +1099,13 @@ pub mod adc {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Refsel {
             #[doc = "Use internal 1.2V bandgap voltage as reference for conversion."]
-            VBG = 0x0,
+            Vbg = 0x0,
             #[doc = "Use external source configured by EXTREFSEL as reference for conversion."]
-            EXTERNAL = 0x01,
+            External = 0x01,
             #[doc = "Use supply voltage with 1/2 prescaling as reference for conversion. Only usable when supply voltage is between 1.7V and 2.6V."]
-            SUPPLY_ONE_HALF_PRESCALING = 0x02,
+            SupplyOneHalfPrescaling = 0x02,
             #[doc = "Use supply voltage with 1/3 prescaling as reference for conversion. Only usable when supply voltage is between 2.5V and 3.6V."]
-            SUPPLY_ONE_THIRD_PRESCALING = 0x03,
+            SupplyOneThirdPrescaling = 0x03,
         }
         impl Refsel {
             #[inline(always)]
@@ -1133,11 +1134,11 @@ pub mod adc {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Res {
             #[doc = "8bit ADC resolution."]
-            _8BIT = 0x0,
+            _8bit = 0x0,
             #[doc = "9bit ADC resolution."]
-            _9BIT = 0x01,
+            _9bit = 0x01,
             #[doc = "10bit ADC resolution."]
-            _10BIT = 0x02,
+            _10bit = 0x02,
             _RESERVED_3 = 0x03,
         }
         impl Res {
@@ -1379,14 +1380,14 @@ pub mod ccm {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Micstatus(pub u32);
         impl Micstatus {
-            #[doc = "Result of the MIC check performed during the previous CCM RX STARTCRYPT"]
+            #[doc = "Result of the MIC check performed during the previous CCM RX STARTCRYPT."]
             #[must_use]
             #[inline(always)]
             pub const fn micstatus(&self) -> super::vals::Micstatus {
                 let val = (self.0 >> 0usize) & 0x01;
                 super::vals::Micstatus::from_bits(val as u8)
             }
-            #[doc = "Result of the MIC check performed during the previous CCM RX STARTCRYPT"]
+            #[doc = "Result of the MIC check performed during the previous CCM RX STARTCRYPT."]
             #[inline(always)]
             pub const fn set_micstatus(&mut self, val: super::vals::Micstatus) {
                 self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
@@ -1531,10 +1532,10 @@ pub mod ccm {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "CCM is disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             _RESERVED_1 = 0x01,
             #[doc = "CCM is enabled."]
-            ENABLED = 0x02,
+            Enabled = 0x02,
             _RESERVED_3 = 0x03,
         }
         impl Enable {
@@ -1564,9 +1565,9 @@ pub mod ccm {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Micstatus {
             #[doc = "MIC check failed."]
-            CHECK_FAILED = 0x0,
+            CheckFailed = 0x0,
             #[doc = "MIC check passed."]
-            CHECK_PASSED = 0x01,
+            CheckPassed = 0x01,
         }
         impl Micstatus {
             #[inline(always)]
@@ -1594,10 +1595,10 @@ pub mod ccm {
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Mode {
-            #[doc = "CCM mode TX"]
-            ENCRYPTION = 0x0,
-            #[doc = "CCM mode TX"]
-            DECRYPTION = 0x01,
+            #[doc = "CCM mode TX."]
+            Encryption = 0x0,
+            #[doc = "CCM mode TX."]
+            Decryption = 0x01,
         }
         impl Mode {
             #[inline(always)]
@@ -2162,9 +2163,9 @@ pub mod clock {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum HfclkstatSrc {
             #[doc = "Internal 16MHz RC oscillator running and generating the HFCLK clock."]
-            RC = 0x0,
+            Rc = 0x0,
             #[doc = "External 16MHz/32MHz crystal oscillator running and generating the HFCLK clock."]
-            XTAL = 0x01,
+            Xtal = 0x01,
         }
         impl HfclkstatSrc {
             #[inline(always)]
@@ -2193,11 +2194,11 @@ pub mod clock {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Lfclksrc {
             #[doc = "Internal 32KiHz RC oscillator."]
-            RC = 0x0,
+            Rc = 0x0,
             #[doc = "External 32KiHz crystal."]
-            XTAL = 0x01,
+            Xtal = 0x01,
             #[doc = "Internal 32KiHz synthesizer from HFCLK system clock."]
-            SYNTH = 0x02,
+            Synth = 0x02,
             _RESERVED_3 = 0x03,
         }
         impl Lfclksrc {
@@ -2227,9 +2228,9 @@ pub mod clock {
         pub struct Xtalfreq(u8);
         impl Xtalfreq {
             #[doc = "32MHz xtal is used as source for the HFCLK oscillator."]
-            pub const _32MHZ: Self = Self(0x0);
+            pub const _32mHz: Self = Self(0x0);
             #[doc = "16MHz xtal is used as source for the HFCLK oscillator."]
-            pub const _16MHZ: Self = Self(0xff);
+            pub const _16mHz: Self = Self(0xff);
         }
         impl Xtalfreq {
             pub const fn from_bits(val: u8) -> Xtalfreq {
@@ -2242,8 +2243,8 @@ pub mod clock {
         impl core::fmt::Debug for Xtalfreq {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0 => f.write_str("_32MHZ"),
-                    0xff => f.write_str("_16MHZ"),
+                    0x0 => f.write_str("_32mHz"),
+                    0xff => f.write_str("_16mHz"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -2252,8 +2253,8 @@ pub mod clock {
         impl defmt::Format for Xtalfreq {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0 => defmt::write!(f, "_32MHZ"),
-                    0xff => defmt::write!(f, "_16MHZ"),
+                    0x0 => defmt::write!(f, "_32mHz"),
+                    0xff => defmt::write!(f, "_16mHz"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -2815,9 +2816,9 @@ pub mod ficr {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Ble1mbit {
             #[doc = "Override the default values for BLE_1Mbit mode."]
-            OVERRIDE = 0x0,
+            Override = 0x0,
             #[doc = "Do not override the default values for BLE_1Mbit mode."]
-            NOT_OVERRIDE = 0x01,
+            NotOverride = 0x01,
         }
         impl Ble1mbit {
             #[inline(always)]
@@ -2846,9 +2847,9 @@ pub mod ficr {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Deviceaddrtype {
             #[doc = "Public address."]
-            PUBLIC = 0x0,
+            Public = 0x0,
             #[doc = "Random address."]
-            RANDOM = 0x01,
+            Random = 0x01,
         }
         impl Deviceaddrtype {
             #[inline(always)]
@@ -2877,9 +2878,9 @@ pub mod ficr {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Nrf1mbit {
             #[doc = "Override the default values for NRF_1Mbit mode."]
-            OVERRIDE = 0x0,
+            Override = 0x0,
             #[doc = "Do not override the default values for NRF_1Mbit mode."]
-            NOT_OVERRIDE = 0x01,
+            NotOverride = 0x01,
         }
         impl Nrf1mbit {
             #[inline(always)]
@@ -2908,9 +2909,9 @@ pub mod ficr {
         pub struct Ppfc(u8);
         impl Ppfc {
             #[doc = "Present."]
-            pub const PRESENT: Self = Self(0x0);
+            pub const Present: Self = Self(0x0);
             #[doc = "Not present."]
-            pub const NOT_PRESENT: Self = Self(0xff);
+            pub const NotPresent: Self = Self(0xff);
         }
         impl Ppfc {
             pub const fn from_bits(val: u8) -> Ppfc {
@@ -2923,8 +2924,8 @@ pub mod ficr {
         impl core::fmt::Debug for Ppfc {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0 => f.write_str("PRESENT"),
-                    0xff => f.write_str("NOT_PRESENT"),
+                    0x0 => f.write_str("Present"),
+                    0xff => f.write_str("NotPresent"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -2933,8 +2934,8 @@ pub mod ficr {
         impl defmt::Format for Ppfc {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0 => defmt::write!(f, "PRESENT"),
-                    0xff => defmt::write!(f, "NOT_PRESENT"),
+                    0x0 => defmt::write!(f, "Present"),
+                    0xff => defmt::write!(f, "NotPresent"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -3627,9 +3628,9 @@ pub mod gpio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Dir {
             #[doc = "Configure pin as an input pin."]
-            INPUT = 0x0,
+            Input = 0x0,
             #[doc = "Configure pin as an output pin."]
-            OUTPUT = 0x01,
+            Output = 0x01,
         }
         impl Dir {
             #[inline(always)]
@@ -3658,21 +3659,21 @@ pub mod gpio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Drive {
             #[doc = "Standard '0', Standard '1'."]
-            S0S1 = 0x0,
+            S0s1 = 0x0,
             #[doc = "High '0', Standard '1'."]
-            H0S1 = 0x01,
+            H0s1 = 0x01,
             #[doc = "Standard '0', High '1'."]
-            S0H1 = 0x02,
+            S0h1 = 0x02,
             #[doc = "High '0', High '1'."]
-            H0H1 = 0x03,
+            H0h1 = 0x03,
             #[doc = "Disconnected '0', Standard '1'."]
-            D0S1 = 0x04,
+            D0s1 = 0x04,
             #[doc = "Disconnected '0', High '1'."]
-            D0H1 = 0x05,
+            D0h1 = 0x05,
             #[doc = "Standard '0', Disconnected '1'."]
-            S0D1 = 0x06,
+            S0d1 = 0x06,
             #[doc = "High '0', Disconnected '1'."]
-            H0D1 = 0x07,
+            H0d1 = 0x07,
         }
         impl Drive {
             #[inline(always)]
@@ -3701,9 +3702,9 @@ pub mod gpio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Input {
             #[doc = "Connect input pin."]
-            CONNECT = 0x0,
+            Connect = 0x0,
             #[doc = "Disconnect input pin."]
-            DISCONNECT = 0x01,
+            Disconnect = 0x01,
         }
         impl Input {
             #[inline(always)]
@@ -3732,12 +3733,12 @@ pub mod gpio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Pull {
             #[doc = "No pull."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Pulldown on pin."]
-            PULLDOWN = 0x01,
+            Pulldown = 0x01,
             _RESERVED_2 = 0x02,
             #[doc = "Pullup on pin."]
-            PULLUP = 0x03,
+            Pullup = 0x03,
         }
         impl Pull {
             #[inline(always)]
@@ -3766,12 +3767,12 @@ pub mod gpio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Sense {
             #[doc = "Disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             _RESERVED_1 = 0x01,
             #[doc = "Wakeup on high level."]
-            HIGH = 0x02,
+            High = 0x02,
             #[doc = "Wakeup on low level."]
-            LOW = 0x03,
+            Low = 0x03,
         }
         impl Sense {
             #[inline(always)]
@@ -3874,14 +3875,14 @@ pub mod gpiote {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Config(pub u32);
         impl Config {
-            #[doc = "Mode"]
+            #[doc = "Mode."]
             #[must_use]
             #[inline(always)]
             pub const fn mode(&self) -> super::vals::Mode {
                 let val = (self.0 >> 0usize) & 0x03;
                 super::vals::Mode::from_bits(val as u8)
             }
-            #[doc = "Mode"]
+            #[doc = "Mode."]
             #[inline(always)]
             pub const fn set_mode(&mut self, val: super::vals::Mode) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
@@ -4055,12 +4056,12 @@ pub mod gpiote {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Mode {
             #[doc = "Disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Channel configure in event mode."]
-            EVENT = 0x01,
+            Event = 0x01,
             _RESERVED_2 = 0x02,
             #[doc = "Channel configure in task mode."]
-            TASK = 0x03,
+            Task = 0x03,
         }
         impl Mode {
             #[inline(always)]
@@ -4089,9 +4090,9 @@ pub mod gpiote {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Outinit {
             #[doc = "Initial low output when in task mode."]
-            LOW = 0x0,
+            Low = 0x0,
             #[doc = "Initial high output when in task mode."]
-            HIGH = 0x01,
+            High = 0x01,
         }
         impl Outinit {
             #[inline(always)]
@@ -4120,13 +4121,13 @@ pub mod gpiote {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Polarity {
             #[doc = "No task or event."]
-            NONE = 0x0,
+            None = 0x0,
             #[doc = "Low to high."]
-            LO_TO_HI = 0x01,
+            LoToHi = 0x01,
             #[doc = "High to low."]
-            HI_TO_LO = 0x02,
+            HiToLo = 0x02,
             #[doc = "Toggle."]
-            TOGGLE = 0x03,
+            Toggle = 0x03,
         }
         impl Polarity {
             #[inline(always)]
@@ -4692,11 +4693,11 @@ pub mod lpcomp {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Anadetect {
             #[doc = "Generate ANADETEC on crossing, both upwards and downwards crossing."]
-            CROSS = 0x0,
+            Cross = 0x0,
             #[doc = "Generate ANADETEC on upwards crossing only."]
-            UP = 0x01,
+            Up = 0x01,
             #[doc = "Generate ANADETEC on downwards crossing only."]
-            DOWN = 0x02,
+            Down = 0x02,
             _RESERVED_3 = 0x03,
         }
         impl Anadetect {
@@ -4726,9 +4727,9 @@ pub mod lpcomp {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "Disabled LPCOMP."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Enable LPCOMP."]
-            ENABLED = 0x01,
+            Enabled = 0x01,
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
@@ -4759,9 +4760,9 @@ pub mod lpcomp {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Extrefsel {
             #[doc = "Use analog reference 0 as reference."]
-            ANALOG_REFERENCE0 = 0x0,
+            AnalogReference0 = 0x0,
             #[doc = "Use analog reference 1 as reference."]
-            ANALOG_REFERENCE1 = 0x01,
+            AnalogReference1 = 0x01,
         }
         impl Extrefsel {
             #[inline(always)]
@@ -4790,21 +4791,21 @@ pub mod lpcomp {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum PselPsel {
             #[doc = "Use analog input 0 as analog input."]
-            ANALOG_INPUT0 = 0x0,
+            AnalogInput0 = 0x0,
             #[doc = "Use analog input 1 as analog input."]
-            ANALOG_INPUT1 = 0x01,
+            AnalogInput1 = 0x01,
             #[doc = "Use analog input 2 as analog input."]
-            ANALOG_INPUT2 = 0x02,
+            AnalogInput2 = 0x02,
             #[doc = "Use analog input 3 as analog input."]
-            ANALOG_INPUT3 = 0x03,
+            AnalogInput3 = 0x03,
             #[doc = "Use analog input 4 as analog input."]
-            ANALOG_INPUT4 = 0x04,
+            AnalogInput4 = 0x04,
             #[doc = "Use analog input 5 as analog input."]
-            ANALOG_INPUT5 = 0x05,
+            AnalogInput5 = 0x05,
             #[doc = "Use analog input 6 as analog input."]
-            ANALOG_INPUT6 = 0x06,
+            AnalogInput6 = 0x06,
             #[doc = "Use analog input 7 as analog input."]
-            ANALOG_INPUT7 = 0x07,
+            AnalogInput7 = 0x07,
         }
         impl PselPsel {
             #[inline(always)]
@@ -4833,21 +4834,21 @@ pub mod lpcomp {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Refsel {
             #[doc = "Use supply with a 1/8 prescaler as reference."]
-            SUPPLY_ONE_EIGHTH_PRESCALING = 0x0,
+            SupplyOneEighthPrescaling = 0x0,
             #[doc = "Use supply with a 2/8 prescaler as reference."]
-            SUPPLY_TWO_EIGHTHS_PRESCALING = 0x01,
+            SupplyTwoEighthsPrescaling = 0x01,
             #[doc = "Use supply with a 3/8 prescaler as reference."]
-            SUPPLY_THREE_EIGHTHS_PRESCALING = 0x02,
+            SupplyThreeEighthsPrescaling = 0x02,
             #[doc = "Use supply with a 4/8 prescaler as reference."]
-            SUPPLY_FOUR_EIGHTHS_PRESCALING = 0x03,
+            SupplyFourEighthsPrescaling = 0x03,
             #[doc = "Use supply with a 5/8 prescaler as reference."]
-            SUPPLY_FIVE_EIGHTHS_PRESCALING = 0x04,
+            SupplyFiveEighthsPrescaling = 0x04,
             #[doc = "Use supply with a 6/8 prescaler as reference."]
-            SUPPLY_SIX_EIGHTHS_PRESCALING = 0x05,
+            SupplySixEighthsPrescaling = 0x05,
             #[doc = "Use supply with a 7/8 prescaler as reference."]
-            SUPPLY_SEVEN_EIGHTHS_PRESCALING = 0x06,
+            SupplySevenEighthsPrescaling = 0x06,
             #[doc = "Use external analog reference as reference."]
-            AREF = 0x07,
+            ARef = 0x07,
         }
         impl Refsel {
             #[inline(always)]
@@ -4876,9 +4877,9 @@ pub mod lpcomp {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Result {
             #[doc = "Input voltage is bellow the reference threshold."]
-            BELOW = 0x0,
+            Below = 0x0,
             #[doc = "Input voltage is above the reference threshold."]
-            ABOVE = 0x01,
+            Above = 0x01,
         }
         impl Result {
             #[inline(always)]
@@ -6279,9 +6280,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Adc {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Adc {
             #[inline(always)]
@@ -6310,9 +6311,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum CcmAar {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl CcmAar {
             #[inline(always)]
@@ -6341,9 +6342,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Disableindebug {
             #[doc = "Protection enabled."]
-            ENABLED = 0x0,
+            Enabled = 0x0,
             #[doc = "Protection disabled."]
-            DISABLED = 0x01,
+            Disabled = 0x01,
         }
         impl Disableindebug {
             #[inline(always)]
@@ -6372,9 +6373,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Ecb {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Ecb {
             #[inline(always)]
@@ -6403,9 +6404,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Gpiote {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Gpiote {
             #[inline(always)]
@@ -6434,9 +6435,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Lpcomp {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Lpcomp {
             #[inline(always)]
@@ -6465,9 +6466,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Nvmc {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Nvmc {
             #[inline(always)]
@@ -6496,9 +6497,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum PowerClock {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl PowerClock {
             #[inline(always)]
@@ -6527,9 +6528,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Ppi {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Ppi {
             #[inline(always)]
@@ -6558,7 +6559,7 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protblocksize {
             #[doc = "Erase and write protection block size is 4k."]
-            _4K = 0x0,
+            _4k = 0x0,
             _RESERVED_1 = 0x01,
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
@@ -6590,9 +6591,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg0 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg0 {
             #[inline(always)]
@@ -6621,9 +6622,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg1 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg1 {
             #[inline(always)]
@@ -6652,9 +6653,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg10 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg10 {
             #[inline(always)]
@@ -6683,9 +6684,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg11 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg11 {
             #[inline(always)]
@@ -6714,9 +6715,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg12 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg12 {
             #[inline(always)]
@@ -6745,9 +6746,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg13 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg13 {
             #[inline(always)]
@@ -6776,9 +6777,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg14 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg14 {
             #[inline(always)]
@@ -6807,9 +6808,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg15 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg15 {
             #[inline(always)]
@@ -6838,9 +6839,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg16 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg16 {
             #[inline(always)]
@@ -6869,9 +6870,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg17 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg17 {
             #[inline(always)]
@@ -6900,9 +6901,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg18 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg18 {
             #[inline(always)]
@@ -6931,9 +6932,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg19 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg19 {
             #[inline(always)]
@@ -6962,9 +6963,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg2 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg2 {
             #[inline(always)]
@@ -6993,9 +6994,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg20 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg20 {
             #[inline(always)]
@@ -7024,9 +7025,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg21 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg21 {
             #[inline(always)]
@@ -7055,9 +7056,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg22 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg22 {
             #[inline(always)]
@@ -7086,9 +7087,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg23 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg23 {
             #[inline(always)]
@@ -7117,9 +7118,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg24 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg24 {
             #[inline(always)]
@@ -7148,9 +7149,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg25 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg25 {
             #[inline(always)]
@@ -7179,9 +7180,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg26 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg26 {
             #[inline(always)]
@@ -7210,9 +7211,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg27 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg27 {
             #[inline(always)]
@@ -7241,9 +7242,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg28 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg28 {
             #[inline(always)]
@@ -7272,9 +7273,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg29 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg29 {
             #[inline(always)]
@@ -7303,9 +7304,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg3 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg3 {
             #[inline(always)]
@@ -7334,9 +7335,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg30 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg30 {
             #[inline(always)]
@@ -7365,9 +7366,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg31 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg31 {
             #[inline(always)]
@@ -7396,9 +7397,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg32 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg32 {
             #[inline(always)]
@@ -7427,9 +7428,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg33 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg33 {
             #[inline(always)]
@@ -7458,9 +7459,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg34 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg34 {
             #[inline(always)]
@@ -7489,9 +7490,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg35 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg35 {
             #[inline(always)]
@@ -7520,9 +7521,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg36 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg36 {
             #[inline(always)]
@@ -7551,9 +7552,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg37 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg37 {
             #[inline(always)]
@@ -7582,9 +7583,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg38 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg38 {
             #[inline(always)]
@@ -7613,9 +7614,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg39 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg39 {
             #[inline(always)]
@@ -7644,9 +7645,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg4 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg4 {
             #[inline(always)]
@@ -7675,9 +7676,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg40 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg40 {
             #[inline(always)]
@@ -7706,9 +7707,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg41 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg41 {
             #[inline(always)]
@@ -7737,9 +7738,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg42 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg42 {
             #[inline(always)]
@@ -7768,9 +7769,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg43 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg43 {
             #[inline(always)]
@@ -7799,9 +7800,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg44 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg44 {
             #[inline(always)]
@@ -7830,9 +7831,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg45 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg45 {
             #[inline(always)]
@@ -7861,9 +7862,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg46 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg46 {
             #[inline(always)]
@@ -7892,9 +7893,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg47 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg47 {
             #[inline(always)]
@@ -7923,9 +7924,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg48 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg48 {
             #[inline(always)]
@@ -7954,9 +7955,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg49 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg49 {
             #[inline(always)]
@@ -7985,9 +7986,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg5 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg5 {
             #[inline(always)]
@@ -8016,9 +8017,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg50 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg50 {
             #[inline(always)]
@@ -8047,9 +8048,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg51 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg51 {
             #[inline(always)]
@@ -8078,9 +8079,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg52 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg52 {
             #[inline(always)]
@@ -8109,9 +8110,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg53 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg53 {
             #[inline(always)]
@@ -8140,9 +8141,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg54 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg54 {
             #[inline(always)]
@@ -8171,9 +8172,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg55 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg55 {
             #[inline(always)]
@@ -8202,9 +8203,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg56 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg56 {
             #[inline(always)]
@@ -8233,9 +8234,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg57 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg57 {
             #[inline(always)]
@@ -8264,9 +8265,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg58 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg58 {
             #[inline(always)]
@@ -8295,9 +8296,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg59 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg59 {
             #[inline(always)]
@@ -8326,9 +8327,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg6 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg6 {
             #[inline(always)]
@@ -8357,9 +8358,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg60 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg60 {
             #[inline(always)]
@@ -8388,9 +8389,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg61 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg61 {
             #[inline(always)]
@@ -8419,9 +8420,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg62 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg62 {
             #[inline(always)]
@@ -8450,9 +8451,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg63 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg63 {
             #[inline(always)]
@@ -8481,9 +8482,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg7 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg7 {
             #[inline(always)]
@@ -8512,9 +8513,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg8 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg8 {
             #[inline(always)]
@@ -8543,9 +8544,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Protreg9 {
             #[doc = "Protection disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Protection enabled."]
-            R_ENABLED_W_SET = 0x01,
+            REnabledWSet = 0x01,
         }
         impl Protreg9 {
             #[inline(always)]
@@ -8574,9 +8575,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Qdec {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Qdec {
             #[inline(always)]
@@ -8605,9 +8606,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Radio {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Radio {
             #[inline(always)]
@@ -8636,9 +8637,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Rng {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Rng {
             #[inline(always)]
@@ -8667,9 +8668,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Rtc0 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Rtc0 {
             #[inline(always)]
@@ -8698,9 +8699,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Rtc1 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Rtc1 {
             #[inline(always)]
@@ -8729,9 +8730,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Spi0Twi0 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Spi0Twi0 {
             #[inline(always)]
@@ -8760,9 +8761,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Spi1Twi1 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Spi1Twi1 {
             #[inline(always)]
@@ -8791,9 +8792,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Temp {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Temp {
             #[inline(always)]
@@ -8822,9 +8823,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Timer0 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Timer0 {
             #[inline(always)]
@@ -8853,9 +8854,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Timer1 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Timer1 {
             #[inline(always)]
@@ -8884,9 +8885,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Timer2 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Timer2 {
             #[inline(always)]
@@ -8915,9 +8916,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Uart0 {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Uart0 {
             #[inline(always)]
@@ -8946,9 +8947,9 @@ pub mod mpu {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Wdt {
             #[doc = "Peripheral configured in region 1."]
-            IN_REGION1 = 0x0,
+            InRegion1 = 0x0,
             #[doc = "Peripheral configured in region 0."]
-            IN_REGION0 = 0x01,
+            InRegion0 = 0x01,
         }
         impl Wdt {
             #[inline(always)]
@@ -9181,11 +9182,11 @@ pub mod nvmc {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Wen {
             #[doc = "Read only access."]
-            REN = 0x0,
+            Ren = 0x0,
             #[doc = "Write enabled."]
-            WEN = 0x01,
+            Wen = 0x01,
             #[doc = "Erase enabled."]
-            EEN = 0x02,
+            Een = 0x02,
             _RESERVED_3 = 0x03,
         }
         impl Wen {
@@ -9969,9 +9970,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Offram0 {
             #[doc = "RAM block 0 OFF in OFF mode."]
-            RAM0OFF = 0x0,
+            Ram0off = 0x0,
             #[doc = "RAM block 0 ON in OFF mode."]
-            RAM0ON = 0x01,
+            Ram0on = 0x01,
         }
         impl Offram0 {
             #[inline(always)]
@@ -10000,9 +10001,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Offram1 {
             #[doc = "RAM block 1 OFF in OFF mode."]
-            RAM1OFF = 0x0,
+            Ram1off = 0x0,
             #[doc = "RAM block 1 ON in OFF mode."]
-            RAM1ON = 0x01,
+            Ram1on = 0x01,
         }
         impl Offram1 {
             #[inline(always)]
@@ -10031,9 +10032,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Offram2 {
             #[doc = "RAM block 2 OFF in OFF mode."]
-            RAM2OFF = 0x0,
+            Ram2off = 0x0,
             #[doc = "RAM block 2 ON in OFF mode."]
-            RAM2ON = 0x01,
+            Ram2on = 0x01,
         }
         impl Offram2 {
             #[inline(always)]
@@ -10062,9 +10063,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Offram3 {
             #[doc = "RAM block 3 OFF in OFF mode."]
-            RAM3OFF = 0x0,
+            Ram3off = 0x0,
             #[doc = "RAM block 3 ON in OFF mode."]
-            RAM3ON = 0x01,
+            Ram3on = 0x01,
         }
         impl Offram3 {
             #[inline(always)]
@@ -10093,9 +10094,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Onram0 {
             #[doc = "RAM block 0 OFF in ON mode."]
-            RAM0OFF = 0x0,
+            Ram0off = 0x0,
             #[doc = "RAM block 0 ON in ON mode."]
-            RAM0ON = 0x01,
+            Ram0on = 0x01,
         }
         impl Onram0 {
             #[inline(always)]
@@ -10124,9 +10125,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Onram1 {
             #[doc = "RAM block 1 OFF in ON mode."]
-            RAM1OFF = 0x0,
+            Ram1off = 0x0,
             #[doc = "RAM block 1 ON in ON mode."]
-            RAM1ON = 0x01,
+            Ram1on = 0x01,
         }
         impl Onram1 {
             #[inline(always)]
@@ -10155,9 +10156,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Onram2 {
             #[doc = "RAM block 2 OFF in ON mode."]
-            RAM2OFF = 0x0,
+            Ram2off = 0x0,
             #[doc = "RAM block 2 ON in ON mode."]
-            RAM2ON = 0x01,
+            Ram2on = 0x01,
         }
         impl Onram2 {
             #[inline(always)]
@@ -10186,9 +10187,9 @@ pub mod power {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Onram3 {
             #[doc = "RAM block 33 OFF in ON mode."]
-            RAM3OFF = 0x0,
+            Ram3off = 0x0,
             #[doc = "RAM block 3 ON in ON mode."]
-            RAM3ON = 0x01,
+            Ram3on = 0x01,
         }
         impl Onram3 {
             #[inline(always)]
@@ -11106,9 +11107,9 @@ pub mod qdec {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Ledpol {
             #[doc = "LED output is active low."]
-            ACTIVE_LOW = 0x0,
+            ActiveLow = 0x0,
             #[doc = "LED output is active high."]
-            ACTIVE_HIGH = 0x01,
+            ActiveHigh = 0x01,
         }
         impl Ledpol {
             #[inline(always)]
@@ -11137,21 +11138,21 @@ pub mod qdec {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Reportper {
             #[doc = "10 samples per report."]
-            _10SMPL = 0x0,
+            _10smpl = 0x0,
             #[doc = "40 samples per report."]
-            _40SMPL = 0x01,
+            _40smpl = 0x01,
             #[doc = "80 samples per report."]
-            _80SMPL = 0x02,
+            _80smpl = 0x02,
             #[doc = "120 samples per report."]
-            _120SMPL = 0x03,
+            _120smpl = 0x03,
             #[doc = "160 samples per report."]
-            _160SMPL = 0x04,
+            _160smpl = 0x04,
             #[doc = "200 samples per report."]
-            _200SMPL = 0x05,
+            _200smpl = 0x05,
             #[doc = "240 samples per report."]
-            _240SMPL = 0x06,
+            _240smpl = 0x06,
             #[doc = "280 samples per report."]
-            _280SMPL = 0x07,
+            _280smpl = 0x07,
         }
         impl Reportper {
             #[inline(always)]
@@ -11180,21 +11181,21 @@ pub mod qdec {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Sampleper {
             #[doc = "128us sample period."]
-            _128US = 0x0,
+            _128us = 0x0,
             #[doc = "256us sample period."]
-            _256US = 0x01,
+            _256us = 0x01,
             #[doc = "512us sample period."]
-            _512US = 0x02,
+            _512us = 0x02,
             #[doc = "1024us sample period."]
-            _1024US = 0x03,
+            _1024us = 0x03,
             #[doc = "2048us sample period."]
-            _2048US = 0x04,
+            _2048us = 0x04,
             #[doc = "4096us sample period."]
-            _4096US = 0x05,
+            _4096us = 0x05,
             #[doc = "8192us sample period."]
-            _8192US = 0x06,
+            _8192us = 0x06,
             #[doc = "16384us sample period."]
-            _16384US = 0x07,
+            _16384us = 0x07,
         }
         impl Sampleper {
             #[inline(always)]
@@ -12667,14 +12668,14 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Rssisample(pub u32);
         impl Rssisample {
-            #[doc = "RSSI sample result. The result is read as a positive value so that ReceivedSignalStrength = -RSSISAMPLE dBm"]
+            #[doc = "RSSI sample result. The result is read as a positive value so that ReceivedSignalStrength = -RSSISAMPLE dBm."]
             #[must_use]
             #[inline(always)]
             pub const fn rssisample(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0x7f;
                 val as u8
             }
-            #[doc = "RSSI sample result. The result is read as a positive value so that ReceivedSignalStrength = -RSSISAMPLE dBm"]
+            #[doc = "RSSI sample result. The result is read as a positive value so that ReceivedSignalStrength = -RSSISAMPLE dBm."]
             #[inline(always)]
             pub const fn set_rssisample(&mut self, val: u8) {
                 self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
@@ -13127,14 +13128,14 @@ pub mod radio {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Tifs(pub u32);
         impl Tifs {
-            #[doc = "Inter frame spacing in microseconds. Decision point: START rask"]
+            #[doc = "Inter frame spacing in microseconds. Decision point: START rask."]
             #[must_use]
             #[inline(always)]
             pub const fn tifs(&self) -> u8 {
                 let val = (self.0 >> 0usize) & 0xff;
                 val as u8
             }
-            #[doc = "Inter frame spacing in microseconds. Decision point: START rask"]
+            #[doc = "Inter frame spacing in microseconds. Decision point: START rask."]
             #[inline(always)]
             pub const fn set_tifs(&mut self, val: u8) {
                 self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -13238,9 +13239,9 @@ pub mod radio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Crcstatus {
             #[doc = "Packet received with CRC error."]
-            CRCERROR = 0x0,
+            CrcError = 0x0,
             #[doc = "Packet received with CRC ok."]
-            CRCOK = 0x01,
+            CrcOk = 0x01,
         }
         impl Crcstatus {
             #[inline(always)]
@@ -13268,10 +13269,10 @@ pub mod radio {
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Endian {
-            #[doc = "Least significant bit on air first"]
-            LITTLE = 0x0,
-            #[doc = "Most significant bit on air first"]
-            BIG = 0x01,
+            #[doc = "Least significant bit on air first."]
+            Little = 0x0,
+            #[doc = "Most significant bit on air first."]
+            Big = 0x01,
         }
         impl Endian {
             #[inline(always)]
@@ -13300,13 +13301,13 @@ pub mod radio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Len {
             #[doc = "CRC calculation disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "One byte long CRC."]
-            ONE = 0x01,
+            One = 0x01,
             #[doc = "Two bytes long CRC."]
-            TWO = 0x02,
+            Two = 0x02,
             #[doc = "Three bytes long CRC."]
-            THREE = 0x03,
+            Three = 0x03,
         }
         impl Len {
             #[inline(always)]
@@ -13335,13 +13336,13 @@ pub mod radio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Mode {
             #[doc = "1Mbit/s Nordic propietary radio mode."]
-            NRF_1MBIT = 0x0,
+            Nrf1mbit = 0x0,
             #[doc = "2Mbit/s Nordic propietary radio mode."]
-            NRF_2MBIT = 0x01,
+            Nrf2mbit = 0x01,
             #[doc = "250kbit/s Nordic propietary radio mode."]
-            NRF_250KBIT = 0x02,
-            #[doc = "1Mbit/s Bluetooth Low Energy"]
-            BLE_1MBIT = 0x03,
+            Nrf250kbit = 0x02,
+            #[doc = "1Mbit/s Bluetooth Low Energy."]
+            Ble1mbit = 0x03,
         }
         impl Mode {
             #[inline(always)]
@@ -13370,9 +13371,9 @@ pub mod radio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Skipaddr {
             #[doc = "Include packet address in CRC calculation."]
-            INCLUDE = 0x0,
+            Include = 0x0,
             #[doc = "Packet address is skipped in CRC calculation. The CRC calculation will start at the first byte after the address."]
-            SKIP = 0x01,
+            Skip = 0x01,
         }
         impl Skipaddr {
             #[inline(always)]
@@ -13401,27 +13402,27 @@ pub mod radio {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum State {
             #[doc = "Radio is in the Disabled state."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Radio is in the Rx Ramp Up state."]
-            RX_RU = 0x01,
+            RxRu = 0x01,
             #[doc = "Radio is in the Rx Idle state."]
-            RX_IDLE = 0x02,
+            RxIdle = 0x02,
             #[doc = "Radio is in the Rx state."]
-            RX = 0x03,
+            Rx = 0x03,
             #[doc = "Radio is in the Rx Disable state."]
-            RX_DISABLE = 0x04,
+            RxDisable = 0x04,
             _RESERVED_5 = 0x05,
             _RESERVED_6 = 0x06,
             _RESERVED_7 = 0x07,
             _RESERVED_8 = 0x08,
             #[doc = "Radio is in the Tx Ramp Up state."]
-            TX_RU = 0x09,
+            TxRu = 0x09,
             #[doc = "Radio is in the Tx Idle state."]
-            TX_IDLE = 0x0a,
+            TxIdle = 0x0a,
             #[doc = "Radio is in the Tx state."]
-            TX = 0x0b,
+            Tx = 0x0b,
             #[doc = "Radio is in the Tx Disable state."]
-            TX_DISABLE = 0x0c,
+            TxDisable = 0x0c,
             _RESERVED_d = 0x0d,
             _RESERVED_e = 0x0e,
             _RESERVED_f = 0x0f,
@@ -13453,21 +13454,21 @@ pub mod radio {
         pub struct Txpower(u8);
         impl Txpower {
             #[doc = "0dBm."]
-            pub const _0_DBM: Self = Self(0x0);
+            pub const _0dBm: Self = Self(0x0);
             #[doc = "+4dBm."]
-            pub const POS4_DBM: Self = Self(0x04);
+            pub const Pos4dBm: Self = Self(0x04);
             #[doc = "-30dBm."]
-            pub const NEG30_DBM: Self = Self(0xd8);
+            pub const Neg30dBm: Self = Self(0xd8);
             #[doc = "-20dBm."]
-            pub const NEG20_DBM: Self = Self(0xec);
+            pub const Neg20dBm: Self = Self(0xec);
             #[doc = "-16dBm."]
-            pub const NEG16_DBM: Self = Self(0xf0);
+            pub const Neg16dBm: Self = Self(0xf0);
             #[doc = "-12dBm."]
-            pub const NEG12_DBM: Self = Self(0xf4);
+            pub const Neg12dBm: Self = Self(0xf4);
             #[doc = "-8dBm."]
-            pub const NEG8_DBM: Self = Self(0xf8);
+            pub const Neg8dBm: Self = Self(0xf8);
             #[doc = "-4dBm."]
-            pub const NEG4_DBM: Self = Self(0xfc);
+            pub const Neg4dBm: Self = Self(0xfc);
         }
         impl Txpower {
             pub const fn from_bits(val: u8) -> Txpower {
@@ -13480,14 +13481,14 @@ pub mod radio {
         impl core::fmt::Debug for Txpower {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0 => f.write_str("_0_DBM"),
-                    0x04 => f.write_str("POS4_DBM"),
-                    0xd8 => f.write_str("NEG30_DBM"),
-                    0xec => f.write_str("NEG20_DBM"),
-                    0xf0 => f.write_str("NEG16_DBM"),
-                    0xf4 => f.write_str("NEG12_DBM"),
-                    0xf8 => f.write_str("NEG8_DBM"),
-                    0xfc => f.write_str("NEG4_DBM"),
+                    0x0 => f.write_str("_0dBm"),
+                    0x04 => f.write_str("Pos4dBm"),
+                    0xd8 => f.write_str("Neg30dBm"),
+                    0xec => f.write_str("Neg20dBm"),
+                    0xf0 => f.write_str("Neg16dBm"),
+                    0xf4 => f.write_str("Neg12dBm"),
+                    0xf8 => f.write_str("Neg8dBm"),
+                    0xfc => f.write_str("Neg4dBm"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -13496,14 +13497,14 @@ pub mod radio {
         impl defmt::Format for Txpower {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0 => defmt::write!(f, "_0_DBM"),
-                    0x04 => defmt::write!(f, "POS4_DBM"),
-                    0xd8 => defmt::write!(f, "NEG30_DBM"),
-                    0xec => defmt::write!(f, "NEG20_DBM"),
-                    0xf0 => defmt::write!(f, "NEG16_DBM"),
-                    0xf4 => defmt::write!(f, "NEG12_DBM"),
-                    0xf8 => defmt::write!(f, "NEG8_DBM"),
-                    0xfc => defmt::write!(f, "NEG4_DBM"),
+                    0x0 => defmt::write!(f, "_0dBm"),
+                    0x04 => defmt::write!(f, "Pos4dBm"),
+                    0xd8 => defmt::write!(f, "Neg30dBm"),
+                    0xec => defmt::write!(f, "Neg20dBm"),
+                    0xf0 => defmt::write!(f, "Neg16dBm"),
+                    0xf4 => defmt::write!(f, "Neg12dBm"),
+                    0xf8 => defmt::write!(f, "Neg8dBm"),
+                    0xfc => defmt::write!(f, "Neg4dBm"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -13559,12 +13560,12 @@ pub mod rng {
         pub const fn shorts(self) -> crate::common::Reg<regs::Shorts, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0200usize) as _) }
         }
-        #[doc = "Interrupt enable set register"]
+        #[doc = "Interrupt enable set register."]
         #[inline(always)]
         pub const fn intenset(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0304usize) as _) }
         }
-        #[doc = "Interrupt enable clear register"]
+        #[doc = "Interrupt enable clear register."]
         #[inline(always)]
         pub const fn intenclr(self) -> crate::common::Reg<regs::Int, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0308usize) as _) }
@@ -13623,7 +13624,7 @@ pub mod rng {
                 defmt::write!(f, "Config {{ dercen: {=bool:?} }}", self.dercen())
             }
         }
-        #[doc = "Interrupt enable clear register"]
+        #[doc = "Interrupt enable clear register."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Int(pub u32);
@@ -14232,7 +14233,7 @@ pub mod spi {
         pub const fn txd(self) -> crate::common::Reg<regs::Txd, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x051cusize) as _) }
         }
-        #[doc = "SPI frequency"]
+        #[doc = "SPI frequency."]
         #[inline(always)]
         pub const fn frequency(self) -> crate::common::Reg<regs::Frequency, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0524usize) as _) }
@@ -14355,7 +14356,7 @@ pub mod spi {
                 defmt::write!(f, "Enable {{ enable: {:?} }}", self.enable())
             }
         }
-        #[doc = "SPI frequency"]
+        #[doc = "SPI frequency."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Frequency(pub u32);
@@ -14542,9 +14543,9 @@ pub mod spi {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Cpha {
             #[doc = "Sample on leading edge of the clock. Shift serial data on trailing edge."]
-            LEADING = 0x0,
+            Leading = 0x0,
             #[doc = "Sample on trailing edge of the clock. Shift serial data on leading edge."]
-            TRAILING = 0x01,
+            Trailing = 0x01,
         }
         impl Cpha {
             #[inline(always)]
@@ -14573,9 +14574,9 @@ pub mod spi {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Cpol {
             #[doc = "Active high."]
-            ACTIVE_HIGH = 0x0,
+            ActiveHigh = 0x0,
             #[doc = "Active low."]
-            ACTIVE_LOW = 0x01,
+            ActiveLow = 0x01,
         }
         impl Cpol {
             #[inline(always)]
@@ -14604,9 +14605,9 @@ pub mod spi {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "Disabled SPI."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             #[doc = "Enable SPI."]
-            ENABLED = 0x01,
+            Enabled = 0x01,
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
             _RESERVED_4 = 0x04,
@@ -14709,9 +14710,9 @@ pub mod spi {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Order {
             #[doc = "Most significant bit transmitted out first."]
-            MSB_FIRST = 0x0,
+            MsbFirst = 0x0,
             #[doc = "Least significant bit transmitted out first."]
-            LSB_FIRST = 0x01,
+            LsbFirst = 0x01,
         }
         impl Order {
             #[inline(always)]
@@ -14773,7 +14774,7 @@ pub mod spis {
         pub const fn as_ptr(&self) -> *mut () {
             self.ptr as _
         }
-        #[doc = "End of RXD buffer reached"]
+        #[doc = "End of RXD buffer reached."]
         #[inline(always)]
         pub const fn end(self) -> crate::common::Reg<u32, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
@@ -15487,9 +15488,9 @@ pub mod spis {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Cpha {
             #[doc = "Sample on leading edge of the clock. Shift serial data on trailing edge."]
-            LEADING = 0x0,
+            Leading = 0x0,
             #[doc = "Sample on trailing edge of the clock. Shift serial data on leading edge."]
-            TRAILING = 0x01,
+            Trailing = 0x01,
         }
         impl Cpha {
             #[inline(always)]
@@ -15518,9 +15519,9 @@ pub mod spis {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Cpol {
             #[doc = "Active high."]
-            ACTIVE_HIGH = 0x0,
+            ActiveHigh = 0x0,
             #[doc = "Active low."]
-            ACTIVE_LOW = 0x01,
+            ActiveLow = 0x01,
         }
         impl Cpol {
             #[inline(always)]
@@ -15549,10 +15550,10 @@ pub mod spis {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "Disabled SPIS."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             _RESERVED_1 = 0x01,
             #[doc = "Enable SPIS."]
-            ENABLED = 0x02,
+            Enabled = 0x02,
             _RESERVED_3 = 0x03,
             _RESERVED_4 = 0x04,
             _RESERVED_5 = 0x05,
@@ -15586,9 +15587,9 @@ pub mod spis {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Order {
             #[doc = "Most significant bit transmitted out first."]
-            MSB_FIRST = 0x0,
+            MsbFirst = 0x0,
             #[doc = "Least significant bit transmitted out first."]
-            LSB_FIRST = 0x01,
+            LsbFirst = 0x01,
         }
         impl Order {
             #[inline(always)]
@@ -15617,13 +15618,13 @@ pub mod spis {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Semstat {
             #[doc = "Semaphore is free."]
-            FREE = 0x0,
+            Free = 0x0,
             #[doc = "Semaphore is assigned to the CPU."]
-            CPU = 0x01,
+            Cpu = 0x01,
             #[doc = "Semaphore is assigned to the SPIS."]
-            SPIS = 0x02,
+            Spis = 0x02,
             #[doc = "Semaphore is assigned to the SPIS, but a handover to the CPU is pending."]
-            CPUPENDING = 0x03,
+            CpuPending = 0x03,
         }
         impl Semstat {
             #[inline(always)]
@@ -15948,7 +15949,7 @@ pub mod timer {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Int(pub u32);
         impl Int {
-            #[doc = "Disable interrupt on COMPARE\\[0\\]"]
+            #[doc = "Disable interrupt on COMPARE\\[0\\]."]
             #[must_use]
             #[inline(always)]
             pub const fn compare(&self, n: usize) -> bool {
@@ -15957,7 +15958,7 @@ pub mod timer {
                 let val = (self.0 >> offs) & 0x01;
                 val != 0
             }
-            #[doc = "Disable interrupt on COMPARE\\[0\\]"]
+            #[doc = "Disable interrupt on COMPARE\\[0\\]."]
             #[inline(always)]
             pub const fn set_compare(&mut self, n: usize, val: bool) {
                 assert!(n < 4usize);
@@ -16167,13 +16168,13 @@ pub mod timer {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Bitmode {
             #[doc = "16-bit timer behaviour."]
-            _16BIT = 0x0,
+            _16bit = 0x0,
             #[doc = "8-bit timer behaviour."]
-            _08BIT = 0x01,
+            _08bit = 0x01,
             #[doc = "24-bit timer behaviour."]
-            _24BIT = 0x02,
+            _24bit = 0x02,
             #[doc = "32-bit timer behaviour."]
-            _32BIT = 0x03,
+            _32bit = 0x03,
         }
         impl Bitmode {
             #[inline(always)]
@@ -16202,9 +16203,9 @@ pub mod timer {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Mode {
             #[doc = "Timer in Normal mode."]
-            TIMER = 0x0,
+            Timer = 0x0,
             #[doc = "Timer in Counter mode."]
-            COUNTER = 0x01,
+            Counter = 0x01,
         }
         impl Mode {
             #[inline(always)]
@@ -16406,14 +16407,14 @@ pub mod twi {
         #[derive(Copy, Clone, Eq, PartialEq)]
         pub struct Enable(pub u32);
         impl Enable {
-            #[doc = "Enable or disable W2M"]
+            #[doc = "Enable or disable W2M."]
             #[must_use]
             #[inline(always)]
             pub const fn enable(&self) -> super::vals::Enable {
                 let val = (self.0 >> 0usize) & 0x07;
                 super::vals::Enable::from_bits(val as u8)
             }
-            #[doc = "Enable or disable W2M"]
+            #[doc = "Enable or disable W2M."]
             #[inline(always)]
             pub const fn set_enable(&mut self, val: super::vals::Enable) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
@@ -16816,13 +16817,13 @@ pub mod twi {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "Disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             _RESERVED_1 = 0x01,
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
             _RESERVED_4 = 0x04,
             #[doc = "Enabled."]
-            ENABLED = 0x05,
+            Enabled = 0x05,
             _RESERVED_6 = 0x06,
             _RESERVED_7 = 0x07,
         }
@@ -17523,41 +17524,41 @@ pub mod uart {
         pub struct Baudrate(u32);
         impl Baudrate {
             #[doc = "1200 baud."]
-            pub const BAUD1200: Self = Self(0x0004_f000);
+            pub const Baud1200: Self = Self(0x0004_f000);
             #[doc = "2400 baud."]
-            pub const BAUD2400: Self = Self(0x0009_d000);
+            pub const Baud2400: Self = Self(0x0009_d000);
             #[doc = "4800 baud."]
-            pub const BAUD4800: Self = Self(0x0013_b000);
+            pub const Baud4800: Self = Self(0x0013_b000);
             #[doc = "9600 baud."]
-            pub const BAUD9600: Self = Self(0x0027_5000);
+            pub const Baud9600: Self = Self(0x0027_5000);
             #[doc = "14400 baud."]
-            pub const BAUD14400: Self = Self(0x003b_0000);
+            pub const Baud14400: Self = Self(0x003b_0000);
             #[doc = "19200 baud."]
-            pub const BAUD19200: Self = Self(0x004e_a000);
+            pub const Baud19200: Self = Self(0x004e_a000);
             #[doc = "28800 baud."]
-            pub const BAUD28800: Self = Self(0x0075_f000);
+            pub const Baud28800: Self = Self(0x0075_f000);
             #[doc = "31250 baud."]
-            pub const BAUD31250: Self = Self(0x0080_0000);
+            pub const Baud31250: Self = Self(0x0080_0000);
             #[doc = "38400 baud."]
-            pub const BAUD38400: Self = Self(0x009d_5000);
+            pub const Baud38400: Self = Self(0x009d_5000);
             #[doc = "56000 baud."]
-            pub const BAUD56000: Self = Self(0x00e5_0000);
+            pub const Baud56000: Self = Self(0x00e5_0000);
             #[doc = "57600 baud."]
-            pub const BAUD57600: Self = Self(0x00eb_f000);
+            pub const Baud57600: Self = Self(0x00eb_f000);
             #[doc = "76800 baud."]
-            pub const BAUD76800: Self = Self(0x013a_9000);
+            pub const Baud76800: Self = Self(0x013a_9000);
             #[doc = "115200 baud."]
-            pub const BAUD115200: Self = Self(0x01d7_e000);
+            pub const Baud115200: Self = Self(0x01d7_e000);
             #[doc = "230400 baud."]
-            pub const BAUD230400: Self = Self(0x03af_b000);
+            pub const Baud230400: Self = Self(0x03af_b000);
             #[doc = "250000 baud."]
-            pub const BAUD250000: Self = Self(0x0400_0000);
+            pub const Baud250000: Self = Self(0x0400_0000);
             #[doc = "460800 baud."]
-            pub const BAUD460800: Self = Self(0x075f_7000);
+            pub const Baud460800: Self = Self(0x075f_7000);
             #[doc = "921600 baud."]
-            pub const BAUD921600: Self = Self(0x0ebe_d000);
+            pub const Baud921600: Self = Self(0x0ebe_d000);
             #[doc = "1M baud."]
-            pub const BAUD1M: Self = Self(0x1000_0000);
+            pub const Baud1m: Self = Self(0x1000_0000);
         }
         impl Baudrate {
             pub const fn from_bits(val: u32) -> Baudrate {
@@ -17570,24 +17571,24 @@ pub mod uart {
         impl core::fmt::Debug for Baudrate {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0004_f000 => f.write_str("BAUD1200"),
-                    0x0009_d000 => f.write_str("BAUD2400"),
-                    0x0013_b000 => f.write_str("BAUD4800"),
-                    0x0027_5000 => f.write_str("BAUD9600"),
-                    0x003b_0000 => f.write_str("BAUD14400"),
-                    0x004e_a000 => f.write_str("BAUD19200"),
-                    0x0075_f000 => f.write_str("BAUD28800"),
-                    0x0080_0000 => f.write_str("BAUD31250"),
-                    0x009d_5000 => f.write_str("BAUD38400"),
-                    0x00e5_0000 => f.write_str("BAUD56000"),
-                    0x00eb_f000 => f.write_str("BAUD57600"),
-                    0x013a_9000 => f.write_str("BAUD76800"),
-                    0x01d7_e000 => f.write_str("BAUD115200"),
-                    0x03af_b000 => f.write_str("BAUD230400"),
-                    0x0400_0000 => f.write_str("BAUD250000"),
-                    0x075f_7000 => f.write_str("BAUD460800"),
-                    0x0ebe_d000 => f.write_str("BAUD921600"),
-                    0x1000_0000 => f.write_str("BAUD1M"),
+                    0x0004_f000 => f.write_str("Baud1200"),
+                    0x0009_d000 => f.write_str("Baud2400"),
+                    0x0013_b000 => f.write_str("Baud4800"),
+                    0x0027_5000 => f.write_str("Baud9600"),
+                    0x003b_0000 => f.write_str("Baud14400"),
+                    0x004e_a000 => f.write_str("Baud19200"),
+                    0x0075_f000 => f.write_str("Baud28800"),
+                    0x0080_0000 => f.write_str("Baud31250"),
+                    0x009d_5000 => f.write_str("Baud38400"),
+                    0x00e5_0000 => f.write_str("Baud56000"),
+                    0x00eb_f000 => f.write_str("Baud57600"),
+                    0x013a_9000 => f.write_str("Baud76800"),
+                    0x01d7_e000 => f.write_str("Baud115200"),
+                    0x03af_b000 => f.write_str("Baud230400"),
+                    0x0400_0000 => f.write_str("Baud250000"),
+                    0x075f_7000 => f.write_str("Baud460800"),
+                    0x0ebe_d000 => f.write_str("Baud921600"),
+                    0x1000_0000 => f.write_str("Baud1m"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -17596,24 +17597,24 @@ pub mod uart {
         impl defmt::Format for Baudrate {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0004_f000 => defmt::write!(f, "BAUD1200"),
-                    0x0009_d000 => defmt::write!(f, "BAUD2400"),
-                    0x0013_b000 => defmt::write!(f, "BAUD4800"),
-                    0x0027_5000 => defmt::write!(f, "BAUD9600"),
-                    0x003b_0000 => defmt::write!(f, "BAUD14400"),
-                    0x004e_a000 => defmt::write!(f, "BAUD19200"),
-                    0x0075_f000 => defmt::write!(f, "BAUD28800"),
-                    0x0080_0000 => defmt::write!(f, "BAUD31250"),
-                    0x009d_5000 => defmt::write!(f, "BAUD38400"),
-                    0x00e5_0000 => defmt::write!(f, "BAUD56000"),
-                    0x00eb_f000 => defmt::write!(f, "BAUD57600"),
-                    0x013a_9000 => defmt::write!(f, "BAUD76800"),
-                    0x01d7_e000 => defmt::write!(f, "BAUD115200"),
-                    0x03af_b000 => defmt::write!(f, "BAUD230400"),
-                    0x0400_0000 => defmt::write!(f, "BAUD250000"),
-                    0x075f_7000 => defmt::write!(f, "BAUD460800"),
-                    0x0ebe_d000 => defmt::write!(f, "BAUD921600"),
-                    0x1000_0000 => defmt::write!(f, "BAUD1M"),
+                    0x0004_f000 => defmt::write!(f, "Baud1200"),
+                    0x0009_d000 => defmt::write!(f, "Baud2400"),
+                    0x0013_b000 => defmt::write!(f, "Baud4800"),
+                    0x0027_5000 => defmt::write!(f, "Baud9600"),
+                    0x003b_0000 => defmt::write!(f, "Baud14400"),
+                    0x004e_a000 => defmt::write!(f, "Baud19200"),
+                    0x0075_f000 => defmt::write!(f, "Baud28800"),
+                    0x0080_0000 => defmt::write!(f, "Baud31250"),
+                    0x009d_5000 => defmt::write!(f, "Baud38400"),
+                    0x00e5_0000 => defmt::write!(f, "Baud56000"),
+                    0x00eb_f000 => defmt::write!(f, "Baud57600"),
+                    0x013a_9000 => defmt::write!(f, "Baud76800"),
+                    0x01d7_e000 => defmt::write!(f, "Baud115200"),
+                    0x03af_b000 => defmt::write!(f, "Baud230400"),
+                    0x0400_0000 => defmt::write!(f, "Baud250000"),
+                    0x075f_7000 => defmt::write!(f, "Baud460800"),
+                    0x0ebe_d000 => defmt::write!(f, "Baud921600"),
+                    0x1000_0000 => defmt::write!(f, "Baud1m"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -17635,7 +17636,7 @@ pub mod uart {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum ConfigParity {
             #[doc = "Parity bit excluded."]
-            EXCLUDED = 0x0,
+            Excluded = 0x0,
             _RESERVED_1 = 0x01,
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
@@ -17643,7 +17644,7 @@ pub mod uart {
             _RESERVED_5 = 0x05,
             _RESERVED_6 = 0x06,
             #[doc = "Parity bit included."]
-            INCLUDED = 0x07,
+            Included = 0x07,
         }
         impl ConfigParity {
             #[inline(always)]
@@ -17672,12 +17673,12 @@ pub mod uart {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "UART disabled."]
-            DISABLED = 0x0,
+            Disabled = 0x0,
             _RESERVED_1 = 0x01,
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
             #[doc = "UART enabled."]
-            ENABLED = 0x04,
+            Enabled = 0x04,
             _RESERVED_5 = 0x05,
             _RESERVED_6 = 0x06,
             _RESERVED_7 = 0x07,
@@ -17908,9 +17909,9 @@ pub mod uicr {
         pub struct Pall(u8);
         impl Pall {
             #[doc = "Enabled."]
-            pub const ENABLED: Self = Self(0x0);
+            pub const Enabled: Self = Self(0x0);
             #[doc = "Disabled."]
-            pub const DISABLED: Self = Self(0xff);
+            pub const Disabled: Self = Self(0xff);
         }
         impl Pall {
             pub const fn from_bits(val: u8) -> Pall {
@@ -17923,8 +17924,8 @@ pub mod uicr {
         impl core::fmt::Debug for Pall {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0 => f.write_str("ENABLED"),
-                    0xff => f.write_str("DISABLED"),
+                    0x0 => f.write_str("Enabled"),
+                    0xff => f.write_str("Disabled"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -17933,8 +17934,8 @@ pub mod uicr {
         impl defmt::Format for Pall {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0 => defmt::write!(f, "ENABLED"),
-                    0xff => defmt::write!(f, "DISABLED"),
+                    0x0 => defmt::write!(f, "Enabled"),
+                    0xff => defmt::write!(f, "Disabled"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -17956,9 +17957,9 @@ pub mod uicr {
         pub struct Pr0(u8);
         impl Pr0 {
             #[doc = "Enabled."]
-            pub const ENABLED: Self = Self(0x0);
+            pub const Enabled: Self = Self(0x0);
             #[doc = "Disabled."]
-            pub const DISABLED: Self = Self(0xff);
+            pub const Disabled: Self = Self(0xff);
         }
         impl Pr0 {
             pub const fn from_bits(val: u8) -> Pr0 {
@@ -17971,8 +17972,8 @@ pub mod uicr {
         impl core::fmt::Debug for Pr0 {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0 => f.write_str("ENABLED"),
-                    0xff => f.write_str("DISABLED"),
+                    0x0 => f.write_str("Enabled"),
+                    0xff => f.write_str("Disabled"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -17981,8 +17982,8 @@ pub mod uicr {
         impl defmt::Format for Pr0 {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0 => defmt::write!(f, "ENABLED"),
-                    0xff => defmt::write!(f, "DISABLED"),
+                    0x0 => defmt::write!(f, "Enabled"),
+                    0xff => defmt::write!(f, "Disabled"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -18004,9 +18005,9 @@ pub mod uicr {
         pub struct Xtalfreq(u8);
         impl Xtalfreq {
             #[doc = "32MHz Xtal is used."]
-            pub const _32MHZ: Self = Self(0x0);
+            pub const _32mHz: Self = Self(0x0);
             #[doc = "16MHz Xtal is used."]
-            pub const _16MHZ: Self = Self(0xff);
+            pub const _16mHz: Self = Self(0xff);
         }
         impl Xtalfreq {
             pub const fn from_bits(val: u8) -> Xtalfreq {
@@ -18019,8 +18020,8 @@ pub mod uicr {
         impl core::fmt::Debug for Xtalfreq {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x0 => f.write_str("_32MHZ"),
-                    0xff => f.write_str("_16MHZ"),
+                    0x0 => f.write_str("_32mHz"),
+                    0xff => f.write_str("_16mHz"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -18029,8 +18030,8 @@ pub mod uicr {
         impl defmt::Format for Xtalfreq {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x0 => defmt::write!(f, "_32MHZ"),
-                    0xff => defmt::write!(f, "_16MHZ"),
+                    0x0 => defmt::write!(f, "_32mHz"),
+                    0xff => defmt::write!(f, "_16mHz"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -18431,9 +18432,9 @@ pub mod wdt {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Halt {
             #[doc = "Pause watchdog while the CPU is halted by the debugger."]
-            PAUSE = 0x0,
+            Pause = 0x0,
             #[doc = "Do not pause watchdog while the CPU is halted by the debugger."]
-            RUN = 0x01,
+            Run = 0x01,
         }
         impl Halt {
             #[inline(always)]
@@ -18462,7 +18463,7 @@ pub mod wdt {
         pub struct Rr(u32);
         impl Rr {
             #[doc = "Value to request a reload of the watchdog timer."]
-            pub const RELOAD: Self = Self(0x6e52_4635);
+            pub const Reload: Self = Self(0x6e52_4635);
         }
         impl Rr {
             pub const fn from_bits(val: u32) -> Rr {
@@ -18475,7 +18476,7 @@ pub mod wdt {
         impl core::fmt::Debug for Rr {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
                 match self.0 {
-                    0x6e52_4635 => f.write_str("RELOAD"),
+                    0x6e52_4635 => f.write_str("Reload"),
                     other => core::write!(f, "0x{:02X}", other),
                 }
             }
@@ -18484,7 +18485,7 @@ pub mod wdt {
         impl defmt::Format for Rr {
             fn format(&self, f: defmt::Formatter) {
                 match self.0 {
-                    0x6e52_4635 => defmt::write!(f, "RELOAD"),
+                    0x6e52_4635 => defmt::write!(f, "Reload"),
                     other => defmt::write!(f, "0x{:02X}", other),
                 }
             }
@@ -18506,9 +18507,9 @@ pub mod wdt {
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Sleep {
             #[doc = "Pause watchdog while the CPU is asleep."]
-            PAUSE = 0x0,
+            Pause = 0x0,
             #[doc = "Do not pause watchdog while the CPU is asleep."]
-            RUN = 0x01,
+            Run = 0x01,
         }
         impl Sleep {
             #[inline(always)]
