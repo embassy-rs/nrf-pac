@@ -1,7 +1,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (bcf538a 2026-05-18))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (694bb9d 2026-04-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -14902,7 +14902,7 @@ pub mod spis {
         }
         #[doc = "Configuration register."]
         #[inline(always)]
-        pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
+        pub const fn config(self) -> crate::common::Reg<regs::SpisConfig, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0554usize) as _) }
         }
         #[doc = "Default character."]
@@ -14994,75 +14994,6 @@ pub mod spis {
         impl defmt::Format for Amounttx {
             fn format(&self, f: defmt::Formatter) {
                 defmt::write!(f, "Amounttx {{ amounttx: {=u8:?} }}", self.amounttx())
-            }
-        }
-        #[doc = "Configuration register."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Config(pub u32);
-        impl Config {
-            #[doc = "Bit order."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn order(&self) -> super::vals::Order {
-                let val = (self.0 >> 0usize) & 0x01;
-                super::vals::Order::from_bits(val as u8)
-            }
-            #[doc = "Bit order."]
-            #[inline(always)]
-            pub const fn set_order(&mut self, val: super::vals::Order) {
-                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
-            }
-            #[doc = "Serial clock (SCK) phase."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn cpha(&self) -> super::vals::Cpha {
-                let val = (self.0 >> 1usize) & 0x01;
-                super::vals::Cpha::from_bits(val as u8)
-            }
-            #[doc = "Serial clock (SCK) phase."]
-            #[inline(always)]
-            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
-                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
-            }
-            #[doc = "Serial clock (SCK) polarity."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn cpol(&self) -> super::vals::Cpol {
-                let val = (self.0 >> 2usize) & 0x01;
-                super::vals::Cpol::from_bits(val as u8)
-            }
-            #[doc = "Serial clock (SCK) polarity."]
-            #[inline(always)]
-            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
-                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
-            }
-        }
-        impl Default for Config {
-            #[inline(always)]
-            fn default() -> Config {
-                Config(0)
-            }
-        }
-        impl core::fmt::Debug for Config {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Config")
-                    .field("order", &self.order())
-                    .field("cpha", &self.cpha())
-                    .field("cpol", &self.cpol())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Config {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(
-                    f,
-                    "Config {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
-                    self.order(),
-                    self.cpha(),
-                    self.cpol()
-                )
             }
         }
         #[doc = "Default character."]
@@ -15424,6 +15355,75 @@ pub mod spis {
         impl defmt::Format for Shorts {
             fn format(&self, f: defmt::Formatter) {
                 defmt::write!(f, "Shorts {{ end_acquire: {=bool:?} }}", self.end_acquire())
+            }
+        }
+        #[doc = "Configuration register."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct SpisConfig(pub u32);
+        impl SpisConfig {
+            #[doc = "Bit order."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn order(&self) -> super::vals::Order {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Order::from_bits(val as u8)
+            }
+            #[doc = "Bit order."]
+            #[inline(always)]
+            pub const fn set_order(&mut self, val: super::vals::Order) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Serial clock (SCK) phase."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn cpha(&self) -> super::vals::Cpha {
+                let val = (self.0 >> 1usize) & 0x01;
+                super::vals::Cpha::from_bits(val as u8)
+            }
+            #[doc = "Serial clock (SCK) phase."]
+            #[inline(always)]
+            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Serial clock (SCK) polarity."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn cpol(&self) -> super::vals::Cpol {
+                let val = (self.0 >> 2usize) & 0x01;
+                super::vals::Cpol::from_bits(val as u8)
+            }
+            #[doc = "Serial clock (SCK) polarity."]
+            #[inline(always)]
+            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
+            }
+        }
+        impl Default for SpisConfig {
+            #[inline(always)]
+            fn default() -> SpisConfig {
+                SpisConfig(0)
+            }
+        }
+        impl core::fmt::Debug for SpisConfig {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("SpisConfig")
+                    .field("order", &self.order())
+                    .field("cpha", &self.cpha())
+                    .field("cpol", &self.cpol())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for SpisConfig {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "SpisConfig {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
+                    self.order(),
+                    self.cpha(),
+                    self.cpol()
+                )
             }
         }
         #[doc = "Status from last transaction."]

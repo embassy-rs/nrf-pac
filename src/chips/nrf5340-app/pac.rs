@@ -1,7 +1,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (bcf538a 2026-05-18))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (694bb9d 2026-04-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -27601,7 +27601,7 @@ pub mod pwm {
         }
         #[doc = "Description cluster: Number of values (duty cycles) in this sequence."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::Cnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::Maxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Description cluster: Number of additional PWM periods between samples loaded into compare register."]
@@ -27878,42 +27878,6 @@ pub mod pwm {
         }
     }
     pub mod regs {
-        #[doc = "Description cluster: Number of values (duty cycles) in this sequence."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Cnt(pub u32);
-        impl Cnt {
-            #[doc = "Number of values (duty cycles) in this sequence."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn cnt(&self) -> super::vals::CntCnt {
-                let val = (self.0 >> 0usize) & 0x7fff;
-                super::vals::CntCnt::from_bits(val as u16)
-            }
-            #[doc = "Number of values (duty cycles) in this sequence."]
-            #[inline(always)]
-            pub const fn set_cnt(&mut self, val: super::vals::CntCnt) {
-                self.0 =
-                    (self.0 & !(0x7fff << 0usize)) | (((val.to_bits() as u32) & 0x7fff) << 0usize);
-            }
-        }
-        impl Default for Cnt {
-            #[inline(always)]
-            fn default() -> Cnt {
-                Cnt(0)
-            }
-        }
-        impl core::fmt::Debug for Cnt {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Cnt").field("cnt", &self.cnt()).finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Cnt {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "Cnt {{ cnt: {:?} }}", self.cnt())
-            }
-        }
         #[doc = "Value up to which the pulse generator counter counts."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -28236,6 +28200,43 @@ pub mod pwm {
                 defmt::write!(f, "Loop {{ cnt: {:?} }}", self.cnt())
             }
         }
+        #[doc = "Description cluster: Number of values (duty cycles) in this sequence."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Maxcnt(pub u32);
+        impl Maxcnt {
+            #[doc = "Number of values (duty cycles) in this sequence."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn maxcnt(&self) -> u16 {
+                let val = (self.0 >> 0usize) & 0x7fff;
+                val as u16
+            }
+            #[doc = "Number of values (duty cycles) in this sequence."]
+            #[inline(always)]
+            pub const fn set_maxcnt(&mut self, val: u16) {
+                self.0 = (self.0 & !(0x7fff << 0usize)) | (((val as u32) & 0x7fff) << 0usize);
+            }
+        }
+        impl Default for Maxcnt {
+            #[inline(always)]
+            fn default() -> Maxcnt {
+                Maxcnt(0)
+            }
+        }
+        impl core::fmt::Debug for Maxcnt {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("Maxcnt")
+                    .field("maxcnt", &self.maxcnt())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for Maxcnt {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(f, "Maxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+            }
+        }
         #[doc = "Selects operating mode of the wave counter."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -28437,50 +28438,6 @@ pub mod pwm {
         }
     }
     pub mod vals {
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-        pub struct CntCnt(u16);
-        impl CntCnt {
-            #[doc = "Sequence is disabled, and shall not be started as it is empty."]
-            pub const Disabled: Self = Self(0x0);
-        }
-        impl CntCnt {
-            pub const fn from_bits(val: u16) -> CntCnt {
-                Self(val & 0x7fff)
-            }
-            pub const fn to_bits(self) -> u16 {
-                self.0
-            }
-        }
-        impl core::fmt::Debug for CntCnt {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                match self.0 {
-                    0x0 => f.write_str("Disabled"),
-                    other => core::write!(f, "0x{:02X}", other),
-                }
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for CntCnt {
-            fn format(&self, f: defmt::Formatter) {
-                match self.0 {
-                    0x0 => defmt::write!(f, "Disabled"),
-                    other => defmt::write!(f, "0x{:02X}", other),
-                }
-            }
-        }
-        impl From<u16> for CntCnt {
-            #[inline(always)]
-            fn from(val: u16) -> CntCnt {
-                CntCnt::from_bits(val)
-            }
-        }
-        impl From<CntCnt> for u16 {
-            #[inline(always)]
-            fn from(val: CntCnt) -> u16 {
-                CntCnt::to_bits(val)
-            }
-        }
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
@@ -34355,17 +34312,17 @@ pub mod spim {
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::RxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::RxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -34392,17 +34349,17 @@ pub mod spim {
         }
         #[doc = "Number of bytes in transmit buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::TxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::TxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -34639,7 +34596,7 @@ pub mod spim {
         }
         #[doc = "Configuration register."]
         #[inline(always)]
-        pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
+        pub const fn config(self) -> crate::common::Reg<regs::SpimConfig, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0554usize) as _) }
         }
         #[doc = "Unspecified."]
@@ -34671,75 +34628,6 @@ pub mod spim {
         }
     }
     pub mod regs {
-        #[doc = "Configuration register."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Config(pub u32);
-        impl Config {
-            #[doc = "Bit order."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn order(&self) -> super::vals::Order {
-                let val = (self.0 >> 0usize) & 0x01;
-                super::vals::Order::from_bits(val as u8)
-            }
-            #[doc = "Bit order."]
-            #[inline(always)]
-            pub const fn set_order(&mut self, val: super::vals::Order) {
-                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
-            }
-            #[doc = "Serial clock (SCK) phase."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn cpha(&self) -> super::vals::Cpha {
-                let val = (self.0 >> 1usize) & 0x01;
-                super::vals::Cpha::from_bits(val as u8)
-            }
-            #[doc = "Serial clock (SCK) phase."]
-            #[inline(always)]
-            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
-                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
-            }
-            #[doc = "Serial clock (SCK) polarity."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn cpol(&self) -> super::vals::Cpol {
-                let val = (self.0 >> 2usize) & 0x01;
-                super::vals::Cpol::from_bits(val as u8)
-            }
-            #[doc = "Serial clock (SCK) polarity."]
-            #[inline(always)]
-            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
-                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
-            }
-        }
-        impl Default for Config {
-            #[inline(always)]
-            fn default() -> Config {
-                Config(0)
-            }
-        }
-        impl core::fmt::Debug for Config {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Config")
-                    .field("order", &self.order())
-                    .field("cpha", &self.cpha())
-                    .field("cpol", &self.cpol())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Config {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(
-                    f,
-                    "Config {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
-                    self.order(),
-                    self.cpha(),
-                    self.cpol()
-                )
-            }
-        }
         #[doc = "Minimum duration between edge of CSN and edge of SCK. When SHORTS.END_START is used, this is also the minimum duration CSN must stay high between transactions."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -35053,8 +34941,8 @@ pub mod spim {
         #[doc = "Number of bytes transferred in the last transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdAmount(pub u32);
-        impl RxdAmount {
+        pub struct RxAmount(pub u32);
+        impl RxAmount {
             #[doc = "Number of bytes transferred in the last transaction."]
             #[must_use]
             #[inline(always)]
@@ -35068,67 +34956,67 @@ pub mod spim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdAmount {
+        impl Default for RxAmount {
             #[inline(always)]
-            fn default() -> RxdAmount {
-                RxdAmount(0)
+            fn default() -> RxAmount {
+                RxAmount(0)
             }
         }
-        impl core::fmt::Debug for RxdAmount {
+        impl core::fmt::Debug for RxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdAmount")
+                f.debug_struct("RxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdAmount {
+        impl defmt::Format for RxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "RxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdList(pub u32);
-        impl RxdList {
+        pub struct RxList(pub u32);
+        impl RxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::RxdListList {
+            pub const fn type_(&self) -> super::vals::RxListType {
                 let val = (self.0 >> 0usize) & 0x03;
-                super::vals::RxdListList::from_bits(val as u8)
+                super::vals::RxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::RxListType) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
-        impl Default for RxdList {
+        impl Default for RxList {
             #[inline(always)]
-            fn default() -> RxdList {
-                RxdList(0)
+            fn default() -> RxList {
+                RxList(0)
             }
         }
-        impl core::fmt::Debug for RxdList {
+        impl core::fmt::Debug for RxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdList")
-                    .field("list", &self.list())
+                f.debug_struct("RxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdList {
+        impl defmt::Format for RxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "RxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdMaxcnt(pub u32);
-        impl RxdMaxcnt {
+        pub struct RxMaxcnt(pub u32);
+        impl RxMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer."]
             #[must_use]
             #[inline(always)]
@@ -35142,23 +35030,23 @@ pub mod spim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdMaxcnt {
+        impl Default for RxMaxcnt {
             #[inline(always)]
-            fn default() -> RxdMaxcnt {
-                RxdMaxcnt(0)
+            fn default() -> RxMaxcnt {
+                RxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for RxdMaxcnt {
+        impl core::fmt::Debug for RxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdMaxcnt")
+                f.debug_struct("RxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdMaxcnt {
+        impl defmt::Format for RxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "RxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Sample delay for input serial data on MISO."]
@@ -35235,6 +35123,75 @@ pub mod spim {
                 defmt::write!(f, "Shorts {{ end_start: {=bool:?} }}", self.end_start())
             }
         }
+        #[doc = "Configuration register."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct SpimConfig(pub u32);
+        impl SpimConfig {
+            #[doc = "Bit order."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn order(&self) -> super::vals::Order {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Order::from_bits(val as u8)
+            }
+            #[doc = "Bit order."]
+            #[inline(always)]
+            pub const fn set_order(&mut self, val: super::vals::Order) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Serial clock (SCK) phase."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn cpha(&self) -> super::vals::Cpha {
+                let val = (self.0 >> 1usize) & 0x01;
+                super::vals::Cpha::from_bits(val as u8)
+            }
+            #[doc = "Serial clock (SCK) phase."]
+            #[inline(always)]
+            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Serial clock (SCK) polarity."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn cpol(&self) -> super::vals::Cpol {
+                let val = (self.0 >> 2usize) & 0x01;
+                super::vals::Cpol::from_bits(val as u8)
+            }
+            #[doc = "Serial clock (SCK) polarity."]
+            #[inline(always)]
+            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
+            }
+        }
+        impl Default for SpimConfig {
+            #[inline(always)]
+            fn default() -> SpimConfig {
+                SpimConfig(0)
+            }
+        }
+        impl core::fmt::Debug for SpimConfig {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("SpimConfig")
+                    .field("order", &self.order())
+                    .field("cpha", &self.cpha())
+                    .field("cpol", &self.cpol())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for SpimConfig {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "SpimConfig {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
+                    self.order(),
+                    self.cpha(),
+                    self.cpol()
+                )
+            }
+        }
         #[doc = "Stall status for EasyDMA RAM accesses. The fields in this register are set to STALL by hardware whenever a stall occurres and can be cleared (set to NOSTALL) by the CPU."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -35293,8 +35250,8 @@ pub mod spim {
         #[doc = "Number of bytes transferred in the last transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdAmount(pub u32);
-        impl TxdAmount {
+        pub struct TxAmount(pub u32);
+        impl TxAmount {
             #[doc = "Number of bytes transferred in the last transaction."]
             #[must_use]
             #[inline(always)]
@@ -35308,67 +35265,67 @@ pub mod spim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdAmount {
+        impl Default for TxAmount {
             #[inline(always)]
-            fn default() -> TxdAmount {
-                TxdAmount(0)
+            fn default() -> TxAmount {
+                TxAmount(0)
             }
         }
-        impl core::fmt::Debug for TxdAmount {
+        impl core::fmt::Debug for TxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdAmount")
+                f.debug_struct("TxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdAmount {
+        impl defmt::Format for TxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "TxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdList(pub u32);
-        impl TxdList {
+        pub struct TxList(pub u32);
+        impl TxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::TxdListList {
+            pub const fn type_(&self) -> super::vals::TxListType {
                 let val = (self.0 >> 0usize) & 0x03;
-                super::vals::TxdListList::from_bits(val as u8)
+                super::vals::TxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::TxListType) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
-        impl Default for TxdList {
+        impl Default for TxList {
             #[inline(always)]
-            fn default() -> TxdList {
-                TxdList(0)
+            fn default() -> TxList {
+                TxList(0)
             }
         }
-        impl core::fmt::Debug for TxdList {
+        impl core::fmt::Debug for TxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdList")
-                    .field("list", &self.list())
+                f.debug_struct("TxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdList {
+        impl defmt::Format for TxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "TxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Number of bytes in transmit buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdMaxcnt(pub u32);
-        impl TxdMaxcnt {
+        pub struct TxMaxcnt(pub u32);
+        impl TxMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer."]
             #[must_use]
             #[inline(always)]
@@ -35382,23 +35339,23 @@ pub mod spim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdMaxcnt {
+        impl Default for TxMaxcnt {
             #[inline(always)]
-            fn default() -> TxdMaxcnt {
-                TxdMaxcnt(0)
+            fn default() -> TxMaxcnt {
+                TxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for TxdMaxcnt {
+        impl core::fmt::Debug for TxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdMaxcnt")
+                f.debug_struct("TxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdMaxcnt {
+        impl defmt::Format for TxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "TxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -35651,7 +35608,7 @@ pub mod spim {
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum RxdListList {
+        pub enum RxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -35659,9 +35616,9 @@ pub mod spim {
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
-        impl RxdListList {
+        impl RxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> RxdListList {
+            pub const fn from_bits(val: u8) -> RxListType {
                 unsafe { core::mem::transmute(val & 0x03) }
             }
             #[inline(always)]
@@ -35669,22 +35626,22 @@ pub mod spim {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for RxdListList {
+        impl From<u8> for RxListType {
             #[inline(always)]
-            fn from(val: u8) -> RxdListList {
-                RxdListList::from_bits(val)
+            fn from(val: u8) -> RxListType {
+                RxListType::from_bits(val)
             }
         }
-        impl From<RxdListList> for u8 {
+        impl From<RxListType> for u8 {
             #[inline(always)]
-            fn from(val: RxdListList) -> u8 {
-                RxdListList::to_bits(val)
+            fn from(val: RxListType) -> u8 {
+                RxListType::to_bits(val)
             }
         }
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum TxdListList {
+        pub enum TxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -35692,9 +35649,9 @@ pub mod spim {
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
-        impl TxdListList {
+        impl TxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> TxdListList {
+            pub const fn from_bits(val: u8) -> TxListType {
                 unsafe { core::mem::transmute(val & 0x03) }
             }
             #[inline(always)]
@@ -35702,16 +35659,16 @@ pub mod spim {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for TxdListList {
+        impl From<u8> for TxListType {
             #[inline(always)]
-            fn from(val: u8) -> TxdListList {
-                TxdListList::from_bits(val)
+            fn from(val: u8) -> TxListType {
+                TxListType::from_bits(val)
             }
         }
-        impl From<TxdListList> for u8 {
+        impl From<TxListType> for u8 {
             #[inline(always)]
-            fn from(val: TxdListList) -> u8 {
-                TxdListList::to_bits(val)
+            fn from(val: TxListType) -> u8 {
+                TxListType::to_bits(val)
             }
         }
     }
@@ -35766,17 +35723,17 @@ pub mod spis {
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes received in last granted transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::RxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::RxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -35803,17 +35760,17 @@ pub mod spis {
         }
         #[doc = "Maximum number of bytes in transmit buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transmitted in last granted transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::TxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::TxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -36015,7 +35972,7 @@ pub mod spis {
         }
         #[doc = "Configuration register."]
         #[inline(always)]
-        pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
+        pub const fn config(self) -> crate::common::Reg<regs::SpisConfig, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0554usize) as _) }
         }
         #[doc = "Default character. Character clocked out in case of an ignored transaction."]
@@ -36030,75 +35987,6 @@ pub mod spis {
         }
     }
     pub mod regs {
-        #[doc = "Configuration register."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Config(pub u32);
-        impl Config {
-            #[doc = "Bit order."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn order(&self) -> super::vals::Order {
-                let val = (self.0 >> 0usize) & 0x01;
-                super::vals::Order::from_bits(val as u8)
-            }
-            #[doc = "Bit order."]
-            #[inline(always)]
-            pub const fn set_order(&mut self, val: super::vals::Order) {
-                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
-            }
-            #[doc = "Serial clock (SCK) phase."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn cpha(&self) -> super::vals::Cpha {
-                let val = (self.0 >> 1usize) & 0x01;
-                super::vals::Cpha::from_bits(val as u8)
-            }
-            #[doc = "Serial clock (SCK) phase."]
-            #[inline(always)]
-            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
-                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
-            }
-            #[doc = "Serial clock (SCK) polarity."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn cpol(&self) -> super::vals::Cpol {
-                let val = (self.0 >> 2usize) & 0x01;
-                super::vals::Cpol::from_bits(val as u8)
-            }
-            #[doc = "Serial clock (SCK) polarity."]
-            #[inline(always)]
-            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
-                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
-            }
-        }
-        impl Default for Config {
-            #[inline(always)]
-            fn default() -> Config {
-                Config(0)
-            }
-        }
-        impl core::fmt::Debug for Config {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Config")
-                    .field("order", &self.order())
-                    .field("cpha", &self.cpha())
-                    .field("cpol", &self.cpol())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Config {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(
-                    f,
-                    "Config {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
-                    self.order(),
-                    self.cpha(),
-                    self.cpol()
-                )
-            }
-        }
         #[doc = "Default character. Character clocked out in case of an ignored transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -36278,8 +36166,8 @@ pub mod spis {
         #[doc = "Number of bytes received in last granted transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdAmount(pub u32);
-        impl RxdAmount {
+        pub struct RxAmount(pub u32);
+        impl RxAmount {
             #[doc = "Number of bytes received in the last granted transaction."]
             #[must_use]
             #[inline(always)]
@@ -36293,67 +36181,67 @@ pub mod spis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdAmount {
+        impl Default for RxAmount {
             #[inline(always)]
-            fn default() -> RxdAmount {
-                RxdAmount(0)
+            fn default() -> RxAmount {
+                RxAmount(0)
             }
         }
-        impl core::fmt::Debug for RxdAmount {
+        impl core::fmt::Debug for RxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdAmount")
+                f.debug_struct("RxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdAmount {
+        impl defmt::Format for RxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "RxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdList(pub u32);
-        impl RxdList {
+        pub struct RxList(pub u32);
+        impl RxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::RxdListList {
+            pub const fn type_(&self) -> super::vals::RxListType {
                 let val = (self.0 >> 0usize) & 0x03;
-                super::vals::RxdListList::from_bits(val as u8)
+                super::vals::RxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::RxListType) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
-        impl Default for RxdList {
+        impl Default for RxList {
             #[inline(always)]
-            fn default() -> RxdList {
-                RxdList(0)
+            fn default() -> RxList {
+                RxList(0)
             }
         }
-        impl core::fmt::Debug for RxdList {
+        impl core::fmt::Debug for RxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdList")
-                    .field("list", &self.list())
+                f.debug_struct("RxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdList {
+        impl defmt::Format for RxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "RxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdMaxcnt(pub u32);
-        impl RxdMaxcnt {
+        pub struct RxMaxcnt(pub u32);
+        impl RxMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer."]
             #[must_use]
             #[inline(always)]
@@ -36367,23 +36255,23 @@ pub mod spis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdMaxcnt {
+        impl Default for RxMaxcnt {
             #[inline(always)]
-            fn default() -> RxdMaxcnt {
-                RxdMaxcnt(0)
+            fn default() -> RxMaxcnt {
+                RxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for RxdMaxcnt {
+        impl core::fmt::Debug for RxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdMaxcnt")
+                f.debug_struct("RxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdMaxcnt {
+        impl defmt::Format for RxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "RxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Semaphore status register."]
@@ -36460,6 +36348,75 @@ pub mod spis {
                 defmt::write!(f, "Shorts {{ end_acquire: {=bool:?} }}", self.end_acquire())
             }
         }
+        #[doc = "Configuration register."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct SpisConfig(pub u32);
+        impl SpisConfig {
+            #[doc = "Bit order."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn order(&self) -> super::vals::Order {
+                let val = (self.0 >> 0usize) & 0x01;
+                super::vals::Order::from_bits(val as u8)
+            }
+            #[doc = "Bit order."]
+            #[inline(always)]
+            pub const fn set_order(&mut self, val: super::vals::Order) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Serial clock (SCK) phase."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn cpha(&self) -> super::vals::Cpha {
+                let val = (self.0 >> 1usize) & 0x01;
+                super::vals::Cpha::from_bits(val as u8)
+            }
+            #[doc = "Serial clock (SCK) phase."]
+            #[inline(always)]
+            pub const fn set_cpha(&mut self, val: super::vals::Cpha) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val.to_bits() as u32) & 0x01) << 1usize);
+            }
+            #[doc = "Serial clock (SCK) polarity."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn cpol(&self) -> super::vals::Cpol {
+                let val = (self.0 >> 2usize) & 0x01;
+                super::vals::Cpol::from_bits(val as u8)
+            }
+            #[doc = "Serial clock (SCK) polarity."]
+            #[inline(always)]
+            pub const fn set_cpol(&mut self, val: super::vals::Cpol) {
+                self.0 = (self.0 & !(0x01 << 2usize)) | (((val.to_bits() as u32) & 0x01) << 2usize);
+            }
+        }
+        impl Default for SpisConfig {
+            #[inline(always)]
+            fn default() -> SpisConfig {
+                SpisConfig(0)
+            }
+        }
+        impl core::fmt::Debug for SpisConfig {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("SpisConfig")
+                    .field("order", &self.order())
+                    .field("cpha", &self.cpha())
+                    .field("cpol", &self.cpol())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for SpisConfig {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "SpisConfig {{ order: {:?}, cpha: {:?}, cpol: {:?} }}",
+                    self.order(),
+                    self.cpha(),
+                    self.cpol()
+                )
+            }
+        }
         #[doc = "Status from last transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -36518,8 +36475,8 @@ pub mod spis {
         #[doc = "Number of bytes transmitted in last granted transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdAmount(pub u32);
-        impl TxdAmount {
+        pub struct TxAmount(pub u32);
+        impl TxAmount {
             #[doc = "Number of bytes transmitted in last granted transaction."]
             #[must_use]
             #[inline(always)]
@@ -36533,67 +36490,67 @@ pub mod spis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdAmount {
+        impl Default for TxAmount {
             #[inline(always)]
-            fn default() -> TxdAmount {
-                TxdAmount(0)
+            fn default() -> TxAmount {
+                TxAmount(0)
             }
         }
-        impl core::fmt::Debug for TxdAmount {
+        impl core::fmt::Debug for TxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdAmount")
+                f.debug_struct("TxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdAmount {
+        impl defmt::Format for TxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "TxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdList(pub u32);
-        impl TxdList {
+        pub struct TxList(pub u32);
+        impl TxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::TxdListList {
+            pub const fn type_(&self) -> super::vals::TxListType {
                 let val = (self.0 >> 0usize) & 0x03;
-                super::vals::TxdListList::from_bits(val as u8)
+                super::vals::TxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::TxListType) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
-        impl Default for TxdList {
+        impl Default for TxList {
             #[inline(always)]
-            fn default() -> TxdList {
-                TxdList(0)
+            fn default() -> TxList {
+                TxList(0)
             }
         }
-        impl core::fmt::Debug for TxdList {
+        impl core::fmt::Debug for TxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdList")
-                    .field("list", &self.list())
+                f.debug_struct("TxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdList {
+        impl defmt::Format for TxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "TxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdMaxcnt(pub u32);
-        impl TxdMaxcnt {
+        pub struct TxMaxcnt(pub u32);
+        impl TxMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer."]
             #[must_use]
             #[inline(always)]
@@ -36607,23 +36564,23 @@ pub mod spis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdMaxcnt {
+        impl Default for TxMaxcnt {
             #[inline(always)]
-            fn default() -> TxdMaxcnt {
-                TxdMaxcnt(0)
+            fn default() -> TxMaxcnt {
+                TxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for TxdMaxcnt {
+        impl core::fmt::Debug for TxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdMaxcnt")
+                f.debug_struct("TxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdMaxcnt {
+        impl defmt::Format for TxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "TxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -36769,7 +36726,7 @@ pub mod spis {
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum RxdListList {
+        pub enum RxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -36777,9 +36734,9 @@ pub mod spis {
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
-        impl RxdListList {
+        impl RxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> RxdListList {
+            pub const fn from_bits(val: u8) -> RxListType {
                 unsafe { core::mem::transmute(val & 0x03) }
             }
             #[inline(always)]
@@ -36787,16 +36744,16 @@ pub mod spis {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for RxdListList {
+        impl From<u8> for RxListType {
             #[inline(always)]
-            fn from(val: u8) -> RxdListList {
-                RxdListList::from_bits(val)
+            fn from(val: u8) -> RxListType {
+                RxListType::from_bits(val)
             }
         }
-        impl From<RxdListList> for u8 {
+        impl From<RxListType> for u8 {
             #[inline(always)]
-            fn from(val: RxdListList) -> u8 {
-                RxdListList::to_bits(val)
+            fn from(val: RxListType) -> u8 {
+                RxListType::to_bits(val)
             }
         }
         #[repr(u8)]
@@ -36837,7 +36794,7 @@ pub mod spis {
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum TxdListList {
+        pub enum TxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -36845,9 +36802,9 @@ pub mod spis {
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
-        impl TxdListList {
+        impl TxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> TxdListList {
+            pub const fn from_bits(val: u8) -> TxListType {
                 unsafe { core::mem::transmute(val & 0x03) }
             }
             #[inline(always)]
@@ -36855,16 +36812,16 @@ pub mod spis {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for TxdListList {
+        impl From<u8> for TxListType {
             #[inline(always)]
-            fn from(val: u8) -> TxdListList {
-                TxdListList::from_bits(val)
+            fn from(val: u8) -> TxListType {
+                TxListType::from_bits(val)
             }
         }
-        impl From<TxdListList> for u8 {
+        impl From<TxListType> for u8 {
             #[inline(always)]
-            fn from(val: TxdListList) -> u8 {
-                TxdListList::to_bits(val)
+            fn from(val: TxListType) -> u8 {
+                TxListType::to_bits(val)
             }
         }
     }
@@ -42356,17 +42313,17 @@ pub mod twim {
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::RxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::RxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -42393,17 +42350,17 @@ pub mod twim {
         }
         #[doc = "Maximum number of bytes in transmit buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::TxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::TxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -43004,8 +42961,8 @@ pub mod twim {
         #[doc = "Number of bytes transferred in the last transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdAmount(pub u32);
-        impl RxdAmount {
+        pub struct RxAmount(pub u32);
+        impl RxAmount {
             #[doc = "Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte."]
             #[must_use]
             #[inline(always)]
@@ -43019,67 +42976,67 @@ pub mod twim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdAmount {
+        impl Default for RxAmount {
             #[inline(always)]
-            fn default() -> RxdAmount {
-                RxdAmount(0)
+            fn default() -> RxAmount {
+                RxAmount(0)
             }
         }
-        impl core::fmt::Debug for RxdAmount {
+        impl core::fmt::Debug for RxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdAmount")
+                f.debug_struct("RxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdAmount {
+        impl defmt::Format for RxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "RxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdList(pub u32);
-        impl RxdList {
+        pub struct RxList(pub u32);
+        impl RxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::RxdListList {
+            pub const fn type_(&self) -> super::vals::RxListType {
                 let val = (self.0 >> 0usize) & 0x07;
-                super::vals::RxdListList::from_bits(val as u8)
+                super::vals::RxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::RxListType) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
             }
         }
-        impl Default for RxdList {
+        impl Default for RxList {
             #[inline(always)]
-            fn default() -> RxdList {
-                RxdList(0)
+            fn default() -> RxList {
+                RxList(0)
             }
         }
-        impl core::fmt::Debug for RxdList {
+        impl core::fmt::Debug for RxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdList")
-                    .field("list", &self.list())
+                f.debug_struct("RxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdList {
+        impl defmt::Format for RxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "RxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdMaxcnt(pub u32);
-        impl RxdMaxcnt {
+        pub struct RxMaxcnt(pub u32);
+        impl RxMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer."]
             #[must_use]
             #[inline(always)]
@@ -43093,23 +43050,23 @@ pub mod twim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdMaxcnt {
+        impl Default for RxMaxcnt {
             #[inline(always)]
-            fn default() -> RxdMaxcnt {
-                RxdMaxcnt(0)
+            fn default() -> RxMaxcnt {
+                RxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for RxdMaxcnt {
+        impl core::fmt::Debug for RxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdMaxcnt")
+                f.debug_struct("RxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdMaxcnt {
+        impl defmt::Format for RxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "RxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks."]
@@ -43204,8 +43161,8 @@ pub mod twim {
         #[doc = "Number of bytes transferred in the last transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdAmount(pub u32);
-        impl TxdAmount {
+        pub struct TxAmount(pub u32);
+        impl TxAmount {
             #[doc = "Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte."]
             #[must_use]
             #[inline(always)]
@@ -43219,67 +43176,67 @@ pub mod twim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdAmount {
+        impl Default for TxAmount {
             #[inline(always)]
-            fn default() -> TxdAmount {
-                TxdAmount(0)
+            fn default() -> TxAmount {
+                TxAmount(0)
             }
         }
-        impl core::fmt::Debug for TxdAmount {
+        impl core::fmt::Debug for TxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdAmount")
+                f.debug_struct("TxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdAmount {
+        impl defmt::Format for TxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "TxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdList(pub u32);
-        impl TxdList {
+        pub struct TxList(pub u32);
+        impl TxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::TxdListList {
+            pub const fn type_(&self) -> super::vals::TxListType {
                 let val = (self.0 >> 0usize) & 0x07;
-                super::vals::TxdListList::from_bits(val as u8)
+                super::vals::TxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::TxListType) {
                 self.0 = (self.0 & !(0x07 << 0usize)) | (((val.to_bits() as u32) & 0x07) << 0usize);
             }
         }
-        impl Default for TxdList {
+        impl Default for TxList {
             #[inline(always)]
-            fn default() -> TxdList {
-                TxdList(0)
+            fn default() -> TxList {
+                TxList(0)
             }
         }
-        impl core::fmt::Debug for TxdList {
+        impl core::fmt::Debug for TxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdList")
-                    .field("list", &self.list())
+                f.debug_struct("TxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdList {
+        impl defmt::Format for TxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "TxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdMaxcnt(pub u32);
-        impl TxdMaxcnt {
+        pub struct TxMaxcnt(pub u32);
+        impl TxMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer."]
             #[must_use]
             #[inline(always)]
@@ -43293,23 +43250,23 @@ pub mod twim {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdMaxcnt {
+        impl Default for TxMaxcnt {
             #[inline(always)]
-            fn default() -> TxdMaxcnt {
-                TxdMaxcnt(0)
+            fn default() -> TxMaxcnt {
+                TxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for TxdMaxcnt {
+        impl core::fmt::Debug for TxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdMaxcnt")
+                f.debug_struct("TxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdMaxcnt {
+        impl defmt::Format for TxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "TxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -43418,7 +43375,7 @@ pub mod twim {
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum RxdListList {
+        pub enum RxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -43430,9 +43387,9 @@ pub mod twim {
             _RESERVED_6 = 0x06,
             _RESERVED_7 = 0x07,
         }
-        impl RxdListList {
+        impl RxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> RxdListList {
+            pub const fn from_bits(val: u8) -> RxListType {
                 unsafe { core::mem::transmute(val & 0x07) }
             }
             #[inline(always)]
@@ -43440,22 +43397,22 @@ pub mod twim {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for RxdListList {
+        impl From<u8> for RxListType {
             #[inline(always)]
-            fn from(val: u8) -> RxdListList {
-                RxdListList::from_bits(val)
+            fn from(val: u8) -> RxListType {
+                RxListType::from_bits(val)
             }
         }
-        impl From<RxdListList> for u8 {
+        impl From<RxListType> for u8 {
             #[inline(always)]
-            fn from(val: RxdListList) -> u8 {
-                RxdListList::to_bits(val)
+            fn from(val: RxListType) -> u8 {
+                RxListType::to_bits(val)
             }
         }
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum TxdListList {
+        pub enum TxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -43467,9 +43424,9 @@ pub mod twim {
             _RESERVED_6 = 0x06,
             _RESERVED_7 = 0x07,
         }
-        impl TxdListList {
+        impl TxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> TxdListList {
+            pub const fn from_bits(val: u8) -> TxListType {
                 unsafe { core::mem::transmute(val & 0x07) }
             }
             #[inline(always)]
@@ -43477,16 +43434,16 @@ pub mod twim {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for TxdListList {
+        impl From<u8> for TxListType {
             #[inline(always)]
-            fn from(val: u8) -> TxdListList {
-                TxdListList::from_bits(val)
+            fn from(val: u8) -> TxListType {
+                TxListType::from_bits(val)
             }
         }
-        impl From<TxdListList> for u8 {
+        impl From<TxListType> for u8 {
             #[inline(always)]
-            fn from(val: TxdListList) -> u8 {
-                TxdListList::to_bits(val)
+            fn from(val: TxListType) -> u8 {
+                TxListType::to_bits(val)
             }
         }
     }
@@ -43541,17 +43498,17 @@ pub mod twis {
         }
         #[doc = "Maximum number of bytes in RXD buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last RXD transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::RxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::RxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::RxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -43578,17 +43535,17 @@ pub mod twis {
         }
         #[doc = "Maximum number of bytes in TXD buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last TXD transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::TxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
         #[doc = "EasyDMA list type."]
         #[inline(always)]
-        pub const fn list(self) -> crate::common::Reg<regs::TxdList, crate::common::RW> {
+        pub const fn list(self) -> crate::common::Reg<regs::TxList, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
         }
     }
@@ -43794,7 +43751,7 @@ pub mod twis {
         }
         #[doc = "Status register indicating which address had a match."]
         #[inline(always)]
-        pub const fn match_(self) -> crate::common::Reg<regs::Match, crate::common::R> {
+        pub const fn match_(self) -> crate::common::Reg<regs::TwisMatch, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04d4usize) as _) }
         }
         #[doc = "Enable TWIS."]
@@ -43824,7 +43781,7 @@ pub mod twis {
         }
         #[doc = "Configuration register for the address match mechanism."]
         #[inline(always)]
-        pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
+        pub const fn config(self) -> crate::common::Reg<regs::TwisConfig, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0594usize) as _) }
         }
         #[doc = "Over-read character. Character sent out in case of an over-read of the transmit buffer."]
@@ -43869,61 +43826,6 @@ pub mod twis {
         impl defmt::Format for Address {
             fn format(&self, f: defmt::Formatter) {
                 defmt::write!(f, "Address {{ address: {=u8:?} }}", self.address())
-            }
-        }
-        #[doc = "Configuration register for the address match mechanism."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Config(pub u32);
-        impl Config {
-            #[doc = "Enable or disable address matching on ADDRESS\\[0\\]."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn address0(&self) -> bool {
-                let val = (self.0 >> 0usize) & 0x01;
-                val != 0
-            }
-            #[doc = "Enable or disable address matching on ADDRESS\\[0\\]."]
-            #[inline(always)]
-            pub const fn set_address0(&mut self, val: bool) {
-                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-            }
-            #[doc = "Enable or disable address matching on ADDRESS\\[1\\]."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn address1(&self) -> bool {
-                let val = (self.0 >> 1usize) & 0x01;
-                val != 0
-            }
-            #[doc = "Enable or disable address matching on ADDRESS\\[1\\]."]
-            #[inline(always)]
-            pub const fn set_address1(&mut self, val: bool) {
-                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
-            }
-        }
-        impl Default for Config {
-            #[inline(always)]
-            fn default() -> Config {
-                Config(0)
-            }
-        }
-        impl core::fmt::Debug for Config {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Config")
-                    .field("address0", &self.address0())
-                    .field("address1", &self.address1())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Config {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(
-                    f,
-                    "Config {{ address0: {=bool:?}, address1: {=bool:?} }}",
-                    self.address0(),
-                    self.address1()
-                )
             }
         }
         #[doc = "Enable TWIS."]
@@ -44134,43 +44036,6 @@ pub mod twis {
                 defmt :: write ! (f , "Int {{ stopped: {=bool:?}, error: {=bool:?}, rxstarted: {=bool:?}, txstarted: {=bool:?}, write: {=bool:?}, read: {=bool:?} }}" , self . stopped () , self . error () , self . rxstarted () , self . txstarted () , self . write () , self . read ())
             }
         }
-        #[doc = "Status register indicating which address had a match."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Match(pub u32);
-        impl Match {
-            #[doc = "Indication of which address in ADDRESS that matched the incoming address."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn match_(&self) -> bool {
-                let val = (self.0 >> 0usize) & 0x01;
-                val != 0
-            }
-            #[doc = "Indication of which address in ADDRESS that matched the incoming address."]
-            #[inline(always)]
-            pub const fn set_match_(&mut self, val: bool) {
-                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-            }
-        }
-        impl Default for Match {
-            #[inline(always)]
-            fn default() -> Match {
-                Match(0)
-            }
-        }
-        impl core::fmt::Debug for Match {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Match")
-                    .field("match_", &self.match_())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Match {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "Match {{ match_: {=bool:?} }}", self.match_())
-            }
-        }
         #[doc = "Over-read character. Character sent out in case of an over-read of the transmit buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -44209,8 +44074,8 @@ pub mod twis {
         #[doc = "Number of bytes transferred in the last RXD transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdAmount(pub u32);
-        impl RxdAmount {
+        pub struct RxAmount(pub u32);
+        impl RxAmount {
             #[doc = "Number of bytes transferred in the last RXD transaction."]
             #[must_use]
             #[inline(always)]
@@ -44224,67 +44089,67 @@ pub mod twis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdAmount {
+        impl Default for RxAmount {
             #[inline(always)]
-            fn default() -> RxdAmount {
-                RxdAmount(0)
+            fn default() -> RxAmount {
+                RxAmount(0)
             }
         }
-        impl core::fmt::Debug for RxdAmount {
+        impl core::fmt::Debug for RxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdAmount")
+                f.debug_struct("RxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdAmount {
+        impl defmt::Format for RxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "RxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdList(pub u32);
-        impl RxdList {
+        pub struct RxList(pub u32);
+        impl RxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::RxdListList {
+            pub const fn type_(&self) -> super::vals::RxListType {
                 let val = (self.0 >> 0usize) & 0x03;
-                super::vals::RxdListList::from_bits(val as u8)
+                super::vals::RxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::RxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::RxListType) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
-        impl Default for RxdList {
+        impl Default for RxList {
             #[inline(always)]
-            fn default() -> RxdList {
-                RxdList(0)
+            fn default() -> RxList {
+                RxList(0)
             }
         }
-        impl core::fmt::Debug for RxdList {
+        impl core::fmt::Debug for RxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdList")
-                    .field("list", &self.list())
+                f.debug_struct("RxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdList {
+        impl defmt::Format for RxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "RxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Maximum number of bytes in RXD buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdMaxcnt(pub u32);
-        impl RxdMaxcnt {
+        pub struct RxMaxcnt(pub u32);
+        impl RxMaxcnt {
             #[doc = "Maximum number of bytes in RXD buffer."]
             #[must_use]
             #[inline(always)]
@@ -44298,23 +44163,23 @@ pub mod twis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdMaxcnt {
+        impl Default for RxMaxcnt {
             #[inline(always)]
-            fn default() -> RxdMaxcnt {
-                RxdMaxcnt(0)
+            fn default() -> RxMaxcnt {
+                RxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for RxdMaxcnt {
+        impl core::fmt::Debug for RxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdMaxcnt")
+                f.debug_struct("RxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdMaxcnt {
+        impl defmt::Format for RxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "RxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks."]
@@ -44372,11 +44237,103 @@ pub mod twis {
                 )
             }
         }
+        #[doc = "Configuration register for the address match mechanism."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TwisConfig(pub u32);
+        impl TwisConfig {
+            #[doc = "Enable or disable address matching on ADDRESS\\[0\\]."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn address0(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enable or disable address matching on ADDRESS\\[0\\]."]
+            #[inline(always)]
+            pub const fn set_address0(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Enable or disable address matching on ADDRESS\\[1\\]."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn address1(&self) -> bool {
+                let val = (self.0 >> 1usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Enable or disable address matching on ADDRESS\\[1\\]."]
+            #[inline(always)]
+            pub const fn set_address1(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
+            }
+        }
+        impl Default for TwisConfig {
+            #[inline(always)]
+            fn default() -> TwisConfig {
+                TwisConfig(0)
+            }
+        }
+        impl core::fmt::Debug for TwisConfig {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("TwisConfig")
+                    .field("address0", &self.address0())
+                    .field("address1", &self.address1())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for TwisConfig {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "TwisConfig {{ address0: {=bool:?}, address1: {=bool:?} }}",
+                    self.address0(),
+                    self.address1()
+                )
+            }
+        }
+        #[doc = "Status register indicating which address had a match."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct TwisMatch(pub u32);
+        impl TwisMatch {
+            #[doc = "Indication of which address in ADDRESS that matched the incoming address."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn match_(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Indication of which address in ADDRESS that matched the incoming address."]
+            #[inline(always)]
+            pub const fn set_match_(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+        }
+        impl Default for TwisMatch {
+            #[inline(always)]
+            fn default() -> TwisMatch {
+                TwisMatch(0)
+            }
+        }
+        impl core::fmt::Debug for TwisMatch {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("TwisMatch")
+                    .field("match_", &self.match_())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for TwisMatch {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(f, "TwisMatch {{ match_: {=bool:?} }}", self.match_())
+            }
+        }
         #[doc = "Number of bytes transferred in the last TXD transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdAmount(pub u32);
-        impl TxdAmount {
+        pub struct TxAmount(pub u32);
+        impl TxAmount {
             #[doc = "Number of bytes transferred in the last TXD transaction."]
             #[must_use]
             #[inline(always)]
@@ -44390,67 +44347,67 @@ pub mod twis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdAmount {
+        impl Default for TxAmount {
             #[inline(always)]
-            fn default() -> TxdAmount {
-                TxdAmount(0)
+            fn default() -> TxAmount {
+                TxAmount(0)
             }
         }
-        impl core::fmt::Debug for TxdAmount {
+        impl core::fmt::Debug for TxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdAmount")
+                f.debug_struct("TxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdAmount {
+        impl defmt::Format for TxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "TxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "EasyDMA list type."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdList(pub u32);
-        impl TxdList {
+        pub struct TxList(pub u32);
+        impl TxList {
             #[doc = "List type."]
             #[must_use]
             #[inline(always)]
-            pub const fn list(&self) -> super::vals::TxdListList {
+            pub const fn type_(&self) -> super::vals::TxListType {
                 let val = (self.0 >> 0usize) & 0x03;
-                super::vals::TxdListList::from_bits(val as u8)
+                super::vals::TxListType::from_bits(val as u8)
             }
             #[doc = "List type."]
             #[inline(always)]
-            pub const fn set_list(&mut self, val: super::vals::TxdListList) {
+            pub const fn set_type_(&mut self, val: super::vals::TxListType) {
                 self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
             }
         }
-        impl Default for TxdList {
+        impl Default for TxList {
             #[inline(always)]
-            fn default() -> TxdList {
-                TxdList(0)
+            fn default() -> TxList {
+                TxList(0)
             }
         }
-        impl core::fmt::Debug for TxdList {
+        impl core::fmt::Debug for TxList {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdList")
-                    .field("list", &self.list())
+                f.debug_struct("TxList")
+                    .field("type_", &self.type_())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdList {
+        impl defmt::Format for TxList {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdList {{ list: {:?} }}", self.list())
+                defmt::write!(f, "TxList {{ type_: {:?} }}", self.type_())
             }
         }
         #[doc = "Maximum number of bytes in TXD buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdMaxcnt(pub u32);
-        impl TxdMaxcnt {
+        pub struct TxMaxcnt(pub u32);
+        impl TxMaxcnt {
             #[doc = "Maximum number of bytes in TXD buffer."]
             #[must_use]
             #[inline(always)]
@@ -44464,23 +44421,23 @@ pub mod twis {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdMaxcnt {
+        impl Default for TxMaxcnt {
             #[inline(always)]
-            fn default() -> TxdMaxcnt {
-                TxdMaxcnt(0)
+            fn default() -> TxMaxcnt {
+                TxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for TxdMaxcnt {
+        impl core::fmt::Debug for TxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdMaxcnt")
+                f.debug_struct("TxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdMaxcnt {
+        impl defmt::Format for TxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "TxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
     }
@@ -44533,7 +44490,7 @@ pub mod twis {
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum RxdListList {
+        pub enum RxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -44541,9 +44498,9 @@ pub mod twis {
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
-        impl RxdListList {
+        impl RxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> RxdListList {
+            pub const fn from_bits(val: u8) -> RxListType {
                 unsafe { core::mem::transmute(val & 0x03) }
             }
             #[inline(always)]
@@ -44551,22 +44508,22 @@ pub mod twis {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for RxdListList {
+        impl From<u8> for RxListType {
             #[inline(always)]
-            fn from(val: u8) -> RxdListList {
-                RxdListList::from_bits(val)
+            fn from(val: u8) -> RxListType {
+                RxListType::from_bits(val)
             }
         }
-        impl From<RxdListList> for u8 {
+        impl From<RxListType> for u8 {
             #[inline(always)]
-            fn from(val: RxdListList) -> u8 {
-                RxdListList::to_bits(val)
+            fn from(val: RxListType) -> u8 {
+                RxListType::to_bits(val)
             }
         }
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum TxdListList {
+        pub enum TxListType {
             #[doc = "Disable EasyDMA list."]
             Disabled = 0x0,
             #[doc = "Use array list."]
@@ -44574,9 +44531,9 @@ pub mod twis {
             _RESERVED_2 = 0x02,
             _RESERVED_3 = 0x03,
         }
-        impl TxdListList {
+        impl TxListType {
             #[inline(always)]
-            pub const fn from_bits(val: u8) -> TxdListList {
+            pub const fn from_bits(val: u8) -> TxListType {
                 unsafe { core::mem::transmute(val & 0x03) }
             }
             #[inline(always)]
@@ -44584,16 +44541,16 @@ pub mod twis {
                 unsafe { core::mem::transmute(self) }
             }
         }
-        impl From<u8> for TxdListList {
+        impl From<u8> for TxListType {
             #[inline(always)]
-            fn from(val: u8) -> TxdListList {
-                TxdListList::from_bits(val)
+            fn from(val: u8) -> TxListType {
+                TxListType::from_bits(val)
             }
         }
-        impl From<TxdListList> for u8 {
+        impl From<TxListType> for u8 {
             #[inline(always)]
-            fn from(val: TxdListList) -> u8 {
-                TxdListList::to_bits(val)
+            fn from(val: TxListType) -> u8 {
+                TxListType::to_bits(val)
             }
         }
     }
@@ -44648,12 +44605,12 @@ pub mod uarte {
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::RxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::RxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::RxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
@@ -44680,12 +44637,12 @@ pub mod uarte {
         }
         #[doc = "Maximum number of bytes in transmit buffer."]
         #[inline(always)]
-        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxdMaxcnt, crate::common::RW> {
+        pub const fn maxcnt(self) -> crate::common::Reg<regs::TxMaxcnt, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
         }
         #[doc = "Number of bytes transferred in the last transaction."]
         #[inline(always)]
-        pub const fn amount(self) -> crate::common::Reg<regs::TxdAmount, crate::common::R> {
+        pub const fn amount(self) -> crate::common::Reg<regs::TxAmount, crate::common::R> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
         }
     }
@@ -45100,7 +45057,7 @@ pub mod uarte {
         }
         #[doc = "Configuration of parity and hardware flow control."]
         #[inline(always)]
-        pub const fn config(self) -> crate::common::Reg<regs::Config, crate::common::RW> {
+        pub const fn config(self) -> crate::common::Reg<regs::UarteConfig, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x056cusize) as _) }
         }
     }
@@ -45141,89 +45098,6 @@ pub mod uarte {
         impl defmt::Format for Baudrate {
             fn format(&self, f: defmt::Formatter) {
                 defmt::write!(f, "Baudrate {{ baudrate: {:?} }}", self.baudrate())
-            }
-        }
-        #[doc = "Configuration of parity and hardware flow control."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Config(pub u32);
-        impl Config {
-            #[doc = "Hardware flow control."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn hwfc(&self) -> bool {
-                let val = (self.0 >> 0usize) & 0x01;
-                val != 0
-            }
-            #[doc = "Hardware flow control."]
-            #[inline(always)]
-            pub const fn set_hwfc(&mut self, val: bool) {
-                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-            }
-            #[doc = "Parity."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn parity(&self) -> super::vals::ConfigParity {
-                let val = (self.0 >> 1usize) & 0x07;
-                super::vals::ConfigParity::from_bits(val as u8)
-            }
-            #[doc = "Parity."]
-            #[inline(always)]
-            pub const fn set_parity(&mut self, val: super::vals::ConfigParity) {
-                self.0 = (self.0 & !(0x07 << 1usize)) | (((val.to_bits() as u32) & 0x07) << 1usize);
-            }
-            #[doc = "Stop bits."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn stop(&self) -> super::vals::Stop {
-                let val = (self.0 >> 4usize) & 0x01;
-                super::vals::Stop::from_bits(val as u8)
-            }
-            #[doc = "Stop bits."]
-            #[inline(always)]
-            pub const fn set_stop(&mut self, val: super::vals::Stop) {
-                self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
-            }
-            #[doc = "Even or odd parity type."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn paritytype(&self) -> super::vals::Paritytype {
-                let val = (self.0 >> 8usize) & 0x01;
-                super::vals::Paritytype::from_bits(val as u8)
-            }
-            #[doc = "Even or odd parity type."]
-            #[inline(always)]
-            pub const fn set_paritytype(&mut self, val: super::vals::Paritytype) {
-                self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
-            }
-        }
-        impl Default for Config {
-            #[inline(always)]
-            fn default() -> Config {
-                Config(0)
-            }
-        }
-        impl core::fmt::Debug for Config {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Config")
-                    .field("hwfc", &self.hwfc())
-                    .field("parity", &self.parity())
-                    .field("stop", &self.stop())
-                    .field("paritytype", &self.paritytype())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Config {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(
-                    f,
-                    "Config {{ hwfc: {=bool:?}, parity: {:?}, stop: {:?}, paritytype: {:?} }}",
-                    self.hwfc(),
-                    self.parity(),
-                    self.stop(),
-                    self.paritytype()
-                )
             }
         }
         #[doc = "Enable UART."]
@@ -45509,8 +45383,8 @@ pub mod uarte {
         #[doc = "Number of bytes transferred in the last transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdAmount(pub u32);
-        impl RxdAmount {
+        pub struct RxAmount(pub u32);
+        impl RxAmount {
             #[doc = "Number of bytes transferred in the last transaction."]
             #[must_use]
             #[inline(always)]
@@ -45524,30 +45398,30 @@ pub mod uarte {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdAmount {
+        impl Default for RxAmount {
             #[inline(always)]
-            fn default() -> RxdAmount {
-                RxdAmount(0)
+            fn default() -> RxAmount {
+                RxAmount(0)
             }
         }
-        impl core::fmt::Debug for RxdAmount {
+        impl core::fmt::Debug for RxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdAmount")
+                f.debug_struct("RxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdAmount {
+        impl defmt::Format for RxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "RxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "Maximum number of bytes in receive buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct RxdMaxcnt(pub u32);
-        impl RxdMaxcnt {
+        pub struct RxMaxcnt(pub u32);
+        impl RxMaxcnt {
             #[doc = "Maximum number of bytes in receive buffer."]
             #[must_use]
             #[inline(always)]
@@ -45561,23 +45435,23 @@ pub mod uarte {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for RxdMaxcnt {
+        impl Default for RxMaxcnt {
             #[inline(always)]
-            fn default() -> RxdMaxcnt {
-                RxdMaxcnt(0)
+            fn default() -> RxMaxcnt {
+                RxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for RxdMaxcnt {
+        impl core::fmt::Debug for RxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("RxdMaxcnt")
+                f.debug_struct("RxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for RxdMaxcnt {
+        impl defmt::Format for RxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "RxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "RxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
             }
         }
         #[doc = "Shortcuts between local events and tasks."]
@@ -45638,8 +45512,8 @@ pub mod uarte {
         #[doc = "Number of bytes transferred in the last transaction."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdAmount(pub u32);
-        impl TxdAmount {
+        pub struct TxAmount(pub u32);
+        impl TxAmount {
             #[doc = "Number of bytes transferred in the last transaction."]
             #[must_use]
             #[inline(always)]
@@ -45653,30 +45527,30 @@ pub mod uarte {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdAmount {
+        impl Default for TxAmount {
             #[inline(always)]
-            fn default() -> TxdAmount {
-                TxdAmount(0)
+            fn default() -> TxAmount {
+                TxAmount(0)
             }
         }
-        impl core::fmt::Debug for TxdAmount {
+        impl core::fmt::Debug for TxAmount {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdAmount")
+                f.debug_struct("TxAmount")
                     .field("amount", &self.amount())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdAmount {
+        impl defmt::Format for TxAmount {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdAmount {{ amount: {=u16:?} }}", self.amount())
+                defmt::write!(f, "TxAmount {{ amount: {=u16:?} }}", self.amount())
             }
         }
         #[doc = "Maximum number of bytes in transmit buffer."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct TxdMaxcnt(pub u32);
-        impl TxdMaxcnt {
+        pub struct TxMaxcnt(pub u32);
+        impl TxMaxcnt {
             #[doc = "Maximum number of bytes in transmit buffer."]
             #[must_use]
             #[inline(always)]
@@ -45690,23 +45564,106 @@ pub mod uarte {
                 self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
             }
         }
-        impl Default for TxdMaxcnt {
+        impl Default for TxMaxcnt {
             #[inline(always)]
-            fn default() -> TxdMaxcnt {
-                TxdMaxcnt(0)
+            fn default() -> TxMaxcnt {
+                TxMaxcnt(0)
             }
         }
-        impl core::fmt::Debug for TxdMaxcnt {
+        impl core::fmt::Debug for TxMaxcnt {
             fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("TxdMaxcnt")
+                f.debug_struct("TxMaxcnt")
                     .field("maxcnt", &self.maxcnt())
                     .finish()
             }
         }
         #[cfg(feature = "defmt")]
-        impl defmt::Format for TxdMaxcnt {
+        impl defmt::Format for TxMaxcnt {
             fn format(&self, f: defmt::Formatter) {
-                defmt::write!(f, "TxdMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+                defmt::write!(f, "TxMaxcnt {{ maxcnt: {=u16:?} }}", self.maxcnt())
+            }
+        }
+        #[doc = "Configuration of parity and hardware flow control."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct UarteConfig(pub u32);
+        impl UarteConfig {
+            #[doc = "Hardware flow control."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn hwfc(&self) -> bool {
+                let val = (self.0 >> 0usize) & 0x01;
+                val != 0
+            }
+            #[doc = "Hardware flow control."]
+            #[inline(always)]
+            pub const fn set_hwfc(&mut self, val: bool) {
+                self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+            }
+            #[doc = "Parity."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn parity(&self) -> super::vals::ConfigParity {
+                let val = (self.0 >> 1usize) & 0x07;
+                super::vals::ConfigParity::from_bits(val as u8)
+            }
+            #[doc = "Parity."]
+            #[inline(always)]
+            pub const fn set_parity(&mut self, val: super::vals::ConfigParity) {
+                self.0 = (self.0 & !(0x07 << 1usize)) | (((val.to_bits() as u32) & 0x07) << 1usize);
+            }
+            #[doc = "Stop bits."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn stop(&self) -> super::vals::ConfigStop {
+                let val = (self.0 >> 4usize) & 0x01;
+                super::vals::ConfigStop::from_bits(val as u8)
+            }
+            #[doc = "Stop bits."]
+            #[inline(always)]
+            pub const fn set_stop(&mut self, val: super::vals::ConfigStop) {
+                self.0 = (self.0 & !(0x01 << 4usize)) | (((val.to_bits() as u32) & 0x01) << 4usize);
+            }
+            #[doc = "Even or odd parity type."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn paritytype(&self) -> super::vals::Paritytype {
+                let val = (self.0 >> 8usize) & 0x01;
+                super::vals::Paritytype::from_bits(val as u8)
+            }
+            #[doc = "Even or odd parity type."]
+            #[inline(always)]
+            pub const fn set_paritytype(&mut self, val: super::vals::Paritytype) {
+                self.0 = (self.0 & !(0x01 << 8usize)) | (((val.to_bits() as u32) & 0x01) << 8usize);
+            }
+        }
+        impl Default for UarteConfig {
+            #[inline(always)]
+            fn default() -> UarteConfig {
+                UarteConfig(0)
+            }
+        }
+        impl core::fmt::Debug for UarteConfig {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("UarteConfig")
+                    .field("hwfc", &self.hwfc())
+                    .field("parity", &self.parity())
+                    .field("stop", &self.stop())
+                    .field("paritytype", &self.paritytype())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for UarteConfig {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "UarteConfig {{ hwfc: {=bool:?}, parity: {:?}, stop: {:?}, paritytype: {:?} }}",
+                    self.hwfc(),
+                    self.parity(),
+                    self.stop(),
+                    self.paritytype()
+                )
             }
         }
     }
@@ -45863,6 +45820,37 @@ pub mod uarte {
         #[repr(u8)]
         #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
         #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+        pub enum ConfigStop {
+            #[doc = "One stop bit."]
+            One = 0x0,
+            #[doc = "Two stop bits."]
+            Two = 0x01,
+        }
+        impl ConfigStop {
+            #[inline(always)]
+            pub const fn from_bits(val: u8) -> ConfigStop {
+                unsafe { core::mem::transmute(val & 0x01) }
+            }
+            #[inline(always)]
+            pub const fn to_bits(self) -> u8 {
+                unsafe { core::mem::transmute(self) }
+            }
+        }
+        impl From<u8> for ConfigStop {
+            #[inline(always)]
+            fn from(val: u8) -> ConfigStop {
+                ConfigStop::from_bits(val)
+            }
+        }
+        impl From<ConfigStop> for u8 {
+            #[inline(always)]
+            fn from(val: ConfigStop) -> u8 {
+                ConfigStop::to_bits(val)
+            }
+        }
+        #[repr(u8)]
+        #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+        #[cfg_attr(feature = "defmt", derive(defmt::Format))]
         pub enum Enable {
             #[doc = "Disable UARTE."]
             Disabled = 0x0,
@@ -45934,37 +45922,6 @@ pub mod uarte {
             #[inline(always)]
             fn from(val: Paritytype) -> u8 {
                 Paritytype::to_bits(val)
-            }
-        }
-        #[repr(u8)]
-        #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
-        #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-        pub enum Stop {
-            #[doc = "One stop bit."]
-            One = 0x0,
-            #[doc = "Two stop bits."]
-            Two = 0x01,
-        }
-        impl Stop {
-            #[inline(always)]
-            pub const fn from_bits(val: u8) -> Stop {
-                unsafe { core::mem::transmute(val & 0x01) }
-            }
-            #[inline(always)]
-            pub const fn to_bits(self) -> u8 {
-                unsafe { core::mem::transmute(self) }
-            }
-        }
-        impl From<u8> for Stop {
-            #[inline(always)]
-            fn from(val: u8) -> Stop {
-                Stop::from_bits(val)
-            }
-        }
-        impl From<Stop> for u8 {
-            #[inline(always)]
-            fn from(val: Stop) -> u8 {
-                Stop::to_bits(val)
             }
         }
     }
