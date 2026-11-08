@@ -377,3 +377,34 @@
       to: maxcnt
   - !DeleteEnums
       from: pwm::vals::CntCnt
+# ======= Aligning nrf52/nrf53 with nrf54 nfct
+  - !MakeBlock
+      blocks: nfct::Nfct
+      from: nfcid1_(last|2nd_last|3rd_last)
+      to_outer: nfcid1
+      to_inner: $1
+      to_block: nfct::Nfcid1
+  - !RenameRegisters
+      block: nfct::Nfcid1
+      from: 2nd_last
+      to: secondlast
+  - !RenameRegisters
+      block: nfct::Nfcid1
+      from: 3rd_last
+      to: thirdlast
+  - !Rename
+      from: nfct::regs::Nfcid1Last
+      to: nfct::regs::Last
+      type: Fieldset
+  - !Rename
+      from: nfct::regs::Nfcid12ndLast
+      to: nfct::regs::Secondlast
+      type: Fieldset
+  - !Rename
+      from: nfct::regs::Nfcid13rdLast
+      to: nfct::regs::Thirdlast
+      type: Fieldset
+  - !RenameFields
+      fieldset: nfct::regs::(Last|Secondlast|Thirdlast)
+      from: nfcid1_(.)
+      to: $1
