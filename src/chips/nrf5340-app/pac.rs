@@ -1,7 +1,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
-#![doc = "Peripheral access API (generated using chiptool v0.1.0 (694bb9d 2026-04-11))"]
+#![doc = "Peripheral access API (generated using chiptool v0.1.0 (c4ee5a7 2026-04-11))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
@@ -23578,6 +23578,37 @@ pub mod nfct {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
         }
     }
+    #[derive(Copy, Clone, Eq, PartialEq)]
+    pub struct Nfcid1 {
+        ptr: *mut u8,
+    }
+    unsafe impl Send for Nfcid1 {}
+    unsafe impl Sync for Nfcid1 {}
+    impl Nfcid1 {
+        #[inline(always)]
+        pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+            Self { ptr: ptr as _ }
+        }
+        #[inline(always)]
+        pub const fn as_ptr(&self) -> *mut () {
+            self.ptr as _
+        }
+        #[doc = "Last NFCID1 part (4, 7 or 10 bytes ID)."]
+        #[inline(always)]
+        pub const fn last(self) -> crate::common::Reg<regs::Last, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+        }
+        #[doc = "Second last NFCID1 part (7 or 10 bytes ID)."]
+        #[inline(always)]
+        pub const fn secondlast(self) -> crate::common::Reg<regs::Secondlast, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+        }
+        #[doc = "Third last NFCID1 part (10 bytes ID)."]
+        #[inline(always)]
+        pub const fn thirdlast(self) -> crate::common::Reg<regs::Thirdlast, crate::common::RW> {
+            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+        }
+    }
     #[doc = "NFC-A compatible radio 0."]
     #[derive(Copy, Clone, Eq, PartialEq)]
     pub struct Nfct {
@@ -23960,24 +23991,9 @@ pub mod nfct {
         ) -> crate::common::Reg<regs::Modulationpsel, crate::common::RW> {
             unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0538usize) as _) }
         }
-        #[doc = "Last NFCID1 part (4, 7 or 10 bytes ID)."]
         #[inline(always)]
-        pub const fn nfcid1_last(self) -> crate::common::Reg<regs::Nfcid1Last, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0590usize) as _) }
-        }
-        #[doc = "Second last NFCID1 part (7 or 10 bytes ID)."]
-        #[inline(always)]
-        pub const fn nfcid1_2nd_last(
-            self,
-        ) -> crate::common::Reg<regs::Nfcid12ndLast, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0594usize) as _) }
-        }
-        #[doc = "Third last NFCID1 part (10 bytes ID)."]
-        #[inline(always)]
-        pub const fn nfcid1_3rd_last(
-            self,
-        ) -> crate::common::Reg<regs::Nfcid13rdLast, crate::common::RW> {
-            unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0598usize) as _) }
+        pub const fn nfcid1(self) -> Nfcid1 {
+            unsafe { Nfcid1::from_ptr(self.ptr.wrapping_add(0x0590usize) as _) }
         }
         #[doc = "Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is activated."]
         #[inline(always)]
@@ -24532,6 +24548,89 @@ pub mod nfct {
                 defmt :: write ! (f , "Int {{ ready: {=bool:?}, fielddetected: {=bool:?}, fieldlost: {=bool:?}, txframestart: {=bool:?}, txframeend: {=bool:?}, rxframestart: {=bool:?}, rxframeend: {=bool:?}, error: {=bool:?}, rxerror: {=bool:?}, endrx: {=bool:?}, endtx: {=bool:?}, autocolresstarted: {=bool:?}, collision: {=bool:?}, selected: {=bool:?}, started: {=bool:?} }}" , self . ready () , self . fielddetected () , self . fieldlost () , self . txframestart () , self . txframeend () , self . rxframestart () , self . rxframeend () , self . error () , self . rxerror () , self . endrx () , self . endtx () , self . autocolresstarted () , self . collision () , self . selected () , self . started ())
             }
         }
+        #[doc = "Last NFCID1 part (4, 7 or 10 bytes ID)."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Last(pub u32);
+        impl Last {
+            #[doc = "NFCID1 byte Z (very last byte sent)."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn z(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte Z (very last byte sent)."]
+            #[inline(always)]
+            pub const fn set_z(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+            #[doc = "NFCID1 byte Y."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn y(&self) -> u8 {
+                let val = (self.0 >> 8usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte Y."]
+            #[inline(always)]
+            pub const fn set_y(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
+            }
+            #[doc = "NFCID1 byte X."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn x(&self) -> u8 {
+                let val = (self.0 >> 16usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte X."]
+            #[inline(always)]
+            pub const fn set_x(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
+            }
+            #[doc = "NFCID1 byte W."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn w(&self) -> u8 {
+                let val = (self.0 >> 24usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte W."]
+            #[inline(always)]
+            pub const fn set_w(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 24usize)) | (((val as u32) & 0xff) << 24usize);
+            }
+        }
+        impl Default for Last {
+            #[inline(always)]
+            fn default() -> Last {
+                Last(0)
+            }
+        }
+        impl core::fmt::Debug for Last {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("Last")
+                    .field("z", &self.z())
+                    .field("y", &self.y())
+                    .field("x", &self.x())
+                    .field("w", &self.w())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for Last {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "Last {{ z: {=u8:?}, y: {=u8:?}, x: {=u8:?}, w: {=u8:?} }}",
+                    self.z(),
+                    self.y(),
+                    self.x(),
+                    self.w()
+                )
+            }
+        }
         #[doc = "Size of the RAM buffer allocated to TXD and RXD data storage each."]
         #[repr(transparent)]
         #[derive(Copy, Clone, Eq, PartialEq)]
@@ -24678,220 +24777,6 @@ pub mod nfct {
                     self.port(),
                     self.connect()
                 )
-            }
-        }
-        #[doc = "Second last NFCID1 part (7 or 10 bytes ID)."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Nfcid12ndLast(pub u32);
-        impl Nfcid12ndLast {
-            #[doc = "NFCID1 byte V."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_v(&self) -> u8 {
-                let val = (self.0 >> 0usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte V."]
-            #[inline(always)]
-            pub const fn set_nfcid1_v(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-            }
-            #[doc = "NFCID1 byte U."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_u(&self) -> u8 {
-                let val = (self.0 >> 8usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte U."]
-            #[inline(always)]
-            pub const fn set_nfcid1_u(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-            }
-            #[doc = "NFCID1 byte T."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_t(&self) -> u8 {
-                let val = (self.0 >> 16usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte T."]
-            #[inline(always)]
-            pub const fn set_nfcid1_t(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
-            }
-        }
-        impl Default for Nfcid12ndLast {
-            #[inline(always)]
-            fn default() -> Nfcid12ndLast {
-                Nfcid12ndLast(0)
-            }
-        }
-        impl core::fmt::Debug for Nfcid12ndLast {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Nfcid12ndLast")
-                    .field("nfcid1_v", &self.nfcid1_v())
-                    .field("nfcid1_u", &self.nfcid1_u())
-                    .field("nfcid1_t", &self.nfcid1_t())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Nfcid12ndLast {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(
-                    f,
-                    "Nfcid12ndLast {{ nfcid1_v: {=u8:?}, nfcid1_u: {=u8:?}, nfcid1_t: {=u8:?} }}",
-                    self.nfcid1_v(),
-                    self.nfcid1_u(),
-                    self.nfcid1_t()
-                )
-            }
-        }
-        #[doc = "Third last NFCID1 part (10 bytes ID)."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Nfcid13rdLast(pub u32);
-        impl Nfcid13rdLast {
-            #[doc = "NFCID1 byte S."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_s(&self) -> u8 {
-                let val = (self.0 >> 0usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte S."]
-            #[inline(always)]
-            pub const fn set_nfcid1_s(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-            }
-            #[doc = "NFCID1 byte R."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_r(&self) -> u8 {
-                let val = (self.0 >> 8usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte R."]
-            #[inline(always)]
-            pub const fn set_nfcid1_r(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-            }
-            #[doc = "NFCID1 byte Q."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_q(&self) -> u8 {
-                let val = (self.0 >> 16usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte Q."]
-            #[inline(always)]
-            pub const fn set_nfcid1_q(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
-            }
-        }
-        impl Default for Nfcid13rdLast {
-            #[inline(always)]
-            fn default() -> Nfcid13rdLast {
-                Nfcid13rdLast(0)
-            }
-        }
-        impl core::fmt::Debug for Nfcid13rdLast {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Nfcid13rdLast")
-                    .field("nfcid1_s", &self.nfcid1_s())
-                    .field("nfcid1_r", &self.nfcid1_r())
-                    .field("nfcid1_q", &self.nfcid1_q())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Nfcid13rdLast {
-            fn format(&self, f: defmt::Formatter) {
-                defmt::write!(
-                    f,
-                    "Nfcid13rdLast {{ nfcid1_s: {=u8:?}, nfcid1_r: {=u8:?}, nfcid1_q: {=u8:?} }}",
-                    self.nfcid1_s(),
-                    self.nfcid1_r(),
-                    self.nfcid1_q()
-                )
-            }
-        }
-        #[doc = "Last NFCID1 part (4, 7 or 10 bytes ID)."]
-        #[repr(transparent)]
-        #[derive(Copy, Clone, Eq, PartialEq)]
-        pub struct Nfcid1Last(pub u32);
-        impl Nfcid1Last {
-            #[doc = "NFCID1 byte Z (very last byte sent)."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_z(&self) -> u8 {
-                let val = (self.0 >> 0usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte Z (very last byte sent)."]
-            #[inline(always)]
-            pub const fn set_nfcid1_z(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
-            }
-            #[doc = "NFCID1 byte Y."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_y(&self) -> u8 {
-                let val = (self.0 >> 8usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte Y."]
-            #[inline(always)]
-            pub const fn set_nfcid1_y(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
-            }
-            #[doc = "NFCID1 byte X."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_x(&self) -> u8 {
-                let val = (self.0 >> 16usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte X."]
-            #[inline(always)]
-            pub const fn set_nfcid1_x(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
-            }
-            #[doc = "NFCID1 byte W."]
-            #[must_use]
-            #[inline(always)]
-            pub const fn nfcid1_w(&self) -> u8 {
-                let val = (self.0 >> 24usize) & 0xff;
-                val as u8
-            }
-            #[doc = "NFCID1 byte W."]
-            #[inline(always)]
-            pub const fn set_nfcid1_w(&mut self, val: u8) {
-                self.0 = (self.0 & !(0xff << 24usize)) | (((val as u32) & 0xff) << 24usize);
-            }
-        }
-        impl Default for Nfcid1Last {
-            #[inline(always)]
-            fn default() -> Nfcid1Last {
-                Nfcid1Last(0)
-            }
-        }
-        impl core::fmt::Debug for Nfcid1Last {
-            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-                f.debug_struct("Nfcid1Last")
-                    .field("nfcid1_z", &self.nfcid1_z())
-                    .field("nfcid1_y", &self.nfcid1_y())
-                    .field("nfcid1_x", &self.nfcid1_x())
-                    .field("nfcid1_w", &self.nfcid1_w())
-                    .finish()
-            }
-        }
-        #[cfg(feature = "defmt")]
-        impl defmt::Format for Nfcid1Last {
-            fn format(&self, f: defmt::Formatter) {
-                defmt :: write ! (f , "Nfcid1Last {{ nfcid1_z: {=u8:?}, nfcid1_y: {=u8:?}, nfcid1_x: {=u8:?}, nfcid1_w: {=u8:?} }}" , self . nfcid1_z () , self . nfcid1_y () , self . nfcid1_x () , self . nfcid1_w ())
             }
         }
         #[doc = "Current operating state of NFC tag."]
@@ -25121,6 +25006,75 @@ pub mod nfct {
                     self.parity(),
                     self.sof(),
                     self.crcmoderx()
+                )
+            }
+        }
+        #[doc = "Second last NFCID1 part (7 or 10 bytes ID)."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Secondlast(pub u32);
+        impl Secondlast {
+            #[doc = "NFCID1 byte V."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn v(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte V."]
+            #[inline(always)]
+            pub const fn set_v(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+            #[doc = "NFCID1 byte U."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn u(&self) -> u8 {
+                let val = (self.0 >> 8usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte U."]
+            #[inline(always)]
+            pub const fn set_u(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
+            }
+            #[doc = "NFCID1 byte T."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn t(&self) -> u8 {
+                let val = (self.0 >> 16usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte T."]
+            #[inline(always)]
+            pub const fn set_t(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
+            }
+        }
+        impl Default for Secondlast {
+            #[inline(always)]
+            fn default() -> Secondlast {
+                Secondlast(0)
+            }
+        }
+        impl core::fmt::Debug for Secondlast {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("Secondlast")
+                    .field("v", &self.v())
+                    .field("u", &self.u())
+                    .field("t", &self.t())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for Secondlast {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "Secondlast {{ v: {=u8:?}, u: {=u8:?}, t: {=u8:?} }}",
+                    self.v(),
+                    self.u(),
+                    self.t()
                 )
             }
         }
@@ -25400,6 +25354,75 @@ pub mod nfct {
         impl defmt::Format for Sleepstate {
             fn format(&self, f: defmt::Formatter) {
                 defmt::write!(f, "Sleepstate {{ sleepstate: {:?} }}", self.sleepstate())
+            }
+        }
+        #[doc = "Third last NFCID1 part (10 bytes ID)."]
+        #[repr(transparent)]
+        #[derive(Copy, Clone, Eq, PartialEq)]
+        pub struct Thirdlast(pub u32);
+        impl Thirdlast {
+            #[doc = "NFCID1 byte S."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn s(&self) -> u8 {
+                let val = (self.0 >> 0usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte S."]
+            #[inline(always)]
+            pub const fn set_s(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
+            }
+            #[doc = "NFCID1 byte R."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn r(&self) -> u8 {
+                let val = (self.0 >> 8usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte R."]
+            #[inline(always)]
+            pub const fn set_r(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
+            }
+            #[doc = "NFCID1 byte Q."]
+            #[must_use]
+            #[inline(always)]
+            pub const fn q(&self) -> u8 {
+                let val = (self.0 >> 16usize) & 0xff;
+                val as u8
+            }
+            #[doc = "NFCID1 byte Q."]
+            #[inline(always)]
+            pub const fn set_q(&mut self, val: u8) {
+                self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
+            }
+        }
+        impl Default for Thirdlast {
+            #[inline(always)]
+            fn default() -> Thirdlast {
+                Thirdlast(0)
+            }
+        }
+        impl core::fmt::Debug for Thirdlast {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+                f.debug_struct("Thirdlast")
+                    .field("s", &self.s())
+                    .field("r", &self.r())
+                    .field("q", &self.q())
+                    .finish()
+            }
+        }
+        #[cfg(feature = "defmt")]
+        impl defmt::Format for Thirdlast {
+            fn format(&self, f: defmt::Formatter) {
+                defmt::write!(
+                    f,
+                    "Thirdlast {{ s: {=u8:?}, r: {=u8:?}, q: {=u8:?} }}",
+                    self.s(),
+                    self.r(),
+                    self.q()
+                )
             }
         }
         #[doc = "Size of outgoing frame."]
