@@ -16,6 +16,7 @@ defmt = { version = "0.3.10", optional = true }
 [features]
 rt = ["cortex-m-rt/device"]
 defmt = ["dep:defmt"]
+debug = []
 
 nrf51 = []
 nrf52805 = []
