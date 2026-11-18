@@ -20,6 +20,8 @@
 #[cfg_attr(feature = "nrf54l15-flpr", path = "./chips/nrf54l15-flpr/pac.rs")]
 #[cfg_attr(feature = "nrf54lm20a-app", path = "./chips/nrf54lm20a-app/pac.rs")]
 #[cfg_attr(feature = "nrf54lm20a-flpr", path = "./chips/nrf54lm20a-flpr/pac.rs")]
+#[cfg_attr(feature = "nrf54lm20b-app", path = "./chips/nrf54lm20b-app/pac.rs")]
+#[cfg_attr(feature = "nrf54lm20b-flpr", path = "./chips/nrf54lm20b-flpr/pac.rs")]
 #[cfg_attr(feature = "nrf9120", path = "./chips/nrf9120/pac.rs")]
 #[cfg_attr(feature = "nrf9160", path = "./chips/nrf9160/pac.rs")]
 mod inner;
